@@ -1,4 +1,6 @@
 # Ignore files & folders
-/TnA - Tanoshimi no Autohardsubber/bin/
+/TnA - Tanoshimi no Autohardsubber/bin/Debug/
+/TnA - Tanoshimi no Autohardsubber/bin/Release
+/TnA - Tanoshimi no Autohardsubber/bin/x86
 /TnA.7z
 /vers.ini
