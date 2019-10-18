@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "attività-TnA - Tanoshimi no Autohardsubber",
+      "appliesTo": "TnA - Tanoshimi no Autohardsubber.sln",
+      "type": "command"
+    }
+  ]
+}

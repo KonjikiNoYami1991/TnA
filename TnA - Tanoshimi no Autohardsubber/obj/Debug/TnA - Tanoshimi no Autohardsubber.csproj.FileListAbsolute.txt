@@ -1,0 +1,190 @@
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe.config
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.exe
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.resources
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.GenerateResource.Cache
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe.config
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csprojResolveAssemblyReference.cache
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Opzioni.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.resources
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.GenerateResource.Cache
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.exe
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe.config
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.exe
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.GenerateResource.Cache
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Interop.IWshRuntimeLibrary.dll
+K:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.ResolveComReference.cache
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.ResolveComReference.cache
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe.config
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csprojResolveAssemblyReference.cache
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Interop.IWshRuntimeLibrary.dll
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.ResolveComReference.cache
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Opzioni.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.resources
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.GenerateResource.Cache
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.exe
+J:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe.config
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csprojResolveAssemblyReference.cache
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Interop.IWshRuntimeLibrary.dll
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.ResolveComReference.cache
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Opzioni.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.resources
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.GenerateResource.Cache
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.exe
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+E:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CoreCompileInputs.cache
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Interop.IWshRuntimeLibrary.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.ResolveComReference.cache
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CoreCompileInputs.cache
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CoreCompileInputs.cache
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csprojAssemblyReference.cache
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Alimentazione.resources
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CopyComplete
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Microsoft.CSharp.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Data.DataSetExtensions.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Data.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Deployment.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Drawing.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Management.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Windows.Forms.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Xml.dll
+D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Xml.Linq.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Microsoft.CSharp.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Data.DataSetExtensions.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Data.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Deployment.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Drawing.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Management.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Windows.Forms.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Xml.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Xml.Linq.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csprojAssemblyReference.cache
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CopyComplete
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Updater.TnA_Updater.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\x86\MediaInfo.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.dll.config
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.xml
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\x86\MediaInfo.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.dll.config
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe.config
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Microsoft.CSharp.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Data.DataSetExtensions.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Data.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Deployment.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Drawing.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Management.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Windows.Forms.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Xml.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Xml.Linq.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.xml
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.ResolveComReference.cache
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Updater.TnA_Updater.resources
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.GenerateResource.cache
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CopyComplete
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.exe
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csprojAssemblyReference.cache
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.CronologiaVersioni.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.CronologiaVersioni.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\x86\MediaInfo.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.dll.config
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe.config
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.exe
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Microsoft.CSharp.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Data.DataSetExtensions.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Data.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Deployment.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Drawing.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Management.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Windows.Forms.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Xml.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\System.Xml.Linq.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\MediaInfoDotNet.xml
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csprojAssemblyReference.cache
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Interop.IWshRuntimeLibrary.dll
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.ResolveComReference.cache
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.CronologiaVersioni.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\Updater.TnA_Updater.resources
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.GenerateResource.cache
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CopyComplete
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.exe
+C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.pdb
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.xml
