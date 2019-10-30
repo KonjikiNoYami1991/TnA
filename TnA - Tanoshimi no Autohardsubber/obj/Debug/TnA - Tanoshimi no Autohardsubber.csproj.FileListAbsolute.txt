@@ -34,7 +34,6 @@ C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Ta
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
-C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
@@ -86,7 +85,6 @@ D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no 
 D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
 D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CoreCompileInputs.cache
 D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
-C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CoreCompileInputs.cache
 D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csprojAssemblyReference.cache
 D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Alimentazione.resources
 D:\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.csproj.CopyComplete
@@ -189,3 +187,6 @@ C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - T
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.dll
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.xml
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\x64\MediaInfo.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\x64\MediaInfo.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.xml

@@ -167,12 +167,6 @@
     <Compile Include="CronologiaVersioni.Designer.cs">
       <DependentUpon>CronologiaVersioni.cs</DependentUpon>
     </Compile>
-    <Compile Include="PasswordStaffer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PasswordStaffer.Designer.cs">
-      <DependentUpon>PasswordStaffer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Seleziona formati.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,9 +204,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CronologiaVersioni.resx">
       <DependentUpon>CronologiaVersioni.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PasswordStaffer.resx">
-      <DependentUpon>PasswordStaffer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Seleziona formati.resx">
       <DependentUpon>Seleziona formati.cs</DependentUpon>

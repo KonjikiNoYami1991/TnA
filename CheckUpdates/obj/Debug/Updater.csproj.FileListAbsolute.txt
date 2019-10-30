@@ -5,7 +5,6 @@ C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpd
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\CheckUpdates.Updater.resources
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.Properties.Resources.resources
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.csproj.GenerateResource.cache
-C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.csproj.CoreCompileInputs.cache
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.exe
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.pdb
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\bin\Debug\Updater.exe.config
