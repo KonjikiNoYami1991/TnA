@@ -188,3 +188,4 @@ C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - T
 C:\Users\oscil\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA - Tanoshimi no Autohardsubber.pdb
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.dll
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.xml
+C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\x64\MediaInfo.dll

@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using Newtonsoft.Json;
+using MediaInfoDotNet;
 
 namespace TnA___Tanoshimi_no_Autohardsubber
 {
@@ -881,9 +881,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                     Environment.CurrentDirectory = Path.GetDirectoryName(temp_folder);
 
-                    Dictionary<String, String> dettagli_video = JsonConvert.DeserializeObject<Dictionary<String, String>>(System.IO.File.ReadAllText(Path.GetDirectoryName(temp_ffprobe) + "\\video.json"));
-
-                    dettagli_video.
                     foreach (MediaInfoDotNet.Models.TextStream t in new MediaFile(file_video).Text)
                     {
                         if (t.CodecId.ToLower().Contains("s_text/ass"))
@@ -1120,7 +1117,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
             MediaFile m = new MediaFile(v);
 
-            Int32 cont_video = 0, cont_audio = 0, cont_sub = 0;
+            Int32 cont_video = 0, cont_audio = 0;
             foreach (MediaInfoDotNet.Models.VideoStream vid in m.Video)
             {
                 if (vid.Format.ToLower().Contains("mpeg") || vid.Format.ToLower().Contains("avc") || vid.Format.ToLower().Contains("hevc"))
@@ -1237,15 +1234,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 }
                 cont_audio++;
             }
-            foreach (MediaInfoDotNet.Models.TextStream txt in m.Text)
-            {
-                if (txt.Format == "Timed Text")
-                {
-                    comando_remux += " -map 0:" + txt.ID.ToString() + " -c:s:" + cont_sub.ToString() + " copy";
-                }
-                cont_sub++;
-            }
-
+            
             comando_remux += " \"" + mp4_finale + "\"";
 
             //MessageBox.Show(comando_remux);
@@ -3044,13 +3033,17 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             Framerate = (media.Video[0].FrameRate).ToString();
             DurataPrecisa = TimeSpan.FromMilliseconds(media.Video[0].Duration);
             TotaleFrames = media.Video[0].FrameCount;
-            if (media.Video[0].miOption("Scan Type").ToLower().StartsWith("p"))
+            switch (media.Video[0].miOption("ScanType").ToLower())
             {
-                Interlacciato = false;
-            }
-            else
-            {
-                Interlacciato = true;
+                case "progressive":
+                    Interlacciato = false;
+                    break;
+                case "interlaced":
+                    Interlacciato = true;
+                    break;
+                default:
+                    Interlacciato = false;
+                    break;
             }
             Larghezza = media.Video[0].Width;
             Altezza = media.Video[0].Height;
