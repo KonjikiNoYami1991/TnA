@@ -27,9 +27,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         readonly String ffmpeg_x86 = Path.GetDirectoryName(Application.ExecutablePath) + "\\ffmpeg\\ffmpeg_tna_x86.exe";
         readonly String ffmpeg_x64 = Path.GetDirectoryName(Application.ExecutablePath) + "\\ffmpeg\\ffmpeg_tna_x64.exe";
 
-        readonly String ffprobe_x64 = Path.GetDirectoryName(Application.ExecutablePath) + "\\ffmpeg\\ffprobe_tna_x64.exe";
-        readonly String ffprobe_x86 = Path.GetDirectoryName(Application.ExecutablePath) + "\\ffmpeg\\ffprobe_tna_x86.exe";
-
         readonly String mkvmerge = Path.GetDirectoryName(Application.ExecutablePath) + "\\mkvtoolnix\\mkvmerge.exe";
 
         readonly String temp_folder = Path.GetDirectoryName(Application.ExecutablePath) + "\\temp";
@@ -827,8 +824,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                 if (Path.GetExtension(file_video).ToLower() == ".mkv" && profilo.StartsWith("Remux") == false && profilo.StartsWith("Workraw") == false && modalita_subs.StartsWith("Hard"))
                 {
-                    Environment.CurrentDirectory = Path.GetDirectoryName(ffprobe_x86);
-
                     this.Invoke((MethodInvoker)delegate ()
                     {
                         ts_avanz.Text = "Avanzamento elaborazione - Cerco eventuali fonts e sottotitoli";
@@ -839,7 +834,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         System.IO.File.Delete(s);
                     }
 
-                    String temp_ffmpeg = String.Empty, temp_ffprobe = String.Empty;
+                    String temp_ffmpeg = String.Empty;
 
                     if (System.IO.File.Exists(ffmpeg_x64))
                     {
@@ -852,34 +847,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         System.IO.File.Copy(ffmpeg_x86, temp_ffmpeg, true);
                     }
 
-                    if (System.IO.File.Exists(ffprobe_x64))
-                    {
-                        temp_ffprobe = ffprobe_x64;
-                    }
-                    else
-                    {
-                        temp_ffprobe = ffprobe_x86;
-                    }
-
                     Tuple<String, String> SubID = new Tuple<string, string>(String.Empty, String.Empty);
 
                     System.Diagnostics.ProcessStartInfo psi_extract = new System.Diagnostics.ProcessStartInfo();
-                    psi_extract.CreateNoWindow = true;
-                    psi_extract.UseShellExecute = false;
-                    psi_extract.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-
-                    psi_extract.FileName = Path.GetFileName(temp_ffprobe);
-
-                    psi_extract.Arguments = " -i \"" + file_video + "\" ";
-                    this.Invoke((MethodInvoker)delegate ()
-                    {
-                        ts_avanz.Text = "Avanzamento elaborazione - Estraggo i sottotitoli";
-                    });
-                    psi_extract.Arguments += " -show_format -show_streams -print_format json > video.json";
                     
-                    System.Diagnostics.Process.Start(psi_extract).WaitForExit();
-
-                    Environment.CurrentDirectory = Path.GetDirectoryName(temp_folder);
+                    Environment.CurrentDirectory = temp_folder;
 
                     foreach (MediaInfoDotNet.Models.TextStream t in new MediaFile(file_video).Text)
                     {
@@ -2167,8 +2139,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     try
                     {
                         System.IO.File.Copy(temp_folder + "\\ffmpeg.exe", Path.GetDirectoryName(ffmpeg_x64) + "\\" + Path.GetFileName(ffmpeg_x64), true);
-                        System.IO.File.Copy(temp_folder + "\\ffprobe.exe", Path.GetDirectoryName(ffprobe_x64) + "\\" + Path.GetFileName(ffprobe_x64), true);
-                        MessageBox.Show("FFmpeg e FFprobe scaricati e impostati correttamente. Ora è possibile utilizzare il programma.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("FFmpeg scaricato e impostato correttamente. Ora è possibile utilizzare il programma.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         data_last_upd = DateTime.Now;
                         IniFile ini = new IniFile(file_settings);
                         ini.Write("last_upd", data_last_upd.ToShortDateString());
@@ -2183,8 +2154,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     try
                     {
                         System.IO.File.Copy(temp_folder + "\\ffmpeg.exe", Path.GetDirectoryName(ffmpeg_x86) + "\\" + Path.GetFileName(ffmpeg_x86), true);
-                        System.IO.File.Copy(temp_folder + "\\ffprobe.exe", Path.GetDirectoryName(ffprobe_x86) + "\\" + Path.GetFileName(ffprobe_x86), true);
-                        MessageBox.Show("FFmpeg e FFprobe scaricati e impostati correttamente. Ora è possibile utilizzare il programma.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("FFmpeg scaricato e impostato correttamente. Ora è possibile utilizzare il programma.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         data_last_upd = DateTime.Now;
                         IniFile ini = new IniFile(file_settings);
                         ini.Write("last_upd", data_last_upd.ToShortDateString());
@@ -3033,7 +3003,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             Framerate = (media.Video[0].FrameRate).ToString();
             DurataPrecisa = TimeSpan.FromMilliseconds(media.Video[0].Duration);
             TotaleFrames = media.Video[0].FrameCount;
-            switch (media.Video[0].miOption("ScanType").ToLower())
+            String interl = media.Video[0].miGetString("ScanType").ToLower();
+            switch (interl)
             {
                 case "progressive":
                     Interlacciato = false;

@@ -137,7 +137,6 @@ C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.About.resources
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.DownloadFFMPEG.resources
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.resources
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.PasswordStaffer.resources
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.resources
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TestFFMPEG.resources
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.TnA.resources
