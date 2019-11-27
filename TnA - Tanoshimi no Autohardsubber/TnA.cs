@@ -59,6 +59,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         public static DateTime data_last_upd = new DateTime();
 
         List<String> formati_scelti = new List<String>();
+        
+        public static List<String> stati_scelti = new List<String>();
 
         String data_vecchia = String.Empty;
 
@@ -686,7 +688,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void b_avvia_Click(object sender, EventArgs e)
         {
-            Boolean presente = false;
+            Boolean presente = false, start = true;
             foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg_x64)))
             {
                 if (Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x64)) || Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x86)))
@@ -701,32 +703,69 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 DGV_video.ClearSelection();
                 DGV_video.ContextMenuStrip.Enabled = false;
                 indice_percentuale = 0;
-                ts = new ThreadStart(encode);
-                t = new Thread(ts);
-                t.Start();
-                timer_tempo.Start();
-                b_avvia.Text = "Ferma";
-                ripristinaImpostazioniToolStripMenuItem3.Enabled = false;
-                ripristinaImpostazioniToolStripMenuItem3.ShortcutKeys = Keys.None;
-                b_avvia.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.stop;
-                b_pause.Enabled = true;
-                b_agg_cart.Enabled = false;
-                b_agg_files.Enabled = false;
-                b_incolla.Enabled = false;
-                b_rimuovi.Enabled = false;
-                DGV_video.ReadOnly = true;
-                strumentiToolStripMenuItem.Enabled = false;
-                modificaToolStripMenuItem.Enabled = false;
-                pb_tot.Value = 0;
-                ts_perc.Text = pb_tot.Value.ToString() + "%";
-                rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
-                l_vel.Text = "Velocità: 0";
-                l_dim_prev.Text = "Dimensione stimata: 0";
-                ts_perc.Text = "0,00%";
-                l_dim_att.Text = "Dimensione attuale: 0";
-                l_temp_rim.Text = "Tempo rimanente: 0";
-                l_temp_trasc.Text = "Posizione video: 0";
-                file_attuale = "Nessuno";
+                Boolean processati = false;
+                foreach (DataGridViewRow r in DGV_video.Rows)
+                {
+                    if (r.Cells["stato"].Value.ToString().ToLower().Contains("pronto"))
+                    {
+                        processati = false;
+                    }
+                    else
+                    {
+                        processati = true;
+                        break;
+                    }
+                }
+                if (processati == true)
+                {
+                    SelezionaProcessati sp = new SelezionaProcessati();
+                    if (sp.ShowDialog() == DialogResult.OK)
+                    {
+                        foreach (DataGridViewRow r in DGV_video.Rows)
+                        {
+                            if (stati_scelti.Contains(r.Cells["stato"].Value.ToString().Split(' ')[0]))
+                            {
+                                r.Cells["stato"].Value = "PRONTO - 0,00%";
+                                r.Cells["stato"].Style.BackColor = Color.White;
+                            }
+                            start = true;
+                        }
+                    }
+                    else
+                    {
+                        start = false;
+                    }
+                }
+                if (start == true)
+                {
+                    ts = new ThreadStart(encode);
+                    t = new Thread(ts);
+                    t.Start();
+                    timer_tempo.Start();
+                    b_avvia.Text = "Ferma";
+                    ripristinaImpostazioniToolStripMenuItem3.Enabled = false;
+                    ripristinaImpostazioniToolStripMenuItem3.ShortcutKeys = Keys.None;
+                    b_avvia.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.stop;
+                    b_avvia.FlatAppearance.MouseOverBackColor = Color.OrangeRed;
+                    b_pause.Enabled = true;
+                    b_agg_cart.Enabled = false;
+                    b_agg_files.Enabled = false;
+                    b_incolla.Enabled = false;
+                    b_rimuovi.Enabled = false;
+                    DGV_video.ReadOnly = true;
+                    strumentiToolStripMenuItem.Enabled = false;
+                    modificaToolStripMenuItem.Enabled = false;
+                    pb_tot.Value = 0;
+                    ts_perc.Text = pb_tot.Value.ToString() + "%";
+                    rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
+                    l_vel.Text = "Velocità: 0";
+                    l_dim_prev.Text = "Dimensione stimata: 0";
+                    ts_perc.Text = "0,00%";
+                    l_dim_att.Text = "Dimensione attuale: 0";
+                    l_temp_rim.Text = "Tempo rimanente: 0";
+                    l_temp_trasc.Text = "Posizione video: 0";
+                    file_attuale = "Nessuno";
+                }
             }
             else
             {
@@ -738,6 +777,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     b_pause.Text = "Pausa";
                     b_avvia.Text = "Avvia";
                     b_avvia.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
+                    b_avvia.FlatAppearance.MouseOverBackColor = Color.LawnGreen;
                     b_pause.Enabled = false;
                     b_agg_cart.Enabled = true;
                     b_agg_files.Enabled = true;
@@ -787,6 +827,13 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             for (Int32 q = 0; q < DGV_video.Rows.Count; q++)
             {
+                if (stati_scelti.Count > 0)
+                {
+                    if (stati_scelti.Contains(DGV_video.Rows[q].Cells["stato"].Value.ToString().Split(' ')[0]))
+                    {
+                        
+                    }
+                }
                 this.Invoke((MethodInvoker)delegate ()
                 {
                     rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
@@ -1060,6 +1107,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 b_avvia.Text = "Avvia";
                 b_avvia.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
+                b_avvia.FlatAppearance.MouseOverBackColor = Color.LawnGreen;
                 b_pause.Enabled = false;
                 b_agg_cart.Enabled = true;
                 b_agg_files.Enabled = true;
@@ -1095,8 +1143,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 if (vid.Format.ToLower().Contains("mpeg") || vid.Format.ToLower().Contains("avc") || vid.Format.ToLower().Contains("hevc"))
                 {
                     comando_remux += " -map 0:" + (vid.ID - 1).ToString() + " -c:v:" + cont_video.ToString() + " copy";
-                    String framerate = (vid.FrameRate / 1000.0).ToString();
-                    comando_remux += " -r " + framerate.Replace(",", ".");
+                    comando_remux += " -r " + vid.FrameRate.ToString().Replace(",", ".");
                     fc = Math.Round((Double)vid.FrameCount/* / 1000.0*/, 0, MidpointRounding.AwayFromZero).ToString();
                     Double altezza = vid.Height;
                     Double larghezza = vid.Width;
@@ -1108,8 +1155,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 else
                 {
                     comando_remux += " -map 0:" + (vid.ID - 1).ToString() + " -c:v:" + cont_video.ToString() + " libx264";
-                    String framerate = (vid.FrameRate / 1000.0).ToString().Replace(",", ".");
-                    comando_remux += " -r " + framerate;
+                    comando_remux += " -r " + vid.FrameRate.ToString().Replace(",", ".");
                     fc = Math.Round((Double)vid.FrameCount/* / 1000.0*/, 0, MidpointRounding.AwayFromZero).ToString();
                     Double altezza = vid.Height;
                     if (altezza % 2 != 0)
@@ -1150,9 +1196,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
 
                     comando_remux += " -profile:v:" + cont_video.ToString() + " high -level:v:" + cont_video.ToString() + " 4.1";
-                    if (vid.miOption("ScanType").StartsWith("P") == false)
+                    if (vid.miGetString("ScanType").ToLower().Trim().StartsWith("i") == true)
                     {
-                        //comando_remux += " -vf yadif";
+                        comando_remux += " -vf yadif";
                     }
                 }
                 cont_video++;
@@ -2579,16 +2625,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
         }
 
-        private void chiaroToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void oKToolStripMenuItem_Click(object sender, EventArgs e)
         {
             for (Int32 i=DGV_video.Rows.Count-1; i>=0; i--)
             {
-                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Contains(oKToolStripMenuItem.Text.ToLower()))
+                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().Trim().ToLower().Contains(oKToolStripMenuItem.Text.ToLower().Trim()))
                     DGV_video.Rows.RemoveAt(DGV_video.Rows[i].Index);
             }
         }
@@ -2597,7 +2638,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             for (Int32 i = DGV_video.Rows.Count - 1; i >= 0; i--)
             {
-                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Contains(fermatoToolStripMenuItem.Text.ToLower()))
+                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(fermatoToolStripMenuItem.Text.ToLower().Trim()))
                     DGV_video.Rows.RemoveAt(DGV_video.Rows[i].Index);
             }
         }
@@ -2656,7 +2697,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             cont_files_canc++;
                             break;
                         case "Ok":
-                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Contains(oKToolStripMenuItem.Text.ToLower()))
+                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(oKToolStripMenuItem.Text.ToLower().Trim()))
                             {
                                 System.IO.File.Delete(nome_file);
                                 DGV_video.Rows.Remove(DGV_video.Rows[i]);
@@ -2664,7 +2705,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             break;
                         case "Fermato":
-                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Contains(fermatoToolStripMenuItem.Text.ToLower()))
+                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(fermatoToolStripMenuItem.Text.ToLower().Trim()))
                             {
                                 System.IO.File.Delete(nome_file);
                                 DGV_video.Rows.Remove(DGV_video.Rows[i]);
@@ -2672,7 +2713,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             break;
                         case "Errore":
-                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Contains(erroreToolStripMenuItem.Text.ToLower()))
+                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(erroreToolStripMenuItem.Text.ToLower().Trim()))
                             {
                                 System.IO.File.Delete(nome_file);
                                 DGV_video.Rows.Remove(DGV_video.Rows[i]);
@@ -2733,15 +2774,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             azione_fine_coda = toolStripComboBox1.Text;
         }
 
-        private void DGV_video_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                copiaToolStripMenuItem.Enabled = false;
-                rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.Enabled = false;
-            }
-        }
-
         private void DGV_video_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (DGV_video.Rows.Count > 0)
@@ -2781,7 +2813,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             for (Int32 i = DGV_video.Rows.Count - 1; i >= 0; i--)
             {
-                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Contains(erroreToolStripMenuItem.Text.ToLower()))
+                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(erroreToolStripMenuItem.Text.ToLower().Trim()))
                     DGV_video.Rows.RemoveAt(DGV_video.Rows[i].Index);
             }
         }
@@ -2817,11 +2849,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void DGV_video_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void confermaToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -2864,11 +2891,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             CronologiaVersioni c = new CronologiaVersioni(this.Text, this.Icon);
             c.ShowDialog();
-        }
-
-        private void scuroToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void DGV_video_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -3003,7 +3025,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             Framerate = (media.Video[0].FrameRate).ToString();
             DurataPrecisa = TimeSpan.FromMilliseconds(media.Video[0].Duration);
             TotaleFrames = media.Video[0].FrameCount;
-            String interl = media.Video[0].miGetString("ScanType").ToLower();
+            String interl = media.Video[0].miGetString("ScanType").ToLower().Trim();
             switch (interl)
             {
                 case "progressive":

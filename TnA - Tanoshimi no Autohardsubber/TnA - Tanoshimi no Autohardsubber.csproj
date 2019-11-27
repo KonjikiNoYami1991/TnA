@@ -173,6 +173,12 @@
     <Compile Include="Seleziona formati.Designer.cs">
       <DependentUpon>Seleziona formati.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelezionaProcessati.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelezionaProcessati.Designer.cs">
+      <DependentUpon>SelezionaProcessati.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestFFMPEG.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Seleziona formati.resx">
       <DependentUpon>Seleziona formati.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelezionaProcessati.resx">
+      <DependentUpon>SelezionaProcessati.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestFFMPEG.resx">
       <DependentUpon>TestFFMPEG.cs</DependentUpon>

@@ -35,15 +35,6 @@
             this.rimuoviIFileSelezionatiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.IncollaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.copiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSelezionatiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tutteLeRigheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.righeSelezionateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.daTutteLeRigheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.righeSelezionateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.barra_menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.apriCartellaLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,12 +159,9 @@
             this.tasto_destro_files.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rimuoviIFileSelezionatiToolStripMenuItem,
             this.toolStripSeparator1,
-            this.IncollaToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.copiaToolStripMenuItem,
-            this.rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem});
+            this.IncollaToolStripMenuItem});
             this.tasto_destro_files.Name = "tasto_destro_files";
-            this.tasto_destro_files.Size = new System.Drawing.Size(202, 104);
+            this.tasto_destro_files.Size = new System.Drawing.Size(202, 54);
             // 
             // rimuoviIFileSelezionatiToolStripMenuItem
             // 
@@ -193,73 +181,6 @@
             this.IncollaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.IncollaToolStripMenuItem.Text = "Incolla";
             this.IncollaToolStripMenuItem.Click += new System.EventHandler(this.IncollaToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(198, 6);
-            // 
-            // copiaToolStripMenuItem
-            // 
-            this.copiaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSelezionatiToolStripMenuItem});
-            this.copiaToolStripMenuItem.Enabled = false;
-            this.copiaToolStripMenuItem.Name = "copiaToolStripMenuItem";
-            this.copiaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.copiaToolStripMenuItem.Text = "Copia...";
-            // 
-            // iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSelezionatiToolStripMenuItem
-            // 
-            this.iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSelezionatiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tutteLeRigheToolStripMenuItem,
-            this.righeSelezionateToolStripMenuItem});
-            this.iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSelezionatiToolStripMenuItem.Name = "iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSeleziona" +
-    "tiToolStripMenuItem";
-            this.iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSelezionatiToolStripMenuItem.Size = new System.Drawing.Size(532, 22);
-            this.iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSelezionatiToolStripMenuItem.Text = "I parametri della modalità esperta della cella selezionata per tutti gli altri fi" +
-    "les selezionati";
-            // 
-            // tutteLeRigheToolStripMenuItem
-            // 
-            this.tutteLeRigheToolStripMenuItem.Name = "tutteLeRigheToolStripMenuItem";
-            this.tutteLeRigheToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.tutteLeRigheToolStripMenuItem.Text = "In tutte le righe";
-            // 
-            // righeSelezionateToolStripMenuItem
-            // 
-            this.righeSelezionateToolStripMenuItem.Name = "righeSelezionateToolStripMenuItem";
-            this.righeSelezionateToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.righeSelezionateToolStripMenuItem.Text = "Righe selezionate";
-            // 
-            // rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem
-            // 
-            this.rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem});
-            this.rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.Enabled = false;
-            this.rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.Name = "rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem";
-            this.rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.Text = "Rimuovi...";
-            // 
-            // iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem
-            // 
-            this.iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.daTutteLeRigheToolStripMenuItem,
-            this.righeSelezionateToolStripMenuItem1});
-            this.iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.Name = "iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem";
-            this.iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.Size = new System.Drawing.Size(369, 22);
-            this.iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem.Text = "I parametri della modalità esperta dalle righe selezionate";
-            // 
-            // daTutteLeRigheToolStripMenuItem
-            // 
-            this.daTutteLeRigheToolStripMenuItem.Name = "daTutteLeRigheToolStripMenuItem";
-            this.daTutteLeRigheToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.daTutteLeRigheToolStripMenuItem.Text = "Da tutte le righe";
-            // 
-            // righeSelezionateToolStripMenuItem1
-            // 
-            this.righeSelezionateToolStripMenuItem1.Name = "righeSelezionateToolStripMenuItem1";
-            this.righeSelezionateToolStripMenuItem1.Size = new System.Drawing.Size(165, 22);
-            this.righeSelezionateToolStripMenuItem1.Text = "Righe selezionate";
             // 
             // barra_menu
             // 
@@ -908,10 +829,8 @@
             this.DGV_video.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV_video.Size = new System.Drawing.Size(1111, 408);
             this.DGV_video.TabIndex = 2;
-            this.DGV_video.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_video_CellMouseDown);
             this.DGV_video.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_video_CellValueChanged);
             this.DGV_video.CurrentCellDirtyStateChanged += new System.EventHandler(this.DGV_video_CurrentCellDirtyStateChanged);
-            this.DGV_video.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_video_RowEnter);
             this.DGV_video.DragDrop += new System.Windows.Forms.DragEventHandler(this.DGV_video_DragDrop);
             this.DGV_video.DragEnter += new System.Windows.Forms.DragEventHandler(this.DGV_video_DragEnter);
             // 
@@ -1077,6 +996,8 @@
             // button2
             // 
             this.button2.Enabled = false;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(330, 27);
             this.button2.Name = "button2";
@@ -1088,6 +1009,8 @@
             // button5
             // 
             this.button5.Enabled = false;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Location = new System.Drawing.Point(493, 27);
             this.button5.Name = "button5";
@@ -1159,7 +1082,9 @@
             // 
             // b_agg_files
             // 
-            this.b_agg_files.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.b_agg_files.FlatAppearance.BorderSize = 0;
+            this.b_agg_files.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.b_agg_files.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_agg_files.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.film;
             this.b_agg_files.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.b_agg_files.Location = new System.Drawing.Point(12, 27);
@@ -1174,7 +1099,9 @@
             // 
             // b_agg_cart
             // 
-            this.b_agg_cart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.b_agg_cart.FlatAppearance.BorderSize = 0;
+            this.b_agg_cart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.b_agg_cart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_agg_cart.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.folder;
             this.b_agg_cart.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.b_agg_cart.Location = new System.Drawing.Point(118, 27);
@@ -1190,6 +1117,9 @@
             // b_pause
             // 
             this.b_pause.Enabled = false;
+            this.b_pause.FlatAppearance.BorderSize = 0;
+            this.b_pause.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
+            this.b_pause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_pause.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause;
             this.b_pause.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.b_pause.Location = new System.Drawing.Point(615, 27);
@@ -1203,7 +1133,9 @@
             // 
             // b_incolla
             // 
-            this.b_incolla.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.b_incolla.FlatAppearance.BorderSize = 0;
+            this.b_incolla.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.b_incolla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_incolla.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.page;
             this.b_incolla.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.b_incolla.Location = new System.Drawing.Point(224, 27);
@@ -1218,6 +1150,9 @@
             // 
             // b_avvia
             // 
+            this.b_avvia.FlatAppearance.BorderSize = 0;
+            this.b_avvia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LawnGreen;
+            this.b_avvia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_avvia.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
             this.b_avvia.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.b_avvia.Location = new System.Drawing.Point(509, 27);
@@ -1231,7 +1166,9 @@
             // 
             // b_rimuovi
             // 
-            this.b_rimuovi.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.b_rimuovi.FlatAppearance.BorderSize = 0;
+            this.b_rimuovi.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.b_rimuovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_rimuovi.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.block;
             this.b_rimuovi.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.b_rimuovi.Location = new System.Drawing.Point(346, 27);
@@ -1318,7 +1255,7 @@
             this.MinimumSize = new System.Drawing.Size(1171, 700);
             this.Name = "TnA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.7.5";
+            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.7.6";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TnA_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TnA_ResizeEnd);
             this.tasto_destro_files.ResumeLayout(false);
@@ -1421,15 +1358,6 @@
         private System.Windows.Forms.Button b_pause;
         private System.Windows.Forms.ToolStripMenuItem allaFineDellaCodaDiLavoroToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripMenuItem copiaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rimuoviIParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iParametriDellaModalitàEspertaDellaCellaSelezionataPerTuttiGliAltriFilesSelezionatiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iParametriDellaModalitàEspertaDalleRigheSelezionateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tutteLeRigheToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem righeSelezionateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem daTutteLeRigheToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem righeSelezionateToolStripMenuItem1;
         private System.Windows.Forms.ToolTip tt_subs;
         private System.Windows.Forms.ToolTip tt_encode;
         private System.Windows.Forms.Button b_avvia;
