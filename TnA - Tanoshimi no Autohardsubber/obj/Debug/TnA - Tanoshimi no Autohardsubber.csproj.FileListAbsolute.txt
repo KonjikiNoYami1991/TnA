@@ -187,6 +187,5 @@ C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.xml
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\x64\MediaInfo.dll
 C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\x64\MediaInfo.dll
-C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\bin\Debug\Newtonsoft.Json.xml
 C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.SelezionaProcessati.resources
+C:\Users\Simo\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\TnA - Tanoshimi no Autohardsubber\obj\Debug\TnA___Tanoshimi_no_Autohardsubber.SelezionaProcessati.resources

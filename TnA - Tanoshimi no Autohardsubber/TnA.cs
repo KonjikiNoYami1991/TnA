@@ -1824,9 +1824,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             switch (prof.Split(' ')[0])
             {
-                case "Xbox360":
-                    comando += " " + parametri_video.XBOX360;
-                    break;
                 case "Bluray":
                     comando += " " + parametri_video.BLURAY;
                     break;
@@ -1836,11 +1833,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     else
                         comando += " " + parametri_video.H265;
                     break;
-                case "PS3":
-                    comando += " " + parametri_video.PS3;
-                    break;
                 case "Workraw":
                     comando += " " + parametri_video.WORKRAW;
+                    break;
+                case "XviD":
+                    comando += " " + parametri_video.XVID;
                     break;
             }
             if (ca.Count > 0)
@@ -3047,9 +3044,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
     {
         public class ParametriVideo
         {
-            public String PS3 { get; }
             public String BLURAY { get; }
-            public String XBOX360 { get; }
             public String STREAMING { get; }
             public String XVID { get; }
             public String WORKRAW { get; }
@@ -3057,9 +3052,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
             public ParametriVideo(MediaFile media)
             {
-                PS3 = " -profile:v high -level:v 4.1 -maxrate 20000k -bufsize 20000k -partitions +parti4x4+parti8x8+partp8x8+partb8x8 -pix_fmt yuv420p -x264opts b-pyramid=0";
                 BLURAY = " -profile:v high -level:v 4.1 -bluray-compat 1 -maxrate 50000k -bufsize 70000k -pix_fmt yuv420p";
-                XBOX360 = " -profile:v high -level:v 4.1 -maxrate 10000k -bufsize 10000k -pix_fmt yuv420p";
                 STREAMING = " -maxrate 20000k -bufsize 20000k -profile:v high -level:v 4.1 -pix_fmt yuv420p -bluray-compat 1 -x264opts cabac=0:weightp=0:weightb=0:sync-lookahead=0:sliced-threads=1:b-pyramid=0 -keyint_min " + CalcolaGOP(media).ToString() + " -g " + CalcolaGOP(media).ToString();
                 XVID = " -fflags +genpts -f avi -vtag XVID -bf 2 -level 5 -use_odml -1 -qmax 10 -qmin 1 -pix_fmt yuv420p -flags +mv4+loop+qpel+aic -qcomp 1.0 -subcmp 7 -mbcmp 7 -precmp 7 -subq 11 -me_range 1023 -mbd rd -profile:v mpeg4_asp -trellis 2";
                 WORKRAW = " -profile:v high -level:v 4.1 -pix_fmt yuv420p -maxrate 20000k -bufsize 20000k -partitions +parti4x4+parti8x8+partp8x8+partb8x8 -x264opts b-pyramid=0 -sn -tune fastdecode";
