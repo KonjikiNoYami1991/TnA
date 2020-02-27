@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TnA - Tanoshimi no Autohardsubber")]
 [assembly: AssemblyDescription("Piccolo e comodo autohardsubber e remuxer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Tanoshimi no Sekai Fansub")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("TnA - Tanoshimi no Autohardsubber")]
-[assembly: AssemblyCopyright("Copyright © TnS Fansub 2018")]
+[assembly: AssemblyCopyright("Copyright © Simone Sociale 2020")]
 [assembly: AssemblyTrademark("TnS Fansub")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // È possibile specificare tutti i valori oppure impostare valori predefiniti per i numeri relativi alla revisione e alla build 
 // utilizzando l'asterisco (*) come descritto di seguito:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.9.8.2")]
-[assembly: AssemblyFileVersion("0.9.8.1")]
+[assembly: AssemblyVersion("0.9.8.7")]
+[assembly: AssemblyFileVersion("0.9.8.7")]

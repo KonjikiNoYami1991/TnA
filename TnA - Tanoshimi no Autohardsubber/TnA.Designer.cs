@@ -104,6 +104,13 @@
             this.tab_autohardsubber = new System.Windows.Forms.TabPage();
             this.tb_help = new System.Windows.Forms.TextBox();
             this.DGV_video = new System.Windows.Forms.DataGridView();
+            this.input = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compatibilita = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.risoluz = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.qualita = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.subtitle_mode = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.stato = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.percorso_orig = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_log = new System.Windows.Forms.TabPage();
             this.sc_log = new System.Windows.Forms.SplitContainer();
             this.rtb_codifica = new System.Windows.Forms.RichTextBox();
@@ -132,13 +139,6 @@
             this.ts_perc = new System.Windows.Forms.ToolStripStatusLabel();
             this.ts_avanz = new System.Windows.Forms.ToolStripStatusLabel();
             this.bgw_updateschecker = new System.ComponentModel.BackgroundWorker();
-            this.input = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.compatibilita = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.risoluz = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.qualita = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.subtitle_mode = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.stato = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.percorso_orig = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tasto_destro_files.SuspendLayout();
             this.barra_menu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -834,6 +834,99 @@
             this.DGV_video.DragDrop += new System.Windows.Forms.DragEventHandler(this.DGV_video_DragDrop);
             this.DGV_video.DragEnter += new System.Windows.Forms.DragEventHandler(this.DGV_video_DragEnter);
             // 
+            // input
+            // 
+            this.input.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.input.HeaderText = "File video";
+            this.input.Name = "input";
+            this.input.ReadOnly = true;
+            this.input.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.input.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.input.Width = 52;
+            // 
+            // compatibilita
+            // 
+            this.compatibilita.HeaderText = "Compatibilità";
+            this.compatibilita.Items.AddRange(new object[] {
+            "Bluray AAC",
+            "Bluray AC3",
+            "Remux MP4",
+            "Remux MKV",
+            "Streaming HTML5 H.264",
+            "Streaming HTML5 H.265",
+            "XviD MP3",
+            "Workraw"});
+            this.compatibilita.MinimumWidth = 185;
+            this.compatibilita.Name = "compatibilita";
+            this.compatibilita.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.compatibilita.Width = 185;
+            // 
+            // risoluz
+            // 
+            this.risoluz.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.risoluz.HeaderText = "Risoluzione";
+            this.risoluz.Items.AddRange(new object[] {
+            "1080p",
+            "900p",
+            "720p",
+            "576p",
+            "480p",
+            "396p"});
+            this.risoluz.Name = "risoluz";
+            this.risoluz.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.risoluz.Width = 67;
+            // 
+            // qualita
+            // 
+            this.qualita.HeaderText = "Qualità";
+            this.qualita.Items.AddRange(new object[] {
+            "Altissima",
+            "Alta",
+            "Medio-alta",
+            "Media",
+            "Medio-bassa",
+            "Bassa",
+            "Bassissima",
+            "Bozza"});
+            this.qualita.Name = "qualita";
+            this.qualita.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.qualita.Width = 80;
+            // 
+            // subtitle_mode
+            // 
+            this.subtitle_mode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.subtitle_mode.HeaderText = "Sottotitoli";
+            this.subtitle_mode.Items.AddRange(new object[] {
+            "Hardsub",
+            "Softsub",
+            "No sottotitoli"});
+            this.subtitle_mode.Name = "subtitle_mode";
+            this.subtitle_mode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.subtitle_mode.Width = 56;
+            // 
+            // stato
+            // 
+            this.stato.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.stato.DefaultCellStyle = dataGridViewCellStyle1;
+            this.stato.HeaderText = "Stato";
+            this.stato.MinimumWidth = 120;
+            this.stato.Name = "stato";
+            this.stato.ReadOnly = true;
+            this.stato.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.stato.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.stato.Width = 120;
+            // 
+            // percorso_orig
+            // 
+            this.percorso_orig.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.percorso_orig.HeaderText = "Percorso originale";
+            this.percorso_orig.Name = "percorso_orig";
+            this.percorso_orig.ReadOnly = true;
+            this.percorso_orig.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.percorso_orig.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.percorso_orig.Width = 87;
+            // 
             // tab_log
             // 
             this.tab_log.Controls.Add(this.sc_log);
@@ -1135,99 +1228,6 @@
             // 
             this.bgw_updateschecker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Bgw_updateschecker_DoWork);
             // 
-            // input
-            // 
-            this.input.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.input.HeaderText = "File video";
-            this.input.Name = "input";
-            this.input.ReadOnly = true;
-            this.input.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.input.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.input.Width = 58;
-            // 
-            // compatibilita
-            // 
-            this.compatibilita.HeaderText = "Compatibilità";
-            this.compatibilita.Items.AddRange(new object[] {
-            "Bluray AAC",
-            "Bluray AC3",
-            "Remux MP4",
-            "Remux MKV",
-            "Streaming HTML5 H.264",
-            "Streaming HTML5 H.265",
-            "XviD MP3",
-            "Workraw"});
-            this.compatibilita.MinimumWidth = 185;
-            this.compatibilita.Name = "compatibilita";
-            this.compatibilita.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.compatibilita.Width = 185;
-            // 
-            // risoluz
-            // 
-            this.risoluz.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.risoluz.HeaderText = "Risoluzione";
-            this.risoluz.Items.AddRange(new object[] {
-            "1080p",
-            "900p",
-            "720p",
-            "576p",
-            "480p",
-            "396p"});
-            this.risoluz.Name = "risoluz";
-            this.risoluz.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.risoluz.Width = 67;
-            // 
-            // qualita
-            // 
-            this.qualita.HeaderText = "Qualità";
-            this.qualita.Items.AddRange(new object[] {
-            "Altissima",
-            "Alta",
-            "Medio-alta",
-            "Media",
-            "Medio-bassa",
-            "Bassa",
-            "Bassissima",
-            "Bozza"});
-            this.qualita.Name = "qualita";
-            this.qualita.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.qualita.Width = 80;
-            // 
-            // subtitle_mode
-            // 
-            this.subtitle_mode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.subtitle_mode.HeaderText = "Sottotitoli";
-            this.subtitle_mode.Items.AddRange(new object[] {
-            "Hardsub",
-            "Softsub",
-            "No sottotitoli"});
-            this.subtitle_mode.Name = "subtitle_mode";
-            this.subtitle_mode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.subtitle_mode.Width = 56;
-            // 
-            // stato
-            // 
-            this.stato.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.stato.DefaultCellStyle = dataGridViewCellStyle1;
-            this.stato.HeaderText = "Stato";
-            this.stato.MinimumWidth = 120;
-            this.stato.Name = "stato";
-            this.stato.ReadOnly = true;
-            this.stato.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.stato.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.stato.Width = 120;
-            // 
-            // percorso_orig
-            // 
-            this.percorso_orig.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.percorso_orig.HeaderText = "Percorso originale";
-            this.percorso_orig.Name = "percorso_orig";
-            this.percorso_orig.ReadOnly = true;
-            this.percorso_orig.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.percorso_orig.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.percorso_orig.Width = 87;
-            // 
             // TnA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1253,7 +1253,7 @@
             this.MinimumSize = new System.Drawing.Size(1171, 700);
             this.Name = "TnA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.7.7";
+            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.7.8";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TnA_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TnA_ResizeEnd);
             this.tasto_destro_files.ResumeLayout(false);

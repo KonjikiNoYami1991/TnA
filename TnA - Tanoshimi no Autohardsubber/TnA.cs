@@ -3539,28 +3539,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("xbox"))
+                                if (profilo.ToLower().Contains("streaming"))
                                 {
                                     if (audio.Canali >= 2)
                                         Canali = 2;
-                                    Bitrate = 128 * Canali;
-                                    Q = Double.NaN;
-                                }
-                                else
-                                {
-                                    if (profilo.ToLower().Contains("streaming"))
-                                    {
-                                        if (audio.Canali >= 2)
-                                            Canali = 2;
-                                        else
-                                            Canali = audio.Canali;
-                                    }
                                     else
                                         Canali = audio.Canali;
-                                    Bitrate = 192 * Convert.ToInt32(Canali) / 2;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
                                 }
+                                else
+                                    Canali = audio.Canali;
+                                Bitrate = 192 * Convert.ToInt32(Canali) / 2;
+                                Q = Double.NaN;
+                                CODEC = "aac";
                             }
                         }
                     }
@@ -3599,29 +3589,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("xbox"))
+                                if (profilo.ToLower().Contains("streaming"))
                                 {
                                     if (audio.Canali >= 2)
                                         Canali = 2;
-                                    Bitrate = 96 * Canali;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
-                                }
-                                else
-                                {
-                                    if (profilo.ToLower().Contains("streaming"))
-                                    {
-                                        if (audio.Canali >= 2)
-                                            Canali = 2;
-                                        else
-                                            Canali = audio.Canali;
-                                    }
                                     else
                                         Canali = audio.Canali;
-                                    Bitrate = 160 * Convert.ToInt32(Canali) / 2;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
                                 }
+                                else
+                                    Canali = audio.Canali;
+                                Bitrate = 160 * Convert.ToInt32(Canali) / 2;
+                                Q = Double.NaN;
+                                CODEC = "aac";
                             }
                         }
                     }
@@ -3661,29 +3640,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("xbox"))
+                                if (profilo.ToLower().Contains("streaming"))
                                 {
                                     if (audio.Canali >= 2)
                                         Canali = 2;
-                                    Bitrate = 80 * Canali;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
-                                }
-                                else
-                                {
-                                    if (profilo.ToLower().Contains("streaming"))
-                                    {
-                                        if (audio.Canali >= 2)
-                                            Canali = 2;
-                                        else
-                                            Canali = audio.Canali;
-                                    }
                                     else
                                         Canali = audio.Canali;
-                                    Bitrate = 144 * Convert.ToInt32(Canali) / 2;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
                                 }
+                                else
+                                    Canali = audio.Canali;
+                                Bitrate = 144 * Convert.ToInt32(Canali) / 2;
+                                Q = Double.NaN;
+                                CODEC = "aac";
                             }
                         }
                     }
@@ -3722,29 +3690,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("xbox"))
+                                if (profilo.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali > 2)
+                                    if (audio.Canali >= 2)
                                         Canali = 2;
-                                    Bitrate = 80 * Canali;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
-                                }
-                                else
-                                {
-                                    if (profilo.ToLower().Contains("streaming"))
-                                    {
-                                        if (audio.Canali >= 2)
-                                            Canali = 2;
-                                        else
-                                            Canali = audio.Canali;
-                                    }
                                     else
                                         Canali = audio.Canali;
-                                    Bitrate = 128 * Convert.ToInt32(Canali) / 2;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
                                 }
+                                else
+                                    Canali = audio.Canali;
+                                Bitrate = 128 * Convert.ToInt32(Canali) / 2;
+                                Q = Double.NaN;
+                                CODEC = "aac";
                             }
                         }
                     }
@@ -3783,29 +3740,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("xbox"))
+                                if (profilo.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali > 2)
+                                    if (audio.Canali >= 2)
                                         Canali = 2;
-                                    Bitrate = 64 * Canali;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
-                                }
-                                else
-                                {
-                                    if (profilo.ToLower().Contains("streaming"))
-                                    {
-                                        if (audio.Canali >= 2)
-                                            Canali = 2;
-                                        else
-                                            Canali = audio.Canali;
-                                    }
                                     else
                                         Canali = audio.Canali;
-                                    Bitrate = 96 * Convert.ToInt32(Canali) / 2;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
                                 }
+                                else
+                                    Canali = audio.Canali;
+                                Bitrate = 96 * Convert.ToInt32(Canali) / 2;
+                                Q = Double.NaN;
+                                CODEC = "aac";
                             }
                         }
                     }
@@ -3844,29 +3790,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("xbox"))
+                                if (profilo.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali > 2)
+                                    if (audio.Canali >= 2)
                                         Canali = 2;
-                                    Bitrate = 48 * Canali;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
-                                }
-                                else
-                                {
-                                    if (profilo.ToLower().Contains("streaming"))
-                                    {
-                                        if (audio.Canali >= 2)
-                                            Canali = 2;
-                                        else
-                                            Canali = audio.Canali;
-                                    }
                                     else
                                         Canali = audio.Canali;
-                                    Bitrate = 64 * Convert.ToInt32(Canali) / 2;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
                                 }
+                                else
+                                    Canali = audio.Canali;
+                                Bitrate = 64 * Convert.ToInt32(Canali) / 2;
+                                Q = Double.NaN;
+                                CODEC = "aac";
                             }
                         }
                     }
@@ -3905,29 +3840,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("xbox"))
+                                if (profilo.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali > 2)
+                                    if (audio.Canali >= 2)
                                         Canali = 2;
-                                    Bitrate = 32 * Canali;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
-                                }
-                                else
-                                {
-                                    if (profilo.ToLower().Contains("streaming"))
-                                    {
-                                        if (audio.Canali >= 2)
-                                            Canali = 2;
-                                        else
-                                            Canali = audio.Canali;
-                                    }
                                     else
                                         Canali = audio.Canali;
-                                    Bitrate = 48 * Convert.ToInt32(Canali) / 2;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
                                 }
+                                else
+                                    Canali = audio.Canali;
+                                Bitrate = 48 * Convert.ToInt32(Canali) / 2;
+                                Q = Double.NaN;
+                                CODEC = "aac";
                             }
                         }
                     }
@@ -3966,29 +3890,19 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("xbox"))
+
+                                if (profilo.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali > 2)
+                                    if (audio.Canali >= 2)
                                         Canali = 2;
-                                    Bitrate = 24 * Canali;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
-                                }
-                                else
-                                {
-                                    if (profilo.ToLower().Contains("streaming"))
-                                    {
-                                        if (audio.Canali >= 2)
-                                            Canali = 2;
-                                        else
-                                            Canali = audio.Canali;
-                                    }
                                     else
                                         Canali = audio.Canali;
-                                    Bitrate = 32 * Convert.ToInt32(Canali) / 2;
-                                    Q = Double.NaN;
-                                    CODEC = "aac";
                                 }
+                                else
+                                    Canali = audio.Canali;
+                                Bitrate = 32 * Convert.ToInt32(Canali) / 2;
+                                Q = Double.NaN;
+                                CODEC = "aac";
                             }
                         }
                     }
