@@ -42,6 +42,10 @@ By activating this, you can just copy files and folder from File Explorer and th
 - Settings save in .ini file.
 - Automatic removing of source file after a correct conversion.
 - Pause/resume conversion.
+- SendTo link in Windows SendTo menù can be created or removed.
+- Possibility to choose one action after conversion of all listed files.
+- Can be restored to initial settings.
+
 
 ## Usage
 
