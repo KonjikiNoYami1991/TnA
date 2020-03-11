@@ -238,7 +238,16 @@ Possible values are:
  - 396p
 
 ### Quality
-
+Quality is the parameter that determines the final quality of destination file.\
+Possible values are:
+- Altissima (Highest)
+- Alta (High)
+- Medio-alta (Above medium)
+- Media (Medium)
+- Medio-bassa (Below medium)
+- Bassa (Low)
+- Bassissima (Lowest)
+- Bozza (Draft)
 
 ```bash
 
