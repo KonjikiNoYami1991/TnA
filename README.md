@@ -124,7 +124,7 @@ Be sure to select destination quality to avoid wrong re-encoding parameters.
   - Lossy case
     - Copied if audio source is one among allowed formats, otherwise AAC-LC, 1 to 6 channels
   - Lossless case
-    - Re-encoded to ALAC to avoid quality loss or copied if already ALAC.
+    - Re-encoded to ALAC to avoid quality loss.
 #### - Remux MKV
 Copies all streams and metadata from source to destination file, without any stream conversion.
 #### - Streaming HTML5 H.264
