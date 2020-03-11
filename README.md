@@ -212,15 +212,15 @@ This profile generates a file with only video and audio streams, excluding all t
     - Bufsize: 20000k
     - Pixel format: yuv420p
     - Bluray compat: disabled
+    - Partitions
+      - i4x4
+      - i8x8
+      - p8x8
+      - b8x8
+    - Subtitles: exluded
+    - Tune: fast decode
     - x264opts 
-      - Cabac: disabled
-      - Weightp: disabled
-      - Weightb: disabled
-      - Sync lookahead: disabled
-      - Sliced threads: 1
       - B pyramid: 0
-      - Keyint min: framerate casted to integer and multiplied by 10
-      - GOP: same as Keyint min to make constant GOP
 - AUDIO CODEC: Vorbis, 1 channel (copied if audio source is the same to avoid quality loss)
 
 ### Resolution
