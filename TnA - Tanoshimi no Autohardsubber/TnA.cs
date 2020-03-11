@@ -405,14 +405,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 monitoraGliAppuntiToolStripMenuItem.CheckState = CheckState.Unchecked;
         }
 
-        public void LeggiImpostazioni_ElencoSeparato(String Value)
-        {
-            if (Value == "y")
-                inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.CheckState = CheckState.Checked;
-            else
-                inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.CheckState = CheckState.Unchecked;
-        }
-
         public void LeggiImpostazioni(String FileINI)
         {
             if (System.IO.File.Exists(file_settings))
@@ -504,10 +496,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 if (ini.KeyExists("monit_clipb") == true)
                 {
                     LeggiImpostazioni_Clipboard(ini.Read("monit_clipb"));
-                }
-                if (ini.KeyExists("sep_window") == true)
-                {
-                    LeggiImpostazioni_ElencoSeparato(ini.Read("sep_window"));
                 }
             }
             else
@@ -632,10 +620,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             {
                                 if (formati_scelti.Contains(Path.GetExtension(t).ToLower()) == true)
                                 {
-                                    if (inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.CheckState == CheckState.Unchecked)
-                                        DGV_video.Rows.Add(Path.GetFileName(t), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(t));
-                                    else
-                                        temp.Add(t);
+                                    DGV_video.Rows.Add(Path.GetFileName(t), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(t));
                                 }
                                 else
                                 {
@@ -643,31 +628,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                     {
                                         if (estensioni_video.Contains(Path.GetExtension(t).ToLower()) == true)
                                         {
-                                            if (inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.CheckState == CheckState.Unchecked)
-                                                DGV_video.Rows.Add(Path.GetFileName(t), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(t));
-                                            else
-                                                temp.Add(t);
+                                            DGV_video.Rows.Add(Path.GetFileName(t), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(t));
                                         }
                                     }
                                 }
                             }
-                        }
-                    }
-                }
-
-                if (temp.Count > 0)
-                {
-                    FileDaAppunti fda = new FileDaAppunti(temp.ToArray());
-                    fda.Icon = this.Icon;
-                    fda.Text = this.Text + " - Lista files da appunti Windows";
-                    fda.Width = this.Width;
-                    fda.WindowState = FormWindowState.Normal;
-                    fda.StartPosition = FormStartPosition.CenterParent;
-                    if (fda.ShowDialog() == DialogResult.OK)
-                    {
-                        foreach (String u in TnA___Tanoshimi_no_Autohardsubber.FileDaAppunti.sorg)
-                        {
-                            DGV_video.Rows.Add(Path.GetFileName(u), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(u));
                         }
                     }
                 }
@@ -699,7 +664,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             if (b_avvia.Text.StartsWith("A") && presente == true)
             {
                 monitoraGliAppuntiToolStripMenuItem.Enabled = false;
-                inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.Enabled = false;
                 DGV_video.ClearSelection();
                 DGV_video.ContextMenuStrip.Enabled = false;
                 indice_percentuale = 0;
@@ -788,7 +752,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     DGV_video.ReadOnly = false;
                     timer_tempo.Stop();
                     monitoraGliAppuntiToolStripMenuItem.Enabled = true;
-                    inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.Enabled = true;
                     DGV_video.ContextMenuStrip.Enabled = true;
                     DGV_video.Columns[DGV_video.Columns["input"].Index].ReadOnly = true;
                     DGV_video.Columns[DGV_video.Columns["stato"].Index].ReadOnly = true;
@@ -1118,7 +1081,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 DGV_video.ReadOnly = false;
                 timer_tempo.Stop();
                 monitoraGliAppuntiToolStripMenuItem.Enabled = true;
-                inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.Enabled = true;
                 DGV_video.ContextMenuStrip.Enabled = true;
                 DGV_video.Columns[DGV_video.Columns["input"].Index].ReadOnly = true;
                 DGV_video.Columns[DGV_video.Columns["stato"].Index].ReadOnly = true;
@@ -2005,6 +1967,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             if (ca != null)
                 comando += " -metadata:s:a title=\"\"";
             comando += " -metadata description=\"Encoded with " + this.Text + " by Tanoshimi no Sekai Fansub. Come to visit us at https://tnsfansub.com\" \"" + file_finale + "\"";
+            //MessageBox.Show(comando);
             AvviaCodifica();
         }
 
@@ -2374,12 +2337,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 ini.Write("monit_clipb", "y");
             else
                 ini.Write("monit_clipb", "n");
-            if (inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.CheckState == CheckState.Checked)
-            {
-                ini.Write("sep_window", "y");
-            }
-            else
-                ini.Write("sep_window", "n");
         }
 
         private void bgw_update_DoWork(object sender, DoWorkEventArgs e)
@@ -2521,14 +2478,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 monitoraGliAppuntiToolStripMenuItem.CheckState = CheckState.Checked;
             }
-        }
-
-        private void inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.CheckState == CheckState.Unchecked)
-                inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.CheckState = CheckState.Checked;
-            else
-                inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.CheckState = CheckState.Unchecked;
         }
 
         private void ripristinaImpostazioniToolStripMenuItem3_Click(object sender, EventArgs e)
@@ -2831,16 +2780,23 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     {
                         case DialogResult.Yes:
                             nuovaVersioneDisponibileToolStripMenuItem.Visible = true;
+                            controllaAggiornamentiToolStripMenuItem.Visible = false;
+                            visualizzaCronologiaVersioniiToolStripMenuItem.Visible = false;
                             break;
-                        case DialogResult.No:
+                        case DialogResult.None:
                             nuovaVersioneDisponibileToolStripMenuItem.Visible = false;
+                            controllaAggiornamentiToolStripMenuItem.Visible = true;
+                            visualizzaCronologiaVersioniiToolStripMenuItem.Visible = true;
                             break;
-                        default:
-                            updater.ShowDialog();
-                            break;
+                        //default:
+                        //    updater.ShowDialog();
+                        //    break;
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
@@ -3006,7 +2962,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         public Boolean Interlacciato { get; set; }
         public TimeSpan DurataPrecisa { get; set; }
         public Int32 TotaleFrames { get; set; }
-
+        
         public CatturaVideo(MediaFile media)
         {
             Cattura(media);

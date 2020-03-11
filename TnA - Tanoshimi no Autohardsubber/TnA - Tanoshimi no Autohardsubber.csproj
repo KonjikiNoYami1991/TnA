@@ -152,12 +152,6 @@
     <Compile Include="DownloadFFMPEG.Designer.cs">
       <DependentUpon>DownloadFFMPEG.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileDaAppunti.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FileDaAppunti.Designer.cs">
-      <DependentUpon>FileDaAppunti.cs</DependentUpon>
-    </Compile>
     <Compile Include="CronologiaVersioni.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,9 +195,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DownloadFFMPEG.resx">
       <DependentUpon>DownloadFFMPEG.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FileDaAppunti.resx">
-      <DependentUpon>FileDaAppunti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CronologiaVersioni.resx">
       <DependentUpon>CronologiaVersioni.cs</DependentUpon>

@@ -35,7 +35,7 @@ namespace Updater
 
         public void Verifica(Boolean Hidden)
         {
-            String link_ini = "https://www.dropbox.com/s/1gln2pthzumofa2/vers.ini?dl=1";
+            String link_ini = "https://www.dropbox.com/s/5ppwjapyd51sf1g/vers.ini?dl=1";
             String file_ini_vers = Path.GetDirectoryName(Application.ExecutablePath) + "\\version.ini";
             try
             {
@@ -61,10 +61,16 @@ namespace Updater
                         this.DialogResult = DialogResult.Yes;
                         this.Close();
                     }
+                    else
+                    {
+                        if (this.Visible == false)
+                            this.ShowDialog();
+                    }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message, this.Text);
                 this.DialogResult = DialogResult.Abort;
                 this.Close();
             }
@@ -72,7 +78,14 @@ namespace Updater
 
         private void b_verifica_Click(object sender, EventArgs e)
         {
+            b_agg.Enabled = false;
+            b_cancel.Enabled = false;
+            b_verifica.Text = "VERIFICA IN CORSO...";
+            b_verifica.Update();
             Verifica(false);
+            b_verifica.Text = "VERIFICA DI NUOVO";
+            b_agg.Enabled = true;
+            b_cancel.Enabled = true;
         }
 
         private void b_agg_Click(object sender, EventArgs e)
@@ -82,6 +95,7 @@ namespace Updater
             if (b_agg.Text.StartsWith("SCA"))
             {
                 b_verifica.Enabled = false;
+                b_cancel.Enabled = false;
                 b_agg.Text = "ANNULLA";
                 update.DownloadFileAsync(new Uri(update.BaseAddress), Path.GetDirectoryName(Application.ExecutablePath) + "\\TnA.7z");
                 update.DownloadProgressChanged += Update_DownloadProgressChanged;
@@ -91,6 +105,7 @@ namespace Updater
             {
                 b_agg.Text = "SCARICA AGGIORNAMENTO";
                 b_verifica.Enabled = true;
+                b_cancel.Enabled = true;
                 update.CancelAsync();
             }
         }
@@ -124,6 +139,12 @@ namespace Updater
         private void Extr_ExtractionFinished(object sender, EventArgs e)
         {
             
+        }
+
+        private void b_cancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void Update_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)

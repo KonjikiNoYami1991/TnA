@@ -35,13 +35,14 @@
             this.pb_perc_down = new System.Windows.Forms.ProgressBar();
             this.l_vers_att = new System.Windows.Forms.Label();
             this.l_dim_down = new System.Windows.Forms.Label();
+            this.b_cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // b_verifica
             // 
             this.b_verifica.Location = new System.Drawing.Point(307, 12);
             this.b_verifica.Name = "b_verifica";
-            this.b_verifica.Size = new System.Drawing.Size(294, 34);
+            this.b_verifica.Size = new System.Drawing.Size(294, 23);
             this.b_verifica.TabIndex = 1;
             this.b_verifica.Text = "VERIFICA DI NUOVO";
             this.b_verifica.UseVisualStyleBackColor = true;
@@ -51,7 +52,7 @@
             // 
             this.b_agg.Location = new System.Drawing.Point(307, 52);
             this.b_agg.Name = "b_agg";
-            this.b_agg.Size = new System.Drawing.Size(294, 34);
+            this.b_agg.Size = new System.Drawing.Size(294, 23);
             this.b_agg.TabIndex = 2;
             this.b_agg.Text = "SCARICA AGGIORNAMENTO";
             this.b_agg.UseVisualStyleBackColor = true;
@@ -60,7 +61,7 @@
             // l_vers_install
             // 
             this.l_vers_install.AutoSize = true;
-            this.l_vers_install.Location = new System.Drawing.Point(12, 23);
+            this.l_vers_install.Location = new System.Drawing.Point(12, 18);
             this.l_vers_install.Name = "l_vers_install";
             this.l_vers_install.Size = new System.Drawing.Size(95, 13);
             this.l_vers_install.TabIndex = 3;
@@ -71,13 +72,13 @@
             this.pb_perc_down.Enabled = false;
             this.pb_perc_down.Location = new System.Drawing.Point(15, 92);
             this.pb_perc_down.Name = "pb_perc_down";
-            this.pb_perc_down.Size = new System.Drawing.Size(442, 23);
+            this.pb_perc_down.Size = new System.Drawing.Size(277, 23);
             this.pb_perc_down.TabIndex = 4;
             // 
             // l_vers_att
             // 
             this.l_vers_att.AutoSize = true;
-            this.l_vers_att.Location = new System.Drawing.Point(12, 63);
+            this.l_vers_att.Location = new System.Drawing.Point(12, 43);
             this.l_vers_att.Name = "l_vers_att";
             this.l_vers_att.Size = new System.Drawing.Size(84, 13);
             this.l_vers_att.TabIndex = 5;
@@ -87,17 +88,29 @@
             // 
             this.l_dim_down.AutoSize = true;
             this.l_dim_down.Enabled = false;
-            this.l_dim_down.Location = new System.Drawing.Point(463, 102);
+            this.l_dim_down.Location = new System.Drawing.Point(12, 76);
             this.l_dim_down.Name = "l_dim_down";
             this.l_dim_down.Size = new System.Drawing.Size(85, 13);
             this.l_dim_down.TabIndex = 8;
             this.l_dim_down.Text = "0/0 MB scaricati";
+            // 
+            // b_cancel
+            // 
+            this.b_cancel.Location = new System.Drawing.Point(307, 92);
+            this.b_cancel.Name = "b_cancel";
+            this.b_cancel.Size = new System.Drawing.Size(294, 23);
+            this.b_cancel.TabIndex = 9;
+            this.b_cancel.Text = "NON AGGIORNARE";
+            this.b_cancel.UseVisualStyleBackColor = true;
+            this.b_cancel.Click += new System.EventHandler(this.b_cancel_Click);
             // 
             // TnA_Updater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(613, 126);
+            this.ControlBox = false;
+            this.Controls.Add(this.b_cancel);
             this.Controls.Add(this.l_dim_down);
             this.Controls.Add(this.l_vers_att);
             this.Controls.Add(this.pb_perc_down);
@@ -124,6 +137,7 @@
         private System.Windows.Forms.ProgressBar pb_perc_down;
         private System.Windows.Forms.Label l_vers_att;
         private System.Windows.Forms.Label l_dim_down;
+        private System.Windows.Forms.Button b_cancel;
     }
 }
 

@@ -1,8 +1,0 @@
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\bin\Debug\Updater.exe.config
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\bin\Debug\Updater.exe
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\bin\Debug\Updater.pdb
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\CheckUpdates.Updater.resources
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.Properties.Resources.resources
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.csproj.GenerateResource.cache
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.exe
-C:\Users\sisociale\Dropbox\C#\Programmi C#\TnA - Tanoshimi no Autohardsubber\CheckUpdates\obj\Debug\Updater.pdb

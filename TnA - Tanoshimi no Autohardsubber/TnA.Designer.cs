@@ -59,7 +59,6 @@
             this.strumentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.monitoraGliAppuntiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.scaricaFFmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testFFmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -267,7 +266,7 @@
             this.cmb_compatibilita,
             this.confermaToolStripMenuItem});
             this.compatibilitàToolStripMenuItem.Name = "compatibilitàToolStripMenuItem";
-            this.compatibilitàToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.compatibilitàToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.compatibilitàToolStripMenuItem.Text = "Compatibilità";
             // 
             // cmb_compatibilita
@@ -300,7 +299,7 @@
             this.cmb_risoluz,
             this.confermaToolStripMenuItem2});
             this.risoluzioneToolStripMenuItem.Name = "risoluzioneToolStripMenuItem";
-            this.risoluzioneToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.risoluzioneToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.risoluzioneToolStripMenuItem.Text = "Risoluzione";
             // 
             // cmb_risoluz
@@ -329,7 +328,7 @@
             this.cmb_qualita,
             this.confermaToolStripMenuItem1});
             this.qualitàToolStripMenuItem.Name = "qualitàToolStripMenuItem";
-            this.qualitàToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.qualitàToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.qualitàToolStripMenuItem.Text = "Qualità";
             // 
             // cmb_qualita
@@ -360,7 +359,7 @@
             this.cmb_subs,
             this.confermaToolStripMenuItem3});
             this.sottotitoliToolStripMenuItem.Name = "sottotitoliToolStripMenuItem";
-            this.sottotitoliToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.sottotitoliToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sottotitoliToolStripMenuItem.Text = "Sottotitoli";
             // 
             // cmb_subs
@@ -398,8 +397,7 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.monitoraGliAppuntiToolStripMenuItem,
-            this.inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem});
+            this.monitoraGliAppuntiToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(306, 22);
             this.toolStripMenuItem2.Text = "Controllo appunti di Windows";
@@ -407,16 +405,9 @@
             // monitoraGliAppuntiToolStripMenuItem
             // 
             this.monitoraGliAppuntiToolStripMenuItem.Name = "monitoraGliAppuntiToolStripMenuItem";
-            this.monitoraGliAppuntiToolStripMenuItem.Size = new System.Drawing.Size(351, 22);
-            this.monitoraGliAppuntiToolStripMenuItem.Text = "Monitora gli appunti del sistema";
+            this.monitoraGliAppuntiToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.monitoraGliAppuntiToolStripMenuItem.Text = "Monitora la clipboard di sistema";
             this.monitoraGliAppuntiToolStripMenuItem.Click += new System.EventHandler(this.MonitoraGliAppuntiToolStripMenuItem_Click);
-            // 
-            // inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem
-            // 
-            this.inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.Name = "inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem";
-            this.inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.Size = new System.Drawing.Size(351, 22);
-            this.inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.Text = "Inserisci i percorsi in una finestra a parte temporanea";
-            this.inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem.Click += new System.EventHandler(this.inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -645,7 +636,8 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.infoToolStripMenuItem,
-            this.controllaAggiornamentiToolStripMenuItem});
+            this.controllaAggiornamentiToolStripMenuItem,
+            this.visualizzaCronologiaVersioniiToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
             this.toolStripMenuItem1.Text = "?";
@@ -653,16 +645,14 @@
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.infoToolStripMenuItem.Text = "Info";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
             // controllaAggiornamentiToolStripMenuItem
             // 
-            this.controllaAggiornamentiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.visualizzaCronologiaVersioniiToolStripMenuItem});
             this.controllaAggiornamentiToolStripMenuItem.Name = "controllaAggiornamentiToolStripMenuItem";
-            this.controllaAggiornamentiToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.controllaAggiornamentiToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.controllaAggiornamentiToolStripMenuItem.Text = "Controlla aggiornamenti";
             this.controllaAggiornamentiToolStripMenuItem.Click += new System.EventHandler(this.controllaAggiornamentiToolStripMenuItem_Click);
             // 
@@ -676,6 +666,7 @@
             // nuovaVersioneDisponibileToolStripMenuItem
             // 
             this.nuovaVersioneDisponibileToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.nuovaVersioneDisponibileToolStripMenuItem.BackColor = System.Drawing.Color.LawnGreen;
             this.nuovaVersioneDisponibileToolStripMenuItem.Name = "nuovaVersioneDisponibileToolStripMenuItem";
             this.nuovaVersioneDisponibileToolStripMenuItem.Size = new System.Drawing.Size(165, 20);
             this.nuovaVersioneDisponibileToolStripMenuItem.Text = "Nuova versione disponibile!";
@@ -1253,7 +1244,7 @@
             this.MinimumSize = new System.Drawing.Size(1171, 700);
             this.Name = "TnA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.7.8";
+            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.7.9";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TnA_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TnA_ResizeEnd);
             this.tasto_destro_files.ResumeLayout(false);
@@ -1324,7 +1315,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem monitoraGliAppuntiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inserisciIPercorsiInUnaFinestraTemporaneaToolStripMenuItem;
         private System.Windows.Forms.TextBox tb_help;
         private System.Windows.Forms.ToolStripMenuItem ripristinaImpostazioniToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem impostazioniToolStripMenuItem;
@@ -1379,7 +1369,6 @@
         private System.Windows.Forms.RichTextBox rtb_codifica;
         private System.Windows.Forms.RichTextBox rtb_sottotitoli;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripMenuItem visualizzaCronologiaVersioniiToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn input;
         private System.Windows.Forms.DataGridViewComboBoxColumn compatibilita;
         private System.Windows.Forms.DataGridViewComboBoxColumn risoluz;
@@ -1387,6 +1376,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn subtitle_mode;
         private System.Windows.Forms.DataGridViewTextBoxColumn stato;
         private System.Windows.Forms.DataGridViewTextBoxColumn percorso_orig;
+        private System.Windows.Forms.ToolStripMenuItem visualizzaCronologiaVersioniiToolStripMenuItem;
     }
 }
 
