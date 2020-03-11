@@ -1,6 +1,6 @@
 # TnA - Tanoshimi no Autohardsubber
 
-Simple, yet almost automatic, autohardsubber from [Tanoshimi no Sekai Fansub](https://tnsfansub.com/) in .NET 4.8.
+Simple, yet almost automatic, autohardsubber from [Tanoshimi no Sekai Fansub](https://tnsfansub.com/), written in .NET 4.8.
 
 ## Building
 
