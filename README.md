@@ -64,6 +64,20 @@ For example, if width is odd, it will be lowered by 1, the same for height.
 Instead, height will be used.
 
 
+## Hardware requirements
+### Minimum
+ - OS: Windows 7/8/8.1/10 x86/x64.
+ - CPU: Intel Core 2 Quad, 2,00 GHz x 4.
+ - RAM: 4 GB DDR2 (better have DDR3).
+ - GPU: any.
+ - SSD/HDD: HDD, better yet with SSD.
+
+### Recommended
+ - OS: Windows 7/8/8.1/10 x86/x64.
+ - CPU: the faster, the better.
+ - RAM: 8 GB DDR4.
+ - GPU: any.
+ - SSD/HDD: HDD, better yet with SSD.
 
 ## Usage
 
@@ -72,7 +86,7 @@ Instead, height will be used.
 - Click on Play button and wait. Destination files will be in the same folder of source files, never overwritten.
 
 ```bash
-This is a frontend 
+-
 ```
 
 ## Contributing
