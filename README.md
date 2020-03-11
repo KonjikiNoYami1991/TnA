@@ -88,6 +88,7 @@ There are many parameters that can be setted before starting encoding, described
 
 ### Compatibility
 #### - Bluray AAC
+This profile suits compatibilty for bluray players witch plays AAC audio stream.
 - VIDEO CODEC: H.264 8bit YUV420p
   - Parameters
     - Profile: High
@@ -98,6 +99,7 @@ There are many parameters that can be setted before starting encoding, described
     - Pixel format: yuv420p
 - AUDIO CODEC: AAC-LC, 1 to 6 channels (copied if audio source is the same to avoid quality loss)
 #### - Bluray AC-3
+This profile suits compatibilty for bluray players witch plays AC-3 audio stream (almost all).
 - VIDEO CODEC: H.264 8bit YUV420p
   - Parameters
     - Profile: High
