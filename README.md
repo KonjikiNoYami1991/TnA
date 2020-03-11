@@ -128,6 +128,7 @@ Be sure to select destination quality to avoid wrong re-encoding parameters.
 #### - Remux MKV
 Copies all streams and metadata from source to destination file, without any stream conversion.
 #### - Streaming HTML5 H.264
+This profile is suitable for video streaming in HTML5 web pages.
 - VIDEO CODEC: H.264 8bit YUV420p
   - Parameters
     - Profile: High
@@ -136,6 +137,7 @@ Copies all streams and metadata from source to destination file, without any str
     - Maxrate: 20000k
     - Bufsize: 20000k
     - Pixel format: yuv420p
+    - Bluray compat: disabled
     - x264opts 
       - Cabac: disabled
       - Weightp: disabled
@@ -147,23 +149,32 @@ Copies all streams and metadata from source to destination file, without any str
       - GOP: same as Keyint min to make constant GOP
 - AUDIO CODEC: AAC-LC, 1 to 2 channels (copied if audio source is the same to avoid quality loss and has at most 2 channels)
 #### - Streaming HTML5 H.265
-- VIDEO CODEC: H.264 8bit YUV420p
+This profile is named "Streaming", but it's a simple profile to convert to H.265 any file you want.
+- VIDEO CODEC: H.265 8bit YUV420p
   - Parameters
-    - Profile: High
+    - Profile: main
     - Level: 4.1
     - Bluray compat: enabled (maybe it should be disabled, because b-pyramid=0 is not compatible with many BD players and it could be useless to be enabled)
-    - Maxrate: 20000k
-    - Bufsize: 20000k
+    - Maxrate: 50000k
+    - Bufsize: 70000k
     - Pixel format: yuv420p
-    - x264opts 
-      - Cabac: disabled
-      - Weightp: disabled
-      - Weightb: disabled
-      - Sync lookahead: disabled
-      - Sliced threads: 1
-      - B pyramid: 0
-      - Keyint min: framerate casted to integer and multiplied by 10
-      - GOP: same as Keyint min to make constant GOP
+    - Bluray compat: none
+    - UHD bluray compat: disabled
+    - x265params 
+      - Pmode: enabled
+      - Pme: enabled
+      - Psy-rd: 4
+      - Rdoq-level: 1
+      - Psy-rdoq: 10
+      - Weightb: 1
+      - Me: uneven multi-hexagon
+      - Subme: 4
+      - Rdpenalty: 1
+      - Open-gop: disabled
+      - Rc-lookahead: 40
+      - Bframes: 4
+      - Rd: 4
+      - B-adapt: 2
 - AUDIO CODEC: AAC-LC, 1 to 2 channels (copied if audio source is the same to avoid quality loss and has at most 2 channels)
 
 
