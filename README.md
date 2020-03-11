@@ -17,7 +17,10 @@ No need to use Professional or Enterprise edition, but you can.
 - [mkvmerge.exe from MKVtoolnix for Windows](https://mkvtoolnix.download/) (preferably x86 for compatibility with x86 systems)
 
 ## Features
-- Supported file formats
+- Only in italian language, for now.
+- No administrator rights required.
+- Can be placed in a netfolder and used with multiple PCs (not recommended).
+- Supported file formats:
   - MKV (this is the only supported format for autohardsubbing)
   - MP4 
   - M2TS (only for MKV remux)
@@ -31,8 +34,8 @@ No need to use Professional or Enterprise edition, but you can.
   - MPG/MPEG
   - 3GP (not tested)
   - M4V (not tested)
-- Automatic extraction of fonts and subtitle track from MKV files (no need to install fonts)
-- Integrated updater
+- Automatic extraction of fonts and subtitle track from MKV files (no need to install fonts).
+- Integrated updater.
 - Autodeinterlacing when needed with [YADIF](https://ffmpeg.org/ffmpeg-filters.html#yadif-1), mode=0 for spatial check without bobbing (only if TFF or BFF are detected, otherwise disabled).\
 This is not the best way for deinterlacing, but it's very fast and simple to use.
 - Instead of xyVSfilter (not included in FFmpeg), it uses [LIBASS](https://github.com/libass/libass) for Advanced Substation Alpha subtitles and generally works well.
@@ -55,9 +58,9 @@ MP4 remux only supports:
 - All videos will be resized if selected resolution of destination is lower than source, considering aspect ration. It'll never do any upscale.\
 For example, a video source with resolution 1280x720 will never be upscaled to 1600x900.\
 So, don't try to.\
-Also, even selecting the same resolution of source will not resize the destination file.
 - Because there are videos with odd resolution, such as 1555x813 or one between width and height, because every compatibility profile is designed to reach standard encoding, this application will recalculate the destination resolution.\
 For example, if width is odd, it will be lowered by 1, the same for height.
+- 
 
 
 ## Usage
