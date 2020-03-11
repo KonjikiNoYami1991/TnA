@@ -1,6 +1,6 @@
 # TnA - Tanoshimi no Autohardsubber
 
-Simple, yet almost automatic, autohardsubber from Tanoshimi no Sekai Fansub in .NET 4.8.
+Simple, yet almost automatic, autohardsubber from [Tanoshimi no Sekai Fansub](https://tnsfansub.com/) in .NET 4.8.
 
 ## Building
 
@@ -35,7 +35,13 @@ No need to use Professional or Enterprise edition, but you can.
 - Integrated updater
 - Autodeinterlacing when needed with [YADIF](https://ffmpeg.org/ffmpeg-filters.html#yadif-1), mode=0 for spatial check without bobbing (only if TFF or BFF are detected, otherwise disabled).\
 This is not the best way for deinterlacing, but it's very fast and simple to use.
-
+- Instead of xyVSfilter (not included in FFmpeg), it uses [LIBASS](https://github.com/libass/libass) for Advanced Substation Alpha subtitles and generally works well.
+- Format selection when adding an entire folder.
+- Clipboard monitoring, similar to JDownloader.\
+By activating this, you can just copy files and folder from File Explorer and they will be automatically added, following the formats' choices.
+- Settings save in .ini file.
+- Automatic removing of source file after a correct conversion.
+- Pause/resume conversion.
 
 ## Usage
 
