@@ -200,8 +200,32 @@ This profile is suitable for old players with DivX/XviD compatibility and PCs, o
       - High quality AC prediction: enabled
     - FFlags
       - Generate missing PTS if DTS is present: enabled
-
 - AUDIO CODEC: MP3, 1 to 2 channels (copied if audio source is the same to avoid quality loss)
+#### - Workraw
+This profile generates a file with only video and audio streams, excluding all the others, with very poor quality.
+- VIDEO CODEC: H.264 8bit YUV420p
+  - Parameters
+    - Profile: High
+    - Level: 4.1
+    - Bluray compat: disabled
+    - Maxrate: 20000k
+    - Bufsize: 20000k
+    - Pixel format: yuv420p
+    - Bluray compat: disabled
+    - x264opts 
+      - Cabac: disabled
+      - Weightp: disabled
+      - Weightb: disabled
+      - Sync lookahead: disabled
+      - Sliced threads: 1
+      - B pyramid: 0
+      - Keyint min: framerate casted to integer and multiplied by 10
+      - GOP: same as Keyint min to make constant GOP
+- AUDIO CODEC: Vorbis, 1 channel (copied if audio source is the same to avoid quality loss)
+
+```bash
+
+```
 
 
 ## Usage
@@ -210,9 +234,6 @@ This profile is suitable for old players with DivX/XviD compatibility and PCs, o
 - Choose one among compatibility profiles, resolutions (height), quality profiles, aubtitle modes.
 - Click on Play button and wait. Destination files will be in the same folder of source files, never overwritten.
 
-```bash
--
-```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
