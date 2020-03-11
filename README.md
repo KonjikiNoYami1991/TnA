@@ -84,9 +84,64 @@ For example, a video 1080p with 23,976 fps, duration of 24 mins, encoded at belo
 Keep in mind that deinterlacing slows down encoding speed.
 
 ## Explanation of parameters
-There are many parameters that can be setted before starting encoding.
+There are many parameters that can be setted before starting encoding, described below.
 
 ### Compatibility
+#### - Bluray AAC
+- VIDEO CODEC: H.264 8bit YUV420p
+  - Parameters
+    - Profile: High
+    - Level: 4.1
+    - Bluray compat: enabled
+    - Maxrate: 50000k
+    - Bufsize: 70000k
+    - Pixel format: yuv420p
+- AUDIO CODEC: AAC-LC, 1 to 6 channels (copied if audio source is the same to avoid quality loss)
+#### - Bluray AC-3
+- VIDEO CODEC: H.264 8bit YUV420p
+  - Parameters
+    - Profile: High
+    - Level: 4.1
+    - Bluray compat: enabled
+    - Maxrate: 50000k
+    - Bufsize: 70000k
+    - Pixel format: yuv420p
+- AUDIO CODEC: AC-3 (not fixed, not E-AC-3), 1 to 6 channels (copied if audio source is the same to avoid quality loss)
+#### - Remux MP4
+- VIDEO CODEC: copied if source video stream is suitable with MP4 container, otherwise video H.264 8bit YUV420p
+  - Parameters
+    - Profile: High
+    - Level: 4.1
+    - Bluray compat: disabled
+    - Maxrate: none
+    - Bufsize: none
+    - Pixel format: yuv420p
+- AUDIO CODEC
+  - Lossy case
+    - Copied if audio source is the same as destination, otherwise AAC-LC, 1 to 6 channels
+  - Lossless case
+    - Re-encoded to ALAC to avoid quality loss
+#### - Remux MKV
+- copied all streams and metadata from source to destination file
+#### - Streaming HTML5 H.264
+- VIDEO CODEC: H.264 8bit YUV420p
+  - Parameters
+    - Profile: High
+    - Level: 4.1
+    - Bluray compat: enabled (maybe it should be disabled, because b-pyramid=0 is not compatible with many BD players and it could be useless to be enabled)
+    - Maxrate: 20000k
+    - Bufsize: 20000k
+    - Pixel format: yuv420p
+    - x264opts 
+      - Cabac: disabled
+      - Weightp: disabled
+      - Weightb: disabled
+      - Sync lookahead: disabled
+      - Sliced threads: 1
+      - B pyramid: 0
+      - Keyint min: framerate casted to integer and multiplied by 10
+      - GOP: same as Keyint min to make constant GOP
+- AUDIO CODEC: AAC-LC, 1 to 2 channels (copied if audio source is the same to avoid quality loss and has at most 2 channels)
 
 
 ## Usage
