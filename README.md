@@ -258,6 +258,8 @@ Audio bitrate is calculated by bitrate used for stereo and multiplied by audio c
     - QP: 1;
   - Audio
     - Bitrate: 160 kbps
+    - Codec: LAME MP3
+    - Channels: 2 (max)
 
 ```bash
 
