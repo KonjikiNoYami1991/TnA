@@ -52,7 +52,7 @@ By activating this, you can just copy files and folder from File Explorer and th
 - Remuxing files to MKV (with mkvmerge, ignoring all other settings) and to MP4 files.\
 MP4 remux only supports:
   - H.264/H.265/XviD/DivX/MPEG 1-2-4 video streams
-  - AAC/AC-3/MP3 audio streams
+  - AAC/AC-3/MP3/ALAC audio streams
   - No subtitles of any kind, except TimedText (very rare and only used for 3GP).
   - Any other stream not listed above will be re-encoded according to the other parameters.
 - All videos will be resized if selected resolution of destination is lower than source, considering aspect ratio. It'll never do any upscale.\
