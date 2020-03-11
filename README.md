@@ -17,7 +17,7 @@ No need to use Professional or Enterprise edition, but you can.
 - [mkvmerge.exe from MKVtoolnix for Windows](https://mkvtoolnix.download/) (preferably x86 for compatibility with x86 systems)
 
 ## Features
-- Only italian language, for now.
+- Only in italian language, for now.
 - No administrator rights required.
 - Can be placed in a netfolder and used with multiple PCs (not recommended).
 - Supported file formats:
@@ -41,7 +41,7 @@ This is not the best way for deinterlacing, but it's very fast and simple to use
 - Instead of xyVSfilter (not included in FFmpeg), it uses [LIBASS](https://github.com/libass/libass) for Advanced Substation Alpha subtitles and generally works well.
 - Format selection when adding an entire folder.
 - Clipboard monitoring, similar to JDownloader.\
-By activating this, you can just copy files and folder from File Explorer and they will be automatically added, following the formats' choices.
+By activating this, you can just copy files and folder from File Explorer and they will be automatically added, following the formats choices.
 - Settings save in .ini file.
 - Automatic removing of source file after a correct conversion (this feature has to be tested, because files seem removed, but they're not).
 - Pause/resume conversion.
@@ -56,11 +56,13 @@ MP4 remux only supports:
   - No subtitles of any kind, except TimedText (very rare and only used for 3GP).
   - Any other stream not listed above will be re-encoded according to the other parameters.
 - All videos will be resized if selected resolution of destination is lower than source, considering aspect ration. It'll never do any upscale.\
-For example, a video source with resolution 1280x720 will never be upscaled to 1600x900.\
-So, don't try to.\
+For example, a video source with resolution 1280x720 will never be upscaled to 1600x900, even selecting 900p for resolution.\
+So, don't try to.
 - Because there are videos with odd resolution, such as 1555x813 or one between width and height, because every compatibility profile is designed to reach standard encoding, this application will recalculate the destination resolution.\
 For example, if width is odd, it will be lowered by 1, the same for height.
-- 
+- While aspect ratio is greater than or equal to 1,333 (4:3), width will be used for resizing.\
+Instead, height will be used.
+
 
 
 ## Usage
