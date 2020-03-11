@@ -79,6 +79,16 @@ Instead, height will be used.
  - GPU: any.
  - SSD/HDD: HDD, better yet with SSD.
 
+Actually, any hardware will be fine (excepted RAM) because it's just a matter of how much time is needed to process video files. Obviously, process will be slow with slow PCs.
+For example, a video 1080p with 23,976 fps, duration of 24 mins, encoded at below-medium quality, reaches 10-12 fps during conversion: PC is slow or not suitable for video encoding, but time needed is still acceptable.
+Keep in mind that deinterlacing slows down encoding speed.
+
+## Explanation of parameters
+There are many parameters that can be setted before starting encoding.
+
+### Compatibility
+
+
 ## Usage
 
 - Drag&drop files and folders, use buttons or paste files and folders from system clipboard.
