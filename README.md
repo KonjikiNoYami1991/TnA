@@ -110,7 +110,8 @@ This profile suits compatibilty for bluray players witch plays AC-3 audio stream
     - Pixel format: yuv420p
 - AUDIO CODEC: AC-3 (not fixed, not E-AC-3), 1 to 6 channels (copied if audio source is the same to avoid quality loss)
 #### - Remux MP4
-This profile remux any source file, re-encoding every stream not suitable, to MP4 container.
+This profile remux any source file, re-encoding every stream not suitable, to MP4 container.\
+Be sure to select destination quality to avoid wrong re-encoding parameters.
 - VIDEO CODEC: copied if source video stream is suitable with MP4 container, otherwise video H.264 8bit YUV420p
   - Parameters
     - Profile: High
