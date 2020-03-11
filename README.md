@@ -223,6 +223,23 @@ This profile generates a file with only video and audio streams, excluding all t
       - GOP: same as Keyint min to make constant GOP
 - AUDIO CODEC: Vorbis, 1 channel (copied if audio source is the same to avoid quality loss)
 
+### Resolution
+There's not so much to explain.\
+Resolution is setted by height, but used according to the case explained above:
+ - Case AR greater than or equal to 1,333 (4:3): width is used.
+ - Case AR lower than 1,333 (4:3): heigth is used.
+
+Possible values are:
+ - 1080p
+ - 900p
+ - 720p
+ - 576p
+ - 480p (actually it's 486p)
+ - 396p
+
+### Quality
+
+
 ```bash
 
 ```
