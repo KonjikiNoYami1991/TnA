@@ -40,7 +40,7 @@ This is not the best way for deinterlacing, but it's very fast and simple to use
 - Clipboard monitoring, similar to JDownloader.\
 By activating this, you can just copy files and folder from File Explorer and they will be automatically added, following the formats' choices.
 - Settings save in .ini file.
-- Automatic removing of source file after a correct conversion.
+- Automatic removing of source file after a correct conversion (this feature has to be tested, because files seem removed, but they're not).
 - Pause/resume conversion.
 - SendTo link in Windows SendTo menù can be created or removed.
 - Possibility to choose one action after conversion of all listed files.
