@@ -45,6 +45,19 @@ By activating this, you can just copy files and folder from File Explorer and th
 - SendTo link in Windows SendTo menù can be created or removed.
 - Possibility to choose one action after conversion of all listed files.
 - Can be restored to initial settings.
+- Audio track copying instead of re-encoding if destination audio is equal to source.
+- Remuxing files to MKV (with mkvmerge, ignoring all other settings) and to MP4 files.\
+MP4 remux only supports:
+  - H.264/H.265/XviD/DivX/MPEG 1-2-4 video streams
+  - AAC/AC-3/MP3/WAV audio streams
+  - No subtitles of any kind, except TimedText (very rare and only used for 3GP).
+  - Any other stream not listed above will be re-encoded according to the other parameters.
+- All videos will be resized if selected resolution of destination is lower than source, considering aspect ration. It'll never do any upscale.\
+For example, a video source with resolution 1280x720 will never be upscaled to 1600x900.\
+So, don't try to.\
+Also, even selecting the same resolution of source will not resize the destination file.
+- Because there are videos with odd resolution, such as 1555x813 or one between width and height, because every compatibility profile is designed to reach standard encoding, this application will recalculate the destination resolution.\
+For example, if width is odd, it will be lowered by 1, the same for height.
 
 
 ## Usage
