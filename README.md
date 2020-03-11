@@ -249,6 +249,16 @@ Possible values are:
 - Bassissima (Lowest)
 - Bozza (Draft)
 
+For every compatibility profile there's a single case for every quality.\
+Audio bitrate is calculated by bitrate used for stereo and multiplied by audio channel number.
+
+#### - Altissima (Highest) - mostly useless.
+- XviD MP3
+  - Video
+    - QP: 1;
+  - Audio
+    - Bitrate: 160 kbps
+
 ```bash
 
 ```
