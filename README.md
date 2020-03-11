@@ -176,7 +176,32 @@ This profile is named "Streaming", but it's a simple profile to convert to H.265
       - Rd: 4
       - B-adapt: 2
 - AUDIO CODEC: AAC-LC, 1 to 2 channels (copied if audio source is the same to avoid quality loss and has at most 2 channels)
+#### - XviD MP3
+This profile is suitable for old players with DivX/XviD compatibility and PCs, of course.
+- VIDEO CODEC: H.263 8bit YUV420p
+  - Parameters
+    - Profile: MPEG4 Advanced Simple Profile
+    - Level: 5
+    - Macroblock decision algorithm: RD
+    - Sub pel motion estimation: 7
+    - Bframes: 2
+    - Limit motion vectors range: 1023
+    - Use Odml: autodetermined, based on destination filesize
+    - Pre motion estimation compare: 7
+    - Macroblock compare: 7
+    - Sub pel me compare: 7
+    - Quantizer curve compression factor: 1,0
+    - Minimum quantizer scale: 1,0
+    - Maximum quantizer scale: 7,0
+    - Flags
+      - Four motion vector: enabled
+      - Loop: enabled
+      - Quarter-pixel motion compensation: enabled
+      - High quality AC prediction: enabled
+    - FFlags
+      - Generate missing PTS if DTS is present: enabled
 
+- AUDIO CODEC: MP3, 1 to 2 channels (copied if audio source is the same to avoid quality loss)
 
 
 ## Usage
