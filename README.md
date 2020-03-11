@@ -110,6 +110,7 @@ This profile suits compatibilty for bluray players witch plays AC-3 audio stream
     - Pixel format: yuv420p
 - AUDIO CODEC: AC-3 (not fixed, not E-AC-3), 1 to 6 channels (copied if audio source is the same to avoid quality loss)
 #### - Remux MP4
+This profile remux any source file, re-encoding every stream not suitable, to MP4 container.
 - VIDEO CODEC: copied if source video stream is suitable with MP4 container, otherwise video H.264 8bit YUV420p
   - Parameters
     - Profile: High
@@ -124,7 +125,7 @@ This profile suits compatibilty for bluray players witch plays AC-3 audio stream
   - Lossless case
     - Re-encoded to ALAC to avoid quality loss or copied if already ALAC.
 #### - Remux MKV
-- copied all streams and metadata from source to destination file
+Copies all streams and metadata from source to destination file, without any stream conversion.
 #### - Streaming HTML5 H.264
 - VIDEO CODEC: H.264 8bit YUV420p
   - Parameters
@@ -144,6 +145,26 @@ This profile suits compatibilty for bluray players witch plays AC-3 audio stream
       - Keyint min: framerate casted to integer and multiplied by 10
       - GOP: same as Keyint min to make constant GOP
 - AUDIO CODEC: AAC-LC, 1 to 2 channels (copied if audio source is the same to avoid quality loss and has at most 2 channels)
+#### - Streaming HTML5 H.265
+- VIDEO CODEC: H.264 8bit YUV420p
+  - Parameters
+    - Profile: High
+    - Level: 4.1
+    - Bluray compat: enabled (maybe it should be disabled, because b-pyramid=0 is not compatible with many BD players and it could be useless to be enabled)
+    - Maxrate: 20000k
+    - Bufsize: 20000k
+    - Pixel format: yuv420p
+    - x264opts 
+      - Cabac: disabled
+      - Weightp: disabled
+      - Weightb: disabled
+      - Sync lookahead: disabled
+      - Sliced threads: 1
+      - B pyramid: 0
+      - Keyint min: framerate casted to integer and multiplied by 10
+      - GOP: same as Keyint min to make constant GOP
+- AUDIO CODEC: AAC-LC, 1 to 2 channels (copied if audio source is the same to avoid quality loss and has at most 2 channels)
+
 
 
 ## Usage
