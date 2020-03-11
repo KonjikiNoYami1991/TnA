@@ -17,7 +17,7 @@ No need to use Professional or Enterprise edition, but you can.
 - [mkvmerge.exe from MKVtoolnix for Windows](https://mkvtoolnix.download/) (preferably x86 for compatibility with x86 systems)
 
 ## Features
-- Only in italian language, for now.
+- Only italian language, for now.
 - No administrator rights required.
 - Can be placed in a netfolder and used with multiple PCs (not recommended).
 - Supported file formats:
