@@ -256,10 +256,29 @@ Audio bitrate is calculated by bitrate used for stereo and multiplied by audio c
 - XviD MP3
   - Video
     - QP: 1;
+    - Codec: libxvid
   - Audio
-    - Bitrate: 160 kbps
+    - Bitrate: 160 kbps (variable bitrate is not supported by most of players and not fully supported by AVI container)
     - Codec: LAME MP3
-    - Channels: 2 (max)
+    - Channels: up to 2
+- Bluray AAC
+  - Video
+    - CRF: 14
+    - Preset: very slow
+    - AQ mode: 2 (it's useless setting to 3 because bitrate will be very high)
+  - Audio
+    - Bitrate: 192 kbps
+    - Codec: built-in FFmpeg AAC encoder
+    - Channels: up to 6
+- Bluray AC3
+  - Video
+    - CRF: 14
+    - Preset: very slow
+    - AQ mode: 2 (it's useless setting to 3 because bitrate will be very high)
+  - Audio
+    - Bitrate: 96 kbps
+    - Codec: built-in FFmpeg AC3 encoder
+    - Channels: up to 6
 
 ```bash
 
