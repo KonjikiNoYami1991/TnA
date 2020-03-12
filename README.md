@@ -263,22 +263,51 @@ Audio bitrate is calculated by bitrate used for stereo and multiplied by audio c
     - Channels: up to 2
 - Bluray AAC
   - Video
+    - Codec: libx264
     - CRF: 14
     - Preset: very slow
-    - AQ mode: 2 (it's useless setting to 3 because bitrate will be very high)
+    - AQ mode: 2 (it's useless setting it to 3 because bitrate will be very high)
   - Audio
     - Bitrate: 192 kbps
     - Codec: built-in FFmpeg AAC encoder
     - Channels: up to 6
 - Bluray AC3
   - Video
+    - Codec: libx264
     - CRF: 14
     - Preset: very slow
-    - AQ mode: 2 (it's useless setting to 3 because bitrate will be very high)
+    - AQ mode: 2 (it's useless setting it to 3 because bitrate will be very high)
   - Audio
     - Bitrate: 96 kbps
     - Codec: built-in FFmpeg AC3 encoder
     - Channels: up to 6
+- Remux MP4 (only for stream re-encoding, otherwise copied)
+  - Video
+    - CRF: 14
+    - Preset: very slow
+    - AQ mode: 3
+  - Audio
+    - Bitrate: 96 kbps
+    - Codec: built-in FFmpeg AAC encoder
+    - Channels: up to 6
+- Remux MKV
+  - Video
+    - Copied
+  - Audio
+    - Copied
+  - Any other stream or attachment
+    - Copied
+- Streaming HTML5 H.264
+  - Video
+    - Codec: libx264
+    - CRF: 14
+    - Preset: very slow
+    - AQ mode: 2 (it's useless setting it to 3 because bitrate will be very high)
+  - Audio
+    - Bitrate: 192 kbps
+    - Codec: built-in FFmpeg AAC encoder
+    - Channels: up to 2
+
 
 ```bash
 
