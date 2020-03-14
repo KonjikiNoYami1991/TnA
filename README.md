@@ -2,6 +2,10 @@
 
 Simple, yet almost automatic, autohardsubber from [Tanoshimi no Sekai Fansub](https://tnsfansub.com/), written in C# .NET 4.8.
 
+```bash
+THIS IS STILL IN BETA VERSION. USE IT CAREFULLY.
+```
+
 ## Building
 
 This solution requires a C# builder for Windows.\
@@ -126,7 +130,8 @@ Be sure to select destination quality to avoid wrong re-encoding parameters.
   - Lossless case
     - Re-encoded to ALAC to avoid quality loss.
 #### - Remux MKV
-Copies all streams and metadata from source to destination file, without any stream conversion.
+  - Copies all streams and metadata from source to destination file, without any stream conversion.
+  - Ignores all other presets.
 #### - Streaming HTML5 H.264
 This profile is suitable for video streaming in HTML5 web pages.
 - VIDEO CODEC: H.264 8bit YUV420p
@@ -241,51 +246,58 @@ Possible values are:
 Quality is the parameter that determines the final quality of destination file.\
 Possible values are:
 - Altissima (Highest)
-  - Mostly useless
-  - Very slow
-  - Very high bitrate
-  - Very large filesize
+  - Mostly useless.
+  - Very slow.
+  - Very high bitrate.
+  - Very large filesize.
 - Alta (High)
-  - Useful to keep high quality
-  - Not as slow as Highest quality but slower than Above medium quality
-  - Large filesize
+  - Useful to keep high quality.
+  - Not as slow as Highest quality but slower than Above medium quality.
+  - Large filesize.
 - Medio-alta (Above medium)
-  - Good quality
-  - Medium filesize (sometimes large, but it rarely happens)
-  - Slower than Medium quality but faster than Above medium
+  - Good quality.
+  - Medium filesize (sometimes large, but it rarely happens).
+  - Slower than Medium quality but faster than Above medium.
 - Media (Medium)
-  - Good compromise between quality and filesize
-  - Medium speed
-  - Normal filesize
+  - Good compromise between quality and filesize.
+  - Medium speed.
+  - Normal filesize.
 - Medio-bassa (Below medium)
-  - Resonable quality
-  - Fast
-  - Quite small filesize
-  - Suitable for streaming 
+  - Resonable quality.
+  - Fast.
+  - Quite small filesize.
+  - Suitable for streaming.
 - Bassa (Low)
-  - Low quality
-  - Small filesize
-  - Suitable for streaming
-  - Faster
+  - Low quality.
+  - Small filesize.
+  - Suitable for streaming.
+  - Faster.
 - Bassissima (Lowest)
-  - Very low quality
-  - Very small filesize
-  - Suitable for streaming, but no, do not use this preset for streaming
-  - Very fast
+  - Very low quality.
+  - Very small filesize.
+  - Suitable for streaming, but no, do not use this preset for streaming.
+  - Very fast.
 - Bozza (Draft)
-  - THIS PRESET IS FOR TESTING ONLY
-  - Useful to make conversion tests
-  - Fastest
-  - Very bad quality
+  - THIS PRESET IS FOR TESTING ONLY.
+  - Useful to make conversion tests.
+  - Fastest.
+  - Very bad quality.
+  - Smallest filesize
 
-Audio bitrate is calculated by bitrate used for stereo and multiplied by audio channel number, then divided by 2, excepted for AC-3, not divided by 2.
+Audio bitrate is determinted using bitrate for stereo and multiplied by audio channel number, then divided by 2 (excepted for AC-3, not divided by 2).
 
 ### Subtitle modes
 
+ - Hardsub
+   1) Demux all the fonts inside MKV, if any.
+   2) Scan for forced subtitle track, if any. Otherwise, default subtitle track, if any. If not found default of forced subtitles, it picks the first track. If there's no subtitles, it just skips demux and jumps to encode process.
+ - Softsub
+   - Copies all fonts and subtitle tracks inside MKV file and just re-encode video and audio, according to compatibility and quality presets.
+   - It forces MKV container for destination file.
+ - No sottotitoli (No subtitles)
+   - Ignores all subtitle tracks and fonts
 
-```bash
-
-```
+Hardsub mode will choose only one subtitle track, never two or more.
 
 
 ## Usage
@@ -294,6 +306,10 @@ Audio bitrate is calculated by bitrate used for stereo and multiplied by audio c
 - Choose one among compatibility profiles, resolutions (height), quality profiles, aubtitle modes.
 - Click on Play button and wait. Destination files will be in the same folder of source files, never overwritten.
 
+## Hints
+ - You can convert the same file twice or more, just be sure to change compatibility, quality or resolution.
+ - Filelist is a Datagridview, similar to Excel or Calc. Clicking on the row header will select all lines in the grid.
+ - Selection can be done using Shift or CTRL key, too.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
