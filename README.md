@@ -241,72 +241,46 @@ Possible values are:
 Quality is the parameter that determines the final quality of destination file.\
 Possible values are:
 - Altissima (Highest)
+  - Mostly useless
+  - Very slow
+  - Very high bitrate
+  - Very large filesize
 - Alta (High)
+  - Useful to keep high quality
+  - Not as slow as Highest quality but slower than Above medium quality
+  - Large filesize
 - Medio-alta (Above medium)
+  - Good quality
+  - Medium filesize (sometimes large, but it rarely happens)
+  - Slower than Medium quality but faster than Above medium
 - Media (Medium)
+  - Good compromise between quality and filesize
+  - Medium speed
+  - Normal filesize
 - Medio-bassa (Below medium)
+  - Resonable quality
+  - Fast
+  - Quite small filesize
+  - Suitable for streaming 
 - Bassa (Low)
+  - Low quality
+  - Small filesize
+  - Suitable for streaming
+  - Faster
 - Bassissima (Lowest)
+  - Very low quality
+  - Very small filesize
+  - Suitable for streaming, but no, do not use this preset for streaming
+  - Very fast
 - Bozza (Draft)
+  - THIS PRESET IS FOR TESTING ONLY
+  - Useful to make conversion tests
+  - Fastest
+  - Very bad quality
 
-For every compatibility profile there's a single case for every quality.\
-Audio bitrate is calculated by bitrate used for stereo and multiplied by audio channel number.
+Audio bitrate is calculated by bitrate used for stereo and multiplied by audio channel number, then divided by 2, excepted for AC-3, not divided by 2.
 
-#### - Altissima (Highest) - mostly useless.
-- XviD MP3
-  - Video
-    - QP: 1;
-    - Codec: libxvid
-  - Audio
-    - Bitrate: 160 kbps (variable bitrate is not supported by most of players and not fully supported by AVI container)
-    - Codec: LAME MP3
-    - Channels: up to 2
-- Bluray AAC
-  - Video
-    - Codec: libx264
-    - CRF: 14
-    - Preset: very slow
-    - AQ mode: 2 (it's useless setting it to 3 because bitrate will be very high)
-  - Audio
-    - Bitrate: 192 kbps
-    - Codec: built-in FFmpeg AAC encoder
-    - Channels: up to 6
-- Bluray AC3
-  - Video
-    - Codec: libx264
-    - CRF: 14
-    - Preset: very slow
-    - AQ mode: 2 (it's useless setting it to 3 because bitrate will be very high)
-  - Audio
-    - Bitrate: 96 kbps
-    - Codec: built-in FFmpeg AC3 encoder
-    - Channels: up to 6
-- Remux MP4 (only for stream re-encoding, otherwise copied)
-  - Video
-    - CRF: 14
-    - Preset: very slow
-    - AQ mode: 3
-  - Audio
-    - Bitrate: 96 kbps
-    - Codec: built-in FFmpeg AAC encoder
-    - Channels: up to 6
-- Remux MKV
-  - Video
-    - Copied
-  - Audio
-    - Copied
-  - Any other stream or attachment
-    - Copied
-- Streaming HTML5 H.264
-  - Video
-    - Codec: libx264
-    - CRF: 14
-    - Preset: very slow
-    - AQ mode: 2 (it's useless setting it to 3 because bitrate will be very high)
-  - Audio
-    - Bitrate: 192 kbps
-    - Codec: built-in FFmpeg AAC encoder
-    - Channels: up to 2
+### Subtitle modes
 
 
 ```bash
