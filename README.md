@@ -3,7 +3,7 @@
 Simple, yet almost automatic, autohardsubber from [Tanoshimi no Sekai Fansub](https://tnsfansub.com/), written in C# .NET 4.8.
 
 ```bash
-THIS IS STILL IN BETA VERSION. USE IT CAREFULLY.
+THIS IS A BETA VERSION. USE IT CAREFULLY.
 ```
 
 ## Building
