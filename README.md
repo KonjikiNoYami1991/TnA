@@ -39,7 +39,7 @@ No need to use Professional or Enterprise edition, but you can.
   - 3GP (not tested)
   - M4V (not tested)
 - Automatic extraction of fonts and subtitle track from MKV files (no need to install fonts).
-- Integrated updater.
+- Built-in updater.
 - Autodeinterlacing when needed with [YADIF](https://ffmpeg.org/ffmpeg-filters.html#yadif-1), mode=0 for spatial check without bobbing (only if TFF or BFF are detected, otherwise disabled).\
 This is not the best way for deinterlacing, but it's very fast and simple to use.
 - Instead of xyVSfilter (not included in FFmpeg), it uses [LIBASS](https://github.com/libass/libass) for Advanced Substation Alpha subtitles and generally works well.
