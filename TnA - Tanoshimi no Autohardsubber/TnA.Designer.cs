@@ -68,15 +68,6 @@
             this.oKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fermatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.erroreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancellaIFilesNellaListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tuttiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.completatiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fermatiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.conErroriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.creaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancellaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.impostazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,7 +75,6 @@
             this.unGiornoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ogniTreGiorniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ogniSettimanaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allaFineDellaCodaDiLavoroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,6 +128,9 @@
             this.ts_perc = new System.Windows.Forms.ToolStripStatusLabel();
             this.ts_avanz = new System.Windows.Forms.ToolStripStatusLabel();
             this.bgw_updateschecker = new System.ComponentModel.BackgroundWorker();
+            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.creaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancellaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tasto_destro_files.SuspendLayout();
             this.barra_menu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -386,10 +379,7 @@
             this.scaricaFFmpegToolStripMenuItem,
             this.testFFmpegToolStripMenuItem,
             this.toolStripSeparator5,
-            this.listaToolStripMenuItem,
-            this.cancellaIFilesNellaListaToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem});
+            this.listaToolStripMenuItem});
             this.strumentiToolStripMenuItem.Name = "strumentiToolStripMenuItem";
             this.strumentiToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.strumentiToolStripMenuItem.Text = "Strumenti";
@@ -399,7 +389,7 @@
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.monitoraGliAppuntiToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(306, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(267, 22);
             this.toolStripMenuItem2.Text = "Controllo appunti di Windows";
             // 
             // monitoraGliAppuntiToolStripMenuItem
@@ -412,13 +402,13 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(303, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(264, 6);
             // 
             // scaricaFFmpegToolStripMenuItem
             // 
             this.scaricaFFmpegToolStripMenuItem.Name = "scaricaFFmpegToolStripMenuItem";
             this.scaricaFFmpegToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.scaricaFFmpegToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.scaricaFFmpegToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.scaricaFFmpegToolStripMenuItem.Text = "Scarica o aggiorna FFmpeg";
             this.scaricaFFmpegToolStripMenuItem.Click += new System.EventHandler(this.scaricaFFmpegToolStripMenuItem_Click);
             // 
@@ -426,21 +416,21 @@
             // 
             this.testFFmpegToolStripMenuItem.Name = "testFFmpegToolStripMenuItem";
             this.testFFmpegToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.testFFmpegToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.testFFmpegToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.testFFmpegToolStripMenuItem.Text = "Test FFmpeg";
             this.testFFmpegToolStripMenuItem.Click += new System.EventHandler(this.testFFmpegToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(303, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(264, 6);
             // 
             // listaToolStripMenuItem
             // 
             this.listaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rimuoviTuttiIFileConEsitoToolStripMenuItem});
             this.listaToolStripMenuItem.Name = "listaToolStripMenuItem";
-            this.listaToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.listaToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.listaToolStripMenuItem.Text = "Pulisci lista";
             // 
             // rimuoviTuttiIFileConEsitoToolStripMenuItem
@@ -474,78 +464,11 @@
             this.erroreToolStripMenuItem.Text = "Errore";
             this.erroreToolStripMenuItem.Click += new System.EventHandler(this.erroreToolStripMenuItem_Click);
             // 
-            // cancellaIFilesNellaListaToolStripMenuItem
-            // 
-            this.cancellaIFilesNellaListaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tuttiToolStripMenuItem,
-            this.completatiToolStripMenuItem,
-            this.fermatiToolStripMenuItem,
-            this.conErroriToolStripMenuItem});
-            this.cancellaIFilesNellaListaToolStripMenuItem.Name = "cancellaIFilesNellaListaToolStripMenuItem";
-            this.cancellaIFilesNellaListaToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
-            this.cancellaIFilesNellaListaToolStripMenuItem.Text = "Cancella i files nella lista";
-            // 
-            // tuttiToolStripMenuItem
-            // 
-            this.tuttiToolStripMenuItem.Name = "tuttiToolStripMenuItem";
-            this.tuttiToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.tuttiToolStripMenuItem.Text = "Tutti";
-            this.tuttiToolStripMenuItem.Click += new System.EventHandler(this.tuttiToolStripMenuItem_Click);
-            // 
-            // completatiToolStripMenuItem
-            // 
-            this.completatiToolStripMenuItem.Name = "completatiToolStripMenuItem";
-            this.completatiToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.completatiToolStripMenuItem.Text = "Completati";
-            this.completatiToolStripMenuItem.Click += new System.EventHandler(this.completatiToolStripMenuItem_Click);
-            // 
-            // fermatiToolStripMenuItem
-            // 
-            this.fermatiToolStripMenuItem.Name = "fermatiToolStripMenuItem";
-            this.fermatiToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.fermatiToolStripMenuItem.Text = "Fermati";
-            this.fermatiToolStripMenuItem.Click += new System.EventHandler(this.fermatiToolStripMenuItem_Click);
-            // 
-            // conErroriToolStripMenuItem
-            // 
-            this.conErroriToolStripMenuItem.Name = "conErroriToolStripMenuItem";
-            this.conErroriToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.conErroriToolStripMenuItem.Text = "Con errori";
-            this.conErroriToolStripMenuItem.Click += new System.EventHandler(this.conErroriToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(303, 6);
-            // 
-            // integraConIlMenùContestualeDiWindowsToolStripMenuItem
-            // 
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.creaToolStripMenuItem,
-            this.cancellaToolStripMenuItem});
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Name = "integraConIlMenùContestualeDiWindowsToolStripMenuItem";
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Text = "Integra con il menù contestuale di Windows";
-            // 
-            // creaToolStripMenuItem
-            // 
-            this.creaToolStripMenuItem.Name = "creaToolStripMenuItem";
-            this.creaToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.creaToolStripMenuItem.Text = "Crea";
-            this.creaToolStripMenuItem.Click += new System.EventHandler(this.creaToolStripMenuItem_Click);
-            // 
-            // cancellaToolStripMenuItem
-            // 
-            this.cancellaToolStripMenuItem.Name = "cancellaToolStripMenuItem";
-            this.cancellaToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.cancellaToolStripMenuItem.Text = "Cancella";
-            this.cancellaToolStripMenuItem.Click += new System.EventHandler(this.cancellaToolStripMenuItem_Click);
-            // 
             // impostazioniToolStripMenuItem
             // 
             this.impostazioniToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem,
             this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem,
-            this.rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem,
             this.allaFineDellaCodaDiLavoroToolStripMenuItem});
             this.impostazioniToolStripMenuItem.Name = "impostazioniToolStripMenuItem";
             this.impostazioniToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
@@ -560,7 +483,7 @@
             this.ogniTreGiorniToolStripMenuItem,
             this.ogniSettimanaToolStripMenuItem});
             this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem.Name = "frequenzaControlloAggiornamentiFFmpegToolStripMenuItem";
-            this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem.Size = new System.Drawing.Size(359, 22);
+            this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
             this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem.Text = "Frequenza controllo aggiornamenti FFmpeg";
             // 
             // manualeToolStripMenuItem
@@ -600,19 +523,12 @@
             this.ogniSettimanaToolStripMenuItem.Text = "Ogni settimana";
             this.ogniSettimanaToolStripMenuItem.Click += new System.EventHandler(this.ogniSettimanaToolStripMenuItem_Click);
             // 
-            // rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem
-            // 
-            this.rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem.Name = "rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem";
-            this.rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem.Size = new System.Drawing.Size(359, 22);
-            this.rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem.Text = "Rimuovi i files sorgenti dopo una corretta conversione";
-            this.rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem.Click += new System.EventHandler(this.rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem_Click);
-            // 
             // allaFineDellaCodaDiLavoroToolStripMenuItem
             // 
             this.allaFineDellaCodaDiLavoroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBox1});
             this.allaFineDellaCodaDiLavoroToolStripMenuItem.Name = "allaFineDellaCodaDiLavoroToolStripMenuItem";
-            this.allaFineDellaCodaDiLavoroToolStripMenuItem.Size = new System.Drawing.Size(359, 22);
+            this.allaFineDellaCodaDiLavoroToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
             this.allaFineDellaCodaDiLavoroToolStripMenuItem.Text = "Alla fine della coda di lavoro";
             // 
             // toolStripComboBox1
@@ -1219,6 +1135,29 @@
             // 
             this.bgw_updateschecker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Bgw_updateschecker_DoWork);
             // 
+            // integraConIlMenùContestualeDiWindowsToolStripMenuItem
+            // 
+            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.creaToolStripMenuItem,
+            this.cancellaToolStripMenuItem});
+            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Name = "integraConIlMenùContestualeDiWindowsToolStripMenuItem";
+            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Text = "Integra con il menù contestuale di Windows";
+            // 
+            // creaToolStripMenuItem
+            // 
+            this.creaToolStripMenuItem.Name = "creaToolStripMenuItem";
+            this.creaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.creaToolStripMenuItem.Text = "Crea";
+            this.creaToolStripMenuItem.Click += new System.EventHandler(this.creaToolStripMenuItem_Click);
+            // 
+            // cancellaToolStripMenuItem
+            // 
+            this.cancellaToolStripMenuItem.Name = "cancellaToolStripMenuItem";
+            this.cancellaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cancellaToolStripMenuItem.Text = "Cancella";
+            this.cancellaToolStripMenuItem.Click += new System.EventHandler(this.cancellaToolStripMenuItem_Click);
+            // 
             // TnA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1244,7 +1183,7 @@
             this.MinimumSize = new System.Drawing.Size(1171, 700);
             this.Name = "TnA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.7.9";
+            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.8";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TnA_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TnA_ResizeEnd);
             this.tasto_destro_files.ResumeLayout(false);
@@ -1333,16 +1272,6 @@
         private System.Windows.Forms.Label l_tempo_trasc;
         private System.Windows.Forms.Label l_temp_rim;
         private System.Windows.Forms.Timer timer_tempo;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem integraConIlMenùContestualeDiWindowsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem creaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cancellaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cancellaIFilesNellaListaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tuttiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem completatiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fermatiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem conErroriToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem;
         private System.Windows.Forms.Button b_pause;
         private System.Windows.Forms.ToolStripMenuItem allaFineDellaCodaDiLavoroToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
@@ -1377,6 +1306,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn stato;
         private System.Windows.Forms.DataGridViewTextBoxColumn percorso_orig;
         private System.Windows.Forms.ToolStripMenuItem visualizzaCronologiaVersioniiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem integraConIlMenùContestualeDiWindowsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem creaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancellaToolStripMenuItem;
     }
 }
 

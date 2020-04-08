@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using MediaInfoDotNet;
+using System.Windows.Shell;
 
 namespace TnA___Tanoshimi_no_Autohardsubber
 {
@@ -65,6 +66,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         String data_vecchia = String.Empty;
 
         Int32 indice_percentuale = 0, exit_code = Int32.MinValue, sec_trasc = 0;
+
+        TaskbarItemInfo tbi = new TaskbarItemInfo();
 
         Thread t;
         ThreadStart ts;
@@ -654,6 +657,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         private void b_avvia_Click(object sender, EventArgs e)
         {
             Boolean presente = false, start = true;
+            tbi = new TaskbarItemInfo();
             foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg_x64)))
             {
                 if (Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x64)) || Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x86)))
@@ -736,6 +740,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 if (presente == true)
                 {
                     ferma_tutto();
+                    tbi.ProgressState = TaskbarItemProgressState.None;
                     pause = false;
                     b_pause.Image = TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause;
                     b_pause.Text = "Pausa";
@@ -790,13 +795,13 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             for (Int32 q = 0; q < DGV_video.Rows.Count; q++)
             {
-                if (stati_scelti.Count > 0)
-                {
-                    if (stati_scelti.Contains(DGV_video.Rows[q].Cells["stato"].Value.ToString().Split(' ')[0]))
-                    {
+                //if (stati_scelti.Count > 0)
+                //{
+                //    if (stati_scelti.Contains(DGV_video.Rows[q].Cells["stato"].Value.ToString().Split(' ')[0]))
+                //    {
                         
-                    }
-                }
+                //    }
+                //}
                 this.Invoke((MethodInvoker)delegate ()
                 {
                     rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
@@ -972,6 +977,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                 if (stop == false)
                 {
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
+                        tbi.ProgressValue = 0;
+                        tbi.ProgressState = TaskbarItemProgressState.Normal;
+                    });
                     switch (profilo)
                     {
                         case "Remux MKV":
@@ -1006,41 +1016,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
 
                     Thread.Sleep(100);
-
-                    if (exit_code == 0)
-                    {
-                        if (rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem.CheckState == CheckState.Checked)
-                        {
-                            this.Invoke((MethodInvoker)delegate ()
-                            {
-                                ts_avanz.Text = "Rimuovo il file sorgente";
-                            });
-                            try
-                            {
-                                Int32 c = 0, indice_riga = 0;
-                                for (Int32 j = 0; j < DGV_video.Rows.Count; j++)
-                                {
-                                    if (DGV_video.Rows[j].Cells[DGV_video.Columns["input"].Index].Value.ToString() == file_video)
-                                    {
-                                        indice_riga = DGV_video.Rows[j].Index;
-                                        break;
-                                    }
-                                }
-                                for (Int32 k = indice_riga; k < DGV_video.Rows.Count; k++)
-                                {
-                                    if (DGV_video.Rows[k].Cells[DGV_video.Columns["input"].Index].Value.ToString() == file_video)
-                                    {
-                                        c++;
-                                    }
-                                }
-                                if (c <= 1)
-                                {
-                                    System.IO.File.Delete(file_video);
-                                }
-                            }
-                            catch { }
-                        }
-                    }
                 }
             }
             Environment.CurrentDirectory = GUIdir;
@@ -1167,9 +1142,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             foreach (MediaInfoDotNet.Models.AudioStream aud in m.Audio)
             {
-                String canali_audio = String.Empty;
-                Boolean IsLossless = false;
                 CatturaAudio ca = new CatturaAudio(aud);
+                String canali_audio = String.Empty;
+                Boolean IsLossless = ca.Lossless;
 
                 canali_audio = ca.Canali.ToString();
 
@@ -1265,6 +1240,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
                     DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
+                    tbi.ProgressState = TaskbarItemProgressState.Error;
                 });
             }
 
@@ -1322,6 +1298,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     {
                         DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
                         DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
+                        tbi.ProgressState = TaskbarItemProgressState.Error;
                     });
                     break;
 
@@ -1374,6 +1351,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         numero = numero.Replace("%", String.Empty);
                         numero = numero.Trim();
                         pb_tot.Value = Convert.ToInt32(numero);
+                        tbi.ProgressValue = pb_tot.Value;
+                        tbi.ProgressState = TaskbarItemProgressState.Normal;
                         ts_perc.Text = pb_tot.Value.ToString() + ".00%";
                         DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "IN CORSO - " + ts_perc.Text;
                     });
@@ -1514,7 +1493,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void Processo_codifica_ErrorDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
         {
-
             this.Invoke((MethodInvoker)delegate ()
                 {
                     try
@@ -1548,6 +1526,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             ts_avanz.Text = "Avanzamento elaborazione - Codifica del file \"" + file_attuale + "\"";
                             ts_perc.Text = Arrotonda(((Double)pb_tot.Value / pb_tot.Maximum) * 100.0, 2) + "%";
                             pb_tot.Value = Convert.ToInt32(ff.Time.TotalSeconds);
+                            tbi.ProgressValue = (Double)pb_tot.Value;
+                            if (tbi.ProgressState != TaskbarItemProgressState.Error)
+                                tbi.ProgressState = TaskbarItemProgressState.Normal;
 
                             DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "IN CORSO - " + ts_perc.Text;
                             DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.White;
@@ -2618,103 +2599,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
         }
 
-        private void tuttiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Si vuole veramente cancellare tutti i files nella lista?\nAvviso: la cancellazione viene effettuata in maniera DEFINITIVA.", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                cancella_files_lista(String.Empty);
-            }
-        }
-
-        public void cancella_files_lista(String quali)
-        {
-            Int32 cont_files_canc = 0;
-            Dictionary<String, String> files_non_canc = new Dictionary<String, String>();
-            for (Int32 i = DGV_video.Rows.Count - 1; i >= 0; i--)
-            {
-                String nome_file = DGV_video.Rows[i].Cells[DGV_video.Columns["input"].Index].Value.ToString();
-                try
-                {
-                    switch (quali)
-                    {
-                        case "":
-                            System.IO.File.Delete(nome_file);
-                            DGV_video.Rows.Remove(DGV_video.Rows[i]);
-                            cont_files_canc++;
-                            break;
-                        case "Ok":
-                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(oKToolStripMenuItem.Text.ToLower().Trim()))
-                            {
-                                System.IO.File.Delete(nome_file);
-                                DGV_video.Rows.Remove(DGV_video.Rows[i]);
-                                cont_files_canc++;
-                            }
-                            break;
-                        case "Fermato":
-                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(fermatoToolStripMenuItem.Text.ToLower().Trim()))
-                            {
-                                System.IO.File.Delete(nome_file);
-                                DGV_video.Rows.Remove(DGV_video.Rows[i]);
-                                cont_files_canc++;
-                            }
-                            break;
-                        case "Errore":
-                            if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(erroreToolStripMenuItem.Text.ToLower().Trim()))
-                            {
-                                System.IO.File.Delete(nome_file);
-                                DGV_video.Rows.Remove(DGV_video.Rows[i]);
-                                cont_files_canc++;
-                            }
-                            break;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    files_non_canc.Add(DGV_video.Rows[i].Cells[DGV_video.Columns["input"].Index].Value.ToString(), ex.Message);
-                }
-            }
-            if (files_non_canc.Count == 0)
-            {
-                MessageBox.Show("Totale files cancellati: " + cont_files_canc.ToString(), this.Text);
-            }
-        }
-
-        private void completatiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Si vuole veramente cancellare tutti i files nella lista?\nAvviso: la cancellazione viene effettuata in maniera DEFINITIVA.", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                cancella_files_lista("Ok");
-            }
-        }
-
-        private void fermatiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Si vuole veramente cancellare tutti i files nella lista?\nAvviso: la cancellazione viene effettuata in maniera DEFINITIVA.", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                cancella_files_lista("Fermato");
-            }
-        }
-
-        private void conErroriToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Si vuole veramente cancellare tutti i files nella lista?\nAvviso: la cancellazione viene effettuata in maniera DEFINITIVA.", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                cancella_files_lista("Errore");
-            }
-        }
-
-        private void rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem.CheckState == CheckState.Unchecked)
-            {
-                rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem.CheckState = CheckState.Checked;
-            }
-            else
-            {
-                rimuoviIFilesSorgentiDopoUnaCorrettaConversioneToolStripMenuItem.CheckState = CheckState.Unchecked;
-            }
-        }
-
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             azione_fine_coda = toolStripComboBox1.Text;
@@ -2735,6 +2619,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             if (pause == false)
             {
+                tbi.ProgressState = TaskbarItemProgressState.Paused;
                 if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false)
                     SuspendProcess(processo_codifica.Id);
                 else
@@ -2745,6 +2630,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             else
             {
+                tbi.ProgressState = TaskbarItemProgressState.Normal;
                 if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false)
                     ResumeProcess(processo_codifica.Id);
                 else
