@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using MediaInfoDotNet;
-using System.Windows.Shell;
+
 
 namespace TnA___Tanoshimi_no_Autohardsubber
 {
@@ -67,7 +67,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         Int32 indice_percentuale = 0, exit_code = Int32.MinValue, sec_trasc = 0;
 
-        TaskbarItemInfo tbi = new TaskbarItemInfo();
+        
 
         Thread t;
         ThreadStart ts;
@@ -555,35 +555,45 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void DGV_video_DragEnter(object sender, DragEventArgs e)
         {
-            String[] dati = (String[])e.Data.GetData(DataFormats.FileDrop);
-            foreach (String s in dati)
+            if (DGV_video.ReadOnly == false)
             {
-                if (Path.HasExtension(s) == true)
+                String[] dati = (String[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (String s in dati)
                 {
-                    if (estensioni_video.Contains(Path.GetExtension(s).ToLower()) == true)
+                    if (Path.HasExtension(s) == true)
                     {
-                        e.Effect = DragDropEffects.Copy;
-                        break;
-                    }
-                }
-                else
-                {
-                    foreach (String t in Directory.GetFiles(s, "*", SearchOption.AllDirectories))
-                    {
-                        if (estensioni_video.Contains(Path.GetExtension(t).ToLower()) == true)
+                        if (estensioni_video.Contains(Path.GetExtension(s).ToLower()) == true)
                         {
                             e.Effect = DragDropEffects.Copy;
                             break;
                         }
                     }
+                    else
+                    {
+                        foreach (String t in Directory.GetFiles(s, "*", SearchOption.AllDirectories))
+                        {
+                            if (estensioni_video.Contains(Path.GetExtension(t).ToLower()) == true)
+                            {
+                                e.Effect = DragDropEffects.Copy;
+                                break;
+                            }
+                        }
+                    }
                 }
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
             }
         }
 
         private void DGV_video_DragDrop(object sender, DragEventArgs e)
         {
-            String[] dati = (String[])e.Data.GetData(DataFormats.FileDrop);
-            recupera_fd(dati);
+            if (DGV_video.ReadOnly == false)
+            {
+                String[] dati = (String[])e.Data.GetData(DataFormats.FileDrop);
+                recupera_fd(dati);
+            }
         }
 
         public void recupera_fd(String[] dati)
@@ -657,7 +667,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         private void b_avvia_Click(object sender, EventArgs e)
         {
             Boolean presente = false, start = true;
-            tbi = new TaskbarItemInfo();
+            
             foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg_x64)))
             {
                 if (Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x64)) || Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x86)))
@@ -730,8 +740,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     l_dim_prev.Text = "Dimensione stimata: 0";
                     ts_perc.Text = "0,00%";
                     l_dim_att.Text = "Dimensione attuale: 0";
-                    l_temp_rim.Text = "Tempo rimanente: 0";
-                    l_temp_trasc.Text = "Posizione video: 0";
+                    l_temp_rim.Text = "Tempo rimanente: 00:00:00";
+                    l_temp_trasc.Text = "Posizione video: 00:00:00";
                     file_attuale = "Nessuno";
                 }
             }
@@ -739,9 +749,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 if (presente == true)
                 {
-                    ferma_tutto();
-                    tbi.ProgressState = TaskbarItemProgressState.None;
-                    pause = false;
                     b_pause.Image = TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause;
                     b_pause.Text = "Pausa";
                     b_avvia.Text = "Avvia";
@@ -765,6 +772,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Yellow;
                     strumentiToolStripMenuItem.Enabled = true;
                     modificaToolStripMenuItem.Enabled = true;
+                    ferma_tutto();
+                    pause = false;
                     file_attuale = "Nessuno";
                 }
                 else
@@ -795,227 +804,231 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             for (Int32 q = 0; q < DGV_video.Rows.Count; q++)
             {
-                //if (stati_scelti.Count > 0)
-                //{
-                //    if (stati_scelti.Contains(DGV_video.Rows[q].Cells["stato"].Value.ToString().Split(' ')[0]))
-                //    {
-                        
-                //    }
-                //}
                 this.Invoke((MethodInvoker)delegate ()
                 {
-                    rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
+                    l_vel.Text = "Velocità: 0";
+                    l_dim_prev.Text = "Dimensione stimata: 0";
+                    ts_perc.Text = "0,00%";
+                    l_dim_att.Text = "Dimensione attuale: 0";
+                    l_temp_rim.Text = "Tempo rimanente: 00:00:00";
+                    l_temp_trasc.Text = "Posizione video: 00:00:00";
                 });
-                DataGridViewRow d = DGV_video.Rows[q];
-                sec_trasc = 0;
-                comando = String.Empty;
-                indice_percentuale = d.Index;
-                file_attuale = "Rimozione cartelle temporanee";
-                if (!Directory.Exists(temp_folder))
-                {
-                    Directory.CreateDirectory(temp_folder);
-                }
-                else
-                {
-                    foreach (String s in Directory.GetFiles(temp_folder))
-                        System.IO.File.Delete(s);
-                }
-                this.Invoke((MethodInvoker)delegate ()
-                {
-                    ts_avanz.Text = "Avanzamento elaborazione - Nessun file in elaborazione";
-                });
-
-                String file_video = Path.Combine(d.Cells[DGV_video.Columns["percorso_orig"].Index].Value.ToString(), d.Cells[DGV_video.Columns["input"].Index].Value.ToString());
-                String profilo = d.Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString();
-                String qualita = d.Cells[DGV_video.Columns["qualita"].Index].Value.ToString();
-                String risoluzione_f = d.Cells[DGV_video.Columns["risoluz"].Index].Value.ToString();
-                String modalita_subs= d.Cells[DGV_video.Columns["subtitle_mode"].Index].Value.ToString();
-
-                List<String> OverbordingLines = new List<String>();
-
-                List<String> file_sub = new List<String>();
-
-                Boolean ass = false, stop = false;
-
-                if (Path.GetExtension(file_video).ToLower() == ".mkv" && profilo.StartsWith("Remux") == false && profilo.StartsWith("Workraw") == false && modalita_subs.StartsWith("Hard"))
+                if (DGV_video.Rows[q].Cells["stato"].Value.ToString().ToLower().StartsWith("pronto"))
                 {
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        ts_avanz.Text = "Avanzamento elaborazione - Cerco eventuali fonts e sottotitoli";
+                        rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
                     });
-
-                    foreach (String s in Directory.GetFiles(temp_folder))
+                    DataGridViewRow d = DGV_video.Rows[q];
+                    sec_trasc = 0;
+                    comando = String.Empty;
+                    indice_percentuale = d.Index;
+                    file_attuale = "Rimozione cartelle temporanee";
+                    if (!Directory.Exists(temp_folder))
                     {
-                        System.IO.File.Delete(s);
-                    }
-
-                    String temp_ffmpeg = String.Empty;
-
-                    if (System.IO.File.Exists(ffmpeg_x64))
-                    {
-                        temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x64);
-                        System.IO.File.Copy(ffmpeg_x64, temp_ffmpeg, true);
+                        Directory.CreateDirectory(temp_folder);
                     }
                     else
                     {
-                        temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x86);
-                        System.IO.File.Copy(ffmpeg_x86, temp_ffmpeg, true);
-                    }
-
-                    Tuple<String, String> SubID = new Tuple<string, string>(String.Empty, String.Empty);
-
-                    System.Diagnostics.ProcessStartInfo psi_extract = new System.Diagnostics.ProcessStartInfo();
-                    
-                    Environment.CurrentDirectory = temp_folder;
-
-                    foreach (MediaInfoDotNet.Models.TextStream t in new MediaFile(file_video).Text)
-                    {
-                        if (t.CodecId.ToLower().Contains("s_text/ass"))
-                        {
-                            if (t.Default == true)
-                            {
-                                SubID = new Tuple<string, string>((t.ID - 1).ToString(), ".ass");
-                            }
-                            if (t.Forced)
-                            {
-                                SubID = new Tuple<string, string>((t.ID - 1).ToString(), ".ass");
-                                break;
-                            }
-                        }
-                        if (t.CodecId.ToLower().Contains("s_text/utf"))
-                        {
-                            if (t.Default == true)
-                            {
-                                SubID = new Tuple<string, string>((t.ID - 1).ToString(), ".srt");
-                            }
-                            if (t.Forced == true)
-                            {
-                                SubID = new Tuple<string, string>((t.ID - 1).ToString(), ".srt");
-                                break;
-                            }
-                        }
-                    }
-
-                    if (SubID.Item1 == String.Empty)
-                    {
-                        if (new MediaFile(file_video).Text.Count > 0)
-                        {
-                            if (new MediaFile(file_video).Text[0].CodecId.ToLower().Contains("s_text/ass"))
-                                SubID = new Tuple<string, string>((new MediaFile(file_video).Text[0].ID - 1).ToString(), ".ass");
-                            if (new MediaFile(file_video).Text[0].CodecId.ToLower().Contains("s_text/utf"))
-                                SubID = new Tuple<string, string>((new MediaFile(file_video).Text[0].ID - 1).ToString(), ".srt");
-                        }
-                    }
-
-                    psi_extract = new System.Diagnostics.ProcessStartInfo();
-                    psi_extract.CreateNoWindow = true;
-                    psi_extract.UseShellExecute = false;
-                    psi_extract.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-
-                    psi_extract.FileName = Path.GetFileName(temp_ffmpeg);
-
-                    if (String.IsNullOrWhiteSpace(SubID.Item1) == false)
-                    {
-                        psi_extract.Arguments = " -y -i \"" + file_video + "\" ";
-                        this.Invoke((MethodInvoker)delegate ()
-                        {
-                            ts_avanz.Text = "Avanzamento elaborazione - Estraggo i sottotitoli";
-                        });
-                        psi_extract.Arguments += " -map 0:" + SubID.Item1 + " -c:s copy \"" + Path.GetDirectoryName(ffmpeg_x64) + "\\subs0" + SubID.Item2 + "\"";
-                        file_sub.Add(Path.GetDirectoryName(ffmpeg_x64) + "\\subs0" + SubID.Item2);
-
-                        System.Diagnostics.Process.Start(psi_extract).WaitForExit();
-                    }
-
-                    this.Invoke((MethodInvoker)delegate ()
-                    {
-                        ts_avanz.Text = "Avanzamento elaborazione - Estraggo gli eventuali fonts";
-                    });
-
-                    psi_extract = new System.Diagnostics.ProcessStartInfo();
-                    psi_extract.CreateNoWindow = true;
-                    psi_extract.UseShellExecute = false;
-                    psi_extract.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-
-                    temp_ffmpeg = String.Empty;
-
-                    if (System.IO.File.Exists(ffmpeg_x64))
-                    {
-                        temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x64);
-                        System.IO.File.Copy(ffmpeg_x64, temp_ffmpeg, true);
-                    }
-                    else
-                    {
-                        temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x86);
-                        System.IO.File.Copy(ffmpeg_x86, temp_ffmpeg, true);
-                    }
-
-                    psi_extract.FileName = Path.GetFileName(temp_ffmpeg);
-
-                    psi_extract.Arguments = " -dump_attachment:t \"\" -i \"" + file_video + "\" NUL";
-
-                    System.Diagnostics.Process.Start(psi_extract).WaitForExit();
-
-                    Environment.CurrentDirectory = GUIdir;
-                    foreach (String s in Directory.GetFiles(temp_folder))
-                    {
-                        if (Path.GetExtension(s).ToLower() == ".exe")
+                        foreach (String s in Directory.GetFiles(temp_folder))
                             System.IO.File.Delete(s);
                     }
-                    if (Directory.Exists(fonts_folder))
-                    {
-                        Directory.Delete(fonts_folder, true);
-                    }
-                    Directory.Move(temp_folder, fonts_folder);
-                }
-
-                comando = String.Empty;
-
-                file_attuale = Path.GetFileName(file_video);
-
-                //Thread.Sleep(2000);
-
-                if (stop == false)
-                {
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        tbi.ProgressValue = 0;
-                        tbi.ProgressState = TaskbarItemProgressState.Normal;
+                        ts_avanz.Text = "Avanzamento elaborazione - Nessun file in elaborazione";
                     });
-                    switch (profilo)
+
+                    String file_video = Path.Combine(d.Cells[DGV_video.Columns["percorso_orig"].Index].Value.ToString(), d.Cells[DGV_video.Columns["input"].Index].Value.ToString());
+                    String profilo = d.Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString();
+                    String qualita = d.Cells[DGV_video.Columns["qualita"].Index].Value.ToString();
+                    String risoluzione_f = d.Cells[DGV_video.Columns["risoluz"].Index].Value.ToString();
+                    String modalita_subs = d.Cells[DGV_video.Columns["subtitle_mode"].Index].Value.ToString();
+
+                    List<String> OverbordingLines = new List<String>();
+
+                    List<String> file_sub = new List<String>();
+
+                    Boolean ass = false, stop = false;
+
+                    if (Path.GetExtension(file_video).ToLower() == ".mkv" && profilo.StartsWith("Remux") == false && profilo.StartsWith("Workraw") == false && modalita_subs.StartsWith("Hard"))
                     {
-                        case "Remux MKV":
-                            remux_mkv(file_video, profilo);
-                            break;
-                        case "Remux MP4":
-                            remux_mp4(file_video, profilo, qualita);
-                            break;
-                        default:
-                            switch (d.Cells["risoluz"].Value.ToString())
+                        this.Invoke((MethodInvoker)delegate ()
+                        {
+                            ts_avanz.Text = "Avanzamento elaborazione - Cerco eventuali fonts e sottotitoli";
+                        });
+
+                        foreach (String s in Directory.GetFiles(temp_folder))
+                        {
+                            System.IO.File.Delete(s);
+                        }
+
+                        String temp_ffmpeg = String.Empty;
+
+                        if (System.IO.File.Exists(ffmpeg_x64))
+                        {
+                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x64);
+                            System.IO.File.Copy(ffmpeg_x64, temp_ffmpeg, true);
+                        }
+                        else
+                        {
+                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x86);
+                            System.IO.File.Copy(ffmpeg_x86, temp_ffmpeg, true);
+                        }
+
+                        Tuple<String, String> SubID = new Tuple<string, string>(String.Empty, String.Empty);
+
+                        System.Diagnostics.ProcessStartInfo psi_extract = new System.Diagnostics.ProcessStartInfo();
+
+                        Environment.CurrentDirectory = temp_folder;
+
+                        foreach (MediaInfoDotNet.Models.TextStream t in new MediaFile(file_video).Text)
+                        {
+                            if (t.CodecId.ToLower().Contains("s_text/ass"))
                             {
-                                case "1080p":
-                                    Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1920, 1080, modalita_subs);
+                                if (t.Default == true)
+                                {
+                                    SubID = new Tuple<string, string>((t.ID - 1).ToString(), ".ass");
+                                }
+                                if (t.Forced)
+                                {
+                                    SubID = new Tuple<string, string>((t.ID - 1).ToString(), ".ass");
                                     break;
-                                case "900p":
-                                    Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1600, 900, modalita_subs);
-                                    break;
-                                case "720p":
-                                    Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1280, 720, modalita_subs);
-                                    break;
-                                case "576p":
-                                    Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1024, 576, modalita_subs);
-                                    break;
-                                case "480p":
-                                    Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 864, 486, modalita_subs);
-                                    break;
-                                case "396p":
-                                    Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 704, 396, modalita_subs);
-                                    break;
+                                }
                             }
-                            break;
+                            if (t.CodecId.ToLower().Contains("s_text/utf"))
+                            {
+                                if (t.Default == true)
+                                {
+                                    SubID = new Tuple<string, string>((t.ID - 1).ToString(), ".srt");
+                                }
+                                if (t.Forced == true)
+                                {
+                                    SubID = new Tuple<string, string>((t.ID - 1).ToString(), ".srt");
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (SubID.Item1 == String.Empty)
+                        {
+                            if (new MediaFile(file_video).Text.Count > 0)
+                            {
+                                if (new MediaFile(file_video).Text[0].CodecId.ToLower().Contains("s_text/ass"))
+                                    SubID = new Tuple<string, string>((new MediaFile(file_video).Text[0].ID - 1).ToString(), ".ass");
+                                if (new MediaFile(file_video).Text[0].CodecId.ToLower().Contains("s_text/utf"))
+                                    SubID = new Tuple<string, string>((new MediaFile(file_video).Text[0].ID - 1).ToString(), ".srt");
+                            }
+                        }
+
+                        psi_extract = new System.Diagnostics.ProcessStartInfo();
+                        psi_extract.CreateNoWindow = true;
+                        psi_extract.UseShellExecute = false;
+                        psi_extract.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+
+                        psi_extract.FileName = Path.GetFileName(temp_ffmpeg);
+
+                        if (String.IsNullOrWhiteSpace(SubID.Item1) == false)
+                        {
+                            psi_extract.Arguments = " -y -i \"" + file_video + "\" ";
+                            this.Invoke((MethodInvoker)delegate ()
+                            {
+                                ts_avanz.Text = "Avanzamento elaborazione - Estraggo i sottotitoli";
+                            });
+                            psi_extract.Arguments += " -map 0:" + SubID.Item1 + " -c:s copy \"" + Path.GetDirectoryName(ffmpeg_x64) + "\\subs0" + SubID.Item2 + "\"";
+                            file_sub.Add(Path.GetDirectoryName(ffmpeg_x64) + "\\subs0" + SubID.Item2);
+
+                            System.Diagnostics.Process.Start(psi_extract).WaitForExit();
+                        }
+
+                        this.Invoke((MethodInvoker)delegate ()
+                        {
+                            ts_avanz.Text = "Avanzamento elaborazione - Estraggo gli eventuali fonts";
+                        });
+
+                        psi_extract = new System.Diagnostics.ProcessStartInfo();
+                        psi_extract.CreateNoWindow = true;
+                        psi_extract.UseShellExecute = false;
+                        psi_extract.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+
+                        temp_ffmpeg = String.Empty;
+
+                        if (System.IO.File.Exists(ffmpeg_x64))
+                        {
+                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x64);
+                            System.IO.File.Copy(ffmpeg_x64, temp_ffmpeg, true);
+                        }
+                        else
+                        {
+                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x86);
+                            System.IO.File.Copy(ffmpeg_x86, temp_ffmpeg, true);
+                        }
+
+                        psi_extract.FileName = Path.GetFileName(temp_ffmpeg);
+
+                        psi_extract.Arguments = " -dump_attachment:t \"\" -i \"" + file_video + "\" NUL";
+
+                        System.Diagnostics.Process.Start(psi_extract).WaitForExit();
+
+                        Environment.CurrentDirectory = GUIdir;
+                        foreach (String s in Directory.GetFiles(temp_folder))
+                        {
+                            if (Path.GetExtension(s).ToLower() == ".exe")
+                                System.IO.File.Delete(s);
+                        }
+                        if (Directory.Exists(fonts_folder))
+                        {
+                            Directory.Delete(fonts_folder, true);
+                        }
+                        Directory.Move(temp_folder, fonts_folder);
                     }
 
-                    Thread.Sleep(100);
+                    comando = String.Empty;
+
+                    file_attuale = Path.GetFileName(file_video);
+
+                    //Thread.Sleep(2000);
+
+                    if (stop == false)
+                    {
+                        this.Invoke((MethodInvoker)delegate ()
+                        {
+
+                        });
+                        switch (profilo)
+                        {
+                            case "Remux MKV":
+                                remux_mkv(file_video, profilo);
+                                break;
+                            case "Remux MP4":
+                                remux_mp4(file_video, profilo, qualita);
+                                break;
+                            default:
+                                switch (d.Cells["risoluz"].Value.ToString())
+                                {
+                                    case "1080p":
+                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1920, 1080, modalita_subs);
+                                        break;
+                                    case "900p":
+                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1600, 900, modalita_subs);
+                                        break;
+                                    case "720p":
+                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1280, 720, modalita_subs);
+                                        break;
+                                    case "576p":
+                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1024, 576, modalita_subs);
+                                        break;
+                                    case "480p":
+                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 864, 486, modalita_subs);
+                                        break;
+                                    case "396p":
+                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 704, 396, modalita_subs);
+                                        break;
+                                }
+                                break;
+                        }
+
+                        Thread.Sleep(100);
+                    }
                 }
             }
             Environment.CurrentDirectory = GUIdir;
@@ -1240,7 +1253,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
                     DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
-                    tbi.ProgressState = TaskbarItemProgressState.Error;
                 });
             }
 
@@ -1275,6 +1287,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             processo_remux.BeginOutputReadLine();
             processo_remux.WaitForExit();
             processo_remux.CancelErrorRead();
+            processo_remux.CancelOutputRead();
             switch (processo_remux.ExitCode)
             {
                 case 0:
@@ -1298,7 +1311,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     {
                         DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
                         DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
-                        tbi.ProgressState = TaskbarItemProgressState.Error;
                     });
                     break;
 
@@ -1351,8 +1363,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         numero = numero.Replace("%", String.Empty);
                         numero = numero.Trim();
                         pb_tot.Value = Convert.ToInt32(numero);
-                        tbi.ProgressValue = pb_tot.Value;
-                        tbi.ProgressState = TaskbarItemProgressState.Normal;
+                        
                         ts_perc.Text = pb_tot.Value.ToString() + ".00%";
                         DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "IN CORSO - " + ts_perc.Text;
                     });
@@ -1499,54 +1510,58 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     {
                         FFmpegOutputWrapperNET ff = new FFmpegOutputWrapperNET(e.Data.Trim());
                         String temp_extra = e.Data;
-                        if (temp_extra.ToLower().Trim().Contains("parsed_ass"))
+                        if (e.Data.Trim().ToLower().StartsWith("frame"))
                         {
-                            rtb_sottotitoli.Text += temp_extra + "\n";
-                            rtb_sottotitoli.SelectionStart = rtb_sottotitoli.Text.Length;
-                            rtb_sottotitoli.ScrollToCaret();
+                            try
+                            {
+                                Int32 frames = Convert.ToInt32(ff.Frames);
+                                pb_tot.Maximum = Convert.ToInt32(TimeSpan.Parse(durata).TotalSeconds);
+                                String fps = ff.Fps;
+                                l_vel.Text = "Velocità: " + fps + " fps";
+                                String size = ff.Size.Replace("kB", "");
+                                l_dim_att.Text = "Dimensione attuale: " + Arrotonda(Convert.ToDouble(size) / 1024.0, 2) + " MB";
+                                l_temp_trasc.Text = "Posizione video: " + ff.Time.ToString();
+                                ts_avanz.Text = "Avanzamento elaborazione - Codifica del file \"" + file_attuale + "\"";
+                                ts_perc.Text = Arrotonda(((Double)pb_tot.Value / pb_tot.Maximum) * 100.0, 2) + "%";
+                                pb_tot.Value = Convert.ToInt32(ff.Time.TotalSeconds);
+
+
+                                DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "IN CORSO - " + ts_perc.Text;
+                                DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.White;
+
+                                String bitrate = ff.Bitrate.Remove(ff.Bitrate.IndexOf("k"));
+
+                                if (fps.Contains("."))
+                                    fps = fps.Remove(fps.IndexOf("."));
+                                Int32 tempo_restante = ((Convert.ToInt32(fc) - Convert.ToInt32(ff.Frames)) / Convert.ToInt32(ff.Fps));
+                                l_temp_rim.Text = "Tempo rimanente: " + TimeSpan.FromSeconds(tempo_restante).ToString(@"hh\:mm\:ss");
+                                Double bitrate_kb = Convert.ToDouble(bitrate.Remove(bitrate.IndexOf("."))) / 8 / 1024.0;
+                                Double dimens_stimata = Math.Round(bitrate_kb * TimeSpan.Parse(durata).TotalSeconds, 2);
+                                l_dim_prev.Text = "Dimensione stimata: " + dimens_stimata + " MB";
+                            }
+                            catch// (Exception ex)
+                            {
+                                //MessageBox.Show(ex.Message);
+                                //DGV_log.Rows.Insert(0, DateTime.Now.ToString(), ex.Message + " -> " + ecc);
+                            }
                         }
                         else
                         {
-                            if (temp_extra.ToLower().Trim().StartsWith("frame") == false)
+                            if (temp_extra.ToLower().Trim().Contains("parsed_ass"))
                             {
-                                rtb_codifica.Text += temp_extra + "\n";
-                                rtb_codifica.SelectionStart = rtb_codifica.Text.Length;
-                                rtb_codifica.ScrollToCaret();
+                                rtb_sottotitoli.Text += l_temp_trasc.Text.Remove(0, l_temp_trasc.Text.LastIndexOf(' ') + 1) + " ---> " + temp_extra + "\n";
+                                rtb_sottotitoli.SelectionStart = rtb_sottotitoli.Text.Length;
+                                rtb_sottotitoli.ScrollToCaret();
                             }
-                        }
-                        try
-                        {
-                            Int32 frames = Convert.ToInt32(ff.Frames);
-                            pb_tot.Maximum = Convert.ToInt32(TimeSpan.Parse(durata).TotalSeconds);
-                            String fps = ff.Fps;
-                            l_vel.Text = "Velocità: " + fps + " fps";
-                            String size = ff.Size.Replace("kB", "");
-                            l_dim_att.Text = "Dimensione attuale: " + Arrotonda(Convert.ToDouble(size) / 1024.0, 2) + " MB";
-                            l_temp_trasc.Text = "Posizione video: " + ff.Time.ToString();
-                            ts_avanz.Text = "Avanzamento elaborazione - Codifica del file \"" + file_attuale + "\"";
-                            ts_perc.Text = Arrotonda(((Double)pb_tot.Value / pb_tot.Maximum) * 100.0, 2) + "%";
-                            pb_tot.Value = Convert.ToInt32(ff.Time.TotalSeconds);
-                            tbi.ProgressValue = (Double)pb_tot.Value;
-                            if (tbi.ProgressState != TaskbarItemProgressState.Error)
-                                tbi.ProgressState = TaskbarItemProgressState.Normal;
-
-                            DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "IN CORSO - " + ts_perc.Text;
-                            DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.White;
-
-                            String bitrate = ff.Bitrate.Remove(ff.Bitrate.IndexOf("k"));
-
-                            if (fps.Contains("."))
-                                fps = fps.Remove(fps.IndexOf("."));
-                            Int32 tempo_restante = ((Convert.ToInt32(fc) - Convert.ToInt32(ff.Frames)) / Convert.ToInt32(ff.Fps));
-                            l_temp_rim.Text = "Tempo rimanente: " + TimeSpan.FromSeconds(tempo_restante).ToString(@"hh\:mm\:ss");
-                            Double bitrate_kb = Convert.ToDouble(bitrate.Remove(bitrate.IndexOf("."))) / 8 / 1024.0;
-                            Double dimens_stimata = Math.Round(bitrate_kb * TimeSpan.Parse(durata).TotalSeconds, 2);
-                            l_dim_prev.Text = "Dimensione stimata: " + dimens_stimata + " MB";
-                        }
-                        catch// (Exception ex)
-                        {
-                            //MessageBox.Show(ex.Message);
-                            //DGV_log.Rows.Insert(0, DateTime.Now.ToString(), ex.Message + " -> " + ecc);
+                            else
+                            {
+                                if (temp_extra.ToLower().Trim().StartsWith("frame") == false)
+                                {
+                                    rtb_codifica.Text += temp_extra + "\n";
+                                    rtb_codifica.SelectionStart = rtb_codifica.Text.Length;
+                                    rtb_codifica.ScrollToCaret();
+                                }
+                            }
                         }
                     }
                     catch { }
@@ -1985,7 +2000,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             try
             {
-                t.Abort();
+                if (t != null)
+                    t.Abort();
                 foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ffmpeg_x64)))
                 {
                     p.Kill();
@@ -2619,7 +2635,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             if (pause == false)
             {
-                tbi.ProgressState = TaskbarItemProgressState.Paused;
+                
                 if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false)
                     SuspendProcess(processo_codifica.Id);
                 else
@@ -2630,7 +2646,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             else
             {
-                tbi.ProgressState = TaskbarItemProgressState.Normal;
+                
                 if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false)
                     ResumeProcess(processo_codifica.Id);
                 else
