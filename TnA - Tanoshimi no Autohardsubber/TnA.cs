@@ -662,6 +662,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            ControllaLunghezzaPercorsi();
         }
 
         private void b_avvia_Click(object sender, EventArgs e)
@@ -733,6 +734,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     DGV_video.ReadOnly = true;
                     strumentiToolStripMenuItem.Enabled = false;
                     modificaToolStripMenuItem.Enabled = false;
+                    infoToolStripMenuItem.Enabled = false;
                     pb_tot.Value = 0;
                     ts_perc.Text = pb_tot.Value.ToString() + "%";
                     rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
@@ -772,6 +774,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Yellow;
                     strumentiToolStripMenuItem.Enabled = true;
                     modificaToolStripMenuItem.Enabled = true;
+                    infoToolStripMenuItem.Enabled = true;
                     ferma_tutto();
                     pause = false;
                     file_attuale = "Nessuno";
@@ -1075,6 +1078,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 DGV_video.Columns[DGV_video.Columns["percorso_orig"].Index].ReadOnly = true;
                 strumentiToolStripMenuItem.Enabled = true;
                 modificaToolStripMenuItem.Enabled = true;
+                infoToolStripMenuItem.Enabled = true;
                 file_attuale = "Nessuno";
             });
         }
@@ -2417,6 +2421,22 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 b_avvia.Enabled = true;
                 tab_autohardsubber.Text = label_tab_lista + " (Totale files: " + DGV_video.Rows.Count.ToString() + ")";
                 tb_help.Visible = false;
+                ControllaLunghezzaPercorsi();
+            }
+        }
+
+        void ControllaLunghezzaPercorsi()
+        {
+            if (DGV_video.Rows.Count > 0)
+            {
+                for (Int32 i = 0; i < DGV_video.Rows.Count; i++)
+                {
+                    if (Path.Combine(DGV_video.Rows[i].Cells["percorso_orig"].Value.ToString(), DGV_video.Rows[i].Cells["input"].Value.ToString()).Length > 220)
+                    {
+                        DGV_video.Rows[i].Cells["input"].Style.BackColor = Color.Orange;
+                    }
+                }
+                DGV_video.ClearSelection();
             }
         }
 
@@ -2445,6 +2465,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     tb_help.Visible = false;
                     tab_autohardsubber.Text = label_tab_lista + " (Totale files: " + DGV_video.Rows.Count.ToString() + ")";
                 }
+                ControllaLunghezzaPercorsi();
             }
         }
 
@@ -2740,6 +2761,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         private void Rtb_sottotitoli_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(e.LinkText);
+        }
+
+        private void cancellaSelezioneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DGV_video.ClearSelection();
         }
 
         private void VisualizzaCronologiaVersioniiToolStripMenuItem_Click(object sender, EventArgs e)

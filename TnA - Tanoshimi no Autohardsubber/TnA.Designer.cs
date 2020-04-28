@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TnA));
             this.tasto_destro_files = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancellaSelezioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rimuoviIFileSelezionatiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.IncollaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,8 +125,6 @@
             this.b_incolla = new System.Windows.Forms.Button();
             this.b_avvia = new System.Windows.Forms.Button();
             this.b_rimuovi = new System.Windows.Forms.Button();
-            this.tasto_destro_tracce_audio = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.duplicaTracciaAudioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barra_stato = new System.Windows.Forms.StatusStrip();
             this.pb_tot = new System.Windows.Forms.ToolStripProgressBar();
             this.ts_perc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -142,35 +141,42 @@
             this.sc_log.Panel1.SuspendLayout();
             this.sc_log.Panel2.SuspendLayout();
             this.sc_log.SuspendLayout();
-            this.tasto_destro_tracce_audio.SuspendLayout();
             this.barra_stato.SuspendLayout();
             this.SuspendLayout();
             // 
             // tasto_destro_files
             // 
             this.tasto_destro_files.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancellaSelezioneToolStripMenuItem,
             this.rimuoviIFileSelezionatiToolStripMenuItem,
             this.toolStripSeparator1,
             this.IncollaToolStripMenuItem});
             this.tasto_destro_files.Name = "tasto_destro_files";
-            this.tasto_destro_files.Size = new System.Drawing.Size(202, 54);
+            this.tasto_destro_files.Size = new System.Drawing.Size(201, 76);
+            // 
+            // cancellaSelezioneToolStripMenuItem
+            // 
+            this.cancellaSelezioneToolStripMenuItem.Name = "cancellaSelezioneToolStripMenuItem";
+            this.cancellaSelezioneToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.cancellaSelezioneToolStripMenuItem.Text = "Cancella selezione";
+            this.cancellaSelezioneToolStripMenuItem.Click += new System.EventHandler(this.cancellaSelezioneToolStripMenuItem_Click);
             // 
             // rimuoviIFileSelezionatiToolStripMenuItem
             // 
             this.rimuoviIFileSelezionatiToolStripMenuItem.Name = "rimuoviIFileSelezionatiToolStripMenuItem";
-            this.rimuoviIFileSelezionatiToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.rimuoviIFileSelezionatiToolStripMenuItem.Text = "Rimuovi i file selezionati";
+            this.rimuoviIFileSelezionatiToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.rimuoviIFileSelezionatiToolStripMenuItem.Text = "Rimuovi files selezionati";
             this.rimuoviIFileSelezionatiToolStripMenuItem.Click += new System.EventHandler(this.rimuoviIFileSelezionatiToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
             // 
             // IncollaToolStripMenuItem
             // 
             this.IncollaToolStripMenuItem.Name = "IncollaToolStripMenuItem";
-            this.IncollaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.IncollaToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.IncollaToolStripMenuItem.Text = "Incolla";
             this.IncollaToolStripMenuItem.Click += new System.EventHandler(this.IncollaToolStripMenuItem_Click);
             // 
@@ -1109,19 +1115,6 @@
             this.b_rimuovi.UseVisualStyleBackColor = true;
             this.b_rimuovi.Click += new System.EventHandler(this.B_rimuovi_Click);
             // 
-            // tasto_destro_tracce_audio
-            // 
-            this.tasto_destro_tracce_audio.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.duplicaTracciaAudioToolStripMenuItem});
-            this.tasto_destro_tracce_audio.Name = "tasto_destro_tracce_audio";
-            this.tasto_destro_tracce_audio.Size = new System.Drawing.Size(186, 26);
-            // 
-            // duplicaTracciaAudioToolStripMenuItem
-            // 
-            this.duplicaTracciaAudioToolStripMenuItem.Name = "duplicaTracciaAudioToolStripMenuItem";
-            this.duplicaTracciaAudioToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.duplicaTracciaAudioToolStripMenuItem.Text = "Duplica traccia audio";
-            // 
             // barra_stato
             // 
             this.barra_stato.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1183,7 +1176,7 @@
             this.MinimumSize = new System.Drawing.Size(1171, 700);
             this.Name = "TnA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.8.1";
+            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.8.2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TnA_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TnA_ResizeEnd);
             this.tasto_destro_files.ResumeLayout(false);
@@ -1200,7 +1193,6 @@
             this.sc_log.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sc_log)).EndInit();
             this.sc_log.ResumeLayout(false);
-            this.tasto_destro_tracce_audio.ResumeLayout(false);
             this.barra_stato.ResumeLayout(false);
             this.barra_stato.PerformLayout();
             this.ResumeLayout(false);
@@ -1279,8 +1271,6 @@
         private System.Windows.Forms.ToolTip tt_encode;
         private System.Windows.Forms.Button b_avvia;
         private System.Windows.Forms.ToolStripMenuItem controllaAggiornamentiToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip tasto_destro_tracce_audio;
-        private System.Windows.Forms.ToolStripMenuItem duplicaTracciaAudioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem risoluzioneToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox cmb_risoluz;
         private System.Windows.Forms.ToolStripMenuItem confermaToolStripMenuItem2;
@@ -1309,6 +1299,7 @@
         private System.Windows.Forms.ToolStripMenuItem integraConIlMenùContestualeDiWindowsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancellaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancellaSelezioneToolStripMenuItem;
     }
 }
 

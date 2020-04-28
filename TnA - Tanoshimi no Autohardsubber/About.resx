@@ -124,7 +124,7 @@ Non richiede installazione, eccetto il pacchetto .NET Framework 4.7.1, necessari
 Richiede una connessione ad internet per il download di FFmpeg, NON incluso nel programma. FFmpeg è scaricabile sia manualmente che automaticamente tramite menù Strumenti -&gt; Scarica FFmpeg o tramite combinazione tasti CTRL+D.
 L'applicazione richiede di norma la build FFmpeg di Zeranoe, NON inclusa. Qualora l'utente ne usasse una diversa, è consigliabile effettuare un test tramite menù Strumenti -&gt; Test FFmpeg
 
-Questo programma NON include FFmpeg, a causa della licenza GPLv3 con cui FFmpeg è compilato.
+Questo programma NON include FFmpeg.
 FFmpeg non ha dipendenze da altro software. In caso di malfunzionamenti dello stesso, contattare il Tanoshimi no Sekai Fansub, tramite doppio click sul logo in alto a destra della finestra Info.
 
 Questo è un software GRATUITO. Se avete pagato per averlo, chiedete il rimborso.

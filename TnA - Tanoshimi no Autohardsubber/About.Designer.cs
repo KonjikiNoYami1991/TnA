@@ -49,6 +49,8 @@
             this.l_sito = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.ll_source_code = new System.Windows.Forms.LinkLabel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.ll_license = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -87,7 +89,7 @@
             // 
             this.rtb_descr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtb_descr.Location = new System.Drawing.Point(12, 148);
+            this.rtb_descr.Location = new System.Drawing.Point(12, 167);
             this.rtb_descr.Name = "rtb_descr";
             this.rtb_descr.ReadOnly = true;
             this.rtb_descr.Size = new System.Drawing.Size(649, 225);
@@ -97,7 +99,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 132);
+            this.label2.Location = new System.Drawing.Point(9, 151);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 5;
@@ -108,7 +110,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(27, 376);
+            this.label3.Location = new System.Drawing.Point(27, 395);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(157, 13);
             this.label3.TabIndex = 7;
@@ -118,7 +120,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(210, 441);
+            this.label5.Location = new System.Drawing.Point(210, 460);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(112, 13);
             this.label5.TabIndex = 10;
@@ -128,7 +130,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(372, 441);
+            this.label6.Location = new System.Drawing.Point(372, 460);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 13);
             this.label6.TabIndex = 12;
@@ -138,7 +140,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(504, 441);
+            this.label8.Location = new System.Drawing.Point(504, 460);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(95, 13);
             this.label8.TabIndex = 17;
@@ -157,7 +159,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(59, 441);
+            this.label4.Location = new System.Drawing.Point(59, 460);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(135, 13);
             this.label4.TabIndex = 19;
@@ -167,7 +169,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 466);
+            this.label9.Location = new System.Drawing.Point(12, 485);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(411, 13);
             this.label9.TabIndex = 20;
@@ -178,7 +180,7 @@
             // 
             this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox4.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources._247de69ed119ae92533d998bf4b065ba_400x400;
-            this.pictureBox4.Location = new System.Drawing.Point(519, 397);
+            this.pictureBox4.Location = new System.Drawing.Point(519, 416);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(68, 41);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -189,7 +191,7 @@
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox2.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.mkvtoolnix;
-            this.pictureBox2.Location = new System.Drawing.Point(368, 397);
+            this.pictureBox2.Location = new System.Drawing.Point(368, 416);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(68, 41);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -200,7 +202,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources._7ziplogo;
-            this.pictureBox1.Location = new System.Drawing.Point(231, 397);
+            this.pictureBox1.Location = new System.Drawing.Point(231, 416);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(68, 41);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -211,7 +213,7 @@
             // 
             this.pb_mi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pb_mi.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources._512px_MediaInfo_Logo_svg;
-            this.pb_mi.Location = new System.Drawing.Point(94, 397);
+            this.pb_mi.Location = new System.Drawing.Point(94, 416);
             this.pb_mi.Name = "pb_mi";
             this.pb_mi.Size = new System.Drawing.Size(68, 41);
             this.pb_mi.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -264,11 +266,33 @@
             this.ll_source_code.Text = "GitHub";
             this.ll_source_code.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ll_source_code_LinkClicked);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(9, 130);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 13);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "Licenza:";
+            // 
+            // ll_license
+            // 
+            this.ll_license.AutoSize = true;
+            this.ll_license.Location = new System.Drawing.Point(53, 130);
+            this.ll_license.Name = "ll_license";
+            this.ll_license.Size = new System.Drawing.Size(40, 13);
+            this.ll_license.TabIndex = 25;
+            this.ll_license.TabStop = true;
+            this.ll_license.Text = "GPLv3";
+            this.ll_license.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ll_license_LinkClicked);
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 488);
+            this.ClientSize = new System.Drawing.Size(673, 507);
+            this.Controls.Add(this.ll_license);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.l_sito);
             this.Controls.Add(this.label9);
@@ -328,5 +352,7 @@
         private System.Windows.Forms.Label l_sito;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.LinkLabel ll_source_code;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.LinkLabel ll_license;
     }
 }

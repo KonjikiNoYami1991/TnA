@@ -40,5 +40,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             Process.Start("https://github.com/KonjikiNoYami1991/TnA");
         }
+
+        private void ll_license_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("notepad.exe", Application.StartupPath + "\\LICENSE");
+        }
     }
 }
