@@ -14,12 +14,12 @@ No need to use Professional or Enterprise edition, but you can.
 
 ## Requirements for building
 
-- [FFmpeg by Zeranoe](https://ffmpeg.zeranoe.com/builds/) static for Windows (automatically downloaded)
+- [FFmpeg by Zeranoe x64](https://ffmpeg.zeranoe.com/builds/) static for Windows (automatically downloaded)
 - [SevenZipSharp](https://www.nuget.org/packages/SevenZipSharp.Net45/) (no need to install 7z)
-- [MediaInfoNet](https://www.nuget.org/packages/MediaInfoNet/) (no need to install MediaInfo)
+- [MediaInfoNet x64](https://www.nuget.org/packages/MediaInfoNet/) (no need to install MediaInfo)
 - [FFmpeg Output Wrapper DLL](https://github.com/KonjikiNoYami1991/FFmpegOutputWrapperNET) (for encoding progress)
-- [mkvmerge.exe from MKVtoolnix for Windows](https://mkvtoolnix.download/) (preferably x86 for compatibility with x86 systems)
-- [SCXviD standalone for Windows](https://github.com/soyokaze/SCXvid-standalone) for keyframes generation.
+- [mkvmerge.exe from MKVtoolnix x64 for Windows](https://mkvtoolnix.download/) (for MKV remux)
+- [SCXviD x64 standalone for Windows](https://github.com/soyokaze/SCXvid-standalone) for keyframes generation.
 
 ## Features
 - Only italian language, for now.
