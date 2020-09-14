@@ -19,6 +19,7 @@ No need to use Professional or Enterprise edition, but you can.
 - [MediaInfoNet](https://www.nuget.org/packages/MediaInfoNet/) (no need to install MediaInfo)
 - [FFmpeg Output Wrapper DLL](https://github.com/KonjikiNoYami1991/FFmpegOutputWrapperNET) (for encoding progress)
 - [mkvmerge.exe from MKVtoolnix for Windows](https://mkvtoolnix.download/) (preferably x86 for compatibility with x86 systems)
+- [SCXviD standalone for Windows](https://github.com/soyokaze/SCXvid-standalone) for keyframes generation.
 
 ## Features
 - Only italian language, for now.
