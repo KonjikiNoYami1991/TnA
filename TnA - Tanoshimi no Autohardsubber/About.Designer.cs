@@ -83,7 +83,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(169, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Copyright © 2019, Simone Sociale";
+            this.label1.Text = "Copyright © 2020, Simone Sociale";
             // 
             // rtb_descr
             // 

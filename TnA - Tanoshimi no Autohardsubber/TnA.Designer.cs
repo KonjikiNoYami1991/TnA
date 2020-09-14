@@ -182,6 +182,7 @@
             // 
             // barra_menu
             // 
+            this.barra_menu.BackColor = System.Drawing.Color.Transparent;
             this.barra_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.modificaToolStripMenuItem,
@@ -622,6 +623,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.l_tempo_trasc);
             this.groupBox1.Controls.Add(this.l_dim_prev);
             this.groupBox1.Controls.Add(this.l_dim_att);
@@ -791,7 +793,8 @@
             "Streaming HTML5 H.264",
             "Streaming HTML5 H.265",
             "XviD MP3",
-            "Workraw"});
+            "Workraw",
+            "Genera keyframes"});
             this.compatibilita.MinimumWidth = 185;
             this.compatibilita.Name = "compatibilita";
             this.compatibilita.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1017,7 +1020,9 @@
             // b_agg_files
             // 
             this.b_agg_files.FlatAppearance.BorderSize = 0;
-            this.b_agg_files.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.b_agg_files.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_agg_files.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_agg_files.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
             this.b_agg_files.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_agg_files.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.film;
             this.b_agg_files.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1034,7 +1039,9 @@
             // b_agg_cart
             // 
             this.b_agg_cart.FlatAppearance.BorderSize = 0;
-            this.b_agg_cart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.b_agg_cart.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_agg_cart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_agg_cart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
             this.b_agg_cart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_agg_cart.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.folder;
             this.b_agg_cart.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1050,8 +1057,11 @@
             // 
             // b_pause
             // 
+            this.b_pause.BackColor = System.Drawing.SystemColors.Control;
             this.b_pause.Enabled = false;
             this.b_pause.FlatAppearance.BorderSize = 0;
+            this.b_pause.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_pause.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.b_pause.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.b_pause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_pause.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause;
@@ -1062,13 +1072,15 @@
             this.b_pause.TabIndex = 22;
             this.b_pause.Text = "PAUSA";
             this.b_pause.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.b_pause.UseVisualStyleBackColor = true;
+            this.b_pause.UseVisualStyleBackColor = false;
             this.b_pause.Click += new System.EventHandler(this.b_pause_Click);
             // 
             // b_incolla
             // 
             this.b_incolla.FlatAppearance.BorderSize = 0;
-            this.b_incolla.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.b_incolla.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_incolla.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_incolla.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
             this.b_incolla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_incolla.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.page;
             this.b_incolla.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1085,6 +1097,8 @@
             // b_avvia
             // 
             this.b_avvia.FlatAppearance.BorderSize = 0;
+            this.b_avvia.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_avvia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.b_avvia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LawnGreen;
             this.b_avvia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_avvia.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
@@ -1101,7 +1115,9 @@
             // b_rimuovi
             // 
             this.b_rimuovi.FlatAppearance.BorderSize = 0;
-            this.b_rimuovi.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.b_rimuovi.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_rimuovi.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_rimuovi.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
             this.b_rimuovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_rimuovi.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.block;
             this.b_rimuovi.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1117,6 +1133,7 @@
             // 
             // barra_stato
             // 
+            this.barra_stato.BackColor = System.Drawing.Color.Transparent;
             this.barra_stato.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pb_tot,
             this.ts_perc,
@@ -1176,7 +1193,7 @@
             this.MinimumSize = new System.Drawing.Size(1171, 700);
             this.Name = "TnA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.8.2";
+            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.8.3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TnA_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TnA_ResizeEnd);
             this.tasto_destro_files.ResumeLayout(false);
@@ -1288,6 +1305,11 @@
         private System.Windows.Forms.RichTextBox rtb_codifica;
         private System.Windows.Forms.RichTextBox rtb_sottotitoli;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem visualizzaCronologiaVersioniiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem integraConIlMenùContestualeDiWindowsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem creaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancellaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancellaSelezioneToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn input;
         private System.Windows.Forms.DataGridViewComboBoxColumn compatibilita;
         private System.Windows.Forms.DataGridViewComboBoxColumn risoluz;
@@ -1295,11 +1317,6 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn subtitle_mode;
         private System.Windows.Forms.DataGridViewTextBoxColumn stato;
         private System.Windows.Forms.DataGridViewTextBoxColumn percorso_orig;
-        private System.Windows.Forms.ToolStripMenuItem visualizzaCronologiaVersioniiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem integraConIlMenùContestualeDiWindowsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem creaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cancellaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cancellaSelezioneToolStripMenuItem;
     }
 }
 

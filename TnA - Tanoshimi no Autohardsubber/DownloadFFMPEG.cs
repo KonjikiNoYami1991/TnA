@@ -29,8 +29,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             //MessageBox.Show(temp_folder);
             try
             {
-                ll_32bit.Text = htmlparser("http://ffmpeg.zeranoe.com/builds/win32/static/");
-                ll_64bit.Text = htmlparser("http://ffmpeg.zeranoe.com/builds/win64/static/");
+                ll_64bit.Text = htmlparser("https://ffmpeg.zeranoe.com/builds/win64/static/");
             }
             catch
             {
@@ -57,7 +56,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             
             foreach (String s in lines)
             {
-                if ((s.ToLower().Contains("win32") || s.ToLower().Contains("win64")) && s.ToLower().Contains("latest"))
+                if (s.ToLower().Contains("win64") && s.ToLower().Contains("latest"))
                 {
                     //MessageBox.Show(s);
                     link_ffmpeg = s.Split('"')[1];
@@ -91,15 +90,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 try
                 {
                     b_scarica.Text = "Annulla download";
-                    if (Environment.Is64BitOperatingSystem == true)
-                    {
-                        wb.BaseAddress = ll_64bit.Text;
-                    }
-                    else
-                        wb.BaseAddress = ll_32bit.Text;
-
+                    wb.BaseAddress = ll_64bit.Text;
                     ffmpeg_zip = temp_folder + "\\" + Path.GetFileName(wb.BaseAddress);
-
                     Uri u = new Uri(wb.BaseAddress);
                     wb.DownloadFileAsync(u, ffmpeg_zip);
                     wb.DownloadProgressChanged += wb_DownloadProgressChanged;
@@ -168,7 +160,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 foreach (String s in Directory.GetFiles(dir, "*", SearchOption.AllDirectories))
                 {
-                    if (s.ToLower().Contains("ffmpeg.exe") || s.ToLower().Contains("ffprobe.exe"))
+                    if (s.ToLower().Contains("ffmpeg.exe"))
                     {
                         File.Copy(s, temp_folder + "\\" + Path.GetFileName(s), true);
                         this.DialogResult = DialogResult.OK;
@@ -191,11 +183,6 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             pb_estr_zip.Value = (Int32)e.PercentDone;
             l_perc_extr.Text = ((Int32)e.PercentDone).ToString() + "%";
-        }
-
-        private void ll_32bit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(ll_32bit.Text);
         }
 
         private void ll_64bit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

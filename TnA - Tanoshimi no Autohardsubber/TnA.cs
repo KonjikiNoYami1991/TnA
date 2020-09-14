@@ -25,13 +25,14 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         readonly String file_settings = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings\\settings.ini";
 
-        readonly String ffmpeg_x86 = Path.GetDirectoryName(Application.ExecutablePath) + "\\ffmpeg\\ffmpeg_tna_x86.exe";
-        readonly String ffmpeg_x64 = Path.GetDirectoryName(Application.ExecutablePath) + "\\ffmpeg\\ffmpeg_tna_x64.exe";
+        readonly String ffmpeg = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\ffmpeg_tna_x64.exe";
 
-        readonly String mkvmerge = Path.GetDirectoryName(Application.ExecutablePath) + "\\mkvtoolnix\\mkvmerge.exe";
+        readonly String mkvmerge = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\mkvmerge.exe";
+
+        readonly String scxvid = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\scxvid.exe";
 
         readonly String temp_folder = Path.GetDirectoryName(Application.ExecutablePath) + "\\temp";
-        readonly String fonts_folder = Path.GetDirectoryName(Application.ExecutablePath) + "\\ffmpeg\\fonts_v";
+        readonly String fonts_folder = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\fonts_v";
 
         String label_tab_lista = "Lista files e impostazioni";
 
@@ -60,14 +61,12 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         public static DateTime data_last_upd = new DateTime();
 
         List<String> formati_scelti = new List<String>();
-        
+
         public static List<String> stati_scelti = new List<String>();
 
         String data_vecchia = String.Empty;
 
         Int32 indice_percentuale = 0, exit_code = Int32.MinValue, sec_trasc = 0;
-
-        
 
         Thread t;
         ThreadStart ts;
@@ -99,6 +98,109 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         static extern int ResumeThread(IntPtr hThread);
         [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
         static extern bool CloseHandle(IntPtr handle);
+
+        public TnA()
+        {
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("it-IT", false);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("it-IT", false);
+            InitializeComponent();
+
+            var screen = Screen.FromPoint(MousePosition);
+            this.StartPosition = FormStartPosition.Manual;
+            this.Left = screen.Bounds.Left + screen.Bounds.Width / 2 - this.Width / 2;
+            this.Top = screen.Bounds.Top + screen.Bounds.Height / 2 - this.Height / 2;
+
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+
+            cmb_compatibilita.Items.Clear();
+            cmb_qualita.Items.Clear();
+            cmb_risoluz.Items.Clear();
+            cmb_subs.Items.Clear();
+
+            for (Int32 i = 0; i < compatibilita.Items.Count; i++)
+            {
+                cmb_compatibilita.Items.Add(compatibilita.Items[i].ToString());
+            }
+            for (Int32 i = 0; i < qualita.Items.Count; i++)
+            {
+                cmb_qualita.Items.Add(qualita.Items[i].ToString());
+            }
+            for (Int32 i = 0; i < risoluz.Items.Count; i++)
+            {
+                cmb_risoluz.Items.Add(risoluz.Items[i].ToString());
+            }
+            for (Int32 i = 0; i < subtitle_mode.Items.Count; i++)
+            {
+                cmb_subs.Items.Add(subtitle_mode.Items[i].ToString());
+            }
+
+            sc_log.Panel2Collapsed = true;
+
+            if (System.IO.File.Exists((Application.StartupPath + "\\TnA.7z")))
+                System.IO.File.Delete(Application.StartupPath + "\\TnA.7z");
+
+            foreach (String s in estensioni_video)
+            {
+                filtro += "*" + s.ToLower() + ";" + "*" + s.ToUpper() + ";";
+            }
+            filtro = filtro.Trim(';');
+            filtro += "|";
+            foreach (String s in estensioni_video)
+            {
+                filtro += "File " + s.Trim('.').ToUpper() + "|*" + s.ToLower() + ";" + "*" + s.ToUpper() + "|";
+            }
+            filtro = filtro.Trim('|');
+            ferma_tutto();
+            toolStripComboBox1.Text = "Non fare niente";
+            cmb_subs.Text = "Hardsub";
+
+            versione_tna = this.Text.Split(' ')[5].Replace("v", String.Empty);
+
+            nextClipboardViewer = (IntPtr)SetClipboardViewer((int)this.Handle);
+            infoToolStripMenuItem.Image = SystemIcons.Information.ToBitmap();
+
+            if (Directory.Exists(LOG_dir) == false)
+                Directory.CreateDirectory(LOG_dir);
+
+            if (Directory.Exists(Path.GetDirectoryName(file_settings)) == false)
+                Directory.CreateDirectory(Path.GetDirectoryName(file_settings));
+
+            if (!Directory.Exists(temp_folder))
+            {
+                Directory.CreateDirectory(temp_folder);
+            }
+            else
+            {
+                foreach (String s in Directory.GetFiles(temp_folder))
+                    System.IO.File.Delete(s);
+            }
+
+            if (Directory.Exists(fonts_folder))
+            {
+                Directory.Delete(fonts_folder, true);
+            }
+            if (!System.IO.File.Exists(ffmpeg))
+            {
+                this.Enabled = false;
+                bgw_downloadffmpeg.RunWorkerAsync();
+            }
+
+            LeggiImpostazioni(file_settings);
+
+            b_avvia.Enabled = false;
+            this.Activate();
+            if (Environment.GetCommandLineArgs().Count() > 1)
+            {
+                List<String> d = new List<String>();
+                for (Int32 i = 1; i < Environment.GetCommandLineArgs().Count(); i++)
+                    d.Add(Environment.GetCommandLineArgs()[i]);
+                recupera_fd(d.ToArray());
+            }
+            
+            bgw_updateschecker.RunWorkerAsync();
+        }
+
 
         private static void SuspendProcess(int pid)
         {
@@ -163,117 +265,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         String filtro = "File video supportati|";
 
-        public TnA()
-        {
-            
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("it-IT", false);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("it-IT", false);
-            InitializeComponent();
-
-            var screen = Screen.FromPoint(MousePosition);
-            this.StartPosition = FormStartPosition.Manual;
-            this.Left = screen.Bounds.Left + screen.Bounds.Width / 2 - this.Width / 2;
-            this.Top = screen.Bounds.Top + screen.Bounds.Height / 2 - this.Height / 2;
-
-            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-
-            cmb_compatibilita.Items.Clear();
-            cmb_qualita.Items.Clear();
-            cmb_risoluz.Items.Clear();
-            cmb_subs.Items.Clear();
-
-            for(Int32 i=0; i<compatibilita.Items.Count; i++)
-            {
-                cmb_compatibilita.Items.Add(compatibilita.Items[i].ToString());
-            }
-            for (Int32 i = 0; i < qualita.Items.Count; i++)
-            {
-                cmb_qualita.Items.Add(qualita.Items[i].ToString());
-            }
-            for (Int32 i = 0; i < risoluz.Items.Count; i++)
-            {
-                cmb_risoluz.Items.Add(risoluz.Items[i].ToString());
-            }
-            for (Int32 i = 0; i < subtitle_mode.Items.Count; i++)
-            {
-                cmb_subs.Items.Add(subtitle_mode.Items[i].ToString());
-            }
-
-            sc_log.Panel2Collapsed = true;
-
-            if (System.IO.File.Exists((Application.StartupPath + "\\TnA.7z")))
-                System.IO.File.Delete(Application.StartupPath + "\\TnA.7z");
-
-            foreach (String s in estensioni_video)
-            {
-                filtro += "*" + s.ToLower() + ";" + "*" + s.ToUpper() + ";";
-            }
-            filtro = filtro.Trim(';');
-            filtro += "|";
-            foreach (String s in estensioni_video)
-            {
-                filtro += "File " + s.Trim('.').ToUpper() + "|*" + s.ToLower() + ";" + "*" + s.ToUpper() + "|";
-            }
-            filtro = filtro.Trim('|');
-            ferma_tutto();
-            toolStripComboBox1.Text = "Non fare niente";
-            cmb_subs.Text = "Hardsub";
-
-            versione_tna = this.Text.Split(' ')[5].Replace("v", String.Empty);
-
-            nextClipboardViewer = (IntPtr)SetClipboardViewer((int)this.Handle);
-            infoToolStripMenuItem.Image = SystemIcons.Information.ToBitmap();
-
-            if (Directory.Exists(LOG_dir) == false)
-                Directory.CreateDirectory(LOG_dir);
-
-            if (Directory.Exists(Path.GetDirectoryName(file_settings)) == false)
-                Directory.CreateDirectory(Path.GetDirectoryName(file_settings));
-
-            if (!Directory.Exists(temp_folder))
-            {
-                Directory.CreateDirectory(temp_folder);
-            }
-            else
-            {
-                foreach (String s in Directory.GetFiles(temp_folder))
-                    System.IO.File.Delete(s);
-            }
-
-            if (Directory.Exists(fonts_folder))
-            {
-                Directory.Delete(fonts_folder, true);
-            }
-            if (Environment.Is64BitOperatingSystem == true)
-            {
-                if (System.IO.File.Exists(ffmpeg_x64) == false)
-                {
-                    this.Enabled = false;
-                    bgw_downloadffmpeg.RunWorkerAsync();
-                }
-            }
-            else
-            {
-                if (System.IO.File.Exists(ffmpeg_x86) == false)
-                {
-                    this.Enabled = false;
-                    bgw_downloadffmpeg.RunWorkerAsync();
-                }
-            }
-
-            LeggiImpostazioni(file_settings);
-
-            b_avvia.Enabled = false;
-            this.Activate();
-            if (Environment.GetCommandLineArgs().Count() > 1)
-            {
-                List<String> d = new List<String>();
-                for (Int32 i = 1; i < Environment.GetCommandLineArgs().Count(); i++)
-                    d.Add(Environment.GetCommandLineArgs()[i]);
-                recupera_fd(d.ToArray());
-            }
-            bgw_updateschecker.RunWorkerAsync();
-        }
+        
 
         public void LeggiImpostazioni_WindowsState(String Value)
         {
@@ -669,9 +661,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             Boolean presente = false, start = true;
             
-            foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg_x64)))
+            foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg)))
             {
-                if (Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x64)) || Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x86)))
+                if (Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg)))
                 {
                     presente = true;
                 }
@@ -867,17 +859,12 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                         String temp_ffmpeg = String.Empty;
 
-                        if (System.IO.File.Exists(ffmpeg_x64))
+                        if (System.IO.File.Exists(ffmpeg))
                         {
-                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x64);
-                            System.IO.File.Copy(ffmpeg_x64, temp_ffmpeg, true);
+                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg);
+                            System.IO.File.Copy(ffmpeg, temp_ffmpeg, true);
                         }
-                        else
-                        {
-                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x86);
-                            System.IO.File.Copy(ffmpeg_x86, temp_ffmpeg, true);
-                        }
-
+                        
                         Tuple<String, String> SubID = new Tuple<string, string>(String.Empty, String.Empty);
 
                         System.Diagnostics.ProcessStartInfo psi_extract = new System.Diagnostics.ProcessStartInfo();
@@ -937,8 +924,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             {
                                 ts_avanz.Text = "Avanzamento elaborazione - Estraggo i sottotitoli";
                             });
-                            psi_extract.Arguments += " -map 0:" + SubID.Item1 + " -c:s copy \"" + Path.GetDirectoryName(ffmpeg_x64) + "\\subs0" + SubID.Item2 + "\"";
-                            file_sub.Add(Path.GetDirectoryName(ffmpeg_x64) + "\\subs0" + SubID.Item2);
+                            psi_extract.Arguments += " -map 0:" + SubID.Item1 + " -c:s copy \"" + Path.GetDirectoryName(ffmpeg) + "\\subs0" + SubID.Item2 + "\"";
+                            file_sub.Add(Path.GetDirectoryName(ffmpeg) + "\\subs0" + SubID.Item2);
 
                             System.Diagnostics.Process.Start(psi_extract).WaitForExit();
                         }
@@ -955,17 +942,12 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                         temp_ffmpeg = String.Empty;
 
-                        if (System.IO.File.Exists(ffmpeg_x64))
+                        if (System.IO.File.Exists(ffmpeg))
                         {
-                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x64);
-                            System.IO.File.Copy(ffmpeg_x64, temp_ffmpeg, true);
+                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg);
+                            System.IO.File.Copy(ffmpeg, temp_ffmpeg, true);
                         }
-                        else
-                        {
-                            temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg_x86);
-                            System.IO.File.Copy(ffmpeg_x86, temp_ffmpeg, true);
-                        }
-
+                        
                         psi_extract.FileName = Path.GetFileName(temp_ffmpeg);
 
                         psi_extract.Arguments = " -dump_attachment:t \"\" -i \"" + file_video + "\" NUL";
@@ -1004,6 +986,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 break;
                             case "Remux MP4":
                                 remux_mp4(file_video, profilo, qualita);
+                                break;
+                            case "Genera keyframes":
+                                GeneraKeyframes(file_video);
                                 break;
                             default:
                                 switch (d.Cells["risoluz"].Value.ToString())
@@ -1081,6 +1066,66 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 infoToolStripMenuItem.Enabled = true;
                 file_attuale = "Nessuno";
             });
+        }
+
+        public void GeneraKeyframes(String v)
+        {
+            String txt = Path.GetDirectoryName(v) + "\\" + Path.GetFileNameWithoutExtension(v) + " - Keyframes.txt";
+            file_finale = Path.Combine(Path.GetDirectoryName(v), Path.GetFileNameWithoutExtension(v));
+            
+            durata = TimeSpan.FromMilliseconds(new MediaFile(v).Video[0].Duration).ToString(@"hh\:mm\:ss");
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                ts_avanz.Text = "Avanzamento elaborazione - Generazione keyframes per il file '" + Path.GetFileNameWithoutExtension(v) + "'";
+            });
+
+            Environment.CurrentDirectory = Path.GetDirectoryName(scxvid);
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            processo_codifica = new System.Diagnostics.Process();
+
+            psi.FileName = "cmd.exe";
+
+            psi.Arguments = "/c " + Path.GetFileNameWithoutExtension(ffmpeg) + " -i \"" + v + "\" -f yuv4mpegpipe -vf scale=1280:720 -pix_fmt yuv420p -vsync drop - | SCXvid.exe \"" + txt + "\"";
+
+            psi.CreateNoWindow = true;
+            psi.UseShellExecute = false;
+            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+
+            processo_codifica.OutputDataReceived += Processo_codifica_OutputDataReceived;
+            processo_codifica.ErrorDataReceived += Processo_codifica_ErrorDataReceived;
+            processo_codifica.StartInfo = psi;
+            processo_codifica.Start();
+            processo_codifica.BeginOutputReadLine();
+            processo_codifica.BeginErrorReadLine();
+            processo_codifica.WaitForExit();
+            processo_codifica.CancelOutputRead();
+            processo_codifica.CancelErrorRead();
+            exit_code = processo_codifica.ExitCode;
+            if (exit_code == 0)
+            {
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    ts_perc.Text = "100,00%";
+                    pb_tot.Value = pb_tot.Maximum;
+                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "OK - " + ts_perc.Text;
+                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.LightGreen;
+                });
+            }
+            else
+            {
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
+                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
+                });
+            }
+
+            CreaLOG();
+
         }
 
         public void remux_mp4(String v, String prof, String qual)
@@ -1211,20 +1256,14 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
             //MessageBox.Show(comando_remux);
 
-            Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg_x64);
+            Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg);
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
             processo_codifica = new System.Diagnostics.Process();
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
             psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            if (Environment.Is64BitOperatingSystem == true)
-            {
-                psi.FileName = Path.GetFileName(ffmpeg_x64);
-            }
-            else
-            {
-                psi.FileName = Path.GetFileName(ffmpeg_x86);
-            }
+            
+            psi.FileName = Path.GetFileName(ffmpeg);
             
             psi.Arguments = comando_remux;
 
@@ -1292,6 +1331,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             processo_remux.WaitForExit();
             processo_remux.CancelErrorRead();
             processo_remux.CancelOutputRead();
+            exit_code = processo_remux.ExitCode;
             switch (processo_remux.ExitCode)
             {
                 case 0:
@@ -1578,7 +1618,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 try
                 {
-                    if (String.IsNullOrWhiteSpace(e.Data) == false)
+                    if (String.IsNullOrWhiteSpace(e.Data.Trim()) == false)
                     {
                         rtb_codifica.Text = String.Empty;
                         rtb_codifica.Text += e.Data;
@@ -1590,7 +1630,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         public void AvviaCodifica()
         {
-            Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg_x64);
+            Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg);
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
             processo_codifica = new System.Diagnostics.Process();
             psi.CreateNoWindow = true;
@@ -1598,11 +1638,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             if (Environment.Is64BitOperatingSystem == true)
             {
-                psi.FileName = Path.GetFileName(ffmpeg_x64);
-            }
-            else
-            {
-                psi.FileName = Path.GetFileName(ffmpeg_x86);
+                psi.FileName = Path.GetFileName(ffmpeg);
             }
             //psi.FileName = "cmd.exe";
             psi.Arguments = comando;// + " 2>" + Path.GetFileName(ffmpeg_txt);
@@ -2006,11 +2042,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 if (t != null)
                     t.Abort();
-                foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ffmpeg_x64)))
-                {
-                    p.Kill();
-                }
-                foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ffmpeg_x86)))
+                foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ffmpeg)))
                 {
                     p.Kill();
                 }
@@ -2054,7 +2086,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     Directory.Delete(fonts_folder, true);
                 }
-                foreach (String s in Directory.GetFiles(Path.GetDirectoryName(ffmpeg_x64)))
+                foreach (String s in Directory.GetFiles(Path.GetDirectoryName(ffmpeg)))
                 {
                     if (Path.GetFileName(s).ToLower().Contains("sub"))
                         System.IO.File.Delete(s);
@@ -2145,7 +2177,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     try
                     {
-                        System.IO.File.Copy(temp_folder + "\\ffmpeg.exe", Path.GetDirectoryName(ffmpeg_x64) + "\\" + Path.GetFileName(ffmpeg_x64), true);
+                        System.IO.File.Copy(temp_folder + "\\ffmpeg.exe", Path.GetDirectoryName(ffmpeg) + "\\" + Path.GetFileName(ffmpeg), true);
                         MessageBox.Show("FFmpeg scaricato e impostato correttamente. Ora è possibile utilizzare il programma.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         data_last_upd = DateTime.Now;
                         IniFile ini = new IniFile(file_settings);
@@ -2160,13 +2192,13 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     try
                     {
-                        System.IO.File.Copy(temp_folder + "\\ffmpeg.exe", Path.GetDirectoryName(ffmpeg_x86) + "\\" + Path.GetFileName(ffmpeg_x86), true);
+                        System.IO.File.Copy(temp_folder + "\\ffmpeg.exe", Path.GetDirectoryName(ffmpeg) + "\\" + Path.GetFileName(ffmpeg), true);
                         MessageBox.Show("FFmpeg scaricato e impostato correttamente. Ora è possibile utilizzare il programma.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         data_last_upd = DateTime.Now;
                         IniFile ini = new IniFile(file_settings);
                         ini.Write("last_upd", data_last_upd.ToShortDateString());
 
-                        Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg_x64);
+                        Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg);
 
                     }
                     catch (Exception ex)
@@ -2178,7 +2210,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     if (s.ToLower().Contains("license"))
                     {
-                        System.IO.File.Copy(s, Path.Combine(Path.GetDirectoryName(ffmpeg_x64), Path.GetFileName(s)), true);
+                        System.IO.File.Copy(s, Path.Combine(Path.GetDirectoryName(ffmpeg), Path.GetFileName(s)), true);
                     }
                 }
                 foreach (String s in System.IO.Directory.GetDirectories(temp_folder))
@@ -2191,13 +2223,13 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void testFFmpegToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg_x64)).Count() > 0)
+            if (System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg)).Count() > 0)
             {
-                foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg_x64)))
+                foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg)))
                 {
-                    if (Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x64)) || Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg_x86)))
+                    if (Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg)))
                     {
-                        Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg_x64);
+                        Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg);
                         System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
                         psi.CreateNoWindow = true;
                         psi.UseShellExecute = false;
@@ -2207,10 +2239,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         System.Diagnostics.Process.Start(psi).WaitForExit();
                         psi.Arguments = " /c " + Path.GetFileNameWithoutExtension(s) + " -filters>fil.txt";
                         System.Diagnostics.Process.Start(psi).WaitForExit();
-                        if (System.IO.File.Exists(Path.GetDirectoryName(ffmpeg_x64) + "\\enc.txt") && System.IO.File.Exists(Path.GetDirectoryName(ffmpeg_x64) + "\\fil.txt"))
+                        if (System.IO.File.Exists(Path.GetDirectoryName(ffmpeg) + "\\enc.txt") && System.IO.File.Exists(Path.GetDirectoryName(ffmpeg) + "\\fil.txt"))
                         {
-                            String[] enc = System.IO.File.ReadAllLines(Path.GetDirectoryName(ffmpeg_x64) + "\\enc.txt");
-                            System.IO.File.Delete(Path.GetDirectoryName(ffmpeg_x64) + "\\enc.txt");
+                            String[] enc = System.IO.File.ReadAllLines(Path.GetDirectoryName(ffmpeg) + "\\enc.txt");
+                            System.IO.File.Delete(Path.GetDirectoryName(ffmpeg) + "\\enc.txt");
                             Boolean aac = false, libx264 = false, ac3 = false, vfscale = false, libx265 = false, hqdn3d = false, gradfun = false, xvid = false, mp3 = false, nvenc = false;
                             foreach (String t in enc)
                             {
@@ -2229,8 +2261,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 if (t.Contains("nvenc"))
                                     nvenc = true;
                             }
-                            String[] filters = System.IO.File.ReadAllLines(Path.GetDirectoryName(ffmpeg_x64) + "\\fil.txt");
-                            System.IO.File.Delete(Path.GetDirectoryName(ffmpeg_x64) + "\\fil.txt");
+                            String[] filters = System.IO.File.ReadAllLines(Path.GetDirectoryName(ffmpeg) + "\\fil.txt");
+                            System.IO.File.Delete(Path.GetDirectoryName(ffmpeg) + "\\fil.txt");
                             Boolean ass = false;
                             foreach (String t in filters)
                             {
@@ -2507,14 +2539,14 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     System.IO.File.Delete(file_settings);
                 }
-                foreach (String s in System.IO.Directory.GetDirectories(Path.GetDirectoryName(ffmpeg_x64), "*", SearchOption.AllDirectories))
+                foreach (String s in System.IO.Directory.GetDirectories(Path.GetDirectoryName(ffmpeg), "*", SearchOption.AllDirectories))
                 {
                     if (s.ToLower().Contains("fonts") == false)
                     {
                         System.IO.Directory.Delete(s, true);
                     }
                 }
-                foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg_x64), "*", SearchOption.TopDirectoryOnly))
+                foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg), "*", SearchOption.TopDirectoryOnly))
                 {
                     if (s.ToLower().Contains("fonts") == false)
                     {
