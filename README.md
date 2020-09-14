@@ -67,18 +67,19 @@ So, don't try to.
 For example, if width is odd, it will be lowered by 1, the same for height.
 - While aspect ratio is greater than or equal to 1,333 (4:3), width will be used for resizing.\
 Instead, height will be used.
+- Keyframes generation in a txt file.
 
 
 ## Hardware requirements
 ### Minimum
- - OS: Windows 7/8/8.1/10 x86/x64.
+ - OS: Windows 7/8/8.1/10 (x64 only).
  - CPU: Intel Core 2 Quad, 2,00 GHz x 4.
  - RAM: 4 GB DDR2 (better have DDR3).
  - GPU: any.
  - SSD/HDD: HDD, better yet with SSD.
 
 ### Recommended
- - OS: Windows 7/8/8.1/10 x86/x64.
+ - OS: Windows 7/8/8.1/10 (x64 only).
  - CPU: the faster, the better.
  - RAM: 8 GB DDR4.
  - GPU: any.
