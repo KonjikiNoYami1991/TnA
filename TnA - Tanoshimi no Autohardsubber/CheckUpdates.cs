@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Net;
 using System.Drawing;
 using SevenZip;
-using Cadbloke.Common.Extensions.WindowsForms;
 
 namespace Updater
 {

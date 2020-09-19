@@ -29,7 +29,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             //MessageBox.Show(temp_folder);
             try
             {
-                ll_64bit.Text = htmlparser("https://ffmpeg.zeranoe.com/builds/win64/static/");
+                //ll_64bit.Text = htmlparser("https://ffmpeg.zeranoe.com/builds/win64/static/");
+                ll_64bit.Text = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.zip";
             }
             catch
             {
@@ -40,42 +41,42 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 scarica();
         }
 
-        public String htmlparser(String url)
-        {
-            WebClient wb = new WebClient();
-            wb.BaseAddress = url;
-            wb.DownloadFile(wb.BaseAddress, temp_folder + "\\ffmpeg.html");
+        //public String htmlparser(String url)
+        //{
+        //    WebClient wb = new WebClient();
+        //    wb.BaseAddress = url;
+        //    wb.DownloadFile(wb.BaseAddress, temp_folder + "\\ffmpeg.html");
 
-            String link_ffmpeg = String.Empty;
+        //    String link_ffmpeg = String.Empty;
 
-            String[] lines = File.ReadAllLines(temp_folder + "\\ffmpeg.html");
+        //    String[] lines = File.ReadAllLines(temp_folder + "\\ffmpeg.html");
 
-            File.Delete(temp_folder + "\\ffmpeg.html");
+        //    File.Delete(temp_folder + "\\ffmpeg.html");
 
-            List<String> links = new List<string>();
+        //    List<String> links = new List<string>();
             
-            foreach (String s in lines)
-            {
-                if (s.ToLower().Contains("win64") && s.ToLower().Contains("latest"))
-                {
-                    //MessageBox.Show(s);
-                    link_ffmpeg = s.Split('"')[1];
-                    link_ffmpeg = url + link_ffmpeg;
-                    links.Add(link_ffmpeg);
-                }
-            }
-            foreach (String t in links)
-            {
-                if (t.ToLower().EndsWith("7z") == true)
-                {
-                    link_ffmpeg = t;
-                    break;
-                }
-                else
-                    link_ffmpeg = t;
-            }
-            return link_ffmpeg;
-        }
+        //    foreach (String s in lines)
+        //    {
+        //        if (s.ToLower().Contains("win64") && s.ToLower().Contains("latest"))
+        //        {
+        //            //MessageBox.Show(s);
+        //            link_ffmpeg = s.Split('"')[1];
+        //            link_ffmpeg = url + link_ffmpeg;
+        //            links.Add(link_ffmpeg);
+        //        }
+        //    }
+        //    foreach (String t in links)
+        //    {
+        //        if (t.ToLower().EndsWith("7z") == true)
+        //        {
+        //            link_ffmpeg = t;
+        //            break;
+        //        }
+        //        else
+        //            link_ffmpeg = t;
+        //    }
+        //    return link_ffmpeg;
+        //}
 
         private void b_scarica_Click(object sender, EventArgs e)
         {
@@ -192,7 +193,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void ll_zeranoe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://ffmpeg.zeranoe.com/builds/");
+            Process.Start("https://www.gyan.dev/ffmpeg/builds/");
         }
     }
 }

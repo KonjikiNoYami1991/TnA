@@ -125,10 +125,10 @@
             this.ll_zeranoe.AutoSize = true;
             this.ll_zeranoe.Location = new System.Drawing.Point(166, 56);
             this.ll_zeranoe.Name = "ll_zeranoe";
-            this.ll_zeranoe.Size = new System.Drawing.Size(47, 13);
+            this.ll_zeranoe.Size = new System.Drawing.Size(32, 13);
             this.ll_zeranoe.TabIndex = 12;
             this.ll_zeranoe.TabStop = true;
-            this.ll_zeranoe.Text = "Zeranoe";
+            this.ll_zeranoe.Text = "Gyan";
             this.ll_zeranoe.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ll_zeranoe_LinkClicked);
             // 
             // DownloadFFMPEG

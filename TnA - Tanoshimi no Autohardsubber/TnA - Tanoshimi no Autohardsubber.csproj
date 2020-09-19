@@ -191,7 +191,6 @@
     <Compile Include="CheckUpdates.Designer.cs">
       <DependentUpon>CheckUpdates.cs</DependentUpon>
     </Compile>
-    <Compile Include="WindowsFormToXaml.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
