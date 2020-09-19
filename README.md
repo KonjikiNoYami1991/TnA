@@ -14,11 +14,12 @@ No need to use Professional or Enterprise edition, but you can.
 
 ## Requirements for building
 
-- [FFmpeg by Zeranoe](https://ffmpeg.zeranoe.com/builds/) static for Windows (automatically downloaded)
+- [FFmpeg by Zeranoe x64](https://ffmpeg.zeranoe.com/builds/) static for Windows (automatically downloaded)
 - [SevenZipSharp](https://www.nuget.org/packages/SevenZipSharp.Net45/) (no need to install 7z)
-- [MediaInfoNet](https://www.nuget.org/packages/MediaInfoNet/) (no need to install MediaInfo)
+- [MediaInfoNet x64](https://www.nuget.org/packages/MediaInfoNet/) (no need to install MediaInfo)
 - [FFmpeg Output Wrapper DLL](https://github.com/KonjikiNoYami1991/FFmpegOutputWrapperNET) (for encoding progress)
-- [mkvmerge.exe from MKVtoolnix for Windows](https://mkvtoolnix.download/) (preferably x86 for compatibility with x86 systems)
+- [mkvmerge.exe from MKVtoolnix x64 for Windows](https://mkvtoolnix.download/) (for MKV remux)
+- [SCXviD x64 standalone for Windows](https://github.com/soyokaze/SCXvid-standalone) for keyframes generation.
 
 ## Features
 - Only italian language, for now.
@@ -67,18 +68,19 @@ So, don't try to.
 For example, if width is odd, it will be lowered by 1, the same for height.
 - While aspect ratio is greater than or equal to 1,333 (4:3), width will be used for resizing.\
 Instead, height will be used.
+- Keyframes generation in a txt file.
 
 
 ## Hardware requirements
 ### Minimum
- - OS: Windows 7/8/8.1/10 x86/x64.
+ - OS: Windows 7/8/8.1/10 (x64 only).
  - CPU: Intel Core 2 Quad, 2,00 GHz x 4.
  - RAM: 4 GB DDR2 (better have DDR3).
  - GPU: any.
  - SSD/HDD: HDD, better yet with SSD.
 
 ### Recommended
- - OS: Windows 7/8/8.1/10 x86/x64.
+ - OS: Windows 7/8/8.1/10 (x64 only).
  - CPU: the faster, the better.
  - RAM: 8 GB DDR4.
  - GPU: any.
