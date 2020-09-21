@@ -307,7 +307,7 @@ Hardsub mode will choose only one subtitle track, never two or more.
 ## Usage
 
 - Drag&drop files and folders, use buttons or paste files and folders from system clipboard.
-- Choose one among compatibility profiles, resolutions (height), quality profiles, aubtitle modes.
+- Choose one among compatibility profiles, resolutions (height), quality profiles, subtitle modes.
 - Click on Play button and wait. Destination files will be in the same folder of source files, never overwritten.
 
 ## Hints
