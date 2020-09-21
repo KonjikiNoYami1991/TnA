@@ -288,7 +288,7 @@ Possible values are:
   - Very bad quality.
   - Smallest filesize
 
-Audio bitrate is determinted using bitrate for stereo and multiplied by audio channel number, then divided by 2 (excepted for AC-3, not divided by 2).
+Audio bitrate is determined using bitrate for stereo and multiplied by audio channel number, then divided by 2 (excepted for AC-3, not divided by 2).
 
 ### Subtitle modes
 
