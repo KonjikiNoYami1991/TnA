@@ -16,7 +16,7 @@ No need to use Professional or Enterprise edition, but you can.
 
 - [FFmpeg by Gyan x64](https://www.gyan.dev/ffmpeg/builds/) release full static for Windows (automatically downloaded)
 - [SevenZipSharp](https://www.nuget.org/packages/SevenZipSharp.Net45/) (no need to install 7z)
-- [7z 19.00 DLL x64](https://www.7-zip.org/download.html) directly extracted from [setup exe](https://www.7-zip.org/a/7z1900-x64.exe)
+- [7z 19.00 DLL x64](https://www.7-zip.org/download.html) directly extracted from [x64 setup](https://www.7-zip.org/a/7z1900-x64.exe)
 - [MediaInfoNet x64](https://www.nuget.org/packages/MediaInfoNet/) (no need to install MediaInfo)
 - [FFmpeg Output Wrapper DLL x64](https://github.com/KonjikiNoYami1991/FFmpegOutputWrapperNET) (for encoding progress)
 - [mkvmerge.exe from MKVtoolnix x64 for Windows](https://mkvtoolnix.download/) (for MKV remux)
