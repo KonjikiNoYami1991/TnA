@@ -135,7 +135,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(522, 144);
+            this.ClientSize = new System.Drawing.Size(566, 144);
             this.Controls.Add(this.ll_zeranoe);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.l_perc_extr);

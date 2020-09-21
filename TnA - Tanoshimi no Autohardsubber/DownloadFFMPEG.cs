@@ -129,7 +129,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         void wb_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             pb_download.Value = e.ProgressPercentage;
-            l_bytes.Text = MyRoundingFunction(e.BytesReceived / 1000000.0, 2).ToString() + " MB /" + MyRoundingFunction(e.TotalBytesToReceive / 1000000.0, 2).ToString() + " MB";
+            l_bytes.Text = MyRoundingFunction(e.BytesReceived / 1000000.0, 2).ToString() + " MB / " + MyRoundingFunction(e.TotalBytesToReceive / 1000000.0, 2).ToString() + " MB";
         }
 
         public static string MyRoundingFunction(double value, int decimalPlaces)

@@ -186,6 +186,16 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 bgw_downloadffmpeg.RunWorkerAsync();
             }
 
+            switch (IntPtr.Size)
+            {
+                case 8:
+                    this.Text += " - x64 Build";
+                    break;
+                default:
+                    this.Text += " - x86 Build";
+                    break;
+            }
+
             LeggiImpostazioni(file_settings);
 
             b_avvia.Enabled = false;
@@ -2539,20 +2549,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     System.IO.File.Delete(file_settings);
                 }
-                foreach (String s in System.IO.Directory.GetDirectories(Path.GetDirectoryName(ffmpeg), "*", SearchOption.AllDirectories))
-                {
-                    if (s.ToLower().Contains("fonts") == false)
-                    {
-                        System.IO.Directory.Delete(s, true);
-                    }
-                }
-                foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg), "*", SearchOption.TopDirectoryOnly))
-                {
-                    if (s.ToLower().Contains("fonts") == false)
-                    {
-                        System.IO.File.Delete(s);
-                    }
-                }
+
+                System.IO.File.Delete(ffmpeg);
+                
                 foreach (String s in System.IO.Directory.GetFiles(LOG_dir, "*", SearchOption.TopDirectoryOnly))
                 {
                     System.IO.File.Delete(s);
