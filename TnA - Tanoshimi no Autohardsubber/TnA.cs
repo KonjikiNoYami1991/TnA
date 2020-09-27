@@ -1096,7 +1096,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
             psi.FileName = "cmd.exe";
 
-            psi.Arguments = "/c " + Path.GetFileNameWithoutExtension(ffmpeg) + " -i \"" + v + "\" -f yuv4mpegpipe -vf scale=1280:720 -pix_fmt yuv420p -vsync drop - | SCXvid.exe \"" + txt + "\"";
+            psi.Arguments = "/c " + Path.GetFileNameWithoutExtension(ffmpeg) + " -i \"" + v + "\" -f yuv4mpegpipe -pix_fmt yuv420p -vsync drop - | SCXvid.exe \"" + txt + "\"";
 
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
@@ -2023,7 +2023,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
             if (cv.Interlacciato == true)
             {
-                //temp += ",yadif";
+                temp += ",yadif";
             }
 
             if (submode.StartsWith("H"))

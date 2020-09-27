@@ -117,24 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="rtb_descr.Text" xml:space="preserve">
-    <value>TnA - Tanoshimi no Autohardsubber è un'applicazione con interfaccia grafica che consente all'utente non esperto di codifica di poter creare una versione hardsub di un qualunque filmato softsub contenuto in un file Matroska (.mkv).
-Completamente portable, offre una scelta di vari profili preimpostati per una conversione automatizzata in tre semplici click.
-Non richiede installazione, eccetto il pacchetto .NET Framework 4.7.1, necessario al funzionamento.
-Richiede una connessione ad internet per il download di FFmpeg, NON incluso nel programma. FFmpeg è scaricabile sia manualmente che automaticamente tramite menù Strumenti -&gt; Scarica FFmpeg o tramite combinazione tasti CTRL+D.
-L'applicazione richiede di norma la build FFmpeg di Zeranoe, NON inclusa. Qualora l'utente ne usasse una diversa, è consigliabile effettuare un test tramite menù Strumenti -&gt; Test FFmpeg
-
-Questo programma NON include FFmpeg.
-FFmpeg non ha dipendenze da altro software. In caso di malfunzionamenti dello stesso, contattare il Tanoshimi no Sekai Fansub, tramite doppio click sul logo in alto a destra della finestra Info.
-
-Questo è un software GRATUITO. Se avete pagato per averlo, chiedete il rimborso.
-
-Requisiti minimi obbligatori:
-  CPU: Intel® Core™ 2 Duo, 2.0 GHz o superiore
-  RAM: 4GB DDR2 1066MHz
- 
-Requisiti minimi consigliati:
-  CPU: Intel® Core™ i5, seconda generazione o superiore
-  RAM: 4GB DDR3 1600MHz</value>
-  </data>
 </root>

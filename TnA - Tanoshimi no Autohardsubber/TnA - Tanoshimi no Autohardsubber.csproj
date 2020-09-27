@@ -291,9 +291,7 @@
     <Content Include="x64\MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="x86\MediaInfo.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="x86\MediaInfo.dll" />
     <None Include="Resources\edit.png" />
     <None Include="Resources\process.png" />
     <None Include="Resources\icon.png" />
