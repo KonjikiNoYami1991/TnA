@@ -14,10 +14,11 @@ No need to use Professional or Enterprise edition, but you can.
 
 ## Requirements for building
 
-- [FFmpeg by Zeranoe x64](https://ffmpeg.zeranoe.com/builds/) static for Windows (automatically downloaded)
+- [FFmpeg by Gyan x64](https://www.gyan.dev/ffmpeg/builds/) release full static for Windows (automatically downloaded)
 - [SevenZipSharp](https://www.nuget.org/packages/SevenZipSharp.Net45/) (no need to install 7z)
+- [7z.dll 19.00 x64](https://www.7-zip.org/download.html) directly extracted from [x64 setup](https://www.7-zip.org/a/7z1900-x64.exe)
 - [MediaInfoNet x64](https://www.nuget.org/packages/MediaInfoNet/) (no need to install MediaInfo)
-- [FFmpeg Output Wrapper DLL](https://github.com/KonjikiNoYami1991/FFmpegOutputWrapperNET) (for encoding progress)
+- [FFmpeg Output Wrapper DLL x64](https://github.com/KonjikiNoYami1991/FFmpegOutputWrapperNET) (for encoding progress)
 - [mkvmerge.exe from MKVtoolnix x64 for Windows](https://mkvtoolnix.download/) (for MKV remux)
 - [SCXviD x64 standalone for Windows](https://github.com/soyokaze/SCXvid-standalone) for keyframes generation.
 
@@ -233,7 +234,7 @@ This profile generates a file with only video and audio streams, excluding all t
 
 ### Resolution
 There's not so much to explain.\
-Resolution is setted by height, but used according to the case explained above:
+Resolution is set by width, but used according to the case explained above:
  - Case AR greater than or equal to 1,333 (4:3): width is used.
  - Case AR lower than 1,333 (4:3): heigth is used.
 
@@ -287,7 +288,7 @@ Possible values are:
   - Very bad quality.
   - Smallest filesize
 
-Audio bitrate is determinted using bitrate for stereo and multiplied by audio channel number, then divided by 2 (excepted for AC-3, not divided by 2).
+Audio bitrate is determined using bitrate for stereo and multiplied by audio channel number, then divided by 2 (excepted for AC-3, not divided by 2).
 
 ### Subtitle modes
 
@@ -306,7 +307,7 @@ Hardsub mode will choose only one subtitle track, never two or more.
 ## Usage
 
 - Drag&drop files and folders, use buttons or paste files and folders from system clipboard.
-- Choose one among compatibility profiles, resolutions (height), quality profiles, aubtitle modes.
+- Choose one among compatibility profiles, resolutions (height), quality profiles, subtitle modes.
 - Click on Play button and wait. Destination files will be in the same folder of source files, never overwritten.
 
 ## Hints
