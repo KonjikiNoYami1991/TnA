@@ -293,8 +293,8 @@ Audio bitrate is determined using bitrate for stereo and multiplied by audio cha
 ### Subtitle modes
 
  - Hardsub
-   1) Demux all the fonts inside MKV, if any.
-   2) Scan for forced subtitle track, if any. Otherwise, default subtitle track, if any. If not found default of forced subtitles, it picks the first track. If there's no subtitles, it just skips demux and jumps to encode process.
+   1) Demuxes all fonts inside MKV, if any.
+   2) Scans for forced subtitle track, if any. Otherwise, default subtitle track, if any. If not found default or forced subtitles, it picks the first track. If there's no subtitles, it just skips demux and jumps to encode process.
  - Softsub
    - Copies all fonts and subtitle tracks inside MKV file and just re-encode video and audio, according to compatibility and quality presets.
    - It forces MKV container for destination file.
