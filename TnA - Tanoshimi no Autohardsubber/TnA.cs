@@ -27,9 +27,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         readonly String ffmpeg = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\ffmpeg_tna_x64.exe";
 
-        readonly String mkvmerge = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\mkvmerge.exe";
+        readonly String mkvmerge = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\mkvmerge_tna_x64.exe";
 
-        readonly String scxvid = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\scxvid.exe";
+        readonly String scxvid = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\scxvid_tna_x64.exe";
 
         readonly String temp_folder = Path.GetDirectoryName(Application.ExecutablePath) + "\\temp";
         readonly String fonts_folder = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\fonts_v";
@@ -855,7 +855,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                     Boolean ass = false, stop = false;
 
-                    if (Path.GetExtension(file_video).ToLower() == ".mkv" && profilo.StartsWith("Remux") == false && profilo.StartsWith("Workraw") == false && modalita_subs.StartsWith("Hard"))
+                    if (Path.GetExtension(file_video).ToLower() == ".mkv" && profilo.StartsWith("Remux") == false && profilo.StartsWith("Workraw") == false && modalita_subs.StartsWith("Hard") && profilo.StartsWith("Gen"))
                     {
                         this.Invoke((MethodInvoker)delegate ()
                         {
@@ -1096,7 +1096,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
             psi.FileName = "cmd.exe";
 
-            psi.Arguments = "/c " + Path.GetFileNameWithoutExtension(ffmpeg) + " -i \"" + v + "\" -f yuv4mpegpipe -pix_fmt yuv420p -vsync drop - | SCXvid.exe \"" + txt + "\"";
+            psi.Arguments = "/c " + Path.GetFileNameWithoutExtension(ffmpeg) + " -i \"" + v + "\" -f yuv4mpegpipe -pix_fmt yuv420p -vsync drop - | " + Path.GetFileNameWithoutExtension(scxvid) + " \"" + txt + "\"";
 
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
@@ -2060,6 +2060,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     p.Kill();
                 }
+                foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(scxvid)))
+                {
+                    p.Kill();
+                }
             }
             catch { }
         }
@@ -2687,22 +2691,56 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             if (pause == false)
             {
-                
-                if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false)
+
+                if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false && DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("keyframe") == false)
                     SuspendProcess(processo_codifica.Id);
                 else
-                    SuspendProcess(processo_remux.Id);
+                {
+                    if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv"))
+                        SuspendProcess(processo_remux.Id);
+                    else
+                    {
+                        Int32 IDFFmpeg = Int32.MinValue, IDSCXviD = Int32.MinValue;
+                        foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ffmpeg)))
+                        {
+                            IDFFmpeg = p.Id;
+                        }
+                        foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(scxvid)))
+                        {
+                            IDSCXviD = p.Id;
+                        }
+                        SuspendProcess(IDFFmpeg);
+                        SuspendProcess(IDSCXviD);
+                    }
+                }
                 pause = true;
                 b_pause.Image = new Bitmap(TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play, new Size(TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause.Width, TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause.Height));
                 b_pause.Text = "Riprendi";
             }
             else
             {
-                
-                if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false)
+
+                if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false && DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("keyframe") == false)
                     ResumeProcess(processo_codifica.Id);
                 else
-                    ResumeProcess(processo_remux.Id);
+                {
+                    if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv"))
+                        ResumeProcess(processo_remux.Id);
+                    else
+                    {
+                        Int32 IDFFmpeg = Int32.MinValue, IDSCXviD = Int32.MinValue;
+                        foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ffmpeg)))
+                        {
+                            IDFFmpeg = p.Id;
+                        }
+                        foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(scxvid)))
+                        {
+                            IDSCXviD = p.Id;
+                        }
+                        ResumeProcess(IDFFmpeg);
+                        ResumeProcess(IDSCXviD);
+                    }
+                }
                 pause = false;
                 b_pause.Image = TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause;
                 b_pause.Text = "Pausa";
