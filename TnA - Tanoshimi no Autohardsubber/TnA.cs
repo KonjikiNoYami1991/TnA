@@ -855,7 +855,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                     Boolean ass = false, stop = false;
 
-                    if (Path.GetExtension(file_video).ToLower() == ".mkv" && profilo.StartsWith("Remux") == false && profilo.StartsWith("Workraw") == false && modalita_subs.StartsWith("Hard") && profilo.StartsWith("Gen"))
+                    if (Path.GetExtension(file_video).ToLower() == ".mkv" && profilo.StartsWith("Remux") == false && profilo.StartsWith("Workraw") == false && modalita_subs.StartsWith("Hard") && profilo.StartsWith("Gen")==false)
                     {
                         this.Invoke((MethodInvoker)delegate ()
                         {
