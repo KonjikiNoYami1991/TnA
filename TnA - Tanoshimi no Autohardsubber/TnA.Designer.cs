@@ -1193,7 +1193,7 @@
             this.MinimumSize = new System.Drawing.Size(1171, 700);
             this.Name = "TnA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.8.7";
+            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.8.8";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TnA_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TnA_ResizeEnd);
             this.tasto_destro_files.ResumeLayout(false);

@@ -38,6 +38,9 @@
             this.l_perc_extr = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.ll_zeranoe = new System.Windows.Forms.LinkLabel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tssl_checkvalidlink = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ll_64bit
@@ -62,6 +65,7 @@
             // 
             // b_scarica
             // 
+            this.b_scarica.Enabled = false;
             this.b_scarica.Location = new System.Drawing.Point(12, 81);
             this.b_scarica.Name = "b_scarica";
             this.b_scarica.Size = new System.Drawing.Size(99, 23);
@@ -131,11 +135,27 @@
             this.ll_zeranoe.Text = "Gyan";
             this.ll_zeranoe.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ll_zeranoe_LinkClicked);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tssl_checkvalidlink});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 140);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(566, 22);
+            this.statusStrip1.TabIndex = 13;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tssl_checkvalidlink
+            // 
+            this.tssl_checkvalidlink.Name = "tssl_checkvalidlink";
+            this.tssl_checkvalidlink.Size = new System.Drawing.Size(0, 17);
+            // 
             // DownloadFFMPEG
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 144);
+            this.ClientSize = new System.Drawing.Size(566, 162);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ll_zeranoe);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.l_perc_extr);
@@ -153,6 +173,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Scarica FFmpeg";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,5 +191,7 @@
         private System.Windows.Forms.Label l_perc_extr;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.LinkLabel ll_zeranoe;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tssl_checkvalidlink;
     }
 }
