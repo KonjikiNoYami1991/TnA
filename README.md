@@ -226,7 +226,7 @@ This profile generates a file with only video and audio streams, excluding all t
       - i8x8
       - p8x8
       - b8x8
-    - Subtitles: exluded
+    - Subtitles: excluded
     - Tune: fast decode
     - x264opts 
       - B pyramid: 0
