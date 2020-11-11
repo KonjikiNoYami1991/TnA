@@ -245,6 +245,8 @@ Possible values are:
  - 576p
  - 480p (actually it's 486p)
  - 396p
+ - 360p
+ - 288p
 
 ### Quality
 Quality is the parameter that determines the final quality of destination file.\
