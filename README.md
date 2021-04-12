@@ -3,7 +3,7 @@
 Simple, yet almost automatic, autohardsubber from [Tanoshimi no Sekai Fansub](https://tnsfansub.com/), written in C# .NET 4.8.
 
 ```bash
-THIS PROJECT IS DEAD. I'VE NO INTEREST TO GO ON DEVELOPING THIS APPLICATION.
+THIS PROJECT IS DEAD. I'VE NO INTENTION TO GO ON DEVELOPING.
 ```
 
 ## Building
