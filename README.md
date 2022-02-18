@@ -46,7 +46,7 @@ No need to use Professional or Enterprise edition, but you can.
 This is not the best way for deinterlacing, but it's very fast and simple to use.
 - Instead of xyVSfilter (not included in FFmpeg), it uses [LIBASS](https://github.com/libass/libass) for Advanced Substation Alpha subtitles and generally works well.
 - Format selection when adding an entire folder.
-- Clipboard monitoring, similar to JDownloader.\
+- Clipboard monitoring, similar to [JDownloader](https://jdownloader.org/).\
 By activating this, you can just copy files and folder from File Explorer and they will be automatically added, following the formats choices.
 - Settings save in .ini file.
 - ~~Automatic removing of source file after a correct conversion (this feature has to be tested, because files seem removed, but they're not).~~
