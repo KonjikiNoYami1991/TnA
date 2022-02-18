@@ -263,7 +263,7 @@ Possible values are:
 - Medio-alta (Above medium)
   - Good quality.
   - Medium filesize (sometimes large, but it rarely happens).
-  - Slower than Medium quality but faster than Above medium.
+  - Slower than Medium quality but faster than High.
 - Media (Medium)
   - Good compromise between quality and filesize.
   - Medium speed.
