@@ -234,7 +234,7 @@ This profile generates a file with only video and audio streams, excluding all t
 
 ### Resolution
 There's not so much to explain.\
-Resolution is set by width, but used according to the cases explained above:
+Resolution is set by width, but used according to the cases explained below:
  - Case AR greater than or equal to 1,333 (4:3): width is used.
  - Case AR lower than 1,333 (4:3): heigth is used.
 
