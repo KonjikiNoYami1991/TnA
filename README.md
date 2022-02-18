@@ -8,7 +8,7 @@ THIS PROJECT IS DEAD. I'VE NO INTENTION TO GO ON DEVELOPING.
 
 ## Building
 
-This solution requires a C# builder for Windows.\
+This solution requires a C# compiler for Windows.\
 For example, [Visual Studio Community 2019](https://visualstudio.microsoft.com/vs/community/), even without registration.\
 No need to use Professional or Enterprise edition, but you can.
 
