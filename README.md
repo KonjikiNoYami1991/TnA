@@ -286,7 +286,7 @@ Possible values are:
 - Bozza (Draft)
   - THIS PRESET IS FOR TESTING ONLY.
   - Useful to make conversion tests.
-  - Fastest.
+  - The fastest.
   - Very bad quality.
   - Smallest filesize
 
