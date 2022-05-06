@@ -1,6 +1,6 @@
 ﻿namespace TnA___Tanoshimi_no_Autohardsubber
 {
-    partial class CronologiaVersioni
+    partial class VersionHistory
     {
         /// <summary>
         /// Required designer variable.

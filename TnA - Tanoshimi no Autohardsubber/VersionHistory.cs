@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace TnA___Tanoshimi_no_Autohardsubber
 {
-    public partial class CronologiaVersioni : Form
+    public partial class VersionHistory : Form
     {
         WebClient wb = new WebClient();
 
@@ -22,7 +22,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         Thread t;
         ThreadStart ts;
 
-        public CronologiaVersioni(String AppName, Icon Icona)
+        public VersionHistory(String AppName, Icon Icona)
         {
             InitializeComponent();
             this.Text = AppName + " - " + this.Text;

@@ -31,107 +31,109 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TnA));
-            this.tasto_destro_files = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cms_files = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancellaSelezioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rimuoviIFileSelezionatiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.IncollaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.barra_menu = new System.Windows.Forms.MenuStrip();
+            this.menu_bar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.apriCartellaLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenLogsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.salvaImpostazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ripristinaImpostazioniToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetSettingsToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.esciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compatibilitàToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmb_compatibilita = new System.Windows.Forms.ToolStripComboBox();
-            this.confermaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmb_profile = new System.Windows.Forms.ToolStripComboBox();
+            this.ConfirmProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.risoluzioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmb_risoluz = new System.Windows.Forms.ToolStripComboBox();
-            this.confermaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmb_resolution = new System.Windows.Forms.ToolStripComboBox();
+            this.ConfirmResolutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qualitàToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmb_qualita = new System.Windows.Forms.ToolStripComboBox();
-            this.confermaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmb_quality = new System.Windows.Forms.ToolStripComboBox();
+            this.ConfirmQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sottotitoliToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmb_subs = new System.Windows.Forms.ToolStripComboBox();
-            this.confermaToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.strumentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConfirmSubsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.monitoraGliAppuntiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ActivateClipboardMonitoringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.scaricaFFmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testFFmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FFmpegDDorUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FFtestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.listaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rimuoviTuttiIFileConEsitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearFileListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveEveryFileWithStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fermatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.erroreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.impostazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.creaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancellaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manualeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unGiornoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ogniTreGiorniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ogniSettimanaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StoppedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.AllFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.IntegrateInSendToMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FFmpegVersionCheckIntervalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EveryTimeProgramStartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EveryDayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EveryThreeDaysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EveryWeekToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allaFineDellaCodaDiLavoroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.ActionWhenFinishedToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.controllaAggiornamentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.visualizzaCronologiaVersioniiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuovaVersioneDisponibileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CheckUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.VersionHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NewVersionAvailableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.l_tempo_trasc = new System.Windows.Forms.Label();
-            this.l_dim_prev = new System.Windows.Forms.Label();
-            this.l_dim_att = new System.Windows.Forms.Label();
-            this.l_temp_rim = new System.Windows.Forms.Label();
-            this.l_temp_trasc = new System.Windows.Forms.Label();
-            this.l_vel = new System.Windows.Forms.Label();
+            this.l_elapsed_time = new System.Windows.Forms.Label();
+            this.l_estimated_size = new System.Windows.Forms.Label();
+            this.l_size = new System.Windows.Forms.Label();
+            this.l_remaining_time = new System.Windows.Forms.Label();
+            this.l_pos = new System.Windows.Forms.Label();
+            this.l_speed = new System.Windows.Forms.Label();
             this.tab_tna = new System.Windows.Forms.TabControl();
             this.tab_autohardsubber = new System.Windows.Forms.TabPage();
             this.tb_help = new System.Windows.Forms.TextBox();
             this.DGV_video = new System.Windows.Forms.DataGridView();
             this.input = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.compatibilita = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.risoluz = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.qualita = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.profile = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.res = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.quality = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.subtitle_mode = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.stato = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.percorso_orig = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.source_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_log = new System.Windows.Forms.TabPage();
             this.sc_log = new System.Windows.Forms.SplitContainer();
-            this.rtb_codifica = new System.Windows.Forms.RichTextBox();
-            this.rtb_sottotitoli = new System.Windows.Forms.RichTextBox();
+            this.rtb_encode = new System.Windows.Forms.RichTextBox();
+            this.rtb_subs = new System.Windows.Forms.RichTextBox();
             this.bgw_update = new System.ComponentModel.BackgroundWorker();
             this.bgw_downloadffmpeg = new System.ComponentModel.BackgroundWorker();
             this.button2 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.ll_icons = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.apri_video = new System.Windows.Forms.OpenFileDialog();
-            this.apri_cartella = new System.Windows.Forms.FolderBrowserDialog();
-            this.timer_tempo = new System.Windows.Forms.Timer(this.components);
+            this.open_video = new System.Windows.Forms.OpenFileDialog();
+            this.open_folder = new System.Windows.Forms.FolderBrowserDialog();
+            this.t_elapsed_time = new System.Windows.Forms.Timer(this.components);
             this.tt_subs = new System.Windows.Forms.ToolTip(this.components);
             this.tt_encode = new System.Windows.Forms.ToolTip(this.components);
-            this.b_agg_files = new System.Windows.Forms.Button();
-            this.b_agg_cart = new System.Windows.Forms.Button();
+            this.b_add_files = new System.Windows.Forms.Button();
+            this.b_add_folder = new System.Windows.Forms.Button();
             this.b_pause = new System.Windows.Forms.Button();
-            this.b_incolla = new System.Windows.Forms.Button();
-            this.b_avvia = new System.Windows.Forms.Button();
-            this.b_rimuovi = new System.Windows.Forms.Button();
-            this.barra_stato = new System.Windows.Forms.StatusStrip();
+            this.b_paste = new System.Windows.Forms.Button();
+            this.b_start = new System.Windows.Forms.Button();
+            this.b_remove = new System.Windows.Forms.Button();
+            this.status_bar = new System.Windows.Forms.StatusStrip();
             this.pb_tot = new System.Windows.Forms.ToolStripProgressBar();
             this.ts_perc = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ts_avanz = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ts_progress = new System.Windows.Forms.ToolStripStatusLabel();
             this.bgw_updateschecker = new System.ComponentModel.BackgroundWorker();
-            this.tasto_destro_files.SuspendLayout();
-            this.barra_menu.SuspendLayout();
+            this.cms_files.SuspendLayout();
+            this.menu_bar.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tab_tna.SuspendLayout();
             this.tab_autohardsubber.SuspendLayout();
@@ -141,138 +143,138 @@
             this.sc_log.Panel1.SuspendLayout();
             this.sc_log.Panel2.SuspendLayout();
             this.sc_log.SuspendLayout();
-            this.barra_stato.SuspendLayout();
+            this.status_bar.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tasto_destro_files
+            // cms_files
             // 
-            this.tasto_destro_files.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cms_files.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cancellaSelezioneToolStripMenuItem,
             this.rimuoviIFileSelezionatiToolStripMenuItem,
             this.toolStripSeparator1,
             this.IncollaToolStripMenuItem});
-            this.tasto_destro_files.Name = "tasto_destro_files";
-            this.tasto_destro_files.Size = new System.Drawing.Size(201, 76);
+            this.cms_files.Name = "tasto_destro_files";
+            this.cms_files.Size = new System.Drawing.Size(188, 76);
             // 
             // cancellaSelezioneToolStripMenuItem
             // 
             this.cancellaSelezioneToolStripMenuItem.Name = "cancellaSelezioneToolStripMenuItem";
-            this.cancellaSelezioneToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.cancellaSelezioneToolStripMenuItem.Text = "Cancella selezione";
+            this.cancellaSelezioneToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.cancellaSelezioneToolStripMenuItem.Text = "Deselect all";
             this.cancellaSelezioneToolStripMenuItem.Click += new System.EventHandler(this.cancellaSelezioneToolStripMenuItem_Click);
             // 
             // rimuoviIFileSelezionatiToolStripMenuItem
             // 
             this.rimuoviIFileSelezionatiToolStripMenuItem.Name = "rimuoviIFileSelezionatiToolStripMenuItem";
-            this.rimuoviIFileSelezionatiToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.rimuoviIFileSelezionatiToolStripMenuItem.Text = "Rimuovi files selezionati";
+            this.rimuoviIFileSelezionatiToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.rimuoviIFileSelezionatiToolStripMenuItem.Text = "Remove selected files";
             this.rimuoviIFileSelezionatiToolStripMenuItem.Click += new System.EventHandler(this.rimuoviIFileSelezionatiToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(184, 6);
             // 
             // IncollaToolStripMenuItem
             // 
             this.IncollaToolStripMenuItem.Name = "IncollaToolStripMenuItem";
-            this.IncollaToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.IncollaToolStripMenuItem.Text = "Incolla";
+            this.IncollaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.IncollaToolStripMenuItem.Text = "Paste";
             this.IncollaToolStripMenuItem.Click += new System.EventHandler(this.IncollaToolStripMenuItem_Click);
             // 
-            // barra_menu
+            // menu_bar
             // 
-            this.barra_menu.BackColor = System.Drawing.Color.Transparent;
-            this.barra_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menu_bar.BackColor = System.Drawing.Color.Transparent;
+            this.menu_bar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.modificaToolStripMenuItem,
-            this.strumentiToolStripMenuItem,
-            this.impostazioniToolStripMenuItem,
+            this.EditToolStripMenuItem,
+            this.ToolsToolStripMenuItem,
+            this.SettingsToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.nuovaVersioneDisponibileToolStripMenuItem});
-            this.barra_menu.Location = new System.Drawing.Point(0, 0);
-            this.barra_menu.Name = "barra_menu";
-            this.barra_menu.Size = new System.Drawing.Size(1155, 24);
-            this.barra_menu.TabIndex = 3;
-            this.barra_menu.Text = "menuStrip1";
+            this.NewVersionAvailableToolStripMenuItem});
+            this.menu_bar.Location = new System.Drawing.Point(0, 0);
+            this.menu_bar.Name = "menu_bar";
+            this.menu_bar.Size = new System.Drawing.Size(1155, 24);
+            this.menu_bar.TabIndex = 3;
+            this.menu_bar.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.apriCartellaLogsToolStripMenuItem,
+            this.OpenLogsFolderToolStripMenuItem,
             this.toolStripSeparator2,
-            this.salvaImpostazioniToolStripMenuItem,
-            this.ripristinaImpostazioniToolStripMenuItem3,
+            this.SaveSettingsToolStripMenuItem,
+            this.ResetSettingsToolStripMenuItem3,
             this.toolStripSeparator8,
-            this.esciToolStripMenuItem});
+            this.ExitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // apriCartellaLogsToolStripMenuItem
+            // OpenLogsFolderToolStripMenuItem
             // 
-            this.apriCartellaLogsToolStripMenuItem.Name = "apriCartellaLogsToolStripMenuItem";
-            this.apriCartellaLogsToolStripMenuItem.Size = new System.Drawing.Size(339, 22);
-            this.apriCartellaLogsToolStripMenuItem.Text = "Apri cartella logs";
-            this.apriCartellaLogsToolStripMenuItem.Click += new System.EventHandler(this.ApriCartellaLogsToolStripMenuItem_Click);
+            this.OpenLogsFolderToolStripMenuItem.Name = "OpenLogsFolderToolStripMenuItem";
+            this.OpenLogsFolderToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.OpenLogsFolderToolStripMenuItem.Text = "Open logs\' folder";
+            this.OpenLogsFolderToolStripMenuItem.Click += new System.EventHandler(this.ApriCartellaLogsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(336, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(277, 6);
             // 
-            // salvaImpostazioniToolStripMenuItem
+            // SaveSettingsToolStripMenuItem
             // 
-            this.salvaImpostazioniToolStripMenuItem.Name = "salvaImpostazioniToolStripMenuItem";
-            this.salvaImpostazioniToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.salvaImpostazioniToolStripMenuItem.Size = new System.Drawing.Size(339, 22);
-            this.salvaImpostazioniToolStripMenuItem.Text = "Salva impostazioni";
-            this.salvaImpostazioniToolStripMenuItem.Click += new System.EventHandler(this.salvaImpostazioniToolStripMenuItem_Click);
+            this.SaveSettingsToolStripMenuItem.Name = "SaveSettingsToolStripMenuItem";
+            this.SaveSettingsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.SaveSettingsToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.SaveSettingsToolStripMenuItem.Text = "Save settings";
+            this.SaveSettingsToolStripMenuItem.Click += new System.EventHandler(this.salvaImpostazioniToolStripMenuItem_Click);
             // 
-            // ripristinaImpostazioniToolStripMenuItem3
+            // ResetSettingsToolStripMenuItem3
             // 
-            this.ripristinaImpostazioniToolStripMenuItem3.Name = "ripristinaImpostazioniToolStripMenuItem3";
-            this.ripristinaImpostazioniToolStripMenuItem3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.ripristinaImpostazioniToolStripMenuItem3.Size = new System.Drawing.Size(339, 22);
-            this.ripristinaImpostazioniToolStripMenuItem3.Text = "Ripristina le impostazioni e il programma";
-            this.ripristinaImpostazioniToolStripMenuItem3.Click += new System.EventHandler(this.ripristinaImpostazioniToolStripMenuItem3_Click);
+            this.ResetSettingsToolStripMenuItem3.Name = "ResetSettingsToolStripMenuItem3";
+            this.ResetSettingsToolStripMenuItem3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.ResetSettingsToolStripMenuItem3.Size = new System.Drawing.Size(280, 22);
+            this.ResetSettingsToolStripMenuItem3.Text = "Reset settings and application";
+            this.ResetSettingsToolStripMenuItem3.Click += new System.EventHandler(this.ripristinaImpostazioniToolStripMenuItem3_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(336, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(277, 6);
             // 
-            // esciToolStripMenuItem
+            // ExitToolStripMenuItem
             // 
-            this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
-            this.esciToolStripMenuItem.Size = new System.Drawing.Size(339, 22);
-            this.esciToolStripMenuItem.Text = "Esci";
-            this.esciToolStripMenuItem.Click += new System.EventHandler(this.esciToolStripMenuItem_Click);
+            this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.ExitToolStripMenuItem.Text = "Exit";
+            this.ExitToolStripMenuItem.Click += new System.EventHandler(this.esciToolStripMenuItem_Click);
             // 
-            // modificaToolStripMenuItem
+            // EditToolStripMenuItem
             // 
-            this.modificaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EditToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.compatibilitàToolStripMenuItem,
             this.risoluzioneToolStripMenuItem,
             this.qualitàToolStripMenuItem,
             this.sottotitoliToolStripMenuItem});
-            this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.modificaToolStripMenuItem.Text = "Modifica";
+            this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
+            this.EditToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.EditToolStripMenuItem.Text = "Edit";
             // 
             // compatibilitàToolStripMenuItem
             // 
             this.compatibilitàToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmb_compatibilita,
-            this.confermaToolStripMenuItem});
+            this.cmb_profile,
+            this.ConfirmProfileToolStripMenuItem});
             this.compatibilitàToolStripMenuItem.Name = "compatibilitàToolStripMenuItem";
-            this.compatibilitàToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.compatibilitàToolStripMenuItem.Text = "Compatibilità";
+            this.compatibilitàToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.compatibilitàToolStripMenuItem.Text = "Profile";
             // 
-            // cmb_compatibilita
+            // cmb_profile
             // 
-            this.cmb_compatibilita.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_compatibilita.Items.AddRange(new object[] {
+            this.cmb_profile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_profile.Items.AddRange(new object[] {
             "PS3",
             "Xbox360",
             "Bluray AAC",
@@ -283,58 +285,58 @@
             "XviD MP3",
             "Workraw",
             "Streaming HTML5 H.265"});
-            this.cmb_compatibilita.Name = "cmb_compatibilita";
-            this.cmb_compatibilita.Size = new System.Drawing.Size(190, 23);
+            this.cmb_profile.Name = "cmb_profile";
+            this.cmb_profile.Size = new System.Drawing.Size(190, 23);
             // 
-            // confermaToolStripMenuItem
+            // ConfirmProfileToolStripMenuItem
             // 
-            this.confermaToolStripMenuItem.Name = "confermaToolStripMenuItem";
-            this.confermaToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
-            this.confermaToolStripMenuItem.Text = "Conferma";
-            this.confermaToolStripMenuItem.Click += new System.EventHandler(this.confermaToolStripMenuItem_Click);
+            this.ConfirmProfileToolStripMenuItem.Name = "ConfirmProfileToolStripMenuItem";
+            this.ConfirmProfileToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.ConfirmProfileToolStripMenuItem.Text = "Confirm";
+            this.ConfirmProfileToolStripMenuItem.Click += new System.EventHandler(this.confermaToolStripMenuItem_Click);
             // 
             // risoluzioneToolStripMenuItem
             // 
             this.risoluzioneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmb_risoluz,
-            this.confermaToolStripMenuItem2});
+            this.cmb_resolution,
+            this.ConfirmResolutionToolStripMenuItem});
             this.risoluzioneToolStripMenuItem.Name = "risoluzioneToolStripMenuItem";
-            this.risoluzioneToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.risoluzioneToolStripMenuItem.Text = "Risoluzione";
+            this.risoluzioneToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.risoluzioneToolStripMenuItem.Text = "Resolution";
             // 
-            // cmb_risoluz
+            // cmb_resolution
             // 
-            this.cmb_risoluz.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_risoluz.Items.AddRange(new object[] {
+            this.cmb_resolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_resolution.Items.AddRange(new object[] {
             "1080p",
             "900p",
             "720p",
             "576p",
             "480p",
             "396p"});
-            this.cmb_risoluz.Name = "cmb_risoluz";
-            this.cmb_risoluz.Size = new System.Drawing.Size(121, 23);
+            this.cmb_resolution.Name = "cmb_resolution";
+            this.cmb_resolution.Size = new System.Drawing.Size(121, 23);
             // 
-            // confermaToolStripMenuItem2
+            // ConfirmResolutionToolStripMenuItem
             // 
-            this.confermaToolStripMenuItem2.Name = "confermaToolStripMenuItem2";
-            this.confermaToolStripMenuItem2.Size = new System.Drawing.Size(181, 22);
-            this.confermaToolStripMenuItem2.Text = "Conferma";
-            this.confermaToolStripMenuItem2.Click += new System.EventHandler(this.confermaToolStripMenuItem2_Click);
+            this.ConfirmResolutionToolStripMenuItem.Name = "ConfirmResolutionToolStripMenuItem";
+            this.ConfirmResolutionToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.ConfirmResolutionToolStripMenuItem.Text = "Confirm";
+            this.ConfirmResolutionToolStripMenuItem.Click += new System.EventHandler(this.confermaToolStripMenuItem2_Click);
             // 
             // qualitàToolStripMenuItem
             // 
             this.qualitàToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmb_qualita,
-            this.confermaToolStripMenuItem1});
+            this.cmb_quality,
+            this.ConfirmQualityToolStripMenuItem});
             this.qualitàToolStripMenuItem.Name = "qualitàToolStripMenuItem";
-            this.qualitàToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.qualitàToolStripMenuItem.Text = "Qualità";
+            this.qualitàToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.qualitàToolStripMenuItem.Text = "Quality";
             // 
-            // cmb_qualita
+            // cmb_quality
             // 
-            this.cmb_qualita.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_qualita.Items.AddRange(new object[] {
+            this.cmb_quality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_quality.Items.AddRange(new object[] {
             "Altissima",
             "Alta",
             "Medio-alta",
@@ -343,24 +345,24 @@
             "Bassa",
             "Bassissima",
             "Bozza"});
-            this.cmb_qualita.Name = "cmb_qualita";
-            this.cmb_qualita.Size = new System.Drawing.Size(121, 23);
+            this.cmb_quality.Name = "cmb_quality";
+            this.cmb_quality.Size = new System.Drawing.Size(121, 23);
             // 
-            // confermaToolStripMenuItem1
+            // ConfirmQualityToolStripMenuItem
             // 
-            this.confermaToolStripMenuItem1.Name = "confermaToolStripMenuItem1";
-            this.confermaToolStripMenuItem1.Size = new System.Drawing.Size(181, 22);
-            this.confermaToolStripMenuItem1.Text = "Conferma";
-            this.confermaToolStripMenuItem1.Click += new System.EventHandler(this.confermaToolStripMenuItem1_Click);
+            this.ConfirmQualityToolStripMenuItem.Name = "ConfirmQualityToolStripMenuItem";
+            this.ConfirmQualityToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.ConfirmQualityToolStripMenuItem.Text = "Confirm";
+            this.ConfirmQualityToolStripMenuItem.Click += new System.EventHandler(this.confermaToolStripMenuItem1_Click);
             // 
             // sottotitoliToolStripMenuItem
             // 
             this.sottotitoliToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmb_subs,
-            this.confermaToolStripMenuItem3});
+            this.ConfirmSubsToolStripMenuItem});
             this.sottotitoliToolStripMenuItem.Name = "sottotitoliToolStripMenuItem";
-            this.sottotitoliToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.sottotitoliToolStripMenuItem.Text = "Sottotitoli";
+            this.sottotitoliToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sottotitoliToolStripMenuItem.Text = "Subtitles";
             // 
             // cmb_subs
             // 
@@ -371,331 +373,346 @@
             this.cmb_subs.Name = "cmb_subs";
             this.cmb_subs.Size = new System.Drawing.Size(180, 23);
             // 
-            // confermaToolStripMenuItem3
+            // ConfirmSubsToolStripMenuItem
             // 
-            this.confermaToolStripMenuItem3.Name = "confermaToolStripMenuItem3";
-            this.confermaToolStripMenuItem3.Size = new System.Drawing.Size(240, 22);
-            this.confermaToolStripMenuItem3.Text = "Conferma";
-            this.confermaToolStripMenuItem3.Click += new System.EventHandler(this.ConfermaToolStripMenuItem3_Click);
+            this.ConfirmSubsToolStripMenuItem.Name = "ConfirmSubsToolStripMenuItem";
+            this.ConfirmSubsToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.ConfirmSubsToolStripMenuItem.Text = "Confirm";
+            this.ConfirmSubsToolStripMenuItem.Click += new System.EventHandler(this.ConfermaToolStripMenuItem3_Click);
             // 
-            // strumentiToolStripMenuItem
+            // ToolsToolStripMenuItem
             // 
-            this.strumentiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
             this.toolStripSeparator3,
-            this.scaricaFFmpegToolStripMenuItem,
-            this.testFFmpegToolStripMenuItem,
+            this.FFmpegDDorUpdateToolStripMenuItem,
+            this.FFtestToolStripMenuItem,
             this.toolStripSeparator5,
-            this.listaToolStripMenuItem});
-            this.strumentiToolStripMenuItem.Name = "strumentiToolStripMenuItem";
-            this.strumentiToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.strumentiToolStripMenuItem.Text = "Strumenti";
+            this.ClearFileListToolStripMenuItem});
+            this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
+            this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.ToolsToolStripMenuItem.Text = "Tools";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.monitoraGliAppuntiToolStripMenuItem});
+            this.ActivateClipboardMonitoringToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(267, 22);
-            this.toolStripMenuItem2.Text = "Controllo appunti di Windows";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(278, 22);
+            this.toolStripMenuItem2.Text = "Monitoring Windows Clipboard";
             // 
-            // monitoraGliAppuntiToolStripMenuItem
+            // ActivateClipboardMonitoringToolStripMenuItem
             // 
-            this.monitoraGliAppuntiToolStripMenuItem.Name = "monitoraGliAppuntiToolStripMenuItem";
-            this.monitoraGliAppuntiToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.monitoraGliAppuntiToolStripMenuItem.Text = "Monitora la clipboard di sistema";
-            this.monitoraGliAppuntiToolStripMenuItem.Click += new System.EventHandler(this.MonitoraGliAppuntiToolStripMenuItem_Click);
+            this.ActivateClipboardMonitoringToolStripMenuItem.Name = "ActivateClipboardMonitoringToolStripMenuItem";
+            this.ActivateClipboardMonitoringToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.ActivateClipboardMonitoringToolStripMenuItem.Text = "Activated";
+            this.ActivateClipboardMonitoringToolStripMenuItem.Click += new System.EventHandler(this.MonitoraGliAppuntiToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(264, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(275, 6);
             // 
-            // scaricaFFmpegToolStripMenuItem
+            // FFmpegDDorUpdateToolStripMenuItem
             // 
-            this.scaricaFFmpegToolStripMenuItem.Name = "scaricaFFmpegToolStripMenuItem";
-            this.scaricaFFmpegToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.scaricaFFmpegToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
-            this.scaricaFFmpegToolStripMenuItem.Text = "Scarica o aggiorna FFmpeg";
-            this.scaricaFFmpegToolStripMenuItem.Click += new System.EventHandler(this.scaricaFFmpegToolStripMenuItem_Click);
+            this.FFmpegDDorUpdateToolStripMenuItem.Name = "FFmpegDDorUpdateToolStripMenuItem";
+            this.FFmpegDDorUpdateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.FFmpegDDorUpdateToolStripMenuItem.Size = new System.Drawing.Size(278, 22);
+            this.FFmpegDDorUpdateToolStripMenuItem.Text = "Download or update FFmpeg";
+            this.FFmpegDDorUpdateToolStripMenuItem.Click += new System.EventHandler(this.scaricaFFmpegToolStripMenuItem_Click);
             // 
-            // testFFmpegToolStripMenuItem
+            // FFtestToolStripMenuItem
             // 
-            this.testFFmpegToolStripMenuItem.Name = "testFFmpegToolStripMenuItem";
-            this.testFFmpegToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.testFFmpegToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
-            this.testFFmpegToolStripMenuItem.Text = "Test FFmpeg";
-            this.testFFmpegToolStripMenuItem.Click += new System.EventHandler(this.testFFmpegToolStripMenuItem_Click);
+            this.FFtestToolStripMenuItem.Name = "FFtestToolStripMenuItem";
+            this.FFtestToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.FFtestToolStripMenuItem.Size = new System.Drawing.Size(278, 22);
+            this.FFtestToolStripMenuItem.Text = "FFtest";
+            this.FFtestToolStripMenuItem.Click += new System.EventHandler(this.testFFmpegToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(264, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(275, 6);
             // 
-            // listaToolStripMenuItem
+            // ClearFileListToolStripMenuItem
             // 
-            this.listaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rimuoviTuttiIFileConEsitoToolStripMenuItem});
-            this.listaToolStripMenuItem.Name = "listaToolStripMenuItem";
-            this.listaToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
-            this.listaToolStripMenuItem.Text = "Pulisci lista";
+            this.ClearFileListToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RemoveEveryFileWithStatusToolStripMenuItem});
+            this.ClearFileListToolStripMenuItem.Name = "ClearFileListToolStripMenuItem";
+            this.ClearFileListToolStripMenuItem.Size = new System.Drawing.Size(278, 22);
+            this.ClearFileListToolStripMenuItem.Text = "Clear file list";
             // 
-            // rimuoviTuttiIFileConEsitoToolStripMenuItem
+            // RemoveEveryFileWithStatusToolStripMenuItem
             // 
-            this.rimuoviTuttiIFileConEsitoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RemoveEveryFileWithStatusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.oKToolStripMenuItem,
-            this.fermatoToolStripMenuItem,
-            this.erroreToolStripMenuItem});
-            this.rimuoviTuttiIFileConEsitoToolStripMenuItem.Name = "rimuoviTuttiIFileConEsitoToolStripMenuItem";
-            this.rimuoviTuttiIFileConEsitoToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.rimuoviTuttiIFileConEsitoToolStripMenuItem.Text = "Rimuovi tutti i file con esito...";
+            this.StoppedToolStripMenuItem,
+            this.ErrorToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.AllFilesToolStripMenuItem});
+            this.RemoveEveryFileWithStatusToolStripMenuItem.Name = "RemoveEveryFileWithStatusToolStripMenuItem";
+            this.RemoveEveryFileWithStatusToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.RemoveEveryFileWithStatusToolStripMenuItem.Text = "Remove every file with status...";
             // 
             // oKToolStripMenuItem
             // 
             this.oKToolStripMenuItem.Name = "oKToolStripMenuItem";
-            this.oKToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.oKToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.oKToolStripMenuItem.Text = "Ok";
             this.oKToolStripMenuItem.Click += new System.EventHandler(this.oKToolStripMenuItem_Click);
             // 
-            // fermatoToolStripMenuItem
+            // StoppedToolStripMenuItem
             // 
-            this.fermatoToolStripMenuItem.Name = "fermatoToolStripMenuItem";
-            this.fermatoToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.fermatoToolStripMenuItem.Text = "Fermato";
-            this.fermatoToolStripMenuItem.Click += new System.EventHandler(this.fermatoToolStripMenuItem_Click);
+            this.StoppedToolStripMenuItem.Name = "StoppedToolStripMenuItem";
+            this.StoppedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.StoppedToolStripMenuItem.Text = "Stopped";
+            this.StoppedToolStripMenuItem.Click += new System.EventHandler(this.fermatoToolStripMenuItem_Click);
             // 
-            // erroreToolStripMenuItem
+            // ErrorToolStripMenuItem
             // 
-            this.erroreToolStripMenuItem.Name = "erroreToolStripMenuItem";
-            this.erroreToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.erroreToolStripMenuItem.Text = "Errore";
-            this.erroreToolStripMenuItem.Click += new System.EventHandler(this.erroreToolStripMenuItem_Click);
+            this.ErrorToolStripMenuItem.Name = "ErrorToolStripMenuItem";
+            this.ErrorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ErrorToolStripMenuItem.Text = "Error";
+            this.ErrorToolStripMenuItem.Click += new System.EventHandler(this.erroreToolStripMenuItem_Click);
             // 
-            // impostazioniToolStripMenuItem
+            // toolStripSeparator4
             // 
-            this.impostazioniToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem,
-            this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem,
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            // 
+            // AllFilesToolStripMenuItem
+            // 
+            this.AllFilesToolStripMenuItem.Name = "AllFilesToolStripMenuItem";
+            this.AllFilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AllFilesToolStripMenuItem.Text = "All files";
+            this.AllFilesToolStripMenuItem.Click += new System.EventHandler(this.AllFilesToolStripMenuItem_Click);
+            // 
+            // SettingsToolStripMenuItem
+            // 
+            this.SettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.IntegrateInSendToMenuToolStripMenuItem,
+            this.FFmpegVersionCheckIntervalToolStripMenuItem,
             this.allaFineDellaCodaDiLavoroToolStripMenuItem});
-            this.impostazioniToolStripMenuItem.Name = "impostazioniToolStripMenuItem";
-            this.impostazioniToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-            this.impostazioniToolStripMenuItem.Text = "Impostazioni";
+            this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
+            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.SettingsToolStripMenuItem.Text = "Settings";
             // 
-            // integraConIlMenùContestualeDiWindowsToolStripMenuItem
+            // IntegrateInSendToMenuToolStripMenuItem
             // 
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.creaToolStripMenuItem,
-            this.cancellaToolStripMenuItem});
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Name = "integraConIlMenùContestualeDiWindowsToolStripMenuItem";
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
-            this.integraConIlMenùContestualeDiWindowsToolStripMenuItem.Text = "Integra con il menù contestuale di Windows";
+            this.IntegrateInSendToMenuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CreateToolStripMenuItem,
+            this.DeleteToolStripMenuItem});
+            this.IntegrateInSendToMenuToolStripMenuItem.Name = "IntegrateInSendToMenuToolStripMenuItem";
+            this.IntegrateInSendToMenuToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.IntegrateInSendToMenuToolStripMenuItem.Text = "Integrate in SendTo menu";
             // 
-            // creaToolStripMenuItem
+            // CreateToolStripMenuItem
             // 
-            this.creaToolStripMenuItem.Name = "creaToolStripMenuItem";
-            this.creaToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.creaToolStripMenuItem.Text = "Crea";
-            this.creaToolStripMenuItem.Click += new System.EventHandler(this.creaToolStripMenuItem_Click);
+            this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
+            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.CreateToolStripMenuItem.Text = "Create";
+            this.CreateToolStripMenuItem.Click += new System.EventHandler(this.creaToolStripMenuItem_Click);
             // 
-            // cancellaToolStripMenuItem
+            // DeleteToolStripMenuItem
             // 
-            this.cancellaToolStripMenuItem.Name = "cancellaToolStripMenuItem";
-            this.cancellaToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.cancellaToolStripMenuItem.Text = "Cancella";
-            this.cancellaToolStripMenuItem.Click += new System.EventHandler(this.cancellaToolStripMenuItem_Click);
+            this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.DeleteToolStripMenuItem.Text = "Delete";
+            this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.cancellaToolStripMenuItem_Click);
             // 
-            // frequenzaControlloAggiornamentiFFmpegToolStripMenuItem
+            // FFmpegVersionCheckIntervalToolStripMenuItem
             // 
-            this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.manualeToolStripMenuItem,
-            this.iToolStripMenuItem,
-            this.unGiornoToolStripMenuItem,
-            this.ogniTreGiorniToolStripMenuItem,
-            this.ogniSettimanaToolStripMenuItem});
-            this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem.Name = "frequenzaControlloAggiornamentiFFmpegToolStripMenuItem";
-            this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
-            this.frequenzaControlloAggiornamentiFFmpegToolStripMenuItem.Text = "Frequenza controllo aggiornamenti FFmpeg";
+            this.FFmpegVersionCheckIntervalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manualToolStripMenuItem,
+            this.EveryTimeProgramStartsToolStripMenuItem,
+            this.EveryDayToolStripMenuItem,
+            this.EveryThreeDaysToolStripMenuItem,
+            this.EveryWeekToolStripMenuItem});
+            this.FFmpegVersionCheckIntervalToolStripMenuItem.Name = "FFmpegVersionCheckIntervalToolStripMenuItem";
+            this.FFmpegVersionCheckIntervalToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.FFmpegVersionCheckIntervalToolStripMenuItem.Text = "Check FFmpeg updates...";
             // 
-            // manualeToolStripMenuItem
+            // manualToolStripMenuItem
             // 
-            this.manualeToolStripMenuItem.Name = "manualeToolStripMenuItem";
-            this.manualeToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.manualeToolStripMenuItem.Text = "Manuale";
-            this.manualeToolStripMenuItem.Click += new System.EventHandler(this.manualeToolStripMenuItem_Click);
+            this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
+            this.manualToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.manualToolStripMenuItem.Text = "Manual";
+            this.manualToolStripMenuItem.Click += new System.EventHandler(this.manualeToolStripMenuItem_Click);
             // 
-            // iToolStripMenuItem
+            // EveryTimeProgramStartsToolStripMenuItem
             // 
-            this.iToolStripMenuItem.Checked = true;
-            this.iToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.iToolStripMenuItem.Name = "iToolStripMenuItem";
-            this.iToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.iToolStripMenuItem.Text = "Ad ogni avvio";
-            this.iToolStripMenuItem.Click += new System.EventHandler(this.iToolStripMenuItem_Click);
+            this.EveryTimeProgramStartsToolStripMenuItem.Checked = true;
+            this.EveryTimeProgramStartsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.EveryTimeProgramStartsToolStripMenuItem.Name = "EveryTimeProgramStartsToolStripMenuItem";
+            this.EveryTimeProgramStartsToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.EveryTimeProgramStartsToolStripMenuItem.Text = "Every time the application starts";
+            this.EveryTimeProgramStartsToolStripMenuItem.Click += new System.EventHandler(this.iToolStripMenuItem_Click);
             // 
-            // unGiornoToolStripMenuItem
+            // EveryDayToolStripMenuItem
             // 
-            this.unGiornoToolStripMenuItem.Name = "unGiornoToolStripMenuItem";
-            this.unGiornoToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.unGiornoToolStripMenuItem.Text = "Ogni giorno";
-            this.unGiornoToolStripMenuItem.Click += new System.EventHandler(this.unGiornoToolStripMenuItem_Click);
+            this.EveryDayToolStripMenuItem.Name = "EveryDayToolStripMenuItem";
+            this.EveryDayToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.EveryDayToolStripMenuItem.Text = "Every day";
+            this.EveryDayToolStripMenuItem.Click += new System.EventHandler(this.unGiornoToolStripMenuItem_Click);
             // 
-            // ogniTreGiorniToolStripMenuItem
+            // EveryThreeDaysToolStripMenuItem
             // 
-            this.ogniTreGiorniToolStripMenuItem.Name = "ogniTreGiorniToolStripMenuItem";
-            this.ogniTreGiorniToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.ogniTreGiorniToolStripMenuItem.Text = "Ogni tre giorni";
-            this.ogniTreGiorniToolStripMenuItem.Click += new System.EventHandler(this.ogniTreGiorniToolStripMenuItem_Click);
+            this.EveryThreeDaysToolStripMenuItem.Name = "EveryThreeDaysToolStripMenuItem";
+            this.EveryThreeDaysToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.EveryThreeDaysToolStripMenuItem.Text = "Every three days";
+            this.EveryThreeDaysToolStripMenuItem.Click += new System.EventHandler(this.ogniTreGiorniToolStripMenuItem_Click);
             // 
-            // ogniSettimanaToolStripMenuItem
+            // EveryWeekToolStripMenuItem
             // 
-            this.ogniSettimanaToolStripMenuItem.Name = "ogniSettimanaToolStripMenuItem";
-            this.ogniSettimanaToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.ogniSettimanaToolStripMenuItem.Text = "Ogni settimana";
-            this.ogniSettimanaToolStripMenuItem.Click += new System.EventHandler(this.ogniSettimanaToolStripMenuItem_Click);
+            this.EveryWeekToolStripMenuItem.Name = "EveryWeekToolStripMenuItem";
+            this.EveryWeekToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.EveryWeekToolStripMenuItem.Text = "Every week";
+            this.EveryWeekToolStripMenuItem.Click += new System.EventHandler(this.ogniSettimanaToolStripMenuItem_Click);
             // 
             // allaFineDellaCodaDiLavoroToolStripMenuItem
             // 
             this.allaFineDellaCodaDiLavoroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox1});
+            this.ActionWhenFinishedToolStripComboBox});
             this.allaFineDellaCodaDiLavoroToolStripMenuItem.Name = "allaFineDellaCodaDiLavoroToolStripMenuItem";
-            this.allaFineDellaCodaDiLavoroToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
-            this.allaFineDellaCodaDiLavoroToolStripMenuItem.Text = "Alla fine della coda di lavoro";
+            this.allaFineDellaCodaDiLavoroToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.allaFineDellaCodaDiLavoroToolStripMenuItem.Text = "When all is done...";
             // 
-            // toolStripComboBox1
+            // ActionWhenFinishedToolStripComboBox
             // 
-            this.toolStripComboBox1.AutoCompleteCustomSource.AddRange(new string[] {
+            this.ActionWhenFinishedToolStripComboBox.AutoCompleteCustomSource.AddRange(new string[] {
             "Non fare niente",
             "Chiudi l\'applicazione",
             "Stand-by",
             "Spegni il PC"});
-            this.toolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBox1.Items.AddRange(new object[] {
-            "Non fare niente",
-            "Chiudi l\'applicazione",
+            this.ActionWhenFinishedToolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ActionWhenFinishedToolStripComboBox.Items.AddRange(new object[] {
+            "Do nothing",
+            "Close application",
             "Stand-by",
-            "Spegni il PC"});
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
-            this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
+            "Reboot",
+            "Shutdown"});
+            this.ActionWhenFinishedToolStripComboBox.Name = "ActionWhenFinishedToolStripComboBox";
+            this.ActionWhenFinishedToolStripComboBox.Size = new System.Drawing.Size(121, 23);
+            this.ActionWhenFinishedToolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.infoToolStripMenuItem,
-            this.controllaAggiornamentiToolStripMenuItem,
-            this.visualizzaCronologiaVersioniiToolStripMenuItem});
+            this.AboutToolStripMenuItem,
+            this.CheckUpdatesToolStripMenuItem,
+            this.VersionHistoryToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
             this.toolStripMenuItem1.Text = "?";
             // 
-            // infoToolStripMenuItem
+            // AboutToolStripMenuItem
             // 
-            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.infoToolStripMenuItem.Text = "Info";
-            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
+            this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AboutToolStripMenuItem.Text = "About";
+            this.AboutToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
-            // controllaAggiornamentiToolStripMenuItem
+            // CheckUpdatesToolStripMenuItem
             // 
-            this.controllaAggiornamentiToolStripMenuItem.Name = "controllaAggiornamentiToolStripMenuItem";
-            this.controllaAggiornamentiToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.controllaAggiornamentiToolStripMenuItem.Text = "Controlla aggiornamenti";
-            this.controllaAggiornamentiToolStripMenuItem.Click += new System.EventHandler(this.controllaAggiornamentiToolStripMenuItem_Click);
+            this.CheckUpdatesToolStripMenuItem.Name = "CheckUpdatesToolStripMenuItem";
+            this.CheckUpdatesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.CheckUpdatesToolStripMenuItem.Text = "Check updates";
+            this.CheckUpdatesToolStripMenuItem.Click += new System.EventHandler(this.controllaAggiornamentiToolStripMenuItem_Click);
             // 
-            // visualizzaCronologiaVersioniiToolStripMenuItem
+            // VersionHistoryToolStripMenuItem
             // 
-            this.visualizzaCronologiaVersioniiToolStripMenuItem.Name = "visualizzaCronologiaVersioniiToolStripMenuItem";
-            this.visualizzaCronologiaVersioniiToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.visualizzaCronologiaVersioniiToolStripMenuItem.Text = "Visualizza cronologia versioni";
-            this.visualizzaCronologiaVersioniiToolStripMenuItem.Click += new System.EventHandler(this.VisualizzaCronologiaVersioniiToolStripMenuItem_Click);
+            this.VersionHistoryToolStripMenuItem.Name = "VersionHistoryToolStripMenuItem";
+            this.VersionHistoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.VersionHistoryToolStripMenuItem.Text = "Version history";
+            this.VersionHistoryToolStripMenuItem.Click += new System.EventHandler(this.VisualizzaCronologiaVersioniiToolStripMenuItem_Click);
             // 
-            // nuovaVersioneDisponibileToolStripMenuItem
+            // NewVersionAvailableToolStripMenuItem
             // 
-            this.nuovaVersioneDisponibileToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.nuovaVersioneDisponibileToolStripMenuItem.BackColor = System.Drawing.Color.LawnGreen;
-            this.nuovaVersioneDisponibileToolStripMenuItem.Name = "nuovaVersioneDisponibileToolStripMenuItem";
-            this.nuovaVersioneDisponibileToolStripMenuItem.Size = new System.Drawing.Size(165, 20);
-            this.nuovaVersioneDisponibileToolStripMenuItem.Text = "Nuova versione disponibile!";
-            this.nuovaVersioneDisponibileToolStripMenuItem.Visible = false;
-            this.nuovaVersioneDisponibileToolStripMenuItem.Click += new System.EventHandler(this.NuovaVersioneDisponibileToolStripMenuItem_Click);
+            this.NewVersionAvailableToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.NewVersionAvailableToolStripMenuItem.BackColor = System.Drawing.Color.LawnGreen;
+            this.NewVersionAvailableToolStripMenuItem.Name = "NewVersionAvailableToolStripMenuItem";
+            this.NewVersionAvailableToolStripMenuItem.Size = new System.Drawing.Size(133, 20);
+            this.NewVersionAvailableToolStripMenuItem.Text = "New version available";
+            this.NewVersionAvailableToolStripMenuItem.Visible = false;
+            this.NewVersionAvailableToolStripMenuItem.Click += new System.EventHandler(this.NuovaVersioneDisponibileToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.l_tempo_trasc);
-            this.groupBox1.Controls.Add(this.l_dim_prev);
-            this.groupBox1.Controls.Add(this.l_dim_att);
-            this.groupBox1.Controls.Add(this.l_temp_rim);
-            this.groupBox1.Controls.Add(this.l_temp_trasc);
-            this.groupBox1.Controls.Add(this.l_vel);
+            this.groupBox1.Controls.Add(this.l_elapsed_time);
+            this.groupBox1.Controls.Add(this.l_estimated_size);
+            this.groupBox1.Controls.Add(this.l_size);
+            this.groupBox1.Controls.Add(this.l_remaining_time);
+            this.groupBox1.Controls.Add(this.l_pos);
+            this.groupBox1.Controls.Add(this.l_speed);
             this.groupBox1.Location = new System.Drawing.Point(12, 571);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1127, 63);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Informazioni";
+            this.groupBox1.Text = "Infos";
             // 
-            // l_tempo_trasc
+            // l_elapsed_time
             // 
-            this.l_tempo_trasc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.l_tempo_trasc.AutoSize = true;
-            this.l_tempo_trasc.Location = new System.Drawing.Point(202, 18);
-            this.l_tempo_trasc.Name = "l_tempo_trasc";
-            this.l_tempo_trasc.Size = new System.Drawing.Size(134, 13);
-            this.l_tempo_trasc.TabIndex = 5;
-            this.l_tempo_trasc.Text = "Tempo trascorso: 00:00:00";
+            this.l_elapsed_time.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.l_elapsed_time.AutoSize = true;
+            this.l_elapsed_time.Location = new System.Drawing.Point(202, 18);
+            this.l_elapsed_time.Name = "l_elapsed_time";
+            this.l_elapsed_time.Size = new System.Drawing.Size(115, 13);
+            this.l_elapsed_time.TabIndex = 5;
+            this.l_elapsed_time.Text = "Elapsed time: 00:00:00";
             // 
-            // l_dim_prev
+            // l_estimated_size
             // 
-            this.l_dim_prev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.l_dim_prev.AutoSize = true;
-            this.l_dim_prev.Location = new System.Drawing.Point(432, 39);
-            this.l_dim_prev.Name = "l_dim_prev";
-            this.l_dim_prev.Size = new System.Drawing.Size(110, 13);
-            this.l_dim_prev.TabIndex = 4;
-            this.l_dim_prev.Text = "Dimensione stimata: 0";
+            this.l_estimated_size.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.l_estimated_size.AutoSize = true;
+            this.l_estimated_size.Location = new System.Drawing.Point(432, 39);
+            this.l_estimated_size.Name = "l_estimated_size";
+            this.l_estimated_size.Size = new System.Drawing.Size(86, 13);
+            this.l_estimated_size.TabIndex = 4;
+            this.l_estimated_size.Text = "Estimated size: 0";
             // 
-            // l_dim_att
+            // l_size
             // 
-            this.l_dim_att.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.l_dim_att.AutoSize = true;
-            this.l_dim_att.Location = new System.Drawing.Point(432, 18);
-            this.l_dim_att.Name = "l_dim_att";
-            this.l_dim_att.Size = new System.Drawing.Size(109, 13);
-            this.l_dim_att.TabIndex = 3;
-            this.l_dim_att.Text = "Dimensione attuale: 0";
+            this.l_size.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.l_size.AutoSize = true;
+            this.l_size.Location = new System.Drawing.Point(432, 18);
+            this.l_size.Name = "l_size";
+            this.l_size.Size = new System.Drawing.Size(39, 13);
+            this.l_size.TabIndex = 3;
+            this.l_size.Text = "Size: 0";
             // 
-            // l_temp_rim
+            // l_remaining_time
             // 
-            this.l_temp_rim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.l_temp_rim.AutoSize = true;
-            this.l_temp_rim.Location = new System.Drawing.Point(202, 39);
-            this.l_temp_rim.Name = "l_temp_rim";
-            this.l_temp_rim.Size = new System.Drawing.Size(137, 13);
-            this.l_temp_rim.TabIndex = 2;
-            this.l_temp_rim.Text = "Tempo rimanente: 00:00:00";
+            this.l_remaining_time.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.l_remaining_time.AutoSize = true;
+            this.l_remaining_time.Location = new System.Drawing.Point(202, 39);
+            this.l_remaining_time.Name = "l_remaining_time";
+            this.l_remaining_time.Size = new System.Drawing.Size(127, 13);
+            this.l_remaining_time.TabIndex = 2;
+            this.l_remaining_time.Text = "Remaining time: 00:00:00";
             // 
-            // l_temp_trasc
+            // l_pos
             // 
-            this.l_temp_trasc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.l_temp_trasc.AutoSize = true;
-            this.l_temp_trasc.Location = new System.Drawing.Point(6, 39);
-            this.l_temp_trasc.Name = "l_temp_trasc";
-            this.l_temp_trasc.Size = new System.Drawing.Size(129, 13);
-            this.l_temp_trasc.TabIndex = 1;
-            this.l_temp_trasc.Text = "Posizione video: 00:00:00";
+            this.l_pos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.l_pos.AutoSize = true;
+            this.l_pos.Location = new System.Drawing.Point(6, 39);
+            this.l_pos.Name = "l_pos";
+            this.l_pos.Size = new System.Drawing.Size(92, 13);
+            this.l_pos.TabIndex = 1;
+            this.l_pos.Text = "Position: 00:00:00";
             // 
-            // l_vel
+            // l_speed
             // 
-            this.l_vel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.l_vel.AutoSize = true;
-            this.l_vel.Location = new System.Drawing.Point(6, 18);
-            this.l_vel.Name = "l_vel";
-            this.l_vel.Size = new System.Drawing.Size(57, 13);
-            this.l_vel.TabIndex = 0;
-            this.l_vel.Text = "Velocità: 0";
+            this.l_speed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.l_speed.AutoSize = true;
+            this.l_speed.Location = new System.Drawing.Point(6, 18);
+            this.l_speed.Name = "l_speed";
+            this.l_speed.Size = new System.Drawing.Size(50, 13);
+            this.l_speed.TabIndex = 0;
+            this.l_speed.Text = "Speed: 0";
             // 
             // tab_tna
             // 
@@ -721,7 +738,7 @@
             this.tab_autohardsubber.Padding = new System.Windows.Forms.Padding(3);
             this.tab_autohardsubber.Size = new System.Drawing.Size(1123, 420);
             this.tab_autohardsubber.TabIndex = 0;
-            this.tab_autohardsubber.Text = "Lista files e impostazioni (Totale files: 0)";
+            this.tab_autohardsubber.Text = "File list (count: 0)";
             this.tab_autohardsubber.UseVisualStyleBackColor = true;
             // 
             // tb_help
@@ -737,8 +754,8 @@
             this.tb_help.ReadOnly = true;
             this.tb_help.Size = new System.Drawing.Size(565, 94);
             this.tb_help.TabIndex = 5;
-            this.tb_help.Text = "Per aggiungere file o cartelle,\r\nusare i pulsanti in alto o trascinarli nella lis" +
-    "ta\r\ntramite drag&drop.";
+            this.tb_help.Text = "To add a file or a folder,\r\njust use the buttons at the top of this GUI\r\nor just " +
+    "drag&drop them.";
             this.tb_help.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // DGV_video
@@ -753,13 +770,13 @@
             this.DGV_video.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_video.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.input,
-            this.compatibilita,
-            this.risoluz,
-            this.qualita,
+            this.profile,
+            this.res,
+            this.quality,
             this.subtitle_mode,
-            this.stato,
-            this.percorso_orig});
-            this.DGV_video.ContextMenuStrip = this.tasto_destro_files;
+            this.status,
+            this.source_path});
+            this.DGV_video.ContextMenuStrip = this.cms_files;
             this.DGV_video.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_video.Location = new System.Drawing.Point(6, 6);
             this.DGV_video.Name = "DGV_video";
@@ -775,17 +792,17 @@
             // input
             // 
             this.input.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.input.HeaderText = "File video";
+            this.input.HeaderText = "Video file";
             this.input.Name = "input";
             this.input.ReadOnly = true;
             this.input.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.input.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.input.Width = 52;
+            this.input.Width = 56;
             // 
-            // compatibilita
+            // profile
             // 
-            this.compatibilita.HeaderText = "Compatibilità";
-            this.compatibilita.Items.AddRange(new object[] {
+            this.profile.HeaderText = "Profile";
+            this.profile.Items.AddRange(new object[] {
             "Bluray AAC",
             "Bluray AC3",
             "Remux MP4",
@@ -794,77 +811,80 @@
             "Streaming HTML5 H.265",
             "XviD MP3",
             "Workraw",
-            "Genera keyframes"});
-            this.compatibilita.MinimumWidth = 185;
-            this.compatibilita.Name = "compatibilita";
-            this.compatibilita.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.compatibilita.Width = 185;
+            "Keyframes generation"});
+            this.profile.MinimumWidth = 185;
+            this.profile.Name = "profile";
+            this.profile.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.profile.Width = 185;
             // 
-            // risoluz
+            // res
             // 
-            this.risoluz.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.risoluz.HeaderText = "Risoluzione";
-            this.risoluz.Items.AddRange(new object[] {
+            this.res.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.res.HeaderText = "Resolution";
+            this.res.Items.AddRange(new object[] {
             "1080p",
             "900p",
             "720p",
             "576p",
             "480p",
-            "396p"});
-            this.risoluz.Name = "risoluz";
-            this.risoluz.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.risoluz.Width = 67;
+            "396p",
+            "360p",
+            "288p",
+            "144p"});
+            this.res.Name = "res";
+            this.res.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.res.Width = 63;
             // 
-            // qualita
+            // quality
             // 
-            this.qualita.HeaderText = "Qualità";
-            this.qualita.Items.AddRange(new object[] {
-            "Altissima",
-            "Alta",
-            "Medio-alta",
-            "Media",
-            "Medio-bassa",
-            "Bassa",
-            "Bassissima",
-            "Bozza"});
-            this.qualita.Name = "qualita";
-            this.qualita.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.qualita.Width = 80;
+            this.quality.HeaderText = "Quality";
+            this.quality.Items.AddRange(new object[] {
+            "Very high",
+            "High",
+            "Above normal",
+            "Normal",
+            "Below normal",
+            "Low",
+            "Very low",
+            "Draft"});
+            this.quality.Name = "quality";
+            this.quality.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.quality.Width = 80;
             // 
             // subtitle_mode
             // 
             this.subtitle_mode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.subtitle_mode.HeaderText = "Sottotitoli";
+            this.subtitle_mode.HeaderText = "Subtitles";
             this.subtitle_mode.Items.AddRange(new object[] {
             "Hardsub",
             "Softsub",
-            "No sottotitoli"});
+            "No subs"});
             this.subtitle_mode.Name = "subtitle_mode";
             this.subtitle_mode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.subtitle_mode.Width = 56;
+            this.subtitle_mode.Width = 53;
             // 
-            // stato
+            // status
             // 
-            this.stato.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.stato.DefaultCellStyle = dataGridViewCellStyle1;
-            this.stato.HeaderText = "Stato";
-            this.stato.MinimumWidth = 120;
-            this.stato.Name = "stato";
-            this.stato.ReadOnly = true;
-            this.stato.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.stato.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.stato.Width = 120;
+            this.status.DefaultCellStyle = dataGridViewCellStyle1;
+            this.status.HeaderText = "Status";
+            this.status.MinimumWidth = 120;
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            this.status.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.status.Width = 120;
             // 
-            // percorso_orig
+            // source_path
             // 
-            this.percorso_orig.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.percorso_orig.HeaderText = "Percorso originale";
-            this.percorso_orig.Name = "percorso_orig";
-            this.percorso_orig.ReadOnly = true;
-            this.percorso_orig.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.percorso_orig.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.percorso_orig.Width = 87;
+            this.source_path.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.source_path.HeaderText = "Source path";
+            this.source_path.Name = "source_path";
+            this.source_path.ReadOnly = true;
+            this.source_path.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.source_path.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.source_path.Width = 71;
             // 
             // tab_log
             // 
@@ -886,35 +906,35 @@
             // 
             // sc_log.Panel1
             // 
-            this.sc_log.Panel1.Controls.Add(this.rtb_codifica);
+            this.sc_log.Panel1.Controls.Add(this.rtb_encode);
             // 
             // sc_log.Panel2
             // 
-            this.sc_log.Panel2.Controls.Add(this.rtb_sottotitoli);
+            this.sc_log.Panel2.Controls.Add(this.rtb_subs);
             this.sc_log.Size = new System.Drawing.Size(1117, 414);
             this.sc_log.SplitterDistance = 744;
             this.sc_log.TabIndex = 0;
             // 
-            // rtb_codifica
+            // rtb_encode
             // 
-            this.rtb_codifica.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_codifica.Location = new System.Drawing.Point(0, 0);
-            this.rtb_codifica.Name = "rtb_codifica";
-            this.rtb_codifica.ReadOnly = true;
-            this.rtb_codifica.Size = new System.Drawing.Size(744, 414);
-            this.rtb_codifica.TabIndex = 0;
-            this.rtb_codifica.Text = "";
+            this.rtb_encode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_encode.Location = new System.Drawing.Point(0, 0);
+            this.rtb_encode.Name = "rtb_encode";
+            this.rtb_encode.ReadOnly = true;
+            this.rtb_encode.Size = new System.Drawing.Size(744, 414);
+            this.rtb_encode.TabIndex = 0;
+            this.rtb_encode.Text = "";
             // 
-            // rtb_sottotitoli
+            // rtb_subs
             // 
-            this.rtb_sottotitoli.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_sottotitoli.Location = new System.Drawing.Point(0, 0);
-            this.rtb_sottotitoli.Name = "rtb_sottotitoli";
-            this.rtb_sottotitoli.ReadOnly = true;
-            this.rtb_sottotitoli.Size = new System.Drawing.Size(369, 414);
-            this.rtb_sottotitoli.TabIndex = 0;
-            this.rtb_sottotitoli.Text = "";
-            this.rtb_sottotitoli.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.Rtb_sottotitoli_LinkClicked);
+            this.rtb_subs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_subs.Location = new System.Drawing.Point(0, 0);
+            this.rtb_subs.Name = "rtb_subs";
+            this.rtb_subs.ReadOnly = true;
+            this.rtb_subs.Size = new System.Drawing.Size(369, 414);
+            this.rtb_subs.TabIndex = 0;
+            this.rtb_subs.Text = "";
+            this.rtb_subs.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.Rtb_sottotitoli_LinkClicked);
             // 
             // bgw_update
             // 
@@ -980,24 +1000,24 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Icons by";
             // 
-            // apri_video
+            // open_video
             // 
-            this.apri_video.Filter = "File video supportati| *.mkv;*.MKV;*.mp4;*.MP4;*.m2ts;*.M2TS;*.ts;*.TS;*.avi;*.AV" +
+            this.open_video.Filter = "Supported video files| *.mkv;*.MKV;*.mp4;*.MP4;*.m2ts;*.M2TS;*.ts;*.TS;*.avi;*.AV" +
     "I| File MKV|*.mkv;*.MKV|File MP4|*.mp4;*.MP4|File M2TS|*.m2ts;*.M2TS|File TS|*.t" +
     "s;*.TS|File AVI|*.avi;*.AVI";
-            this.apri_video.Multiselect = true;
-            this.apri_video.RestoreDirectory = true;
-            this.apri_video.Title = "Aggiungi un video";
+            this.open_video.Multiselect = true;
+            this.open_video.RestoreDirectory = true;
+            this.open_video.Title = "Open a video";
             // 
-            // apri_cartella
+            // open_folder
             // 
-            this.apri_cartella.Description = "Seleziona una cartella";
-            this.apri_cartella.ShowNewFolderButton = false;
+            this.open_folder.Description = "Choose a folder";
+            this.open_folder.ShowNewFolderButton = false;
             // 
-            // timer_tempo
+            // t_elapsed_time
             // 
-            this.timer_tempo.Interval = 1000;
-            this.timer_tempo.Tick += new System.EventHandler(this.timer_tempo_Tick);
+            this.t_elapsed_time.Interval = 1000;
+            this.t_elapsed_time.Tick += new System.EventHandler(this.timer_tempo_Tick);
             // 
             // tt_subs
             // 
@@ -1017,43 +1037,43 @@
             this.tt_encode.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.tt_encode.ToolTipTitle = "Riquadro codifica/remux";
             // 
-            // b_agg_files
+            // b_add_files
             // 
-            this.b_agg_files.FlatAppearance.BorderSize = 0;
-            this.b_agg_files.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.b_agg_files.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.b_agg_files.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
-            this.b_agg_files.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_agg_files.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.film;
-            this.b_agg_files.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.b_agg_files.Location = new System.Drawing.Point(12, 27);
-            this.b_agg_files.Name = "b_agg_files";
-            this.b_agg_files.Size = new System.Drawing.Size(100, 86);
-            this.b_agg_files.TabIndex = 12;
-            this.b_agg_files.Text = "Aggiungi video";
-            this.b_agg_files.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.b_agg_files.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.b_agg_files.UseVisualStyleBackColor = true;
-            this.b_agg_files.Click += new System.EventHandler(this.b_agg_files_Click);
+            this.b_add_files.FlatAppearance.BorderSize = 0;
+            this.b_add_files.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_add_files.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_add_files.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
+            this.b_add_files.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_add_files.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.film;
+            this.b_add_files.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.b_add_files.Location = new System.Drawing.Point(12, 27);
+            this.b_add_files.Name = "b_add_files";
+            this.b_add_files.Size = new System.Drawing.Size(100, 86);
+            this.b_add_files.TabIndex = 12;
+            this.b_add_files.Text = "Add video";
+            this.b_add_files.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.b_add_files.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.b_add_files.UseVisualStyleBackColor = true;
+            this.b_add_files.Click += new System.EventHandler(this.b_agg_files_Click);
             // 
-            // b_agg_cart
+            // b_add_folder
             // 
-            this.b_agg_cart.FlatAppearance.BorderSize = 0;
-            this.b_agg_cart.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.b_agg_cart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.b_agg_cart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
-            this.b_agg_cart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_agg_cart.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.folder;
-            this.b_agg_cart.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.b_agg_cart.Location = new System.Drawing.Point(118, 27);
-            this.b_agg_cart.Name = "b_agg_cart";
-            this.b_agg_cart.Size = new System.Drawing.Size(100, 86);
-            this.b_agg_cart.TabIndex = 15;
-            this.b_agg_cart.Text = "Aggiungi cartelle";
-            this.b_agg_cart.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.b_agg_cart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.b_agg_cart.UseVisualStyleBackColor = true;
-            this.b_agg_cart.Click += new System.EventHandler(this.b_agg_cart_Click);
+            this.b_add_folder.FlatAppearance.BorderSize = 0;
+            this.b_add_folder.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_add_folder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_add_folder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
+            this.b_add_folder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_add_folder.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.folder;
+            this.b_add_folder.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.b_add_folder.Location = new System.Drawing.Point(118, 27);
+            this.b_add_folder.Name = "b_add_folder";
+            this.b_add_folder.Size = new System.Drawing.Size(100, 86);
+            this.b_add_folder.TabIndex = 15;
+            this.b_add_folder.Text = "Add folder";
+            this.b_add_folder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.b_add_folder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.b_add_folder.UseVisualStyleBackColor = true;
+            this.b_add_folder.Click += new System.EventHandler(this.b_agg_cart_Click);
             // 
             // b_pause
             // 
@@ -1070,79 +1090,79 @@
             this.b_pause.Name = "b_pause";
             this.b_pause.Size = new System.Drawing.Size(62, 67);
             this.b_pause.TabIndex = 22;
-            this.b_pause.Text = "PAUSA";
+            this.b_pause.Text = "PAUSE";
             this.b_pause.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.b_pause.UseVisualStyleBackColor = false;
             this.b_pause.Click += new System.EventHandler(this.b_pause_Click);
             // 
-            // b_incolla
+            // b_paste
             // 
-            this.b_incolla.FlatAppearance.BorderSize = 0;
-            this.b_incolla.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.b_incolla.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.b_incolla.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
-            this.b_incolla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_incolla.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.page;
-            this.b_incolla.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.b_incolla.Location = new System.Drawing.Point(224, 27);
-            this.b_incolla.Name = "b_incolla";
-            this.b_incolla.Size = new System.Drawing.Size(100, 86);
-            this.b_incolla.TabIndex = 21;
-            this.b_incolla.Text = "Incolla";
-            this.b_incolla.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.b_incolla.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.b_incolla.UseVisualStyleBackColor = true;
-            this.b_incolla.Click += new System.EventHandler(this.b_incolla_Click);
+            this.b_paste.FlatAppearance.BorderSize = 0;
+            this.b_paste.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_paste.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_paste.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
+            this.b_paste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_paste.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.page;
+            this.b_paste.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.b_paste.Location = new System.Drawing.Point(224, 27);
+            this.b_paste.Name = "b_paste";
+            this.b_paste.Size = new System.Drawing.Size(100, 86);
+            this.b_paste.TabIndex = 21;
+            this.b_paste.Text = "Paste";
+            this.b_paste.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.b_paste.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.b_paste.UseVisualStyleBackColor = true;
+            this.b_paste.Click += new System.EventHandler(this.b_incolla_Click);
             // 
-            // b_avvia
+            // b_start
             // 
-            this.b_avvia.FlatAppearance.BorderSize = 0;
-            this.b_avvia.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.b_avvia.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.b_avvia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LawnGreen;
-            this.b_avvia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_avvia.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
-            this.b_avvia.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.b_avvia.Location = new System.Drawing.Point(509, 27);
-            this.b_avvia.Name = "b_avvia";
-            this.b_avvia.Size = new System.Drawing.Size(100, 86);
-            this.b_avvia.TabIndex = 5;
-            this.b_avvia.Text = "AVVIA";
-            this.b_avvia.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.b_avvia.UseVisualStyleBackColor = true;
-            this.b_avvia.Click += new System.EventHandler(this.b_avvia_Click);
+            this.b_start.FlatAppearance.BorderSize = 0;
+            this.b_start.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_start.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_start.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LawnGreen;
+            this.b_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_start.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
+            this.b_start.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.b_start.Location = new System.Drawing.Point(509, 27);
+            this.b_start.Name = "b_start";
+            this.b_start.Size = new System.Drawing.Size(100, 86);
+            this.b_start.TabIndex = 5;
+            this.b_start.Text = "START";
+            this.b_start.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.b_start.UseVisualStyleBackColor = true;
+            this.b_start.Click += new System.EventHandler(this.b_avvia_Click);
             // 
-            // b_rimuovi
+            // b_remove
             // 
-            this.b_rimuovi.FlatAppearance.BorderSize = 0;
-            this.b_rimuovi.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.b_rimuovi.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.b_rimuovi.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
-            this.b_rimuovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_rimuovi.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.block;
-            this.b_rimuovi.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.b_rimuovi.Location = new System.Drawing.Point(346, 27);
-            this.b_rimuovi.Name = "b_rimuovi";
-            this.b_rimuovi.Size = new System.Drawing.Size(141, 86);
-            this.b_rimuovi.TabIndex = 14;
-            this.b_rimuovi.Text = "Rimuovi files selezionati";
-            this.b_rimuovi.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.b_rimuovi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.b_rimuovi.UseVisualStyleBackColor = true;
-            this.b_rimuovi.Click += new System.EventHandler(this.B_rimuovi_Click);
+            this.b_remove.FlatAppearance.BorderSize = 0;
+            this.b_remove.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.b_remove.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.b_remove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkOrange;
+            this.b_remove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_remove.Image = global::TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.block;
+            this.b_remove.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.b_remove.Location = new System.Drawing.Point(346, 27);
+            this.b_remove.Name = "b_remove";
+            this.b_remove.Size = new System.Drawing.Size(141, 86);
+            this.b_remove.TabIndex = 14;
+            this.b_remove.Text = "Remove selected files";
+            this.b_remove.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.b_remove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.b_remove.UseVisualStyleBackColor = true;
+            this.b_remove.Click += new System.EventHandler(this.B_rimuovi_Click);
             // 
-            // barra_stato
+            // status_bar
             // 
-            this.barra_stato.BackColor = System.Drawing.Color.Transparent;
-            this.barra_stato.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.status_bar.BackColor = System.Drawing.Color.Transparent;
+            this.status_bar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pb_tot,
             this.ts_perc,
-            this.ts_avanz});
-            this.barra_stato.Location = new System.Drawing.Point(0, 637);
-            this.barra_stato.Name = "barra_stato";
-            this.barra_stato.Size = new System.Drawing.Size(1155, 24);
-            this.barra_stato.TabIndex = 23;
-            this.barra_stato.Text = "statusStrip1";
+            this.ts_progress});
+            this.status_bar.Location = new System.Drawing.Point(0, 637);
+            this.status_bar.Name = "status_bar";
+            this.status_bar.Size = new System.Drawing.Size(1155, 24);
+            this.status_bar.TabIndex = 23;
+            this.status_bar.Text = "statusStrip1";
             // 
             // pb_tot
             // 
@@ -1156,13 +1176,13 @@
             this.ts_perc.Size = new System.Drawing.Size(42, 19);
             this.ts_perc.Text = "0,00%";
             // 
-            // ts_avanz
+            // ts_progress
             // 
-            this.ts_avanz.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ts_avanz.Name = "ts_avanz";
-            this.ts_avanz.Size = new System.Drawing.Size(207, 19);
-            this.ts_avanz.Text = "Avanzamento elaborazione - Nessuno";
-            this.ts_avanz.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.ts_progress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ts_progress.Name = "ts_progress";
+            this.ts_progress.Size = new System.Drawing.Size(36, 19);
+            this.ts_progress.Text = "None";
+            this.ts_progress.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
             // bgw_updateschecker
             // 
@@ -1174,31 +1194,31 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1155, 661);
-            this.Controls.Add(this.barra_stato);
+            this.Controls.Add(this.status_bar);
             this.Controls.Add(this.ll_icons);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.b_agg_files);
-            this.Controls.Add(this.b_agg_cart);
-            this.Controls.Add(this.barra_menu);
+            this.Controls.Add(this.b_add_files);
+            this.Controls.Add(this.b_add_folder);
+            this.Controls.Add(this.menu_bar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.b_rimuovi);
-            this.Controls.Add(this.b_avvia);
+            this.Controls.Add(this.b_remove);
+            this.Controls.Add(this.b_start);
             this.Controls.Add(this.b_pause);
             this.Controls.Add(this.tab_tna);
-            this.Controls.Add(this.b_incolla);
+            this.Controls.Add(this.b_paste);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(1171, 700);
             this.Name = "TnA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.8.8.9";
+            this.Text = "TnA - Tanoshimi no Autohardsubber v0.9.9";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TnA_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.TnA_ResizeEnd);
-            this.tasto_destro_files.ResumeLayout(false);
-            this.barra_menu.ResumeLayout(false);
-            this.barra_menu.PerformLayout();
+            this.cms_files.ResumeLayout(false);
+            this.menu_bar.ResumeLayout(false);
+            this.menu_bar.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tab_tna.ResumeLayout(false);
@@ -1210,113 +1230,115 @@
             this.sc_log.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sc_log)).EndInit();
             this.sc_log.ResumeLayout(false);
-            this.barra_stato.ResumeLayout(false);
-            this.barra_stato.PerformLayout();
+            this.status_bar.ResumeLayout(false);
+            this.status_bar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip barra_menu;
+        private System.Windows.Forms.MenuStrip menu_bar;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label l_vel;
-        private System.Windows.Forms.Label l_temp_trasc;
-        private System.Windows.Forms.Label l_dim_att;
-        private System.Windows.Forms.Label l_dim_prev;
-        private System.Windows.Forms.ContextMenuStrip tasto_destro_files;
+        private System.Windows.Forms.Label l_speed;
+        private System.Windows.Forms.Label l_pos;
+        private System.Windows.Forms.Label l_size;
+        private System.Windows.Forms.Label l_estimated_size;
+        private System.Windows.Forms.ContextMenuStrip cms_files;
         private System.Windows.Forms.ToolStripMenuItem rimuoviIFileSelezionatiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modificaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EditToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compatibilitàToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox cmb_compatibilita;
-        private System.Windows.Forms.ToolStripMenuItem confermaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox cmb_profile;
+        private System.Windows.Forms.ToolStripMenuItem ConfirmProfileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qualitàToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox cmb_qualita;
-        private System.Windows.Forms.ToolStripMenuItem confermaToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem strumentiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem scaricaFFmpegToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox cmb_quality;
+        private System.Windows.Forms.ToolStripMenuItem ConfirmQualityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FFmpegDDorUpdateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem testFFmpegToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FFtestToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem IncollaToolStripMenuItem;
         private System.Windows.Forms.TabControl tab_tna;
         private System.Windows.Forms.TabPage tab_autohardsubber;
         private System.Windows.Forms.DataGridView DGV_video;
         private System.Windows.Forms.TabPage tab_log;
-        private System.Windows.Forms.ToolStripMenuItem salvaImpostazioniToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem esciToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker bgw_update;
         public System.ComponentModel.BackgroundWorker bgw_downloadffmpeg;
-        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
-        private System.Windows.Forms.Button b_agg_files;
-        private System.Windows.Forms.Button b_rimuovi;
-        private System.Windows.Forms.Button b_agg_cart;
+        private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
+        private System.Windows.Forms.Button b_add_files;
+        private System.Windows.Forms.Button b_remove;
+        private System.Windows.Forms.Button b_add_folder;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.LinkLabel ll_icons;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.OpenFileDialog apri_video;
-        public System.Windows.Forms.FolderBrowserDialog apri_cartella;
-        private System.Windows.Forms.Button b_incolla;
+        public System.Windows.Forms.OpenFileDialog open_video;
+        public System.Windows.Forms.FolderBrowserDialog open_folder;
+        private System.Windows.Forms.Button b_paste;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem monitoraGliAppuntiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ActivateClipboardMonitoringToolStripMenuItem;
         private System.Windows.Forms.TextBox tb_help;
-        private System.Windows.Forms.ToolStripMenuItem ripristinaImpostazioniToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem impostazioniToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem frequenzaControlloAggiornamentiFFmpegToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem manualeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unGiornoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ogniTreGiorniToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ogniSettimanaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetSettingsToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem SettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FFmpegVersionCheckIntervalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manualToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EveryTimeProgramStartsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EveryDayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EveryThreeDaysToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EveryWeekToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem listaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rimuoviTuttiIFileConEsitoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ClearFileListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RemoveEveryFileWithStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oKToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fermatoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem erroreToolStripMenuItem;
-        private System.Windows.Forms.Label l_tempo_trasc;
-        private System.Windows.Forms.Label l_temp_rim;
-        private System.Windows.Forms.Timer timer_tempo;
+        private System.Windows.Forms.ToolStripMenuItem StoppedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ErrorToolStripMenuItem;
+        private System.Windows.Forms.Label l_elapsed_time;
+        private System.Windows.Forms.Label l_remaining_time;
+        private System.Windows.Forms.Timer t_elapsed_time;
         private System.Windows.Forms.Button b_pause;
         private System.Windows.Forms.ToolStripMenuItem allaFineDellaCodaDiLavoroToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripComboBox ActionWhenFinishedToolStripComboBox;
         private System.Windows.Forms.ToolTip tt_subs;
         private System.Windows.Forms.ToolTip tt_encode;
-        private System.Windows.Forms.Button b_avvia;
-        private System.Windows.Forms.ToolStripMenuItem controllaAggiornamentiToolStripMenuItem;
+        private System.Windows.Forms.Button b_start;
+        private System.Windows.Forms.ToolStripMenuItem CheckUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem risoluzioneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox cmb_risoluz;
-        private System.Windows.Forms.ToolStripMenuItem confermaToolStripMenuItem2;
-        private System.Windows.Forms.StatusStrip barra_stato;
-        private System.Windows.Forms.ToolStripStatusLabel ts_avanz;
+        private System.Windows.Forms.ToolStripComboBox cmb_resolution;
+        private System.Windows.Forms.ToolStripMenuItem ConfirmResolutionToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip status_bar;
+        private System.Windows.Forms.ToolStripStatusLabel ts_progress;
         private System.Windows.Forms.ToolStripProgressBar pb_tot;
         private System.Windows.Forms.ToolStripStatusLabel ts_perc;
-        private System.Windows.Forms.ToolStripMenuItem nuovaVersioneDisponibileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem NewVersionAvailableToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker bgw_updateschecker;
         private System.Windows.Forms.ToolStripMenuItem sottotitoliToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox cmb_subs;
-        private System.Windows.Forms.ToolStripMenuItem apriCartellaLogsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem confermaToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem OpenLogsFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ConfirmSubsToolStripMenuItem;
         private System.Windows.Forms.SplitContainer sc_log;
-        private System.Windows.Forms.RichTextBox rtb_codifica;
-        private System.Windows.Forms.RichTextBox rtb_sottotitoli;
+        private System.Windows.Forms.RichTextBox rtb_encode;
+        private System.Windows.Forms.RichTextBox rtb_subs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripMenuItem visualizzaCronologiaVersioniiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem integraConIlMenùContestualeDiWindowsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem creaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cancellaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem VersionHistoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem IntegrateInSendToMenuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CreateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancellaSelezioneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AllFilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.DataGridViewTextBoxColumn input;
-        private System.Windows.Forms.DataGridViewComboBoxColumn compatibilita;
-        private System.Windows.Forms.DataGridViewComboBoxColumn risoluz;
-        private System.Windows.Forms.DataGridViewComboBoxColumn qualita;
+        private System.Windows.Forms.DataGridViewComboBoxColumn profile;
+        private System.Windows.Forms.DataGridViewComboBoxColumn res;
+        private System.Windows.Forms.DataGridViewComboBoxColumn quality;
         private System.Windows.Forms.DataGridViewComboBoxColumn subtitle_mode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stato;
-        private System.Windows.Forms.DataGridViewTextBoxColumn percorso_orig;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn source_path;
     }
 }
 

@@ -1,5 +1,7 @@
 ﻿using FFmpeg_Output_Wrapper;
 using IWshRuntimeLibrary;
+using MediaInfoDotNet;
+using MediaInfoLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,8 +14,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using MediaInfoDotNet;
-
 
 namespace TnA___Tanoshimi_no_Autohardsubber
 {
@@ -23,7 +23,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         readonly String LOG_dir = Path.GetDirectoryName(Application.ExecutablePath) + "\\LOGS";
 
-        readonly String file_settings = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings\\settings.ini";
+        readonly String SettingsFile = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings\\settings.ini";
 
         readonly String ffmpeg = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\ffmpeg_tna_x64.exe";
 
@@ -34,45 +34,47 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         readonly String temp_folder = Path.GetDirectoryName(Application.ExecutablePath) + "\\temp";
         readonly String fonts_folder = Path.GetDirectoryName(Application.ExecutablePath) + "\\x64\\fonts_v";
 
-        String label_tab_lista = "Lista files e impostazioni";
+        String Filter = "Supported video files|";
 
-        String azione_fine_coda = "Non fare niente";
+        String TabFilelistLabel = "File list";
 
-        readonly String[] estensioni_video = { ".mkv", ".mp4", ".m2ts", ".ts", ".avi", ".mov", ".rmvb", ".ogm", ".flv", ".vob", ".mpg", ".mpeg", ".3gp", ".m4v" };
+        String WhenAllIsFinished = "Do nothing";
+
+        readonly String[] VideoEXT = { ".mkv", ".mp4", ".m2ts", ".ts", ".avi", ".mov", ".rmvb", ".ogm", ".flv", ".vob", ".mpg", ".mpeg", ".3gp", ".m4v" };
 
         //readonly String[] estensioni_audio = { ".m4a", ".flac", ".wav", ".aac", ".ogg", ".opus", ".tta", ".ac3", ".dts", ".mp3", ".mka" };
 
-        String comando = String.Empty;
+        String Arguments = String.Empty;
 
-        String durata = String.Empty;
+        String Duration = String.Empty;
 
         String fc = String.Empty;
 
         Boolean pause = false;
 
-        public static Boolean forza_chiusura = false;
+        public static Boolean ForceClose = false;
 
-        String file_attuale = "Nessuno";
+        String EncodingFile = "None";
 
-        String file_finale = String.Empty;
+        String FinalFile = String.Empty;
 
-        String versione_tna = String.Empty;
+        String TnAVersion = String.Empty;
 
-        public static DateTime data_last_upd = new DateTime();
+        public static DateTime LastUpdDate = new DateTime();
 
-        List<String> formati_scelti = new List<String>();
+        List<String> ExtensionToImport = new List<String>();
 
-        public static List<String> stati_scelti = new List<String>();
+        public static List<String> StatusToReset = new List<String>();
 
-        String data_vecchia = String.Empty;
+        String OldDate = String.Empty;
 
-        Int32 indice_percentuale = 0, exit_code = Int32.MinValue, sec_trasc = 0;
+        Int32 PercentageIndex = 0, exit_code = Int32.MinValue, ElapsedSeconds = 0;
 
         Thread t;
         ThreadStart ts;
 
-        System.Diagnostics.Process processo_codifica = new System.Diagnostics.Process();
-        System.Diagnostics.Process processo_remux = new System.Diagnostics.Process();
+        System.Diagnostics.Process EncodeProcess = new System.Diagnostics.Process();
+        System.Diagnostics.Process RemuxProcess = new System.Diagnostics.Process();
 
         DownloadFFMPEG df;
 
@@ -102,9 +104,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         public TnA()
         {
 
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("it-IT", false);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("it-IT", false);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", false);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", false);
             InitializeComponent();
+
+            //MessageBox.Show(SystemInformation.PowerStatus.PowerLineStatus.ToString());
 
             var screen = Screen.FromPoint(MousePosition);
             this.StartPosition = FormStartPosition.Manual;
@@ -113,22 +117,22 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
 
-            cmb_compatibilita.Items.Clear();
-            cmb_qualita.Items.Clear();
-            cmb_risoluz.Items.Clear();
+            cmb_profile.Items.Clear();
+            cmb_quality.Items.Clear();
+            cmb_resolution.Items.Clear();
             cmb_subs.Items.Clear();
 
-            for (Int32 i = 0; i < compatibilita.Items.Count; i++)
+            for (Int32 i = 0; i < profile.Items.Count; i++)
             {
-                cmb_compatibilita.Items.Add(compatibilita.Items[i].ToString());
+                cmb_profile.Items.Add(profile.Items[i].ToString());
             }
-            for (Int32 i = 0; i < qualita.Items.Count; i++)
+            for (Int32 i = 0; i < quality.Items.Count; i++)
             {
-                cmb_qualita.Items.Add(qualita.Items[i].ToString());
+                cmb_quality.Items.Add(quality.Items[i].ToString());
             }
-            for (Int32 i = 0; i < risoluz.Items.Count; i++)
+            for (Int32 i = 0; i < res.Items.Count; i++)
             {
-                cmb_risoluz.Items.Add(risoluz.Items[i].ToString());
+                cmb_resolution.Items.Add(res.Items[i].ToString());
             }
             for (Int32 i = 0; i < subtitle_mode.Items.Count; i++)
             {
@@ -140,31 +144,31 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             if (System.IO.File.Exists((Application.StartupPath + "\\TnA.7z")))
                 System.IO.File.Delete(Application.StartupPath + "\\TnA.7z");
 
-            foreach (String s in estensioni_video)
+            foreach (String s in VideoEXT)
             {
-                filtro += "*" + s.ToLower() + ";" + "*" + s.ToUpper() + ";";
+                Filter += "*" + s.ToLower() + ";" + "*" + s.ToUpper() + ";";
             }
-            filtro = filtro.Trim(';');
-            filtro += "|";
-            foreach (String s in estensioni_video)
+            Filter = Filter.Trim(';');
+            Filter += "|";
+            foreach (String s in VideoEXT)
             {
-                filtro += "File " + s.Trim('.').ToUpper() + "|*" + s.ToLower() + ";" + "*" + s.ToUpper() + "|";
+                Filter += "File " + s.Trim('.').ToUpper() + "|*" + s.ToLower() + ";" + "*" + s.ToUpper() + "|";
             }
-            filtro = filtro.Trim('|');
-            ferma_tutto();
-            toolStripComboBox1.Text = "Non fare niente";
+            Filter = Filter.Trim('|');
+            STOP();
+            ActionWhenFinishedToolStripComboBox.Text = "Do nothing";
             cmb_subs.Text = "Hardsub";
 
-            versione_tna = this.Text.Split(' ')[5].Replace("v", String.Empty);
+            TnAVersion = this.Text.Split(' ')[5].Replace("v", String.Empty);
 
             nextClipboardViewer = (IntPtr)SetClipboardViewer((int)this.Handle);
-            infoToolStripMenuItem.Image = SystemIcons.Information.ToBitmap();
+            AboutToolStripMenuItem.Image = SystemIcons.Information.ToBitmap();
 
             if (Directory.Exists(LOG_dir) == false)
                 Directory.CreateDirectory(LOG_dir);
 
-            if (Directory.Exists(Path.GetDirectoryName(file_settings)) == false)
-                Directory.CreateDirectory(Path.GetDirectoryName(file_settings));
+            if (Directory.Exists(Path.GetDirectoryName(SettingsFile)) == false)
+                Directory.CreateDirectory(Path.GetDirectoryName(SettingsFile));
 
             if (!Directory.Exists(temp_folder))
             {
@@ -196,18 +200,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     break;
             }
 
-            LeggiImpostazioni(file_settings);
+            ReadSettings(SettingsFile);
 
-            b_avvia.Enabled = false;
+            b_start.Enabled = false;
             this.Activate();
             if (Environment.GetCommandLineArgs().Count() > 1)
             {
                 List<String> d = new List<String>();
                 for (Int32 i = 1; i < Environment.GetCommandLineArgs().Count(); i++)
                     d.Add(Environment.GetCommandLineArgs()[i]);
-                recupera_fd(d.ToArray());
+                RetriveFiles(d.ToArray());
             }
-            
+
             bgw_updateschecker.RunWorkerAsync();
         }
 
@@ -273,11 +277,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         IntPtr nextClipboardViewer;
 
-        String filtro = "File video supportati|";
-
-        
-
-        public void LeggiImpostazioni_WindowsState(String Value)
+        public void ReadSettings_WindowsState(String Value)
         {
             switch (Value)
             {
@@ -293,7 +293,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
         }
 
-        public void LeggiImpostazioni_LarghezzaFinestra(String Value)
+        public void ReadSettings_WindowWidth(String Value)
         {
             try
             {
@@ -303,7 +303,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             catch { }
         }
 
-        public void LeggiImpostazioni_AltezzaFinestra(String Value)
+        public void ReadSettings_WindowHeight(String Value)
         {
             try
             {
@@ -313,15 +313,15 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             catch { }
         }
 
-        public void LeggiImpostazioni_Compatibilita(String Value)
+        public void ReadSettings_Profile(String Value)
         {
-            if (cmb_compatibilita.Items.Contains(Value))
-                cmb_compatibilita.Text = Value;
+            if (cmb_profile.Items.Contains(Value))
+                cmb_profile.Text = Value;
             else
-                cmb_compatibilita.Text = "Bluray AAC";
+                cmb_profile.Text = "Bluray AAC";
         }
 
-        public void LeggiImpostazioni_Sottotitoli(String Value)
+        public void ReadSettings_Subtitle(String Value)
         {
             if (cmb_subs.Items.Contains(Value))
                 cmb_subs.Text = Value;
@@ -329,141 +329,141 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 cmb_subs.Text = "Hardsub";
         }
 
-        public void LeggiImpostazioni_Risoluzione(String Value)
+        public void ReadSettings_Resolution(String Value)
         {
-            if (cmb_risoluz.Items.Contains(Value))
-                cmb_risoluz.Text = Value;
+            if (cmb_resolution.Items.Contains(Value))
+                cmb_resolution.Text = Value;
             else
-                cmb_risoluz.Text = "720p";
+                cmb_resolution.Text = "720p";
         }
 
-        public void LeggiImpostazioni_Qualita(String Value)
+        public void ReadSettings_Quality(String Value)
         {
-            if (cmb_qualita.Items.Contains(Value))
-                cmb_qualita.Text = Value;
+            if (cmb_quality.Items.Contains(Value))
+                cmb_quality.Text = Value;
             else
-                cmb_qualita.Text = "Media";
+                cmb_quality.Text = "Normal";
         }
 
-        public Int32 LeggiImpostazioni_DataUpd(String Value)
+        public Int32 ReadSettings_DataUpd(String Value)
         {
             Int32 Freq;
             switch (Value)
             {
                 case "m":
-                    manualeToolStripMenuItem.CheckState = CheckState.Checked;
-                    iToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    manualToolStripMenuItem.CheckState = CheckState.Checked;
+                    EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
                     Freq = -1;
                     break;
                 case "s":
-                    manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    iToolStripMenuItem.CheckState = CheckState.Checked;
-                    unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Checked;
+                    EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
                     Freq = 0;
                     break;
                 case "1":
-                    manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    iToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    unGiornoToolStripMenuItem.CheckState = CheckState.Checked;
-                    ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryDayToolStripMenuItem.CheckState = CheckState.Checked;
+                    EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
                     Freq = 1;
                     break;
                 case "3":
-                    manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    iToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Checked;
-                    ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Checked;
+                    EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
                     Freq = 3;
                     break;
                 case "7":
-                    manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    iToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniSettimanaToolStripMenuItem.CheckState = CheckState.Checked;
+                    manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryWeekToolStripMenuItem.CheckState = CheckState.Checked;
                     Freq = 7;
                     break;
                 default:
-                    manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    iToolStripMenuItem.CheckState = CheckState.Checked;
-                    unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                    ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Checked;
+                    EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                    EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
                     Freq = 0;
                     break;
             }
             return Freq;
         }
 
-        public void LeggiImpostazioni_Clipboard(String Value)
+        public void ReadSettings_Clipboard(String Value)
         {
             if (Value == "y")
-                monitoraGliAppuntiToolStripMenuItem.CheckState = CheckState.Checked;
+                ActivateClipboardMonitoringToolStripMenuItem.CheckState = CheckState.Checked;
             else
-                monitoraGliAppuntiToolStripMenuItem.CheckState = CheckState.Unchecked;
+                ActivateClipboardMonitoringToolStripMenuItem.CheckState = CheckState.Unchecked;
         }
 
-        public void LeggiImpostazioni(String FileINI)
+        public void ReadSettings(String FileINI)
         {
-            if (System.IO.File.Exists(file_settings))
+            if (System.IO.File.Exists(SettingsFile))
             {
-                IniFile ini = new IniFile(file_settings);
+                IniFile ini = new IniFile(SettingsFile);
 
                 if (ini.KeyExists("WindowState"))
                 {
-                    LeggiImpostazioni_WindowsState(ini.Read("WindowState"));
+                    ReadSettings_WindowsState(ini.Read("WindowState"));
                 }
 
                 if (this.WindowState != FormWindowState.Minimized && this.WindowState != FormWindowState.Maximized)
                 {
                     if (ini.KeyExists("Width"))
-                        LeggiImpostazioni_LarghezzaFinestra(ini.Read("Width"));
+                        ReadSettings_WindowWidth(ini.Read("Width"));
                     if (ini.KeyExists("Height"))
-                        LeggiImpostazioni_AltezzaFinestra(ini.Read("Height"));
+                        ReadSettings_WindowHeight(ini.Read("Height"));
                 }
 
-                if (ini.KeyExists("comp"))
+                if (ini.KeyExists("profile"))
                 {
-                    LeggiImpostazioni_Compatibilita(ini.Read("comp"));
+                    ReadSettings_Profile(ini.Read("profile"));
                 }
                 else
-                    cmb_compatibilita.Text = "Bluray AAC";
+                    cmb_profile.Text = "Bluray AAC";
 
                 if (ini.KeyExists("qual"))
                 {
-                    LeggiImpostazioni_Qualita(ini.Read("qual"));
+                    ReadSettings_Quality(ini.Read("qual"));
                 }
                 else
-                    cmb_qualita.Text = "Media";
+                    cmb_quality.Text = "Normal";
 
-                if (ini.KeyExists("risoluz"))
+                if (ini.KeyExists("res"))
                 {
-                    LeggiImpostazioni_Risoluzione(ini.Read("risoluz"));
+                    ReadSettings_Resolution(ini.Read("res"));
                 }
                 else
-                    cmb_risoluz.Text = "720p";
+                    cmb_resolution.Text = "720p";
 
                 if (ini.KeyExists("subs"))
                 {
-                    LeggiImpostazioni_Sottotitoli(ini.Read("subs"));
+                    ReadSettings_Subtitle(ini.Read("subs"));
                 }
                 else
                     cmb_subs.Text = "Hardsub";
 
                 if (ini.KeyExists("last_upd"))
                 {
-                    data_vecchia = ini.Read("last_upd");
+                    OldDate = ini.Read("last_upd");
                     Int32 fr = -2;
                     if (ini.KeyExists("upd_freq"))
                     {
-                        fr = LeggiImpostazioni_DataUpd(ini.Read("upd_freq"));
+                        fr = ReadSettings_DataUpd(ini.Read("upd_freq"));
                     }
 
                     if (fr != -2)
@@ -475,11 +475,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         if (fr >= 1)
                         {
-                            DateTime data_odierna = DateTime.Now;
+                            DateTime Date = DateTime.Now;
                             try
                             {
-                                DateTime dt = DateTime.ParseExact(data_vecchia, "dd/MM/yyyy", new CultureInfo("it-IT"));
-                                TimeSpan diff = data_odierna - dt;
+                                DateTime dt = DateTime.ParseExact(OldDate, "dd/MM/yyyy", new CultureInfo("en-US"));
+                                TimeSpan diff = Date - dt;
                                 if (diff.Days >= fr)
                                 {
                                     this.Enabled = false;
@@ -488,7 +488,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             }
                             catch
                             {
-                                iToolStripMenuItem.CheckState = CheckState.Checked;
+                                EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Checked;
                             }
                         }
                     }
@@ -500,14 +500,14 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 }
                 if (ini.KeyExists("monit_clipb") == true)
                 {
-                    LeggiImpostazioni_Clipboard(ini.Read("monit_clipb"));
+                    ReadSettings_Clipboard(ini.Read("monit_clipb"));
                 }
             }
             else
             {
-                cmb_compatibilita.Text = "Bluray AAC";
-                cmb_risoluz.Text = "720p";
-                cmb_qualita.Text = "Media";
+                cmb_profile.Text = "Bluray AAC";
+                cmb_resolution.Text = "720p";
+                cmb_quality.Text = "Normal";
             }
         }
 
@@ -541,12 +541,12 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             try
             {
-                if (monitoraGliAppuntiToolStripMenuItem.CheckState == CheckState.Checked && monitoraGliAppuntiToolStripMenuItem.Enabled == true)
+                if (ActivateClipboardMonitoringToolStripMenuItem.CheckState == CheckState.Checked && ActivateClipboardMonitoringToolStripMenuItem.Enabled == true)
                 {
                     System.Collections.Specialized.StringCollection coll = Clipboard.GetFileDropList();
                     String[] f = new string[coll.Count];
                     coll.CopyTo(f, 0);
-                    recupera_fd(f);
+                    RetriveFiles(f);
                 }
             }
             catch (Exception e)
@@ -564,7 +564,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     if (Path.HasExtension(s) == true)
                     {
-                        if (estensioni_video.Contains(Path.GetExtension(s).ToLower()) == true)
+                        if (VideoEXT.Contains(Path.GetExtension(s).ToLower()) == true)
                         {
                             e.Effect = DragDropEffects.Copy;
                             break;
@@ -574,7 +574,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     {
                         foreach (String t in Directory.GetFiles(s, "*", SearchOption.AllDirectories))
                         {
-                            if (estensioni_video.Contains(Path.GetExtension(t).ToLower()) == true)
+                            if (VideoEXT.Contains(Path.GetExtension(t).ToLower()) == true)
                             {
                                 e.Effect = DragDropEffects.Copy;
                                 break;
@@ -594,11 +594,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             if (DGV_video.ReadOnly == false)
             {
                 String[] dati = (String[])e.Data.GetData(DataFormats.FileDrop);
-                recupera_fd(dati);
+                RetriveFiles(dati);
             }
         }
 
-        public void recupera_fd(String[] dati)
+        public void RetriveFiles(String[] dati)
         {
             List<String> temp = new List<String>();
             Boolean es_cart = false;
@@ -609,14 +609,14 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                     if (Path.HasExtension(s) == true)
                     {
-                        if (estensioni_video.Contains(Path.GetExtension(s).ToLower()) == true)
+                        if (VideoEXT.Contains(Path.GetExtension(s).ToLower()) == true)
                         {
-                            DGV_video.Rows.Add(Path.GetFileName(s), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(s));
+                            DGV_video.Rows.Add(Path.GetFileName(s), cmb_profile.Text, cmb_resolution.Text, cmb_quality.Text, cmb_subs.Text, "READY", Path.GetDirectoryName(s));
                         }
                     }
                     else
                     {
-                        Seleziona_formati sf = new Seleziona_formati(estensioni_video);
+                        FormatSelection sf = new FormatSelection(VideoEXT);
                         sf.ShowInTaskbar = false;
                         sf.Icon = this.Icon;
                         sf.TopLevel = true;
@@ -630,20 +630,20 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         if (es_cart == true)
                         {
-                            formati_scelti = TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.formati_scelti;
+                            ExtensionToImport = TnA___Tanoshimi_no_Autohardsubber.FormatSelection.Formats;
                             foreach (String t in Directory.GetFiles(s, "*", SearchOption.AllDirectories))
                             {
-                                if (formati_scelti.Contains(Path.GetExtension(t).ToLower()) == true)
+                                if (ExtensionToImport.Contains(Path.GetExtension(t).ToLower()) == true)
                                 {
-                                    DGV_video.Rows.Add(Path.GetFileName(t), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(t));
+                                    DGV_video.Rows.Add(Path.GetFileName(t), cmb_profile.Text, cmb_resolution.Text, cmb_quality.Text, cmb_subs.Text, "READY", Path.GetDirectoryName(t));
                                 }
                                 else
                                 {
-                                    if (formati_scelti.Contains("TUTTI"))
+                                    if (ExtensionToImport.Contains("TUTTI"))
                                     {
-                                        if (estensioni_video.Contains(Path.GetExtension(t).ToLower()) == true)
+                                        if (VideoEXT.Contains(Path.GetExtension(t).ToLower()) == true)
                                         {
-                                            DGV_video.Rows.Add(Path.GetFileName(t), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(t));
+                                            DGV_video.Rows.Add(Path.GetFileName(t), cmb_profile.Text, cmb_resolution.Text, cmb_quality.Text, cmb_subs.Text, "READY", Path.GetDirectoryName(t));
                                         }
                                     }
                                 }
@@ -654,60 +654,61 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                 if (DGV_video.Rows.Count > 0)
                 {
-                    b_avvia.Enabled = true;
+                    b_start.Enabled = true;
                     tb_help.Visible = false;
                 }
                 temp.Clear();
-                tab_autohardsubber.Text = label_tab_lista + " (Totale files: " + DGV_video.Rows.Count.ToString() + ")";
+                tab_autohardsubber.Text = TabFilelistLabel + " (count: " + DGV_video.Rows.Count.ToString() + ")";
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            ControllaLunghezzaPercorsi();
+            CheckPathLength();
         }
 
         private void b_avvia_Click(object sender, EventArgs e)
         {
-            Boolean presente = false, start = true;
-            
+            Boolean FFmpegEXEFound = false, start = true;
+
             foreach (String s in System.IO.Directory.GetFiles(Path.GetDirectoryName(ffmpeg)))
             {
                 if (Path.GetFileName(s).ToLower().Contains(Path.GetFileName(ffmpeg)))
                 {
-                    presente = true;
+                    FFmpegEXEFound = true;
+                    break;
                 }
             }
-            if (b_avvia.Text.StartsWith("A") && presente == true)
+            if (b_start.Text.StartsWith("S") && FFmpegEXEFound == true)
             {
-                monitoraGliAppuntiToolStripMenuItem.Enabled = false;
+                ActivateClipboardMonitoringToolStripMenuItem.Enabled = false;
                 DGV_video.ClearSelection();
                 DGV_video.ContextMenuStrip.Enabled = false;
-                indice_percentuale = 0;
-                Boolean processati = false;
+                PercentageIndex = 0;
+                Boolean AlreadyDone = false;
                 foreach (DataGridViewRow r in DGV_video.Rows)
                 {
-                    if (r.Cells["stato"].Value.ToString().ToLower().Contains("pronto"))
+                    if (r.Cells["status"].Value.ToString().ToLower().Contains("ready"))
                     {
-                        processati = false;
+                        AlreadyDone = false;
                     }
                     else
                     {
-                        processati = true;
+                        AlreadyDone = true;
                         break;
                     }
                 }
-                if (processati == true)
+                if (AlreadyDone == true)
                 {
-                    SelezionaProcessati sp = new SelezionaProcessati();
+                    FilesToProcess sp = new FilesToProcess();
                     if (sp.ShowDialog() == DialogResult.OK)
                     {
                         foreach (DataGridViewRow r in DGV_video.Rows)
                         {
-                            if (stati_scelti.Contains(r.Cells["stato"].Value.ToString().Split(' ')[0]))
+                            if (StatusToReset.Contains(r.Cells["status"].Value.ToString().Split(' ')[0]))
                             {
-                                r.Cells["stato"].Value = "PRONTO - 0,00%";
-                                r.Cells["stato"].Style.BackColor = Color.White;
+                                r.Cells["status"].Value = "READY - 0,00%";
+                                r.Cells["status"].Style.BackColor = Color.White;
                             }
                             start = true;
                         }
@@ -722,85 +723,85 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     ts = new ThreadStart(encode);
                     t = new Thread(ts);
                     t.Start();
-                    timer_tempo.Start();
-                    b_avvia.Text = "Ferma";
-                    ripristinaImpostazioniToolStripMenuItem3.Enabled = false;
-                    ripristinaImpostazioniToolStripMenuItem3.ShortcutKeys = Keys.None;
-                    b_avvia.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.stop;
-                    b_avvia.FlatAppearance.MouseOverBackColor = Color.OrangeRed;
+                    t_elapsed_time.Start();
+                    b_start.Text = "STOP";
+                    ResetSettingsToolStripMenuItem3.Enabled = false;
+                    ResetSettingsToolStripMenuItem3.ShortcutKeys = Keys.None;
+                    b_start.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.stop;
+                    b_start.FlatAppearance.MouseOverBackColor = Color.OrangeRed;
                     b_pause.Enabled = true;
-                    b_agg_cart.Enabled = false;
-                    b_agg_files.Enabled = false;
-                    b_incolla.Enabled = false;
-                    b_rimuovi.Enabled = false;
+                    b_add_folder.Enabled = false;
+                    b_add_files.Enabled = false;
+                    b_paste.Enabled = false;
+                    b_remove.Enabled = false;
                     DGV_video.ReadOnly = true;
-                    strumentiToolStripMenuItem.Enabled = false;
-                    modificaToolStripMenuItem.Enabled = false;
-                    infoToolStripMenuItem.Enabled = false;
+                    ToolsToolStripMenuItem.Enabled = false;
+                    EditToolStripMenuItem.Enabled = false;
+                    AboutToolStripMenuItem.Enabled = false;
                     pb_tot.Value = 0;
                     ts_perc.Text = pb_tot.Value.ToString() + "%";
-                    rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
-                    l_vel.Text = "Velocità: 0";
-                    l_dim_prev.Text = "Dimensione stimata: 0";
+                    rtb_encode.Text = rtb_subs.Text = String.Empty;
+                    l_speed.Text = "Speed: 0";
+                    l_estimated_size.Text = "Estimated size: 0";
                     ts_perc.Text = "0,00%";
-                    l_dim_att.Text = "Dimensione attuale: 0";
-                    l_temp_rim.Text = "Tempo rimanente: 00:00:00";
-                    l_temp_trasc.Text = "Posizione video: 00:00:00";
-                    file_attuale = "Nessuno";
+                    l_size.Text = "Size: 0";
+                    l_remaining_time.Text = "Remaining time: 00:00:00";
+                    l_pos.Text = "Position: 00:00:00";
+                    EncodingFile = "None";
                 }
             }
             else
             {
-                if (presente == true)
+                if (FFmpegEXEFound == true)
                 {
                     b_pause.Image = TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause;
-                    b_pause.Text = "Pausa";
-                    b_avvia.Text = "Avvia";
-                    b_avvia.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
-                    b_avvia.FlatAppearance.MouseOverBackColor = Color.LawnGreen;
+                    b_pause.Text = "PAUSE";
+                    b_start.Text = "START";
+                    b_start.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
+                    b_start.FlatAppearance.MouseOverBackColor = Color.LawnGreen;
                     b_pause.Enabled = false;
-                    b_agg_cart.Enabled = true;
-                    b_agg_files.Enabled = true;
-                    b_incolla.Enabled = true;
-                    b_rimuovi.Enabled = true;
-                    ripristinaImpostazioniToolStripMenuItem3.Enabled = true;
-                    ripristinaImpostazioniToolStripMenuItem3.ShortcutKeys = (Keys)Shortcut.CtrlR;
+                    b_add_folder.Enabled = true;
+                    b_add_files.Enabled = true;
+                    b_paste.Enabled = true;
+                    b_remove.Enabled = true;
+                    ResetSettingsToolStripMenuItem3.Enabled = true;
+                    ResetSettingsToolStripMenuItem3.ShortcutKeys = (Keys)Shortcut.CtrlR;
                     DGV_video.ReadOnly = false;
-                    timer_tempo.Stop();
-                    monitoraGliAppuntiToolStripMenuItem.Enabled = true;
+                    t_elapsed_time.Stop();
+                    ActivateClipboardMonitoringToolStripMenuItem.Enabled = true;
                     DGV_video.ContextMenuStrip.Enabled = true;
                     DGV_video.Columns[DGV_video.Columns["input"].Index].ReadOnly = true;
-                    DGV_video.Columns[DGV_video.Columns["stato"].Index].ReadOnly = true;
-                    DGV_video.Columns[DGV_video.Columns["percorso_orig"].Index].ReadOnly = true;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "FERMATO - " + ts_perc.Text;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Yellow;
-                    strumentiToolStripMenuItem.Enabled = true;
-                    modificaToolStripMenuItem.Enabled = true;
-                    infoToolStripMenuItem.Enabled = true;
-                    ferma_tutto();
+                    DGV_video.Columns[DGV_video.Columns["status"].Index].ReadOnly = true;
+                    DGV_video.Columns[DGV_video.Columns["source_path"].Index].ReadOnly = true;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "STOPPED - " + ts_perc.Text;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.Yellow;
+                    ToolsToolStripMenuItem.Enabled = true;
+                    EditToolStripMenuItem.Enabled = true;
+                    AboutToolStripMenuItem.Enabled = true;
+                    STOP();
                     pause = false;
-                    file_attuale = "Nessuno";
+                    EncodingFile = "None";
                 }
                 else
                 {
-                    var scelta = MessageBox.Show("Eseguibile di FFmpeg non trovato. Scaricarlo ora?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                    var scelta = MessageBox.Show("FFmpeg not found. Download it now?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
 
                     if (scelta == DialogResult.Yes)
                     {
                         DF(true);
                         if (df.DialogResult == DialogResult.OK)
                         {
-                            DialogResult inizio = MessageBox.Show("Iniziare ora la codifica?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            DialogResult inizio = MessageBox.Show("Start encode now?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (inizio == DialogResult.Yes)
                             {
                                 b_avvia_Click(sender, e);
                             }
                         }
                         else
-                            MessageBox.Show("Finché mancherà l'eseguibile di FFmpeg, il programma non potrà funzionare.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("FFmpeg.exe is required. This program will not work without it.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     else
-                        MessageBox.Show("Finché mancherà l'eseguibile di FFmpeg, il programma non potrà funzionare.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("FFmpeg.exe is required. This program will not work without it.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
@@ -811,24 +812,24 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
-                    l_vel.Text = "Velocità: 0";
-                    l_dim_prev.Text = "Dimensione stimata: 0";
+                    l_speed.Text = "Speed: 0";
+                    l_estimated_size.Text = "Estimated size: 0";
                     ts_perc.Text = "0,00%";
-                    l_dim_att.Text = "Dimensione attuale: 0";
-                    l_temp_rim.Text = "Tempo rimanente: 00:00:00";
-                    l_temp_trasc.Text = "Posizione video: 00:00:00";
+                    l_size.Text = "Size: 0";
+                    l_remaining_time.Text = "Remaining time: 00:00:00";
+                    l_pos.Text = "Position: 00:00:00";
                 });
-                if (DGV_video.Rows[q].Cells["stato"].Value.ToString().ToLower().StartsWith("pronto"))
+                if (DGV_video.Rows[q].Cells["status"].Value.ToString().ToLower().StartsWith("ready"))
                 {
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        rtb_codifica.Text = rtb_sottotitoli.Text = String.Empty;
+                        rtb_encode.Text = rtb_subs.Text = String.Empty;
                     });
                     DataGridViewRow d = DGV_video.Rows[q];
-                    sec_trasc = 0;
-                    comando = String.Empty;
-                    indice_percentuale = d.Index;
-                    file_attuale = "Rimozione cartelle temporanee";
+                    ElapsedSeconds = 0;
+                    Arguments = String.Empty;
+                    PercentageIndex = d.Index;
+                    EncodingFile = "Removing temporary folders...";
                     if (!Directory.Exists(temp_folder))
                     {
                         Directory.CreateDirectory(temp_folder);
@@ -840,14 +841,14 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        ts_avanz.Text = "Avanzamento elaborazione - Nessun file in elaborazione";
+                        ts_progress.Text = "None";
                     });
 
-                    String file_video = Path.Combine(d.Cells[DGV_video.Columns["percorso_orig"].Index].Value.ToString(), d.Cells[DGV_video.Columns["input"].Index].Value.ToString());
-                    String profilo = d.Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString();
-                    String qualita = d.Cells[DGV_video.Columns["qualita"].Index].Value.ToString();
-                    String risoluzione_f = d.Cells[DGV_video.Columns["risoluz"].Index].Value.ToString();
-                    String modalita_subs = d.Cells[DGV_video.Columns["subtitle_mode"].Index].Value.ToString();
+                    String VideoFile = Path.Combine(d.Cells[DGV_video.Columns["source_path"].Index].Value.ToString(), d.Cells[DGV_video.Columns["input"].Index].Value.ToString());
+                    String Profile = d.Cells[DGV_video.Columns["profile"].Index].Value.ToString();
+                    String Quality = d.Cells[DGV_video.Columns["quality"].Index].Value.ToString();
+                    String Res = d.Cells[DGV_video.Columns["res"].Index].Value.ToString();
+                    String SubsMode = d.Cells[DGV_video.Columns["subtitle_mode"].Index].Value.ToString();
 
                     List<String> OverbordingLines = new List<String>();
 
@@ -855,11 +856,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                     Boolean ass = false, stop = false;
 
-                    if (Path.GetExtension(file_video).ToLower() == ".mkv" && profilo.StartsWith("Remux") == false && profilo.StartsWith("Workraw") == false && modalita_subs.StartsWith("Hard") && profilo.StartsWith("Gen")==false)
+                    if (Path.GetExtension(VideoFile).ToLower() == ".mkv" && Profile.StartsWith("Remux") == false && Profile.StartsWith("Workraw") == false && SubsMode.StartsWith("Hard") && Profile.StartsWith("Gen") == false)
                     {
                         this.Invoke((MethodInvoker)delegate ()
                         {
-                            ts_avanz.Text = "Avanzamento elaborazione - Cerco eventuali fonts e sottotitoli";
+                            ts_progress.Text = "Finding attachments and subtitles...";
                         });
 
                         foreach (String s in Directory.GetFiles(temp_folder))
@@ -874,14 +875,14 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg);
                             System.IO.File.Copy(ffmpeg, temp_ffmpeg, true);
                         }
-                        
+
                         Tuple<String, String> SubID = new Tuple<string, string>(String.Empty, String.Empty);
 
                         System.Diagnostics.ProcessStartInfo psi_extract = new System.Diagnostics.ProcessStartInfo();
 
                         Environment.CurrentDirectory = temp_folder;
 
-                        foreach (MediaInfoDotNet.Models.TextStream t in new MediaFile(file_video).Text)
+                        foreach (MediaInfoDotNet.Models.TextStream t in new MediaFile(VideoFile).Text)
                         {
                             if (t.CodecId.ToLower().Contains("s_text/ass"))
                             {
@@ -911,12 +912,12 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                         if (SubID.Item1 == String.Empty)
                         {
-                            if (new MediaFile(file_video).Text.Count > 0)
+                            if (new MediaFile(VideoFile).Text.Count > 0)
                             {
-                                if (new MediaFile(file_video).Text[0].CodecId.ToLower().Contains("s_text/ass"))
-                                    SubID = new Tuple<string, string>((new MediaFile(file_video).Text[0].ID - 1).ToString(), ".ass");
-                                if (new MediaFile(file_video).Text[0].CodecId.ToLower().Contains("s_text/utf"))
-                                    SubID = new Tuple<string, string>((new MediaFile(file_video).Text[0].ID - 1).ToString(), ".srt");
+                                if (new MediaFile(VideoFile).Text[0].CodecId.ToLower().Contains("s_text/ass"))
+                                    SubID = new Tuple<string, string>((new MediaFile(VideoFile).Text[0].ID - 1).ToString(), ".ass");
+                                if (new MediaFile(VideoFile).Text[0].CodecId.ToLower().Contains("s_text/utf"))
+                                    SubID = new Tuple<string, string>((new MediaFile(VideoFile).Text[0].ID - 1).ToString(), ".srt");
                             }
                         }
 
@@ -929,10 +930,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                         if (String.IsNullOrWhiteSpace(SubID.Item1) == false)
                         {
-                            psi_extract.Arguments = " -y -i \"" + file_video + "\" ";
+                            psi_extract.Arguments = " -y -i \"" + VideoFile + "\" ";
                             this.Invoke((MethodInvoker)delegate ()
                             {
-                                ts_avanz.Text = "Avanzamento elaborazione - Estraggo i sottotitoli";
+                                ts_progress.Text = "Extracting subtitles...";
                             });
                             psi_extract.Arguments += " -map 0:" + SubID.Item1 + " -c:s copy \"" + Path.GetDirectoryName(ffmpeg) + "\\subs0" + SubID.Item2 + "\"";
                             file_sub.Add(Path.GetDirectoryName(ffmpeg) + "\\subs0" + SubID.Item2);
@@ -942,7 +943,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
                         this.Invoke((MethodInvoker)delegate ()
                         {
-                            ts_avanz.Text = "Avanzamento elaborazione - Estraggo gli eventuali fonts";
+                            ts_progress.Text = "Extracting attachments...";
                         });
 
                         psi_extract = new System.Diagnostics.ProcessStartInfo();
@@ -957,10 +958,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             temp_ffmpeg = temp_folder + "\\" + Path.GetFileName(ffmpeg);
                             System.IO.File.Copy(ffmpeg, temp_ffmpeg, true);
                         }
-                        
+
                         psi_extract.FileName = Path.GetFileName(temp_ffmpeg);
 
-                        psi_extract.Arguments = " -dump_attachment:t \"\" -i \"" + file_video + "\" NUL";
+                        psi_extract.Arguments = " -dump_attachment:t \"\" -i \"" + VideoFile + "\" NUL";
 
                         System.Diagnostics.Process.Start(psi_extract).WaitForExit();
 
@@ -977,51 +978,32 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         Directory.Move(temp_folder, fonts_folder);
                     }
 
-                    comando = String.Empty;
+                    Arguments = String.Empty;
 
-                    file_attuale = Path.GetFileName(file_video);
+                    EncodingFile = Path.GetFileName(VideoFile);
 
                     //Thread.Sleep(2000);
 
                     if (stop == false)
                     {
+                        Int32 H = Convert.ToInt32(d.Cells["res"].Value.ToString().Replace("p", String.Empty));
                         this.Invoke((MethodInvoker)delegate ()
                         {
 
                         });
-                        switch (profilo)
+                        switch (Profile)
                         {
                             case "Remux MKV":
-                                remux_mkv(file_video, profilo);
+                                remux_mkv(VideoFile, Profile);
                                 break;
                             case "Remux MP4":
-                                remux_mp4(file_video, profilo, qualita);
+                                remux_mp4(VideoFile, Profile, Quality, H / 9 * 16, H);
                                 break;
-                            case "Genera keyframes":
-                                GeneraKeyframes(file_video);
+                            case "Keyframes generation":
+                                GeneraKeyframes(VideoFile, H / 9 * 16, H);
                                 break;
                             default:
-                                switch (d.Cells["risoluz"].Value.ToString())
-                                {
-                                    case "1080p":
-                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1920, 1080, modalita_subs);
-                                        break;
-                                    case "900p":
-                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1600, 900, modalita_subs);
-                                        break;
-                                    case "720p":
-                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1280, 720, modalita_subs);
-                                        break;
-                                    case "576p":
-                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 1024, 576, modalita_subs);
-                                        break;
-                                    case "480p":
-                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 864, 486, modalita_subs);
-                                        break;
-                                    case "396p":
-                                        Codifica(file_video, qualita, file_sub, fonts_folder, ass, profilo, 704, 396, modalita_subs);
-                                        break;
-                                }
+                                Encode(VideoFile, Quality, file_sub, fonts_folder, ass, Profile, H / 9 * 16, H, SubsMode);
                                 break;
                         }
 
@@ -1031,140 +1013,148 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             Environment.CurrentDirectory = GUIdir;
             Thread.Sleep(500);
-            if (azione_fine_coda.StartsWith("Non") == false)
+            switch (WhenAllIsFinished)
             {
-                switch (azione_fine_coda)
-                {
-                    case "Chiudi l'applicazione":
-                        forza_chiusura = true;
-                        this.Close();
-                        break;
-                    case "Stand-by":
-                        Application.SetSuspendState(PowerState.Suspend, true, true);
-                        break;
-                    default:
-                        System.Diagnostics.Process.Start("shutdown", "/s /t 120");
-                        if (MessageBox.Show("Il PC si spegnerà entro due minuti a partire dalle " + DateTime.Now.TimeOfDay.ToString() + ".\nPer annullare, premere OK.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
-                        {
-                            System.Diagnostics.Process.Start("shutdown", "/a");
-                            MessageBox.Show("L'arresto del PC è stato cancellato.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        break;
-                }
+                case "Close application":
+                    ForceClose = true;
+                    this.Close();
+                    break;
+                case "Stand-by":
+                    Application.SetSuspendState(PowerState.Suspend, true, true);
+                    break;
+                case "Shutdown":
+                    System.Diagnostics.Process.Start("shutdown", "/s /t 120");
+                    if (MessageBox.Show("This PC will shutdown in 2 minutes starting from " + DateTime.Now.TimeOfDay.ToString() + ".\nClick on OK to abort.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
+                    {
+                        System.Diagnostics.Process.Start("shutdown", "/a");
+                        MessageBox.Show("Shutdown aborted.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    break;
+                case "Reboot":
+                    System.Diagnostics.Process.Start("shutdown", "/r /t 0");
+                    break;
             }
             this.Invoke((MethodInvoker)delegate ()
             {
-                b_avvia.Text = "Avvia";
-                b_avvia.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
-                b_avvia.FlatAppearance.MouseOverBackColor = Color.LawnGreen;
+                b_start.Text = "START";
+                b_start.Image = (Image)TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play;
+                b_start.FlatAppearance.MouseOverBackColor = Color.LawnGreen;
                 b_pause.Enabled = false;
-                b_agg_cart.Enabled = true;
-                b_agg_files.Enabled = true;
-                b_incolla.Enabled = true;
-                b_rimuovi.Enabled = true;
-                ripristinaImpostazioniToolStripMenuItem3.Enabled = true;
-                ripristinaImpostazioniToolStripMenuItem3.ShortcutKeys = (Keys)Shortcut.CtrlR;
+                b_add_folder.Enabled = true;
+                b_add_files.Enabled = true;
+                b_paste.Enabled = true;
+                b_remove.Enabled = true;
+                ResetSettingsToolStripMenuItem3.Enabled = true;
+                ResetSettingsToolStripMenuItem3.ShortcutKeys = (Keys)Shortcut.CtrlR;
                 DGV_video.ReadOnly = false;
-                timer_tempo.Stop();
-                monitoraGliAppuntiToolStripMenuItem.Enabled = true;
+                t_elapsed_time.Stop();
+                ActivateClipboardMonitoringToolStripMenuItem.Enabled = true;
                 DGV_video.ContextMenuStrip.Enabled = true;
                 DGV_video.Columns[DGV_video.Columns["input"].Index].ReadOnly = true;
-                DGV_video.Columns[DGV_video.Columns["stato"].Index].ReadOnly = true;
-                DGV_video.Columns[DGV_video.Columns["percorso_orig"].Index].ReadOnly = true;
-                strumentiToolStripMenuItem.Enabled = true;
-                modificaToolStripMenuItem.Enabled = true;
-                infoToolStripMenuItem.Enabled = true;
-                file_attuale = "Nessuno";
+                DGV_video.Columns[DGV_video.Columns["status"].Index].ReadOnly = true;
+                DGV_video.Columns[DGV_video.Columns["source_path"].Index].ReadOnly = true;
+                ToolsToolStripMenuItem.Enabled = true;
+                EditToolStripMenuItem.Enabled = true;
+                AboutToolStripMenuItem.Enabled = true;
+                EncodingFile = "None";
             });
         }
 
-        public void GeneraKeyframes(String v)
+        public void GeneraKeyframes(String v, Int32 largh, Int32 alt)
         {
             String txt = Path.GetDirectoryName(v) + "\\" + Path.GetFileNameWithoutExtension(v) + " - Keyframes.txt";
-            file_finale = Path.Combine(Path.GetDirectoryName(v), Path.GetFileNameWithoutExtension(v));
-            
-            durata = TimeSpan.FromMilliseconds(new MediaFile(v).Video[0].Duration).ToString(@"hh\:mm\:ss");
+            FinalFile = Path.Combine(Path.GetDirectoryName(v), Path.GetFileNameWithoutExtension(v));
+
+            Duration = TimeSpan.FromMilliseconds(new MediaFile(v).Video[0].Duration).ToString(@"hh\:mm\:ss");
 
             this.Invoke((MethodInvoker)delegate ()
             {
-                ts_avanz.Text = "Avanzamento elaborazione - Generazione keyframes per il file '" + Path.GetFileNameWithoutExtension(v) + "'";
+                ts_progress.Text = "Keyframes generation of '" + Path.GetFileNameWithoutExtension(v) + "'";
             });
 
             Environment.CurrentDirectory = Path.GetDirectoryName(scxvid);
             var psi = new System.Diagnostics.ProcessStartInfo();
-            processo_codifica = new System.Diagnostics.Process();
+            EncodeProcess = new System.Diagnostics.Process();
+
+            String temp = ResizeAuto(new GetVideoTracks(new MediaFile(v)).AspectRatio, largh, new GetVideoTracks(new MediaFile(v)).Width, alt, new GetVideoTracks(new MediaFile(v)).Height);
+            if (String.IsNullOrWhiteSpace(temp) == false)
+            {
+                temp = " -vf " + temp.Trim(',');
+            }
+            else
+                temp = String.Empty;
 
             psi.FileName = "cmd.exe";
 
-            psi.Arguments = "/c " + Path.GetFileNameWithoutExtension(ffmpeg) + " -i \"" + v + "\" -f yuv4mpegpipe -pix_fmt yuv420p -vsync drop - | " + Path.GetFileNameWithoutExtension(scxvid) + " \"" + txt + "\"";
+            psi.Arguments = "/c " + Path.GetFileNameWithoutExtension(ffmpeg) + " -i \"" + v + "\" -f yuv4mpegpipe " + temp + " -pix_fmt yuv420p -vsync drop - | " + Path.GetFileNameWithoutExtension(scxvid) + " \"" + txt + "\"";
 
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
             psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            
+
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
 
-            processo_codifica.OutputDataReceived += Processo_codifica_OutputDataReceived;
-            processo_codifica.ErrorDataReceived += Processo_codifica_ErrorDataReceived;
-            processo_codifica.StartInfo = psi;
-            processo_codifica.Start();
-            processo_codifica.BeginOutputReadLine();
-            processo_codifica.BeginErrorReadLine();
-            processo_codifica.WaitForExit();
-            processo_codifica.CancelOutputRead();
-            processo_codifica.CancelErrorRead();
-            exit_code = processo_codifica.ExitCode;
+            EncodeProcess.OutputDataReceived += Processo_codifica_OutputDataReceived;
+            EncodeProcess.ErrorDataReceived += Processo_codifica_ErrorDataReceived;
+            EncodeProcess.StartInfo = psi;
+            EncodeProcess.Start();
+            EncodeProcess.BeginOutputReadLine();
+            EncodeProcess.BeginErrorReadLine();
+            EncodeProcess.WaitForExit();
+            EncodeProcess.CancelOutputRead();
+            EncodeProcess.CancelErrorRead();
+            exit_code = EncodeProcess.ExitCode;
             if (exit_code == 0)
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
                     ts_perc.Text = "100,00%";
                     pb_tot.Value = pb_tot.Maximum;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "OK - " + ts_perc.Text;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.LightGreen;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "OK - " + ts_perc.Text;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.LightGreen;
                 });
             }
             else
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "ERROR - " + ts_perc.Text;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.Red;
                 });
             }
 
-            CreaLOG();
+            CreateLOG();
 
         }
 
-        public void remux_mp4(String v, String prof, String qual)
+        public void remux_mp4(String v, String prof, String qual, Int32 largh, Int32 alt)
         {
-            String comando_remux = " -y -i \"" + v + "\"";
-            String mp4_finale = Path.GetDirectoryName(v) + "\\" + Path.GetFileNameWithoutExtension(v) + "[" + prof + "].mp4";
-            file_finale = mp4_finale;
+            String RemuxArguments = " -y -i \"" + v + "\"";
+            String OutputMP4 = Path.GetDirectoryName(v) + "\\" + Path.GetFileNameWithoutExtension(v) + "[" + prof + "].mp4";
+            FinalFile = OutputMP4;
 
             MediaFile m = new MediaFile(v);
 
-            Int32 cont_video = 0, cont_audio = 0;
+            Int32 VideoIndex = 0, AudioIndex = 0;
             foreach (MediaInfoDotNet.Models.VideoStream vid in m.Video)
             {
                 if (vid.Format.ToLower().Contains("mpeg") || vid.Format.ToLower().Contains("avc") || vid.Format.ToLower().Contains("hevc"))
                 {
-                    comando_remux += " -map 0:" + (vid.ID - 1).ToString() + " -c:v:" + cont_video.ToString() + " copy";
-                    comando_remux += " -r " + vid.FrameRate.ToString().Replace(",", ".");
+                    RemuxArguments += " -map 0:" + (vid.ID - 1).ToString() + " -c:v:" + VideoIndex.ToString() + " copy";
+                    RemuxArguments += " -r " + vid.FrameRate.ToString().Replace(",", ".");
                     fc = Math.Round((Double)vid.FrameCount/* / 1000.0*/, 0, MidpointRounding.AwayFromZero).ToString();
                     Double altezza = vid.Height;
                     Double larghezza = vid.Width;
                     String aspect = Math.Round(larghezza / altezza, 3, MidpointRounding.AwayFromZero).ToString();
-                    durata = TimeSpan.FromMilliseconds(vid.Duration).ToString(@"hh\:mm\:ss");
+                    Duration = TimeSpan.FromMilliseconds(vid.Duration).ToString(@"hh\:mm\:ss");
                     //if (durata.Contains("."))
                     //    durata = durata.Remove(durata.IndexOf(".")).Trim();
                 }
                 else
                 {
-                    comando_remux += " -map 0:" + (vid.ID - 1).ToString() + " -c:v:" + cont_video.ToString() + " libx264";
-                    comando_remux += " -r " + vid.FrameRate.ToString().Replace(",", ".");
+                    RemuxArguments += " -map 0:" + (vid.ID - 1).ToString() + " -c:v:" + VideoIndex.ToString() + " libx264";
+                    RemuxArguments += " -r " + vid.FrameRate.ToString().Replace(",", ".");
                     fc = Math.Round((Double)vid.FrameCount/* / 1000.0*/, 0, MidpointRounding.AwayFromZero).ToString();
                     Double altezza = vid.Height;
                     if (altezza % 2 != 0)
@@ -1173,212 +1163,223 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     if (larghezza % 2 != 0)
                         larghezza--;
                     String aspect = Math.Round(larghezza / altezza, 3, MidpointRounding.AwayFromZero).ToString();
-                    durata = TimeSpan.FromMilliseconds(vid.Duration).ToString("HH:mm:ss");
+                    Duration = TimeSpan.FromMilliseconds(vid.Duration).ToString("HH:mm:ss");
                     //if (durata.Contains("."))
                     //    durata = durata.Remove(durata.IndexOf(".")).Trim();
                     switch (qual)
                     {
-                        case "Altissima":
-                            comando += " -crf 14 -preset:v veryslow -aq-mode 3";
+                        case "Very high":
+                            Arguments += " -crf:v:" + VideoIndex.ToString() + " 14 -preset:v veryslow -aq-mode 3";
                             break;
-                        case "Alta":
-                            comando += " -crf 17 -preset:v veryslow -aq-mode 3";
+                        case "High":
+                            Arguments += " -crf:v:" + VideoIndex.ToString() + " 17 -preset:v veryslow -aq-mode 3";
                             break;
-                        case "Medio-alta":
-                            comando += " -crf 18.5 -preset:v slower -aq-mode 3";
+                        case "Above normal":
+                            Arguments += " -crf:v:" + VideoIndex.ToString() + " 18.5 -preset:v slower -aq-mode 3";
                             break;
-                        case "Media":
-                            comando += " -crf 20 -preset:v medium -aq-mode 2";
+                        case "Normal":
+                            Arguments += " -crf:v:" + VideoIndex.ToString() + " 20 -preset:v medium -aq-mode 2";
                             break;
-                        case "Medio-bassa":
-                            comando += " -crf 22 -preset:v fast -aq-mode 1";
+                        case "Below normal":
+                            Arguments += " -crf:v:" + VideoIndex.ToString() + " 22 -preset:v fast -aq-mode 1";
                             break;
-                        case "Bassa":
-                            comando += " -crf 25 -preset:v fast -aq-mode 1";
+                        case "Low":
+                            Arguments += " -crf:v:" + VideoIndex.ToString() + " 25 -preset:v fast -aq-mode 1";
                             break;
-                        case "Bassissima":
-                            comando += " -crf 27 -preset:v fast -aq-mode 1";
+                        case "Very low":
+                            Arguments += " -crf:v:" + VideoIndex.ToString() + " 27 -preset:v fast -aq-mode 1";
                             break;
-                        case "Bozza":
-                            comando += " -crf 36 -preset:v superfast -aq-mode 1";
+                        case "Draft":
+                            Arguments += " -crf:v:" + VideoIndex.ToString() + " 36 -preset:v superfast -aq-mode 1";
                             break;
                     }
 
-                    comando_remux += " -profile:v:" + cont_video.ToString() + " high -level:v:" + cont_video.ToString() + " 4.1";
+                    RemuxArguments += " -profile:v:" + VideoIndex.ToString() + " high -level:v:" + VideoIndex.ToString() + " 4.1";
+                    String temp = ResizeAuto(new GetVideoTracks(new MediaFile(v)).AspectRatio, largh, new GetVideoTracks(new MediaFile(v)).Width, alt, new GetVideoTracks(new MediaFile(v)).Height);
+                    if (String.IsNullOrWhiteSpace(temp) == false)
+                    {
+                        temp = "," + temp;
+                    }
+                    else
+                        temp = String.Empty;
                     if (vid.miGetString("ScanType").ToLower().Trim().StartsWith("i") == true)
                     {
-                        comando_remux += " -vf yadif";
+                        temp += ",yadif";
                     }
+                    RemuxArguments += " -vf " + temp.Trim(',');
                 }
-                cont_video++;
+                VideoIndex++;
             }
             foreach (MediaInfoDotNet.Models.AudioStream aud in m.Audio)
             {
-                CatturaAudio ca = new CatturaAudio(aud);
-                String canali_audio = String.Empty;
+                GetAudioTracks ca = new GetAudioTracks(aud, m.filePath);
+                String AudioChannels = String.Empty;
                 Boolean IsLossless = ca.Lossless;
 
-                canali_audio = ca.Canali.ToString();
+                AudioChannels = ca.Channels.ToString();
 
-                if (ca.Formato.ToLower().Contains("ac-3") || ca.Formato.ToLower().StartsWith("mpeg") || ca.Formato.ToLower().Contains("aac"))
+                if (ca.Format.ToLower().Contains("ac-3") || ca.Format.ToLower().StartsWith("mpeg") || ca.Format.ToLower().Contains("aac"))
                 {
-                    comando_remux += " -map 0:" + ca.Indice.ToString() + " -c:a:" + cont_audio.ToString() + " copy";
+                    RemuxArguments += " -map 0:" + ca.Index.ToString() + " -c:a:" + AudioIndex.ToString() + " copy";
                 }
                 else
                 {
                     if (IsLossless == true)
                     {
-                        comando_remux += " -map 0:" + ca.Indice.ToString() + " -c:a:" + cont_audio.ToString() + " alac -ac:" + cont_audio.ToString() + " " + canali_audio;
+                        RemuxArguments += " -map 0:" + ca.Index.ToString() + " -c:a:" + AudioIndex.ToString() + " alac -ac:" + AudioIndex.ToString() + " " + AudioChannels;
                     }
                     else
                     {
-                        comando_remux += " -map 0:" + ca.Indice.ToString() + " -c:a:" + cont_audio.ToString() + " aac -ac:" + cont_audio.ToString() + " " + canali_audio;
+                        RemuxArguments += " -map 0:" + ca.Index.ToString() + " -c:a:" + AudioIndex.ToString() + " aac -ac:" + AudioIndex.ToString() + " " + AudioChannels;
                         switch (qual)
                         {
-                            case "Altissima":
-                                comando_remux += " -b:a:" + cont_audio.ToString() + " " + (192 * (Convert.ToInt32(canali_audio) / 2)).ToString() + "k";
+                            case "Very high":
+                                RemuxArguments += " -b:a:" + AudioIndex.ToString() + " " + (192 * (Convert.ToInt32(AudioChannels) / 2)).ToString() + "k";
                                 break;
-                            case "Alta":
-                                comando_remux += " -b:a:" + cont_audio.ToString() + " " + (160 * (Convert.ToInt32(canali_audio) / 2)).ToString() + "k";
+                            case "High":
+                                RemuxArguments += " -b:a:" + AudioIndex.ToString() + " " + (160 * (Convert.ToInt32(AudioChannels) / 2)).ToString() + "k";
                                 break;
-                            case "Medio-alta":
-                                comando_remux += " -b:a:" + cont_audio.ToString() + " " + (144 * (Convert.ToInt32(canali_audio) / 2)).ToString() + "k";
+                            case "Above medium":
+                                RemuxArguments += " -b:a:" + AudioIndex.ToString() + " " + (144 * (Convert.ToInt32(AudioChannels) / 2)).ToString() + "k";
                                 break;
-                            case "Media":
-                                comando_remux += " -b:a:" + cont_audio.ToString() + " " + (112 * (Convert.ToInt32(canali_audio) / 2)).ToString() + "k";
+                            case "Normal":
+                                RemuxArguments += " -b:a:" + AudioIndex.ToString() + " " + (112 * (Convert.ToInt32(AudioChannels) / 2)).ToString() + "k";
                                 break;
-                            case "Medio-bassa":
-                                comando_remux += " -b:a:" + cont_audio.ToString() + " " + (96 * (Convert.ToInt32(canali_audio) / 2)).ToString() + "k";
+                            case "Below normal":
+                                RemuxArguments += " -b:a:" + AudioIndex.ToString() + " " + (96 * (Convert.ToInt32(AudioChannels) / 2)).ToString() + "k";
                                 break;
-                            case "Bassa":
-                                comando_remux += " -b:a:" + cont_audio.ToString() + " " + (64 * (Convert.ToInt32(canali_audio) / 2)).ToString() + "k";
+                            case "Low":
+                                RemuxArguments += " -b:a:" + AudioIndex.ToString() + " " + (64 * (Convert.ToInt32(AudioChannels) / 2)).ToString() + "k";
                                 break;
-                            case "Bassissima":
-                                comando_remux += " -b:a:" + cont_audio.ToString() + " " + (48 * (Convert.ToInt32(canali_audio) / 2)).ToString() + "k";
+                            case "Very low":
+                                RemuxArguments += " -b:a:" + AudioIndex.ToString() + " " + (48 * (Convert.ToInt32(AudioChannels) / 2)).ToString() + "k";
+                                break;
+                            case "Draft":
+                                RemuxArguments += " -b:a:" + AudioIndex.ToString() + " " + (32 * (Convert.ToInt32(AudioChannels) / 2)).ToString() + "k";
                                 break;
                         }
                     }
                 }
-                cont_audio++;
+                AudioIndex++;
             }
-            
-            comando_remux += " \"" + mp4_finale + "\"";
+
+            RemuxArguments += " \"" + OutputMP4 + "\"";
 
             //MessageBox.Show(comando_remux);
 
             Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg);
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
-            processo_codifica = new System.Diagnostics.Process();
+            EncodeProcess = new System.Diagnostics.Process();
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
             psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            
+
             psi.FileName = Path.GetFileName(ffmpeg);
-            
-            psi.Arguments = comando_remux;
+
+            psi.Arguments = RemuxArguments;
 
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
 
-            processo_codifica.OutputDataReceived += Processo_codifica_OutputDataReceived;
-            processo_codifica.ErrorDataReceived += Processo_codifica_ErrorDataReceived;
-            processo_codifica.StartInfo = psi;
-            processo_codifica.Start();
-            processo_codifica.BeginOutputReadLine();
-            processo_codifica.BeginErrorReadLine();
-            processo_codifica.WaitForExit();
-            processo_codifica.CancelOutputRead();
-            processo_codifica.CancelErrorRead();
-            exit_code = processo_codifica.ExitCode;
+            EncodeProcess.OutputDataReceived += Processo_codifica_OutputDataReceived;
+            EncodeProcess.ErrorDataReceived += Processo_codifica_ErrorDataReceived;
+            EncodeProcess.StartInfo = psi;
+            EncodeProcess.Start();
+            EncodeProcess.BeginOutputReadLine();
+            EncodeProcess.BeginErrorReadLine();
+            EncodeProcess.WaitForExit();
+            EncodeProcess.CancelOutputRead();
+            EncodeProcess.CancelErrorRead();
+            exit_code = EncodeProcess.ExitCode;
             if (exit_code == 0)
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
                     ts_perc.Text = "100,00%";
                     pb_tot.Value = pb_tot.Maximum;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "OK - " + ts_perc.Text;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.LightGreen;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "OK - " + ts_perc.Text;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.LightGreen;
                 });
             }
             else
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "ERROR - " + ts_perc.Text;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.Red;
                 });
             }
 
-            CreaLOG();
+            CreateLOG();
 
         }
 
         public void remux_mkv(String v, String prof)
         {
             Environment.CurrentDirectory = Path.GetDirectoryName(mkvmerge);
-            String mkv_finale = Path.GetDirectoryName(v) + "\\" + Path.GetFileNameWithoutExtension(v) + "[" + prof + "].mkv";
-            file_finale = mkv_finale;
-            String comando_remux = " -o \"" + mkv_finale + "\" \"" + v + "\"";
+            String OutputMKV = Path.GetDirectoryName(v) + "\\" + Path.GetFileNameWithoutExtension(v) + "[" + prof + "].mkv";
+            FinalFile = OutputMKV;
+            String RemuxArguments = " -o \"" + OutputMKV + "\" \"" + v + "\"";
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
-            psi.Arguments = comando_remux;
+            psi.Arguments = RemuxArguments;
             psi.FileName = Path.GetFileName(mkvmerge);
             psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             psi.RedirectStandardError = true;
             psi.RedirectStandardOutput = true;
             psi.UseShellExecute = false;
             psi.CreateNoWindow = true;
-            processo_remux = new System.Diagnostics.Process();
-            processo_remux.StartInfo = psi;
-            processo_remux.ErrorDataReceived += Pr_ErrorDataReceived;
-            processo_remux.OutputDataReceived += Pr_OutputDataReceived;
+            RemuxProcess = new System.Diagnostics.Process();
+            RemuxProcess.StartInfo = psi;
+            RemuxProcess.ErrorDataReceived += Pr_ErrorDataReceived;
+            RemuxProcess.OutputDataReceived += Pr_OutputDataReceived;
             this.Invoke((MethodInvoker)delegate ()
             {
-                ts_avanz.Text = "Avanzamento elaborazione - Remux in corso del file '" + Path.GetFileName(v) + "'";
+                ts_progress.Text = "Remuxing file '" + Path.GetFileName(v) + "'";
             });
-            processo_remux.Start();
-            processo_remux.BeginErrorReadLine();
-            processo_remux.BeginOutputReadLine();
-            processo_remux.WaitForExit();
-            processo_remux.CancelErrorRead();
-            processo_remux.CancelOutputRead();
-            exit_code = processo_remux.ExitCode;
-            switch (processo_remux.ExitCode)
+            RemuxProcess.Start();
+            RemuxProcess.BeginErrorReadLine();
+            RemuxProcess.BeginOutputReadLine();
+            RemuxProcess.WaitForExit();
+            RemuxProcess.CancelErrorRead();
+            RemuxProcess.CancelOutputRead();
+            exit_code = RemuxProcess.ExitCode;
+            switch (RemuxProcess.ExitCode)
             {
                 case 0:
                     this.Invoke((MethodInvoker)delegate ()
                     {
                         ts_perc.Text = "100,00%";
                         pb_tot.Value = pb_tot.Maximum;
-                        DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "OK - " + ts_perc.Text;
-                        DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.LightGreen;
+                        DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "OK - " + ts_perc.Text;
+                        DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.LightGreen;
                     });
                     break;
                 case 1:
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ATTENZIONE - " + ts_perc.Text;
-                        DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.LightGoldenrodYellow;
+                        DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "WARNING - " + ts_perc.Text;
+                        DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.LightGoldenrodYellow;
                     });
                     break;
                 default:
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
-                        DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
+                        DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "ERROR - " + ts_perc.Text;
+                        DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.Red;
                     });
                     break;
 
             }
 
-            CreaLOG();
+            CreateLOG();
 
             this.Invoke((MethodInvoker)delegate ()
             {
-                ts_avanz.Text = "Avanzamento elaborazione - Nessuna elaborazione";
+                ts_progress.Text = "None";
             });
         }
 
-        public void CreaLOG()
+        public void CreateLOG()
         {
             if (Directory.Exists(LOG_dir) == false)
             {
@@ -1388,16 +1389,16 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
-                    List<String> LOG_info = rtb_codifica.Lines.ToList();
+                    List<String> LOG_info = rtb_encode.Lines.ToList();
                     LOG_info.RemoveAll(String.IsNullOrWhiteSpace);
                     LOG_info.Add("\n");
 
-                    List<String> LOG_subs = rtb_sottotitoli.Lines.ToList();
+                    List<String> LOG_subs = rtb_subs.Lines.ToList();
                     LOG_subs.RemoveAll(String.IsNullOrWhiteSpace);
 
                     LOG_info.AddRange(LOG_subs);
 
-                    System.IO.File.WriteAllLines(LOG_dir + "\\" + Path.GetFileNameWithoutExtension(file_finale) + " - LOG.txt", LOG_info.ToArray());
+                    System.IO.File.WriteAllLines(LOG_dir + "\\" + Path.GetFileNameWithoutExtension(FinalFile) + " - LOG.txt", LOG_info.ToArray());
                 });
             }
             catch { }
@@ -1406,29 +1407,29 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         private void Pr_OutputDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
         {
             String s = e.Data;
-            String numero = String.Empty;
+            String Number = String.Empty;
             if (String.IsNullOrWhiteSpace(s) == false)
             {
                 if (s.StartsWith("Progress"))
                 {
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        numero = s.Replace("Progress:", String.Empty);
-                        numero = numero.Replace("%", String.Empty);
-                        numero = numero.Trim();
-                        pb_tot.Value = Convert.ToInt32(numero);
-                        
+                        Number = s.Replace("Progress:", String.Empty);
+                        Number = Number.Replace("%", String.Empty);
+                        Number = Number.Trim();
+                        pb_tot.Value = Convert.ToInt32(Number);
+
                         ts_perc.Text = pb_tot.Value.ToString() + ".00%";
-                        DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "IN CORSO - " + ts_perc.Text;
+                        DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "RUNNING - " + ts_perc.Text;
                     });
                 }
                 else
                 {
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        rtb_codifica.Text += s + "\n";
-                        rtb_codifica.SelectionStart = rtb_codifica.Text.Length;
-                        rtb_codifica.ScrollToCaret();
+                        rtb_encode.Text += s + "\n";
+                        rtb_encode.SelectionStart = rtb_encode.Text.Length;
+                        rtb_encode.ScrollToCaret();
                     });
                 }
             }
@@ -1449,29 +1450,29 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         numero = numero.Trim();
                         pb_tot.Value = Convert.ToInt32(numero);
                         ts_perc.Text = pb_tot.Value.ToString() + ".00%";
-                        DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "IN CORSO - " + ts_perc.Text;
+                        DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "RUNNING - " + ts_perc.Text;
                     });
                 }
                 else
                 {
                     this.Invoke((MethodInvoker)delegate ()
                     {
-                        rtb_codifica.Text += s + "\n";
+                        rtb_encode.Text += s + "\n";
                     });
                 }
             }
         }
 
-        public String ResizeAuto(String AspectR, Int32 LargDest, Double LargOrig, Int32 AltDest, Double AltOrig)
+        public String ResizeAuto(String AspectR, Int32 OutW, Double InW, Int32 OutH, Double InH)
         {
             String temp = String.Empty;
 
-            if (Convert.ToDouble(LargOrig / AltOrig) >= (4.0 / 3.0))
+            if (Convert.ToDouble(InW / InH) >= (4.0 / 3.0))
             {
-                Int32 LFin = CalcolaLarghezzaFinale(Convert.ToInt32(LargOrig), LargDest, Convert.ToInt32(AltOrig));
-                if (LFin > 0)
+                Int32 FinalW = CalculateOutW(Convert.ToInt32(InW), OutW, Convert.ToInt32(InH));
+                if (FinalW > 0)
                 {
-                    temp = ",scale=\"" + LFin + ":trunc(ow/a/2)*2\"";
+                    temp = ",scale=\"" + FinalW + ":trunc(ow/a/2)*2\"";
                 }
                 else
                 {
@@ -1480,11 +1481,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             else
             {
-                if (Convert.ToInt32(AltOrig) > AltDest)
+                if (Convert.ToInt32(InH) > OutH)
                 {
-                    if (AltOrig % 2 == 0)
-                        AltOrig = AltDest;
-                    temp = ",scale=\"trunc(oh*a/2)*2:" + AltOrig + "\"";
+                    if (InH % 2 == 0)
+                        InH = OutH;
+                    temp = ",scale=\"trunc(oh*a/2)*2:" + InH + "\"";
                 }
                 else
                 {
@@ -1494,28 +1495,28 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             return temp;
         }
 
-        public Int32 CalcolaLarghezzaFinale(Int32 LargO, Int32 LargD, Int32 AltO)
+        public Int32 CalculateOutW(Int32 InW, Int32 OutW, Int32 InH)
         {
             Int32 temp = 0;
-            if (LargO < LargD)
+            if (InW < OutW)
             {
-                if (LargO % 2 == 0)
+                if (InW % 2 == 0)
                 {
-                    if (AltO % 2 == 0)
+                    if (InH % 2 == 0)
                         temp = 0;
                     else
-                        temp = LargO;
+                        temp = InW;
                 }
                 else
                 {
-                    temp = LargO - 1;
+                    temp = InW - 1;
                 }
             }
             else
             {
-                if (LargO > LargD)
+                if (InW > OutW)
                 {
-                    temp = LargD;
+                    temp = OutW;
                 }
                 else
                 {
@@ -1525,28 +1526,28 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             return temp;
         }
 
-        public Int32 CalcolaAltezzaFinale(Int32 AltO, Int32 AltD, Int32 LargO)
+        public Int32 CalculateOutH(Int32 InH, Int32 OutH, Int32 OutW)
         {
             Int32 temp = 0;
-            if (AltO < AltD)
+            if (InH < OutH)
             {
-                if (AltO % 2 == 0)
+                if (InH % 2 == 0)
                 {
-                    if (LargO % 2 == 0)
+                    if (OutW % 2 == 0)
                         temp = 0;
                     else
-                        temp = AltO;
+                        temp = InH;
                 }
                 else
                 {
-                    temp = AltO - 1;
+                    temp = InH - 1;
                 }
             }
             else
             {
-                if (AltO > AltD)
+                if (InH > OutH)
                 {
-                    temp = AltD;
+                    temp = OutH;
                 }
                 else
                 {
@@ -1569,29 +1570,29 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                             try
                             {
                                 Int32 frames = Convert.ToInt32(ff.Frames);
-                                pb_tot.Maximum = Convert.ToInt32(TimeSpan.Parse(durata).TotalSeconds);
+                                pb_tot.Maximum = Convert.ToInt32(TimeSpan.Parse(Duration).TotalSeconds);
                                 String fps = ff.Fps;
-                                l_vel.Text = "Velocità: " + fps + " fps";
+                                l_speed.Text = "Speed: " + fps + " fps";
                                 String size = ff.Size.Replace("kB", "");
-                                l_dim_att.Text = "Dimensione attuale: " + Arrotonda(Convert.ToDouble(size) / 1024.0, 2) + " MB";
-                                l_temp_trasc.Text = "Posizione video: " + ff.Time.ToString();
-                                ts_avanz.Text = "Avanzamento elaborazione - Codifica del file \"" + file_attuale + "\"";
+                                l_size.Text = "Size: " + Arrotonda(Convert.ToDouble(size) / 1024.0, 2) + " MB";
+                                l_pos.Text = "Position: " + ff.Time.ToString();
+                                ts_progress.Text = "Encoding file \"" + EncodingFile + "\"";
                                 ts_perc.Text = Arrotonda(((Double)pb_tot.Value / pb_tot.Maximum) * 100.0, 2) + "%";
                                 pb_tot.Value = Convert.ToInt32(ff.Time.TotalSeconds);
 
 
-                                DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "IN CORSO - " + ts_perc.Text;
-                                DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.White;
+                                DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "RUNNING - " + ts_perc.Text;
+                                DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.White;
 
                                 String bitrate = ff.Bitrate.Remove(ff.Bitrate.IndexOf("k"));
 
                                 if (fps.Contains("."))
                                     fps = fps.Remove(fps.IndexOf("."));
                                 Int32 tempo_restante = ((Convert.ToInt32(fc) - Convert.ToInt32(ff.Frames)) / Convert.ToInt32(ff.Fps));
-                                l_temp_rim.Text = "Tempo rimanente: " + TimeSpan.FromSeconds(tempo_restante).ToString(@"hh\:mm\:ss");
+                                l_remaining_time.Text = "Remaining time: " + TimeSpan.FromSeconds(tempo_restante).ToString(@"hh\:mm\:ss");
                                 Double bitrate_kb = Convert.ToDouble(bitrate.Remove(bitrate.IndexOf("."))) / 8 / 1024.0;
-                                Double dimens_stimata = Math.Round(bitrate_kb * TimeSpan.Parse(durata).TotalSeconds, 2);
-                                l_dim_prev.Text = "Dimensione stimata: " + dimens_stimata + " MB";
+                                Double dimens_stimata = Math.Round(bitrate_kb * TimeSpan.Parse(Duration).TotalSeconds, 2);
+                                l_estimated_size.Text = "Estimated size: " + dimens_stimata + " MB";
                             }
                             catch// (Exception ex)
                             {
@@ -1603,17 +1604,17 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         {
                             if (temp_extra.ToLower().Trim().Contains("parsed_ass"))
                             {
-                                rtb_sottotitoli.Text += l_temp_trasc.Text.Remove(0, l_temp_trasc.Text.LastIndexOf(' ') + 1) + " ---> " + temp_extra + "\n";
-                                rtb_sottotitoli.SelectionStart = rtb_sottotitoli.Text.Length;
-                                rtb_sottotitoli.ScrollToCaret();
+                                rtb_subs.Text += l_pos.Text.Remove(0, l_pos.Text.LastIndexOf(' ') + 1) + " ---> " + temp_extra + "\n";
+                                rtb_subs.SelectionStart = rtb_subs.Text.Length;
+                                rtb_subs.ScrollToCaret();
                             }
                             else
                             {
                                 if (temp_extra.ToLower().Trim().StartsWith("frame") == false)
                                 {
-                                    rtb_codifica.Text += temp_extra + "\n";
-                                    rtb_codifica.SelectionStart = rtb_codifica.Text.Length;
-                                    rtb_codifica.ScrollToCaret();
+                                    rtb_encode.Text += temp_extra + "\n";
+                                    rtb_encode.SelectionStart = rtb_encode.Text.Length;
+                                    rtb_encode.ScrollToCaret();
                                 }
                             }
                         }
@@ -1630,19 +1631,19 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 {
                     if (String.IsNullOrWhiteSpace(e.Data.Trim()) == false)
                     {
-                        rtb_codifica.Text = String.Empty;
-                        rtb_codifica.Text += e.Data;
+                        rtb_encode.Text = String.Empty;
+                        rtb_encode.Text += e.Data;
                     }
                 }
                 catch { }
             });
         }
 
-        public void AvviaCodifica()
+        public void StartEncode()
         {
             Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg);
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
-            processo_codifica = new System.Diagnostics.Process();
+            EncodeProcess = new System.Diagnostics.Process();
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
             psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -1651,65 +1652,65 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 psi.FileName = Path.GetFileName(ffmpeg);
             }
             //psi.FileName = "cmd.exe";
-            psi.Arguments = comando;// + " 2>" + Path.GetFileName(ffmpeg_txt);
+            psi.Arguments = Arguments;// + " 2>" + Path.GetFileName(ffmpeg_txt);
 
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
 
-            processo_codifica.OutputDataReceived += Processo_codifica_OutputDataReceived;
-            processo_codifica.ErrorDataReceived += Processo_codifica_ErrorDataReceived;
-            processo_codifica.StartInfo = psi;
-            processo_codifica.Start();
-            processo_codifica.BeginOutputReadLine();
-            processo_codifica.BeginErrorReadLine();
-            processo_codifica.WaitForExit();
-            processo_codifica.CancelOutputRead();
-            processo_codifica.CancelErrorRead();
-            exit_code = processo_codifica.ExitCode;
+            EncodeProcess.OutputDataReceived += Processo_codifica_OutputDataReceived;
+            EncodeProcess.ErrorDataReceived += Processo_codifica_ErrorDataReceived;
+            EncodeProcess.StartInfo = psi;
+            EncodeProcess.Start();
+            EncodeProcess.BeginOutputReadLine();
+            EncodeProcess.BeginErrorReadLine();
+            EncodeProcess.WaitForExit();
+            EncodeProcess.CancelOutputRead();
+            EncodeProcess.CancelErrorRead();
+            exit_code = EncodeProcess.ExitCode;
             if (exit_code == 0)
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
                     ts_perc.Text = "100,00%";
                     pb_tot.Value = pb_tot.Maximum;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "OK - " + ts_perc.Text;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.LightGreen;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "OK - " + ts_perc.Text;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.LightGreen;
                 });
             }
             else
             {
                 this.Invoke((MethodInvoker)delegate ()
                 {
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Value = "ERRORE - " + ts_perc.Text;
-                    DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["stato"].Index].Style.BackColor = Color.Red;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Value = "ERROR - " + ts_perc.Text;
+                    DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["status"].Index].Style.BackColor = Color.Red;
                 });
             }
 
-            CreaLOG();
+            CreateLOG();
         }
 
-        public void Codifica(String video, String qualita, List<String> sub, String ff, Boolean sub_ass, String prof, Int32 largh, Int32 alt, String submode)
+        public void Encode(String video, String quality, List<String> sub, String ff, Boolean sub_ass, String prof, Int32 W, Int32 H, String submode)
         {
             MediaFile media = new MediaFile(video);
 
-            List<CatturaAudio> ca = new List<CatturaAudio>();
-            CatturaVideo cv = new CatturaVideo(media);
+            List<GetAudioTracks> ca = new List<GetAudioTracks>();
+            GetVideoTracks cv = new GetVideoTracks(media);
 
-            ImpostazioniProfiliCodifica.QualitaVideo.Altissima q_altissima = new ImpostazioniProfiliCodifica.QualitaVideo.Altissima(prof);
-            ImpostazioniProfiliCodifica.QualitaVideo.Alta q_alta = new ImpostazioniProfiliCodifica.QualitaVideo.Alta(prof);
-            ImpostazioniProfiliCodifica.QualitaVideo.MedioAlta q_medioalta = new ImpostazioniProfiliCodifica.QualitaVideo.MedioAlta(prof);
-            ImpostazioniProfiliCodifica.QualitaVideo.Media q_media = new ImpostazioniProfiliCodifica.QualitaVideo.Media(prof);
-            ImpostazioniProfiliCodifica.QualitaVideo.MedioBassa q_mediobassa = new ImpostazioniProfiliCodifica.QualitaVideo.MedioBassa(prof);
-            ImpostazioniProfiliCodifica.QualitaVideo.Bassa q_bassa = new ImpostazioniProfiliCodifica.QualitaVideo.Bassa(prof);
-            ImpostazioniProfiliCodifica.QualitaVideo.Bassissima q_bassissima = new ImpostazioniProfiliCodifica.QualitaVideo.Bassissima(prof);
-            ImpostazioniProfiliCodifica.QualitaVideo.Bozza q_bozza = new ImpostazioniProfiliCodifica.QualitaVideo.Bozza(prof);
+            EncodeProfileSettings.VideoQuality.VeryHigh qVH = new EncodeProfileSettings.VideoQuality.VeryHigh(prof);
+            EncodeProfileSettings.VideoQuality.High qH = new EncodeProfileSettings.VideoQuality.High(prof);
+            EncodeProfileSettings.VideoQuality.AboveNormal qAN = new EncodeProfileSettings.VideoQuality.AboveNormal(prof);
+            EncodeProfileSettings.VideoQuality.Normal qN = new EncodeProfileSettings.VideoQuality.Normal(prof);
+            EncodeProfileSettings.VideoQuality.BelowNormal qBN = new EncodeProfileSettings.VideoQuality.BelowNormal(prof);
+            EncodeProfileSettings.VideoQuality.Low qL = new EncodeProfileSettings.VideoQuality.Low(prof);
+            EncodeProfileSettings.VideoQuality.VeryLow qVL = new EncodeProfileSettings.VideoQuality.VeryLow(prof);
+            EncodeProfileSettings.VideoQuality.Draft qD = new EncodeProfileSettings.VideoQuality.Draft(prof);
 
-            ImpostazioniProfiliCodifica.ParametriVideo parametri_video = new ImpostazioniProfiliCodifica.ParametriVideo(media);
+            EncodeProfileSettings.Parameters VideoArguments = new EncodeProfileSettings.Parameters(media);
 
-            fc = Math.Round((Double)cv.TotaleFrames, 0, MidpointRounding.AwayFromZero).ToString();
+            fc = Math.Round((Double)cv.Framecount, 0, MidpointRounding.AwayFromZero).ToString();
 
 
-            Boolean interl = cv.Interlacciato;
+            Boolean interl = cv.Interlaced;
 
             this.Invoke((MethodInvoker)delegate ()
             {
@@ -1723,109 +1724,109 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
             foreach (MediaInfoDotNet.Models.AudioStream a in media.Audio)
             {
-                ca.Add(new CatturaAudio(a));
+                ca.Add(new GetAudioTracks(a, media.filePath));
             }
 
-            comando = " -y -i \"" + video + "\" -map 0:" + cv.Indice;
+            this.Arguments = " -y -i \"" + video + "\" -map 0:" + cv.Index;
 
-            comando += " -c:v:" + cv.Indice + " " + q_altissima.CODEC;
+            this.Arguments += " -c:v:" + cv.Index + " " + qVH.CODEC;
             if (prof.ToLower().Contains("xbox") && Convert.ToDouble(cv.Framerate) > 30)
                 cv.Framerate = "30";
 
             cv.Framerate = cv.Framerate.ToString().Replace(",", ".");
 
             if (Convert.ToDouble(cv.Framerate) > 0)
-                comando += " -r " + cv.Framerate;
+                this.Arguments += " -r " + cv.Framerate;
 
-            durata = cv.DurataPrecisa.ToString();
-            
-            switch (qualita)
+            Duration = cv.Duration.ToString();
+
+            switch (quality)
             {
-                case "Altissima":
+                case "Very High":
                     switch (prof.Split(' ')[0])
                     {
                         case "XviD":
-                            comando += " -q:v:" + cv.Indice.ToString() + " " + q_altissima.QP.ToString() + " " + parametri_video.XVID;
+                            this.Arguments += " -q:v:" + cv.Index.ToString() + " " + qVH.QP.ToString() + " " + VideoArguments.XVID;
                             break;
                         default:
-                            comando += " -crf: " + q_altissima.CRF.ToString().Replace(',', '.') + " -preset:v " + q_altissima.Preset + " -aq-mode " + q_altissima.AQmode.ToString();
+                            this.Arguments += " -crf: " + qVH.CRF.ToString().Replace(',', '.') + " -preset:v " + qVH.Preset + " -aq-mode " + qVH.AQmode.ToString();
                             break;
                     }
                     break;
-                case "Alta":
+                case "High":
                     switch (prof.Split(' ')[0])
                     {
                         case "XviD":
-                            comando += " -q:v:" + cv.Indice.ToString() + " " + q_alta.QP.ToString() + " " + parametri_video.XVID;
+                            this.Arguments += " -q:v:" + cv.Index.ToString() + " " + qH.QP.ToString() + " " + VideoArguments.XVID;
                             break;
                         default:
-                            comando += " -crf: " + q_alta.CRF.ToString().Replace(',', '.') + " -preset:v " + q_alta.Preset + " -aq-mode " + q_alta.AQmode.ToString();
+                            this.Arguments += " -crf: " + qH.CRF.ToString().Replace(',', '.') + " -preset:v " + qH.Preset + " -aq-mode " + qH.AQmode.ToString();
                             break;
                     }
                     break;
-                case "Medio-alta":
+                case "Above normal":
                     switch (prof.Split(' ')[0])
                     {
                         case "XviD":
-                            comando += " -q:v:" + cv.Indice.ToString() + " " + q_medioalta.QP.ToString() + " " + parametri_video.XVID;
+                            this.Arguments += " -q:v:" + cv.Index.ToString() + " " + qAN.QP.ToString() + " " + VideoArguments.XVID;
                             break;
                         default:
-                            comando += " -crf: " + q_medioalta.CRF.ToString().Replace(',', '.') + " -preset:v " + q_medioalta.Preset + " -aq-mode " + q_medioalta.AQmode.ToString();
+                            this.Arguments += " -crf: " + qAN.CRF.ToString().Replace(',', '.') + " -preset:v " + qAN.Preset + " -aq-mode " + qAN.AQmode.ToString();
                             break;
                     }
                     break;
-                case "Media":
+                case "Normal":
                     switch (prof.Split(' ')[0])
                     {
                         case "XviD":
-                            comando += " -q:v:" + cv.Indice.ToString() + " " + q_media.QP.ToString() + " " + parametri_video.XVID;
+                            this.Arguments += " -q:v:" + cv.Index.ToString() + " " + qN.QP.ToString() + " " + VideoArguments.XVID;
                             break;
                         default:
-                            comando += " -crf: " + q_media.CRF.ToString().Replace(',', '.') + " -preset:v " + q_media.Preset + " -aq-mode " + q_media.AQmode.ToString();
+                            this.Arguments += " -crf: " + qN.CRF.ToString().Replace(',', '.') + " -preset:v " + qN.Preset + " -aq-mode " + qN.AQmode.ToString();
                             break;
                     }
                     break;
-                case "Medio-bassa":
+                case "Below normal":
                     switch (prof.Split(' ')[0])
                     {
                         case "XviD":
-                            comando += " -q:v:" + cv.Indice.ToString() + " " + q_mediobassa.QP.ToString() + " " + parametri_video.XVID;
+                            this.Arguments += " -q:v:" + cv.Index.ToString() + " " + qBN.QP.ToString() + " " + VideoArguments.XVID;
                             break;
                         default:
-                            comando += " -crf: " + q_mediobassa.CRF.ToString().Replace(',', '.') + " -preset:v " + q_mediobassa.Preset + " -aq-mode " + q_mediobassa.AQmode.ToString();
+                            this.Arguments += " -crf: " + qBN.CRF.ToString().Replace(',', '.') + " -preset:v " + qBN.Preset + " -aq-mode " + qBN.AQmode.ToString();
                             break;
                     }
                     break;
-                case "Bassa":
+                case "Low":
                     switch (prof.Split(' ')[0])
                     {
                         case "XviD":
-                            comando += " -q:v:" + cv.Indice.ToString() + " " + q_bassa.QP.ToString() + " " + parametri_video.XVID;
+                            this.Arguments += " -q:v:" + cv.Index.ToString() + " " + qL.QP.ToString() + " " + VideoArguments.XVID;
                             break;
                         default:
-                            comando += " -crf: " + q_bassa.CRF.ToString().Replace(',', '.') + " -preset:v " + q_bassa.Preset + " -aq-mode " + q_bassa.AQmode.ToString();
+                            this.Arguments += " -crf: " + qL.CRF.ToString().Replace(',', '.') + " -preset:v " + qL.Preset + " -aq-mode " + qL.AQmode.ToString();
                             break;
                     }
                     break;
-                case "Bassissima":
+                case "Very low":
                     switch (prof.Split(' ')[0])
                     {
                         case "XviD":
-                            comando += " -q:v:" + cv.Indice.ToString() + " " + q_bassissima.QP.ToString() + " " + parametri_video.XVID;
+                            this.Arguments += " -q:v:" + cv.Index.ToString() + " " + qVL.QP.ToString() + " " + VideoArguments.XVID;
                             break;
                         default:
-                            comando += " -crf: " + q_bassissima.CRF.ToString().Replace(',', '.') + " -preset:v " + q_bassissima.Preset + " -aq-mode " + q_bassissima.AQmode.ToString();
+                            this.Arguments += " -crf: " + qVL.CRF.ToString().Replace(',', '.') + " -preset:v " + qVL.Preset + " -aq-mode " + qVL.AQmode.ToString();
                             break;
                     }
                     break;
-                case "Bozza":
+                case "Draft":
                     switch (prof.Split(' ')[0])
                     {
                         case "XviD":
-                            comando += " -q:v:" + cv.Indice.ToString() + " " + q_bozza.QP.ToString() + " " + parametri_video.XVID;
+                            this.Arguments += " -q:v:" + cv.Index.ToString() + " " + qD.QP.ToString() + " " + VideoArguments.XVID;
                             break;
                         default:
-                            comando += " -crf: " + q_bozza.CRF.ToString().Replace(',', '.') + " -preset:v " + q_bozza.Preset + " -aq-mode " + q_bozza.AQmode.ToString();
+                            this.Arguments += " -crf: " + qD.CRF.ToString().Replace(',', '.') + " -preset:v " + qD.Preset + " -aq-mode " + qD.AQmode.ToString();
                             break;
                     }
                     break;
@@ -1833,30 +1834,30 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             switch (prof.Split(' ')[0])
             {
                 case "Bluray":
-                    comando += " " + parametri_video.BLURAY;
+                    this.Arguments += " " + VideoArguments.BLURAY;
                     break;
                 case "Streaming":
                     if (prof.ToLower().Contains("h.264"))
-                        comando += " " + parametri_video.STREAMING;
+                        this.Arguments += " " + VideoArguments.STREAMING;
                     else
-                        comando += " " + parametri_video.H265;
+                        this.Arguments += " " + VideoArguments.H265;
                     break;
                 case "Workraw":
-                    comando += " " + parametri_video.WORKRAW;
+                    this.Arguments += " " + VideoArguments.WORKRAW;
                     break;
                 case "XviD":
-                    comando += " " + parametri_video.XVID;
+                    this.Arguments += " " + VideoArguments.XVID;
                     break;
             }
             if (ca.Count > 0)
             {
-                List<CatturaAudio> temp3 = new List<CatturaAudio>();
-                Int32 cont_audio = 0;
+                List<GetAudioTracks> temp3 = new List<GetAudioTracks>();
+                Int32 AudioCounter = 0;
                 if (submode.StartsWith("H"))
                 {
-                    foreach (CatturaAudio c in ca)
+                    foreach (GetAudioTracks c in ca)
                     {
-                        if (c.Default == true || c.Forzata == true)
+                        if (c.Default == true || c.Forced == true)
                         {
                             temp3.Clear();
                             temp3.Add(c);
@@ -1865,7 +1866,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     if (temp3.Count == 0)
                     {
                         temp3.Clear();
-                        temp3.Add(new CatturaAudio(media.Audio[0]));
+                        temp3.Add(new GetAudioTracks(media.Audio[0], media.filePath));
                     }
                 }
                 else
@@ -1873,155 +1874,158 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     temp3 = ca;
                 }
 
-                foreach (CatturaAudio c in temp3)
+                foreach (GetAudioTracks c in temp3)
                 {
-                    ImpostazioniProfiliAudio parametri_audio = new ImpostazioniProfiliAudio(prof, qualita, c);
+                    AudioProfileSettings AudioArguments = new AudioProfileSettings(prof, quality, c);
 
-                    switch (c.Formato)
+                    switch (c.Format)
                     {
                         case "MP3":
                             if (prof.StartsWith("XviD"))
                             {
-                                if (c.BitrateVariabile == true)
+                                if (c.VBR == true)
                                 {
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -b:a:" + cont_audio + " " + parametri_audio.Bitrate + "k";
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -b:a:" + AudioCounter + " " + AudioArguments.Bitrate + "k";
                                 }
                                 else
                                 {
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " copy";
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " copy";
                                 }
                             }
                             else
                             {
                                 if (prof.StartsWith("Work"))
                                 {
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -q:a:" + cont_audio + " " + parametri_audio.Q;
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -q:a:" + AudioCounter + " " + AudioArguments.Q;
                                 }
                                 else
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -b:a:" + cont_audio + " " + parametri_audio.Bitrate + "k";
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -b:a:" + AudioCounter + " " + AudioArguments.Bitrate + "k";
                             }
                             break;
                         case "AAC":
                             if (prof.StartsWith("Bluray AAC") || prof.StartsWith("PS3") || prof.StartsWith("Xbox") || prof.StartsWith("Streaming"))
                             {
-                                if (prof.StartsWith("Streaming") && c.Canali > 2)
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -b:a:" + cont_audio + " " + parametri_audio.Bitrate + "k";
+                                if (prof.StartsWith("Streaming") && c.Channels > 2)
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -b:a:" + AudioCounter + " " + AudioArguments.Bitrate + "k";
                                 else
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " copy";
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " copy";
                             }
                             else
                             {
                                 if (prof.StartsWith("Work"))
                                 {
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -q:a:" + cont_audio + " " + parametri_audio.Q;
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -q:a:" + AudioCounter + " " + AudioArguments.Q;
                                 }
                                 else
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -b:a:" + cont_audio + " " + parametri_audio.Bitrate + "k";
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -b:a:" + AudioCounter + " " + AudioArguments.Bitrate + "k";
                             }
                             break;
                         case "AC-3":
                             if (prof.StartsWith("Bluray AC3"))
                             {
-                                comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " copy";
+                                this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " copy";
                             }
                             else
                             {
                                 if (prof.StartsWith("Work"))
                                 {
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -q:a:" + cont_audio + " " + parametri_audio.Q;
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -q:a:" + AudioCounter + " " + AudioArguments.Q;
                                 }
                                 else
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -b:a:" + cont_audio + " " + parametri_audio.Bitrate + "k";
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -b:a:" + AudioCounter + " " + AudioArguments.Bitrate + "k";
                             }
                             break;
                         case "Vorbis":
                             if (prof.StartsWith("Work"))
                             {
-                                if (c.Canali > 1)
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -q:a:" + cont_audio + " " + parametri_audio.Q;
+                                if (c.Channels > 1)
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -q:a:" + AudioCounter + " " + AudioArguments.Q;
                                 else
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " copy";
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " copy";
                             }
                             else
                             {
-                                comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -q:a:" + cont_audio + " " + parametri_audio.Q;
+                                this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -q:a:" + AudioCounter + " " + AudioArguments.Q;
                             }
                             break;
                         default:
                             if (prof.StartsWith("Work"))
                             {
-                                if (c.Canali > 2)
-                                    comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -q:a:" + cont_audio + " " + parametri_audio.Q;
-                                comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -q:a:" + cont_audio + " " + parametri_audio.Q;
+                                if (c.Channels > 2)
+                                    this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -q:a:" + AudioCounter + " " + AudioArguments.Q;
+                                this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -q:a:" + AudioCounter + " " + AudioArguments.Q;
                             }
                             else
-                                comando += " -map 0:" + c.Indice.ToString() + " -c:a:" + cont_audio + " " + parametri_audio.CODEC + " -ac:a:" + cont_audio + " " + parametri_audio.Canali + " -b:a:" + cont_audio + " " + parametri_audio.Bitrate + "k";
+                                this.Arguments += " -map 0:" + c.Index.ToString() + " -c:a:" + AudioCounter + " " + AudioArguments.CODEC + " -ac:a:" + AudioCounter + " " + AudioArguments.Channels + " -b:a:" + AudioCounter + " " + AudioArguments.Bitrate + "k";
                             break;
                     }
-                    cont_audio++;
+                    AudioCounter++;
                 }
             }
             else
             {
-                comando += " -an";
+                this.Arguments += " -an";
             }
 
             if (submode.StartsWith("S"))
             {
                 if (media.Text.Count > 0)
-                    comando += " -map 0:s:? -map 0:t:? -c:t copy -c:s copy";
+                    this.Arguments += " -map 0:s:? -map 0:t:? -c:t copy -c:s copy";
             }
 
             if (submode.StartsWith("N"))
             {
-                comando += " -sn";
+                this.Arguments += " -sn";
             }
 
-            comando += FiltriCodifica(sub, ff, cv, largh, alt, submode) + " -aspect " + cv.AspectRatio;
+            this.Arguments += Filters(sub, ff, cv, W, H, submode) + " -aspect " + cv.AspectRatio;
 
             if (prof.ToLower().Contains("xvid"))
             {
                 if (submode.StartsWith("H") || submode.StartsWith("N"))
                 {
-                    file_finale = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + alt.ToString() + "p, " + qualita + "].avi";
+                    FinalFile = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + H.ToString() + "p, " + quality + "].avi";
                 }
                 else
                 {
-                    file_finale = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + alt.ToString() + "p, " + qualita + "].mkv";
-                    comando = comando.Replace(" -f avi", String.Empty);
+                    FinalFile = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + H.ToString() + "p, " + quality + "].mkv";
+                    this.Arguments = this.Arguments.Replace(" -f avi", string.Empty);
                 }
             }
             else
             {
                 if (prof.StartsWith("Work") == true)
                 {
-                    file_finale = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + alt.ToString() + "p, " + qualita + "].mkv";
+                    FinalFile = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + H.ToString() + "p, " + quality + "].mkv";
                 }
                 else
                 {
                     if (submode.StartsWith("H") || submode.StartsWith("N"))
                     {
-                        file_finale = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + alt.ToString() + "p, " + qualita + "].mp4";
+                        FinalFile = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + H.ToString() + "p, " + quality + "].mp4";
                     }
                     else
                     {
-                        file_finale = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + alt.ToString() + "p, " + qualita + "].mkv";
+                        FinalFile = Path.GetDirectoryName(video) + "\\" + Path.GetFileNameWithoutExtension(video) + "[" + prof + " " + H.ToString() + "p, " + quality + "].mkv";
                     }
                 }
             }
 
             if (ca != null)
-                comando += " -metadata:s:a title=\"\"";
-            comando += " -metadata description=\"Encoded with " + this.Text + " by Tanoshimi no Sekai Fansub. Come to visit us at https://tnsfansub.com\" \"" + file_finale + "\"";
-            //MessageBox.Show(comando);
-            AvviaCodifica();
+                this.Arguments += " -metadata:s:a title=\"\"";
+            this.Arguments += " -metadata description=\"Encoded with " + this.Text + " by Tanoshimi no Sekai Fansub. Come to visit us at https://tnsfansub.com\" \"" + FinalFile + "\"";
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                //Clipboard.SetText(this.Arguments);
+            });
+            StartEncode();
         }
 
-        public String FiltriCodifica(List<String> subs, String dir_ff, CatturaVideo cv, Int32 largh, Int32 alt, String submode)
+        public String Filters(List<String> subs, String dir_ff, GetVideoTracks cv, Int32 W, Int32 H, String submode)
         {
             String temp = String.Empty;
 
-            if (cv.Interlacciato == true)
+            if (cv.Interlaced == true)
             {
                 temp += ",yadif";
             }
@@ -2037,7 +2041,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 }
             }
 
-            temp += ResizeAuto(cv.AspectRatio, largh, cv.Larghezza, alt, cv.Altezza);
+            temp += ResizeAuto(cv.AspectRatio, W, cv.Width, H, cv.Height);
             if (String.IsNullOrWhiteSpace(temp) == false)
             {
                 return " -vf " + temp.Trim(',');
@@ -2046,7 +2050,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 return String.Empty;
         }
 
-        public void ferma_tutto()
+        public void STOP()
         {
             try
             {
@@ -2071,16 +2075,16 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         private void TnA_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.SetTopLevel(true);
-            if (forza_chiusura == true)
+            if (ForceClose == true)
             {
                 e.Cancel = false;
-                chiudi();
+                CLOSE();
             }
             else
             {
-                if (MessageBox.Show("Si sta per chiudere l'applicazione. Continuare?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Close this application?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    chiudi();
+                    CLOSE();
                 }
                 else
                 {
@@ -2089,11 +2093,11 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
         }
 
-        public void chiudi()
+        public void CLOSE()
         {
             try
             {
-                ferma_tutto();
+                STOP();
                 if (Directory.Exists(temp_folder))
                     Directory.Delete(temp_folder, true);
                 if (Directory.Exists(fonts_folder))
@@ -2107,17 +2111,17 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 }
             }
             catch { }
-            IniFile ini = new IniFile(file_settings);
+            IniFile ini = new IniFile(SettingsFile);
             ini.Write("WindowState", this.WindowState.ToString());
-            if (manualeToolStripMenuItem.CheckState == CheckState.Checked)
+            if (manualToolStripMenuItem.CheckState == CheckState.Checked)
                 ini.Write("upd_freq", "m");
-            if (iToolStripMenuItem.CheckState == CheckState.Checked)
+            if (EveryTimeProgramStartsToolStripMenuItem.CheckState == CheckState.Checked)
                 ini.Write("upd_freq", "s");
-            if (unGiornoToolStripMenuItem.CheckState == CheckState.Checked)
+            if (EveryDayToolStripMenuItem.CheckState == CheckState.Checked)
                 ini.Write("upd_freq", "1");
-            if (ogniTreGiorniToolStripMenuItem.CheckState == CheckState.Checked)
+            if (EveryThreeDaysToolStripMenuItem.CheckState == CheckState.Checked)
                 ini.Write("upd_freq", "3");
-            if (ogniSettimanaToolStripMenuItem.CheckState == CheckState.Checked)
+            if (EveryWeekToolStripMenuItem.CheckState == CheckState.Checked)
                 ini.Write("upd_freq", "7");
         }
 
@@ -2129,10 +2133,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             if (DGV_video.Rows.Count == 0)
             {
-                b_avvia.Enabled = false;
+                b_start.Enabled = false;
                 tb_help.Visible = true;
             }
-            tab_autohardsubber.Text = label_tab_lista + " (Totale files: " + DGV_video.Rows.Count.ToString() + ")";
+            tab_autohardsubber.Text = TabFilelistLabel + " (count: " + DGV_video.Rows.Count.ToString() + ")";
         }
 
         private void esciToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2144,8 +2148,8 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             foreach (DataGridViewRow d in DGV_video.SelectedRows)
             {
-                d.Cells[DGV_video.Columns["compatibilita"].Index].Value = cmb_compatibilita.Text;
-                String p = d.Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString();
+                d.Cells[DGV_video.Columns["profile"].Index].Value = cmb_profile.Text;
+                String p = d.Cells[DGV_video.Columns["profile"].Index].Value.ToString();
             }
         }
 
@@ -2153,7 +2157,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             foreach (DataGridViewRow d in DGV_video.SelectedRows)
             {
-                d.Cells[DGV_video.Columns["qualita"].Index].Value = cmb_qualita.Text;
+                d.Cells[DGV_video.Columns["quality"].Index].Value = cmb_quality.Text;
             }
         }
 
@@ -2168,7 +2172,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             DF(false);
         }
 
-        public void DF(Boolean auto)
+        private void DF(Boolean auto)
         {
             df = new DownloadFFMPEG(temp_folder, auto);
             df.ShowInTaskbar = true;
@@ -2176,8 +2180,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             DialogResult gui = df.ShowDialog();
             while (gui == DialogResult.Abort)
             {
-                DialogResult scelta = MessageBox.Show("Non è stato possibile avviare il downloader a causa di una possibile mancanza di una connessione ad internet.\nRiprovare?", this.Text, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-                if (scelta == DialogResult.Retry)
+                if (MessageBox.Show("Error while trying to download FFmpeg.\nRetry?", this.Text, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
                 {
                     df = new DownloadFFMPEG(temp_folder, auto);
                     gui = df.ShowDialog();
@@ -2192,10 +2195,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     try
                     {
                         System.IO.File.Copy(temp_folder + "\\ffmpeg.exe", Path.GetDirectoryName(ffmpeg) + "\\" + Path.GetFileName(ffmpeg), true);
-                        MessageBox.Show("FFmpeg scaricato e impostato correttamente. Ora è possibile utilizzare il programma.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        data_last_upd = DateTime.Now;
-                        IniFile ini = new IniFile(file_settings);
-                        ini.Write("last_upd", data_last_upd.ToShortDateString());
+                        MessageBox.Show("FFmpeg downloaded correctly.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LastUpdDate = DateTime.Now;
+                        IniFile ini = new IniFile(SettingsFile);
+                        ini.Write("last_upd", LastUpdDate.ToShortDateString());
                     }
                     catch (Exception ex)
                     {
@@ -2207,10 +2210,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     try
                     {
                         System.IO.File.Copy(temp_folder + "\\ffmpeg.exe", Path.GetDirectoryName(ffmpeg) + "\\" + Path.GetFileName(ffmpeg), true);
-                        MessageBox.Show("FFmpeg scaricato e impostato correttamente. Ora è possibile utilizzare il programma.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        data_last_upd = DateTime.Now;
-                        IniFile ini = new IniFile(file_settings);
-                        ini.Write("last_upd", data_last_upd.ToShortDateString());
+                        MessageBox.Show("FFmpeg downloaded correctly.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LastUpdDate = DateTime.Now;
+                        IniFile ini = new IniFile(SettingsFile);
+                        ini.Write("last_upd", LastUpdDate.ToShortDateString());
 
                         Environment.CurrentDirectory = Path.GetDirectoryName(ffmpeg);
 
@@ -2220,7 +2223,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                foreach (String s in System.IO.Directory.GetFiles(temp_folder,"*",SearchOption.AllDirectories))
+                foreach (String s in System.IO.Directory.GetFiles(temp_folder, "*", SearchOption.AllDirectories))
                 {
                     if (s.ToLower().Contains("license"))
                     {
@@ -2290,15 +2293,13 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                     gradfun = true;
                             }
                             TestFFMPEG test = new TestFFMPEG(libx264, aac, ac3, ass, libx265, vfscale, hqdn3d, gradfun, xvid, mp3, nvenc);
-                            DialogResult risultato = test.ShowDialog();
-                            if (risultato == DialogResult.Yes)
+                            if (test.ShowDialog() == DialogResult.Yes)
                             {
-                                MessageBox.Show("Il test ha dato esito positivo. Il programma può essere usato tranquillamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Test result: OK.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
-                                DialogResult esito = MessageBox.Show("Il test ha dato esito negativo. Scaricare ora la build predefinita?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                if (esito == DialogResult.Yes)
+                                if (MessageBox.Show("Test failed. Download default FFmpeg build?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 {
                                     scaricaFFmpegToolStripMenuItem_Click(sender, e);
                                     if (df.DialogResult == DialogResult.OK)
@@ -2310,51 +2311,47 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        DialogResult scelta = MessageBox.Show("Eseguibile di FFmpeg non trovato. Scaricarlo ora?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
-                        if (scelta == DialogResult.Yes)
+                        if (MessageBox.Show("FFmpeg not found. Download it now?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
                         {
                             scaricaFFmpegToolStripMenuItem_Click(sender, e);
                             if (df.DialogResult == DialogResult.OK)
                             {
-                                DialogResult inizio = MessageBox.Show("Iniziare ora il test?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                if (inizio == DialogResult.Yes)
+                                if (MessageBox.Show("Begin FFmpeg test?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 {
                                     testFFmpegToolStripMenuItem_Click(sender, e);
                                 }
                             }
                             else
-                                MessageBox.Show("Non è obbligatorio effettuare un test di FFmpeg.\nSi consiglia di effettuarlo in quanto non tutte le build di FFmpeg sono compatibili.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MessageBox.Show("A FFmpeg test is not mandatory.\nIt's recommended if you're not using the default build.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         else
-                            MessageBox.Show("Finché mancherà l'eseguibile di FFmpeg, il programma non potrà funzionare.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("FFmpeg.exe is required. This program will not work without it.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
             }
             else
             {
-                DialogResult scelta = MessageBox.Show("Eseguibile di FFmpeg non trovato. Scaricarlo ora?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
-                if (scelta == DialogResult.Yes)
+                if (MessageBox.Show("FFmpeg not found. Download it now?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
                 {
                     scaricaFFmpegToolStripMenuItem_Click(sender, e);
                     if (df.DialogResult == DialogResult.OK)
                     {
-                        DialogResult inizio = MessageBox.Show("Iniziare ora il test?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (inizio == DialogResult.Yes)
+                        if (MessageBox.Show("Begin FFmpeg test?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             testFFmpegToolStripMenuItem_Click(sender, e);
                         }
                     }
                     else
-                        MessageBox.Show("Non è obbligatorio effettuare un test di FFmpeg.\nSi consiglia di effettuarlo in quanto non tutte le build di FFmpeg sono compatibili.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("A FFmpeg test is not mandatory.\nIt's recommended if you're not using the default build.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
-                    MessageBox.Show("Finché mancherà l'eseguibile di FFmpeg, il programma non potrà funzionare.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("FFmpeg.exe is required. This program will not work without it.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
         private void IncollaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Collections.Specialized.StringCollection data = new System.Collections.Specialized.StringCollection();
+            var data = new System.Collections.Specialized.StringCollection();
             if (Clipboard.GetFileDropList().Count > 0)
                 data = Clipboard.GetFileDropList();
             else
@@ -2368,19 +2365,19 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             String[] temp = new String[data.Count];
             data.CopyTo(temp, 0);
-            recupera_fd(temp);
+            RetriveFiles(temp);
         }
 
         private void salvaImpostazioniToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IniFile ini = new IniFile(file_settings);
+            IniFile ini = new IniFile(SettingsFile);
 
-            ini.Write("comp", cmb_compatibilita.Text);
-            ini.Write("risoluz", cmb_risoluz.Text);
-            ini.Write("qual", cmb_qualita.Text);
+            ini.Write("profile", cmb_profile.Text);
+            ini.Write("res", cmb_resolution.Text);
+            ini.Write("qual", cmb_quality.Text);
             ini.Write("subs", cmb_subs.Text);
 
-            if (monitoraGliAppuntiToolStripMenuItem.CheckState == CheckState.Checked)
+            if (ActivateClipboardMonitoringToolStripMenuItem.CheckState == CheckState.Checked)
                 ini.Write("monit_clipb", "y");
             else
                 ini.Write("monit_clipb", "n");
@@ -2390,24 +2387,21 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             try
             {
-                if (DateTime.Now.ToShortDateString().CompareTo(data_vecchia) > 0)
+                if (DateTime.Now.ToShortDateString().CompareTo(OldDate) > 0)
                 {
-                    DateTime data = new DateTime(Convert.ToInt32(data_vecchia.Split('/')[2]), Convert.ToInt32(data_vecchia.Split('/')[1]), Convert.ToInt32(data_vecchia.Split('/')[0]));
-                    //MessageBox.Show(data.ToString
+                    DateTime data = new DateTime(Convert.ToInt32(OldDate.Split('/')[2]), Convert.ToInt32(OldDate.Split('/')[1]), Convert.ToInt32(OldDate.Split('/')[0]));
                     TimeSpan t = new TimeSpan();
                     t = DateTime.Today - data;
                     if (t.TotalDays <= 1)
                     {
-                        DialogResult scelta = MessageBox.Show("La build corrente di FFmpeg è vecchia di " + t.TotalDays.ToString() + " giorno.\nAggiornare la build di FFmpeg?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (scelta == DialogResult.Yes)
+                        if (MessageBox.Show("This FFmpeg build is " + t.TotalDays.ToString() + " day old.\nUpdate?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             DF(true);
                         }
                     }
                     else
                     {
-                        DialogResult scelta = MessageBox.Show("La build corrente di FFmpeg è vecchia di " + t.TotalDays.ToString() + " giorni.\nAggiornare la build di FFmpeg?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (scelta == DialogResult.Yes)
+                        if (MessageBox.Show("This FFmpeg build is " + t.TotalDays.ToString() + " days old.\nUpdate?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             DF(true);
                         }
@@ -2416,7 +2410,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Data non valida: " + data_vecchia + "\n\n" + exc.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Date not valid: " + OldDate + "\n\n" + exc.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //IniFile ini = new IniFile(file_settings);
                 //ini.Write("last_upd", DateTime.Now.ToShortDateString());
             }
@@ -2430,10 +2424,10 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void bgw_downloadffmpeg_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (MessageBox.Show("Eseguibile di FFmpeg non trovato. Scaricarlo?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("FFmpeg not found. Download it now?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 DF(true);
             else
-                MessageBox.Show("Finché mancherà l'eseguibile di FFmpeg, il programma non potrà funzionare.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("FFmpeg.exe is required. This program will not work without it.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void bgw_downloadffmpeg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -2457,27 +2451,27 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void b_agg_files_Click(object sender, EventArgs e)
         {
-            apri_video.Filter = filtro;
-            if (apri_video.ShowDialog() == DialogResult.OK)
+            open_video.Filter = Filter;
+            if (open_video.ShowDialog() == DialogResult.OK)
             {
-                foreach (String s in apri_video.FileNames)
+                foreach (String s in open_video.FileNames)
                 {
-                    DGV_video.Rows.Add(Path.GetFileName(s), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(s));
+                    DGV_video.Rows.Add(Path.GetFileName(s), cmb_profile.Text, cmb_resolution.Text, cmb_quality.Text, cmb_subs.Text, "READY", Path.GetDirectoryName(s));
                 }
-                b_avvia.Enabled = true;
-                tab_autohardsubber.Text = label_tab_lista + " (Totale files: " + DGV_video.Rows.Count.ToString() + ")";
+                b_start.Enabled = true;
+                tab_autohardsubber.Text = TabFilelistLabel + " (count: " + DGV_video.Rows.Count.ToString() + ")";
                 tb_help.Visible = false;
-                ControllaLunghezzaPercorsi();
+                CheckPathLength();
             }
         }
 
-        void ControllaLunghezzaPercorsi()
+        void CheckPathLength()
         {
             if (DGV_video.Rows.Count > 0)
             {
                 for (Int32 i = 0; i < DGV_video.Rows.Count; i++)
                 {
-                    if (Path.Combine(DGV_video.Rows[i].Cells["percorso_orig"].Value.ToString(), DGV_video.Rows[i].Cells["input"].Value.ToString()).Length > 220)
+                    if (Path.Combine(DGV_video.Rows[i].Cells["source_path"].Value.ToString(), DGV_video.Rows[i].Cells["input"].Value.ToString()).Length > 220)
                     {
                         DGV_video.Rows[i].Cells["input"].Style.BackColor = Color.Orange;
                     }
@@ -2488,30 +2482,30 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void b_agg_cart_Click(object sender, EventArgs e)
         {
-            if (apri_cartella.ShowDialog() == DialogResult.OK)
+            if (open_folder.ShowDialog() == DialogResult.OK)
             {
-                Seleziona_formati sf = new Seleziona_formati(estensioni_video);
+                FormatSelection sf = new FormatSelection(VideoEXT);
                 sf.Icon = this.Icon;
                 sf.TopLevel = true;
                 sf.StartPosition = FormStartPosition.CenterParent;
                 sf.ShowInTaskbar = false;
                 if (sf.ShowDialog() == DialogResult.OK)
                 {
-                    foreach (String s in Directory.GetFiles(apri_cartella.SelectedPath, "*", SearchOption.AllDirectories))
+                    foreach (String s in Directory.GetFiles(open_folder.SelectedPath, "*", SearchOption.AllDirectories))
                     {
-                        if (TnA___Tanoshimi_no_Autohardsubber.Seleziona_formati.formati_scelti.Contains(Path.GetExtension(s).ToLower()) == true)
+                        if (TnA___Tanoshimi_no_Autohardsubber.FormatSelection.Formats.Contains(Path.GetExtension(s).ToLower()) == true)
                         {
-                            DGV_video.Rows.Add(Path.GetFileName(s), cmb_compatibilita.Text, cmb_risoluz.Text, cmb_qualita.Text, cmb_subs.Text, "PRONTO", Path.GetDirectoryName(s));
+                            DGV_video.Rows.Add(Path.GetFileName(s), cmb_profile.Text, cmb_resolution.Text, cmb_quality.Text, cmb_subs.Text, "READY", Path.GetDirectoryName(s));
                         }
                     }
                 }
                 if (DGV_video.Rows.Count > 0)
                 {
-                    b_avvia.Enabled = true;
+                    b_start.Enabled = true;
                     tb_help.Visible = false;
-                    tab_autohardsubber.Text = label_tab_lista + " (Totale files: " + DGV_video.Rows.Count.ToString() + ")";
+                    tab_autohardsubber.Text = TabFilelistLabel + " (count: " + DGV_video.Rows.Count.ToString() + ")";
                 }
-                ControllaLunghezzaPercorsi();
+                CheckPathLength();
             }
         }
 
@@ -2527,35 +2521,35 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void TnA_ResizeEnd(object sender, EventArgs e)
         {
-            IniFile ini = new IniFile(file_settings);
+            IniFile ini = new IniFile(SettingsFile);
             ini.Write("Width", this.Width.ToString());
             ini.Write("Heigth", this.Height.ToString());
         }
 
         private void MonitoraGliAppuntiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (monitoraGliAppuntiToolStripMenuItem.CheckState == CheckState.Checked)
+            if (ActivateClipboardMonitoringToolStripMenuItem.CheckState == CheckState.Checked)
             {
-                monitoraGliAppuntiToolStripMenuItem.CheckState = CheckState.Unchecked;
+                ActivateClipboardMonitoringToolStripMenuItem.CheckState = CheckState.Unchecked;
             }
             else
             {
-                monitoraGliAppuntiToolStripMenuItem.CheckState = CheckState.Checked;
+                ActivateClipboardMonitoringToolStripMenuItem.CheckState = CheckState.Checked;
             }
         }
 
         private void ripristinaImpostazioniToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Ripristinare programma e impostazioni e riavviare l'applicazione?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Reset settings and restart application?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                forza_chiusura = true;
-                if (System.IO.File.Exists(file_settings))
+                ForceClose = true;
+                if (System.IO.File.Exists(SettingsFile))
                 {
-                    System.IO.File.Delete(file_settings);
+                    System.IO.File.Delete(SettingsFile);
                 }
 
                 System.IO.File.Delete(ffmpeg);
-                
+
                 foreach (String s in System.IO.Directory.GetFiles(LOG_dir, "*", SearchOption.TopDirectoryOnly))
                 {
                     System.IO.File.Delete(s);
@@ -2566,69 +2560,69 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void manualeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (manualeToolStripMenuItem.CheckState == CheckState.Unchecked)
+            if (manualToolStripMenuItem.CheckState == CheckState.Unchecked)
             {
-                manualeToolStripMenuItem.CheckState = CheckState.Checked;
-                iToolStripMenuItem.CheckState = CheckState.Unchecked;
-                unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                manualToolStripMenuItem.CheckState = CheckState.Checked;
+                EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
             }
         }
 
         private void iToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (iToolStripMenuItem.CheckState == CheckState.Unchecked)
+            if (EveryTimeProgramStartsToolStripMenuItem.CheckState == CheckState.Unchecked)
             {
-                manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                iToolStripMenuItem.CheckState = CheckState.Checked;
-                unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Checked;
+                EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
             }
         }
 
         private void unGiornoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (unGiornoToolStripMenuItem.CheckState == CheckState.Unchecked)
+            if (EveryDayToolStripMenuItem.CheckState == CheckState.Unchecked)
             {
-                manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                iToolStripMenuItem.CheckState = CheckState.Unchecked;
-                unGiornoToolStripMenuItem.CheckState = CheckState.Checked;
-                ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryDayToolStripMenuItem.CheckState = CheckState.Checked;
+                EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
             }
         }
 
         private void ogniTreGiorniToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ogniTreGiorniToolStripMenuItem.CheckState == CheckState.Unchecked)
+            if (EveryThreeDaysToolStripMenuItem.CheckState == CheckState.Unchecked)
             {
-                manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                iToolStripMenuItem.CheckState = CheckState.Unchecked;
-                unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Checked;
-                ogniSettimanaToolStripMenuItem.CheckState = CheckState.Unchecked;
+                manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Checked;
+                EveryWeekToolStripMenuItem.CheckState = CheckState.Unchecked;
             }
         }
 
         private void ogniSettimanaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ogniSettimanaToolStripMenuItem.CheckState == CheckState.Unchecked)
+            if (EveryWeekToolStripMenuItem.CheckState == CheckState.Unchecked)
             {
-                manualeToolStripMenuItem.CheckState = CheckState.Unchecked;
-                iToolStripMenuItem.CheckState = CheckState.Unchecked;
-                unGiornoToolStripMenuItem.CheckState = CheckState.Unchecked;
-                ogniTreGiorniToolStripMenuItem.CheckState = CheckState.Unchecked;
-                ogniSettimanaToolStripMenuItem.CheckState = CheckState.Checked;
+                manualToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryTimeProgramStartsToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryDayToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryThreeDaysToolStripMenuItem.CheckState = CheckState.Unchecked;
+                EveryWeekToolStripMenuItem.CheckState = CheckState.Checked;
             }
         }
 
         private void oKToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (Int32 i=DGV_video.Rows.Count-1; i>=0; i--)
+            for (Int32 i = DGV_video.Rows.Count - 1; i >= 0; i--)
             {
-                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().Trim().ToLower().Contains(oKToolStripMenuItem.Text.ToLower().Trim()))
+                if (DGV_video.Rows[i].Cells[DGV_video.Columns["status"].Index].Value.ToString().Trim().ToLower().Contains(oKToolStripMenuItem.Text.ToLower().Trim()))
                     DGV_video.Rows.RemoveAt(DGV_video.Rows[i].Index);
             }
         }
@@ -2637,16 +2631,16 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             for (Int32 i = DGV_video.Rows.Count - 1; i >= 0; i--)
             {
-                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(fermatoToolStripMenuItem.Text.ToLower().Trim()))
+                if (DGV_video.Rows[i].Cells[DGV_video.Columns["status"].Index].Value.ToString().ToLower().Trim().Contains(StoppedToolStripMenuItem.Text.ToLower().Trim()))
                     DGV_video.Rows.RemoveAt(DGV_video.Rows[i].Index);
             }
         }
 
         private void timer_tempo_Tick(object sender, EventArgs e)
         {
-            TimeSpan tp = TimeSpan.FromSeconds((Double)sec_trasc);
-            l_tempo_trasc.Text = "Tempo trascorso: " + tp.ToString(@"hh\:mm\:ss");
-            sec_trasc++;
+            TimeSpan tp = TimeSpan.FromSeconds((Double)ElapsedSeconds);
+            l_elapsed_time.Text = "Elapsed time: " + tp.ToString(@"hh\:mm\:ss");
+            ElapsedSeconds++;
         }
 
         private void creaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2673,77 +2667,64 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            azione_fine_coda = toolStripComboBox1.Text;
+            WhenAllIsFinished = ActionWhenFinishedToolStripComboBox.Text;
         }
 
         private void DGV_video_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (DGV_video.Rows.Count > 0)
             {
-                if (e.ColumnIndex == DGV_video.Columns["compatibilita"].Index)
+                if (e.ColumnIndex == DGV_video.Columns["profile"].Index)
                 {
-                    String p = DGV_video.Rows[e.RowIndex].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString();
+                    String p = DGV_video.Rows[e.RowIndex].Cells[DGV_video.Columns["profile"].Index].Value.ToString();
                 }
             }
         }
 
         private void b_pause_Click(object sender, EventArgs e)
         {
+            PauseResume();
+        }
+
+        void PauseResume()
+        {
             if (pause == false)
             {
 
-                if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false && DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("keyframe") == false)
-                    SuspendProcess(processo_codifica.Id);
+                if (DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["profile"].Index].Value.ToString().ToLower().Contains("mkv") == false && DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["profile"].Index].Value.ToString().ToLower().Contains("keyframe") == false)
+                    SuspendProcess(EncodeProcess.Id);
                 else
                 {
-                    if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv"))
-                        SuspendProcess(processo_remux.Id);
+                    if (DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["profile"].Index].Value.ToString().ToLower().Contains("mkv"))
+                        SuspendProcess(RemuxProcess.Id);
                     else
                     {
-                        Int32 IDFFmpeg = Int32.MinValue, IDSCXviD = Int32.MinValue;
-                        foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ffmpeg)))
-                        {
-                            IDFFmpeg = p.Id;
-                        }
-                        foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(scxvid)))
-                        {
-                            IDSCXviD = p.Id;
-                        }
-                        SuspendProcess(IDFFmpeg);
-                        SuspendProcess(IDSCXviD);
+                        SuspendProcess(EncodeProcess.Id);
+                        SuspendProcess(EncodeProcess.Id);
                     }
                 }
                 pause = true;
                 b_pause.Image = new Bitmap(TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.play, new Size(TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause.Width, TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause.Height));
-                b_pause.Text = "Riprendi";
+                b_pause.Text = "RESUME";
             }
             else
             {
 
-                if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv") == false && DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("keyframe") == false)
-                    ResumeProcess(processo_codifica.Id);
+                if (DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["profile"].Index].Value.ToString().ToLower().Contains("mkv") == false && DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["profile"].Index].Value.ToString().ToLower().Contains("keyframe") == false)
+                    ResumeProcess(EncodeProcess.Id);
                 else
                 {
-                    if (DGV_video.Rows[indice_percentuale].Cells[DGV_video.Columns["compatibilita"].Index].Value.ToString().ToLower().Contains("mkv"))
-                        ResumeProcess(processo_remux.Id);
+                    if (DGV_video.Rows[PercentageIndex].Cells[DGV_video.Columns["profile"].Index].Value.ToString().ToLower().Contains("mkv"))
+                        ResumeProcess(RemuxProcess.Id);
                     else
                     {
-                        Int32 IDFFmpeg = Int32.MinValue, IDSCXviD = Int32.MinValue;
-                        foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ffmpeg)))
-                        {
-                            IDFFmpeg = p.Id;
-                        }
-                        foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(scxvid)))
-                        {
-                            IDSCXviD = p.Id;
-                        }
-                        ResumeProcess(IDFFmpeg);
-                        ResumeProcess(IDSCXviD);
+                        ResumeProcess(EncodeProcess.Id);
+                        ResumeProcess(EncodeProcess.Id);
                     }
                 }
                 pause = false;
                 b_pause.Image = TnA___Tanoshimi_no_Autohardsubber.Properties.Resources.pause;
-                b_pause.Text = "Pausa";
+                b_pause.Text = "PAUSE";
             }
         }
 
@@ -2751,7 +2732,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             for (Int32 i = DGV_video.Rows.Count - 1; i >= 0; i--)
             {
-                if (DGV_video.Rows[i].Cells[DGV_video.Columns["stato"].Index].Value.ToString().ToLower().Trim().Contains(erroreToolStripMenuItem.Text.ToLower().Trim()))
+                if (DGV_video.Rows[i].Cells[DGV_video.Columns["status"].Index].Value.ToString().ToLower().Trim().Contains(ErrorToolStripMenuItem.Text.ToLower().Trim()))
                     DGV_video.Rows.RemoveAt(DGV_video.Rows[i].Index);
             }
         }
@@ -2771,18 +2752,18 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     switch (updater.DialogResult)
                     {
                         case DialogResult.Yes:
-                            nuovaVersioneDisponibileToolStripMenuItem.Visible = true;
-                            controllaAggiornamentiToolStripMenuItem.Visible = false;
-                            visualizzaCronologiaVersioniiToolStripMenuItem.Visible = false;
+                            NewVersionAvailableToolStripMenuItem.Visible = true;
+                            CheckUpdatesToolStripMenuItem.Visible = false;
+                            VersionHistoryToolStripMenuItem.Visible = false;
                             break;
                         case DialogResult.None:
-                            nuovaVersioneDisponibileToolStripMenuItem.Visible = false;
-                            controllaAggiornamentiToolStripMenuItem.Visible = true;
-                            visualizzaCronologiaVersioniiToolStripMenuItem.Visible = true;
+                            NewVersionAvailableToolStripMenuItem.Visible = false;
+                            CheckUpdatesToolStripMenuItem.Visible = true;
+                            VersionHistoryToolStripMenuItem.Visible = true;
                             break;
-                        //default:
-                        //    updater.ShowDialog();
-                        //    break;
+                            //default:
+                            //    updater.ShowDialog();
+                            //    break;
                     }
                 }
                 catch (Exception ex)
@@ -2800,7 +2781,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             foreach (DataGridViewRow d in DGV_video.SelectedRows)
             {
-                d.Cells[DGV_video.Columns["risoluz"].Index].Value = cmb_risoluz.Text;
+                d.Cells[DGV_video.Columns["res"].Index].Value = cmb_resolution.Text;
             }
         }
 
@@ -2837,9 +2818,14 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             DGV_video.ClearSelection();
         }
 
+        private void AllFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DGV_video.Rows.Clear();
+        }
+
         private void VisualizzaCronologiaVersioniiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CronologiaVersioni c = new CronologiaVersioni(this.Text, this.Icon);
+            VersionHistory c = new VersionHistory(this.Text, this.Icon);
             c.ShowDialog();
         }
 
@@ -2894,108 +2880,141 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
     }
 
-    public class CatturaAudio
+    public class GetAudioTracks
     {
-        public String Formato { get; set; }
-        public String Profilo { get; set; }
-        public Double Canali { get; set; }
-        public Int32 Indice { get; set; }
-        public Boolean BitrateVariabile { get; set; }
-        public Boolean Forzata { get; set; }
+        public String Format { get; set; }
+        public String Profile { get; set; }
+        public Double Channels { get; set; }
+        public Int32 Index { get; set; }
+        public Boolean VBR { get; set; }
+        public Boolean Forced { get; set; }
         public Boolean Default { get; set; }
         public Boolean Lossless { get; set; }
 
-        public CatturaAudio(MediaInfoDotNet.Models.AudioStream a)
+        public GetAudioTracks(MediaInfoDotNet.Models.AudioStream a, String File)
         {
-            Cattura(a);
+            Get(a, File);
         }
 
-        protected void Cattura(MediaInfoDotNet.Models.AudioStream a)
+        protected void Get(MediaInfoDotNet.Models.AudioStream a, String File)
         {
-            Forzata = a.Forced;
+            Forced = a.Forced;
             Default = a.Default;
-            Formato = a.Format;
+            Format = a.Format;
 
             if (a.CompressionMode.ToLower().EndsWith("y"))
                 Lossless = false;
             else
                 Lossless = true;
-            
-            if(String.IsNullOrWhiteSpace(Formato))
+
+            if (String.IsNullOrWhiteSpace(Format))
             {
-                Formato = String.Empty;
+                Format = String.Empty;
             }
 
-            Profilo = a.FormatProfile;
-            
-            if(String.IsNullOrWhiteSpace(Profilo))
+            Profile = a.FormatProfile;
+
+            if (String.IsNullOrWhiteSpace(Profile))
             {
-                Profilo = String.Empty;
+                Profile = String.Empty;
             }
 
-            Indice = a.ID - 1;
-
-            Canali = Convert.ToDouble(a.Channels);
-
-            if (a.BitRateMode == "CBR")
+            if (System.IO.Path.GetExtension(File).ToLower().Contains("ts") == false)
             {
-                BitrateVariabile = true;
+                Index = a.ID - 1;
             }
             else
             {
-                BitrateVariabile = false;
+                String Binary = a.ID.ToString();
+                Binary = Binary.Substring(Binary.IndexOf("("));
+                Binary = Binary.Trim('(');
+                Binary = Binary.Trim(')');
+                Binary = Binary.Replace("0x", String.Empty);
+                Index = Convert.ToInt32(Binary, 2);
+                Index = Index - (Convert.ToInt32(Binary, 2) - 1);
+            }
+
+            Channels = Convert.ToDouble(a.Channels);
+
+            if (a.BitRateMode == "CBR")
+            {
+                VBR = true;
+            }
+            else
+            {
+                VBR = false;
             }
         }
     }
 
-    public class CatturaVideo
+    public class GetVideoTracks
     {
         public String File { get; set; }
-        public Int32 Indice { get; set; }
+        public Int32 Index { get; set; }
         public String AspectRatio { get; set; }
-        public Double Larghezza { get; set; }
-        public Double Altezza { get; set; }
+        public Double Width { get; set; }
+        public Double Height { get; set; }
         public String Framerate { get; set; }
-        public Boolean Interlacciato { get; set; }
-        public TimeSpan DurataPrecisa { get; set; }
-        public Int32 TotaleFrames { get; set; }
-        
-        public CatturaVideo(MediaFile media)
+        public Boolean Interlaced { get; set; }
+        public TimeSpan Duration { get; set; }
+        public Int32 Framecount { get; set; }
+
+        public GetVideoTracks(MediaFile media)
         {
-            Cattura(media);
+            Get(media);
         }
 
-        protected void Cattura(MediaFile media)
+        protected void Get(MediaFile media)
         {
             File = media.filePath;
-            Indice = media.Video[0].ID - 1;
+            if (System.IO.Path.GetExtension(File).ToLower().Contains("ts") == false)
+            {
+                Index = media.Video[0].ID - 1;
+            }
+            else
+            {
+                MediaInfo MI = new MediaInfo();
+                MI.Open(File);
+                String Binary = String.Empty;
+                foreach (String s in MI.Inform().Split('\n'))
+                {
+                    if (s.Trim().ToLower().StartsWith("video"))
+                    {
+                        Binary = Binary.Substring(Binary.IndexOf("("));
+                        Binary = Binary.Trim('(');
+                        Binary = Binary.Trim(')');
+                        Binary = Binary.Replace("0x", String.Empty);
+                        Index = Convert.ToInt32(Binary, 2);
+                        Index = Index - (Convert.ToInt32(Binary, 2) - 1);
+                    }
+                }
+            }
             AspectRatio = media.Video[0].DisplayAspectRatio.ToString().Replace(",", ".");
             if (String.IsNullOrWhiteSpace(AspectRatio))
                 AspectRatio = String.Empty;
             Framerate = (media.Video[0].FrameRate).ToString();
-            DurataPrecisa = TimeSpan.FromMilliseconds(media.Video[0].Duration);
-            TotaleFrames = media.Video[0].FrameCount;
-            String interl = media.Video[0].miGetString("ScanType").ToLower().Trim();
-            switch (interl)
+            Duration = TimeSpan.FromMilliseconds(media.Video[0].Duration);
+            Framecount = media.Video[0].FrameCount;
+            switch (media.Video[0].miGetString("ScanType").ToLower().Trim())
             {
                 case "progressive":
-                    Interlacciato = false;
+                    Interlaced = false;
                     break;
                 case "interlaced":
-                    Interlacciato = true;
+                    Interlaced = true;
                     break;
                 default:
-                    Interlacciato = false;
+                    Interlaced = false;
                     break;
             }
-            Larghezza = media.Video[0].Width;
-            Altezza = media.Video[0].Height;
+            Width = media.Video[0].Width;
+            Height = media.Video[0].Height;
         }
     }
 
-    public class ImpostazioniProfiliCodifica
+    public class EncodeProfileSettings
     {
-        public class ParametriVideo
+        public class Parameters
         {
             public String BLURAY { get; }
             public String STREAMING { get; }
@@ -3003,24 +3022,24 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             public String WORKRAW { get; }
             public String H265 { get; }
 
-            public ParametriVideo(MediaFile media)
+            public Parameters(MediaFile media)
             {
                 BLURAY = " -profile:v high -level:v 4.1 -bluray-compat 1 -maxrate 50000k -bufsize 70000k -pix_fmt yuv420p";
-                STREAMING = " -maxrate 20000k -bufsize 20000k -profile:v high -level:v 4.1 -pix_fmt yuv420p -bluray-compat 1 -x264opts cabac=0:weightp=0:weightb=0:sync-lookahead=0:sliced-threads=1:b-pyramid=0 -keyint_min " + CalcolaGOP(media).ToString() + " -g " + CalcolaGOP(media).ToString();
+                STREAMING = " -maxrate 20000k -bufsize 20000k -profile:v high -level:v 4.1 -pix_fmt yuv420p -bluray-compat 1 -x264opts cabac=0:weightp=0:weightb=0:sync-lookahead=0:sliced-threads=1:b-pyramid=0 -keyint_min " + CalculateGOP(media).ToString() + " -g " + CalculateGOP(media).ToString();
                 XVID = " -fflags +genpts -f avi -vtag XVID -bf 2 -level 5 -use_odml -1 -qmax 10 -qmin 1 -pix_fmt yuv420p -flags +mv4+loop+qpel+aic -qcomp 1.0 -subcmp 7 -mbcmp 7 -precmp 7 -subq 11 -me_range 1023 -mbd rd -profile:v mpeg4_asp -trellis 2";
                 WORKRAW = " -profile:v high -level:v 4.1 -pix_fmt yuv420p -maxrate 20000k -bufsize 20000k -partitions +parti4x4+parti8x8+partp8x8+partb8x8 -x264opts b-pyramid=0 -sn -tune fastdecode";
                 H265 = " -profile:v main -maxrate 50000k -bufsize 70000k -pix_fmt yuv420p -x265-params pmode=1:pme=1:psy-rd=4:rdoq-level=1:psy-rdoq=10:weightb=1:me=umh:subme=4:rdpenalty=1:open-gop=0:rc-lookahead=40:bframes=4:rd=4:b-adapt=2";
             }
 
-            protected Int32 CalcolaGOP(MediaFile media)
+            protected Int32 CalculateGOP(MediaFile media)
             {
                 return (Int32)Math.Ceiling(Convert.ToDecimal(media.Video[0].FrameRate)) * 10;
             }
         }
 
-        public class QualitaVideo
+        public class VideoQuality
         {
-            public class Altissima
+            public class VeryHigh
             {
                 public Double CRF { get; }
                 public Double QP { get; }
@@ -3030,9 +3049,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 public Double AQstrength { get; }
                 public String CODEC { get; }
 
-                public Altissima(String ProfiloScelto)
+                public VeryHigh(String Profile)
                 {
-                    if (ProfiloScelto.ToLower().Contains("xvid") == true)
+                    if (Profile.ToLower().Contains("xvid") == true)
                     {
                         QP = 1;
                         CRF = Double.NaN;
@@ -3044,7 +3063,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        if (ProfiloScelto.ToLower().Contains("workraw") == true)
+                        if (Profile.ToLower().Contains("workraw") == true)
                         {
                             CRF = 20;
                             QP = Double.NaN;
@@ -3052,7 +3071,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         else
                         {
-                            if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                            if (Profile.ToLower().Contains("h.265") == true)
                             {
                                 CRF = 17;
                                 QP = Double.NaN;
@@ -3063,7 +3082,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 QP = Double.NaN;
                             }
                         }
-                        if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                        if (Profile.ToLower().Contains("h.265") == true)
                             CODEC = "libx265";
                         else
                             CODEC = "libx264";
@@ -3073,7 +3092,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                 }
             }
-            public class Alta
+            public class High
             {
                 public Double CRF { get; }
                 public Double QP { get; }
@@ -3083,9 +3102,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 public Double AQstrength { get; }
                 public String CODEC { get; }
 
-                public Alta(String ProfiloScelto)
+                public High(String Profile)
                 {
-                    if (ProfiloScelto.ToLower().Contains("xvid") == true)
+                    if (Profile.ToLower().Contains("xvid") == true)
                     {
                         QP = 2;
                         CRF = Double.NaN;
@@ -3097,7 +3116,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        if (ProfiloScelto.ToLower().Contains("workraw") == true)
+                        if (Profile.ToLower().Contains("workraw") == true)
                         {
                             CRF = 23;
                             QP = Double.NaN;
@@ -3105,7 +3124,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         else
                         {
-                            if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                            if (Profile.ToLower().Contains("h.265") == true)
                             {
                                 CRF = 20;
                                 QP = Double.NaN;
@@ -3116,7 +3135,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 QP = Double.NaN;
                             }
                         }
-                        if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                        if (Profile.ToLower().Contains("h.265") == true)
                             CODEC = "libx265";
                         else
                             CODEC = "libx264";
@@ -3126,7 +3145,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                 }
             }
-            public class MedioAlta
+            public class AboveNormal
             {
                 public Double CRF { get; }
                 public Double QP { get; }
@@ -3136,9 +3155,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 public Double AQstrength { get; }
                 public String CODEC { get; }
 
-                public MedioAlta(String ProfiloScelto)
+                public AboveNormal(String Profile)
                 {
-                    if (ProfiloScelto.ToLower().Contains("xvid") == true)
+                    if (Profile.ToLower().Contains("xvid") == true)
                     {
                         QP = 3;
                         CRF = Double.NaN;
@@ -3150,7 +3169,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        if (ProfiloScelto.ToLower().Contains("workraw") == true)
+                        if (Profile.ToLower().Contains("workraw") == true)
                         {
                             CRF = 26;
                             QP = Double.NaN;
@@ -3158,7 +3177,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         else
                         {
-                            if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                            if (Profile.ToLower().Contains("h.265") == true)
                             {
                                 CRF = 21.5;
                                 QP = Double.NaN;
@@ -3169,7 +3188,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 QP = Double.NaN;
                             }
                         }
-                        if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                        if (Profile.ToLower().Contains("h.265") == true)
                             CODEC = "libx265";
                         else
                             CODEC = "libx264";
@@ -3179,7 +3198,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                 }
             }
-            public class Media
+            public class Normal
             {
                 public Double CRF { get; }
                 public Double QP { get; }
@@ -3189,9 +3208,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 public Double AQstrength { get; }
                 public String CODEC { get; }
 
-                public Media(String ProfiloScelto)
+                public Normal(String Profile)
                 {
-                    if (ProfiloScelto.ToLower().Contains("xvid") == true)
+                    if (Profile.ToLower().Contains("xvid") == true)
                     {
                         QP = 4;
                         CRF = Double.NaN;
@@ -3203,7 +3222,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        if (ProfiloScelto.ToLower().Contains("workraw") == true)
+                        if (Profile.ToLower().Contains("workraw") == true)
                         {
                             CRF = 29;
                             QP = Double.NaN;
@@ -3211,7 +3230,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         else
                         {
-                            if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                            if (Profile.ToLower().Contains("h.265") == true)
                             {
                                 CRF = 23;
                                 QP = Double.NaN;
@@ -3222,7 +3241,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 QP = Double.NaN;
                             }
                         }
-                        if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                        if (Profile.ToLower().Contains("h.265") == true)
                             CODEC = "libx265";
                         else
                             CODEC = "libx264";
@@ -3232,7 +3251,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                 }
             }
-            public class MedioBassa
+            public class BelowNormal
             {
                 public Double CRF { get; }
                 public Double QP { get; }
@@ -3242,9 +3261,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 public Double AQstrength { get; }
                 public String CODEC { get; }
 
-                public MedioBassa(String ProfiloScelto)
+                public BelowNormal(String Profile)
                 {
-                    if (ProfiloScelto.ToLower().Contains("xvid") == true)
+                    if (Profile.ToLower().Contains("xvid") == true)
                     {
                         QP = 5;
                         CRF = Double.NaN;
@@ -3256,7 +3275,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        if (ProfiloScelto.ToLower().Contains("workraw") == true)
+                        if (Profile.ToLower().Contains("workraw") == true)
                         {
                             CRF = 32;
                             QP = Double.NaN;
@@ -3264,7 +3283,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         else
                         {
-                            if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                            if (Profile.ToLower().Contains("h.265") == true)
                             {
                                 CRF = 25;
                                 QP = Double.NaN;
@@ -3275,7 +3294,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 QP = Double.NaN;
                             }
                         }
-                        if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                        if (Profile.ToLower().Contains("h.265") == true)
                             CODEC = "libx265";
                         else
                             CODEC = "libx264";
@@ -3285,7 +3304,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                 }
             }
-            public class Bassa
+            public class Low
             {
                 public Double CRF { get; }
                 public Double QP { get; }
@@ -3295,9 +3314,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 public Double AQstrength { get; }
                 public String CODEC { get; }
 
-                public Bassa(String ProfiloScelto)
+                public Low(String Profile)
                 {
-                    if (ProfiloScelto.ToLower().Contains("xvid") == true)
+                    if (Profile.ToLower().Contains("xvid") == true)
                     {
                         QP = 6;
                         CRF = Double.NaN;
@@ -3309,7 +3328,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        if (ProfiloScelto.ToLower().Contains("workraw") == true)
+                        if (Profile.ToLower().Contains("workraw") == true)
                         {
                             CRF = 35;
                             QP = Double.NaN;
@@ -3317,7 +3336,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         else
                         {
-                            if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                            if (Profile.ToLower().Contains("h.265") == true)
                             {
                                 CRF = 28;
                                 QP = Double.NaN;
@@ -3328,7 +3347,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 QP = Double.NaN;
                             }
                         }
-                        if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                        if (Profile.ToLower().Contains("h.265") == true)
                             CODEC = "libx265";
                         else
                             CODEC = "libx264";
@@ -3338,7 +3357,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                 }
             }
-            public class Bassissima
+            public class VeryLow
             {
                 public Double CRF { get; }
                 public Double QP { get; }
@@ -3348,9 +3367,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 public Double AQstrength { get; }
                 public String CODEC { get; }
 
-                public Bassissima(String ProfiloScelto)
+                public VeryLow(String Profile)
                 {
-                    if (ProfiloScelto.ToLower().Contains("xvid") == true)
+                    if (Profile.ToLower().Contains("xvid") == true)
                     {
                         QP = 7;
                         CRF = Double.NaN;
@@ -3362,7 +3381,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        if (ProfiloScelto.ToLower().Contains("workraw") == true)
+                        if (Profile.ToLower().Contains("workraw") == true)
                         {
                             CRF = 38;
                             QP = Double.NaN;
@@ -3370,7 +3389,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         else
                         {
-                            if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                            if (Profile.ToLower().Contains("h.265") == true)
                             {
                                 CRF = 30;
                                 QP = Double.NaN;
@@ -3381,7 +3400,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 QP = Double.NaN;
                             }
                         }
-                        if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                        if (Profile.ToLower().Contains("h.265") == true)
                             CODEC = "libx265";
                         else
                             CODEC = "libx264";
@@ -3391,7 +3410,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                 }
             }
-            public class Bozza
+            public class Draft
             {
                 public Double CRF { get; }
                 public Double QP { get; }
@@ -3401,9 +3420,9 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                 public Double AQstrength { get; }
                 public String CODEC { get; }
 
-                public Bozza(String ProfiloScelto)
+                public Draft(String Profile)
                 {
-                    if (ProfiloScelto.ToLower().Contains("xvid") == true)
+                    if (Profile.ToLower().Contains("xvid") == true)
                     {
                         QP = 10;
                         CRF = Double.NaN;
@@ -3415,7 +3434,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                     }
                     else
                     {
-                        if (ProfiloScelto.ToLower().Contains("workraw") == true)
+                        if (Profile.ToLower().Contains("workraw") == true)
                         {
                             CRF = 45;
                             QP = Double.NaN;
@@ -3423,7 +3442,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                         }
                         else
                         {
-                            if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                            if (Profile.ToLower().Contains("h.265") == true)
                             {
                                 CRF = 39;
                                 QP = Double.NaN;
@@ -3434,7 +3453,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
                                 QP = Double.NaN;
                             }
                         }
-                        if (ProfiloScelto.ToLower().Contains("h.265") == true)
+                        if (Profile.ToLower().Contains("h.265") == true)
                             CODEC = "libx265";
                         else
                             CODEC = "libx264";
@@ -3447,413 +3466,413 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         }
     }
 
-    public class ImpostazioniProfiliAudio
+    public class AudioProfileSettings
     {
         public Double Bitrate { get; set; }
         public Double Q { get; set; }
-        public Double Canali { get; set; }
+        public Double Channels { get; set; }
         public String CODEC { get; set; }
 
-        public ImpostazioniProfiliAudio(String profilo, String qualita, CatturaAudio audio)
+        public AudioProfileSettings(String Profile, String Quality, GetAudioTracks Audio)
         {
-            switch (qualita)
+            switch (Quality)
             {
-                case "Altissima":
-                    if (profilo.ToLower().Contains("xvid"))
+                case "Very high":
+                    if (Profile.ToLower().Contains("xvid"))
                     {
-                        Bitrate = 160 * Convert.ToInt32(audio.Canali);
+                        Bitrate = 160 * Convert.ToInt32(Audio.Channels);
                         Q = Double.NaN;
                         CODEC = "libmp3lame";
-                        if (audio.Canali >= 2)
-                            Canali = 2;
+                        if (Audio.Channels >= 2)
+                            Channels = 2;
                         else
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                     }
                     else
                     {
-                        if (profilo.ToLower().Contains("workraw"))
+                        if (Profile.ToLower().Contains("workraw"))
                         {
-                            if (audio.Canali >= 1)
-                                Canali = 1;
+                            if (Audio.Channels >= 1)
+                                Channels = 1;
                             else
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             Bitrate = Double.NaN;
                             Q = 7;
                             CODEC = "libvorbis";
                         }
                         else
                         {
-                            if (profilo.ToLower().Contains("ac3"))
+                            if (Profile.ToLower().Contains("ac3"))
                             {
-                                Bitrate = 96 * Convert.ToInt32(audio.Canali);
+                                Bitrate = 96 * Convert.ToInt32(Audio.Channels);
                                 Q = Double.NaN;
                                 CODEC = "ac3";
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("streaming"))
+                                if (Profile.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali >= 2)
-                                        Canali = 2;
+                                    if (Audio.Channels >= 2)
+                                        Channels = 2;
                                     else
-                                        Canali = audio.Canali;
+                                        Channels = Audio.Channels;
                                 }
                                 else
-                                    Canali = audio.Canali;
-                                Bitrate = 192 * Convert.ToInt32(Canali) / 2;
+                                    Channels = Audio.Channels;
+                                Bitrate = 192 * Convert.ToInt32(Channels) / 2;
                                 Q = Double.NaN;
                                 CODEC = "aac";
                             }
                         }
                     }
                     break;
-                case "Alta":
-                    if (profilo.ToLower().Contains("xvid"))
+                case "High":
+                    if (Profile.ToLower().Contains("xvid"))
                     {
-                        Bitrate = 128 * Convert.ToInt32(audio.Canali);
+                        Bitrate = 128 * Convert.ToInt32(Audio.Channels);
                         Q = Double.NaN;
                         CODEC = "libmp3lame";
-                        if (audio.Canali >= 2)
-                            Canali = 2;
+                        if (Audio.Channels >= 2)
+                            Channels = 2;
                         else
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                     }
                     else
                     {
-                        if (profilo.ToLower().Contains("workraw"))
+                        if (Profile.ToLower().Contains("workraw"))
                         {
-                            if (audio.Canali >= 1)
-                                Canali = 1;
+                            if (Audio.Channels >= 1)
+                                Channels = 1;
                             else
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             Bitrate = Double.NaN;
                             Q = 6;
                             CODEC = "libvorbis";
                         }
                         else
                         {
-                            if (profilo.ToLower().Contains("ac3"))
+                            if (Profile.ToLower().Contains("ac3"))
                             {
-                                Bitrate = 96 * Convert.ToInt32(audio.Canali);
+                                Bitrate = 96 * Convert.ToInt32(Audio.Channels);
                                 Q = Double.NaN;
                                 CODEC = "ac3";
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("streaming"))
+                                if (Profile.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali >= 2)
-                                        Canali = 2;
+                                    if (Audio.Channels >= 2)
+                                        Channels = 2;
                                     else
-                                        Canali = audio.Canali;
+                                        Channels = Audio.Channels;
                                 }
                                 else
-                                    Canali = audio.Canali;
-                                Bitrate = 160 * Convert.ToInt32(Canali) / 2;
+                                    Channels = Audio.Channels;
+                                Bitrate = 160 * Convert.ToInt32(Channels) / 2;
                                 Q = Double.NaN;
                                 CODEC = "aac";
                             }
                         }
                     }
                     break;
-                case "Medio-alta":
-                    if (profilo.ToLower().Contains("xvid"))
+                case "Above normal":
+                    if (Profile.ToLower().Contains("xvid"))
                     {
-                        Bitrate = 112 * Convert.ToInt32(audio.Canali);
+                        Bitrate = 112 * Convert.ToInt32(Audio.Channels);
                         Q = Double.NaN;
                         CODEC = "libmp3lame";
-                        if (audio.Canali >= 2)
-                            Canali = 2;
+                        if (Audio.Channels >= 2)
+                            Channels = 2;
                         else
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                     }
                     else
                     {
-                        if (profilo.ToLower().Contains("workraw"))
+                        if (Profile.ToLower().Contains("workraw"))
                         {
-                            if (audio.Canali >= 1)
-                                Canali = 1;
+                            if (Audio.Channels >= 1)
+                                Channels = 1;
                             else
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             Bitrate = Double.NaN;
                             Q = 5;
                             CODEC = "libvorbis";
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                         }
                         else
                         {
-                            if (profilo.ToLower().Contains("ac3"))
+                            if (Profile.ToLower().Contains("ac3"))
                             {
-                                Bitrate = 80 * Convert.ToInt32(audio.Canali);
+                                Bitrate = 80 * Convert.ToInt32(Audio.Channels);
                                 Q = Double.NaN;
                                 CODEC = "ac3";
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("streaming"))
+                                if (Profile.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali >= 2)
-                                        Canali = 2;
+                                    if (Audio.Channels >= 2)
+                                        Channels = 2;
                                     else
-                                        Canali = audio.Canali;
+                                        Channels = Audio.Channels;
                                 }
                                 else
-                                    Canali = audio.Canali;
-                                Bitrate = 144 * Convert.ToInt32(Canali) / 2;
+                                    Channels = Audio.Channels;
+                                Bitrate = 144 * Convert.ToInt32(Channels) / 2;
                                 Q = Double.NaN;
                                 CODEC = "aac";
                             }
                         }
                     }
                     break;
-                case "Media":
-                    if (profilo.ToLower().Contains("xvid"))
+                case "Normal":
+                    if (Profile.ToLower().Contains("xvid"))
                     {
-                        Bitrate = 96 * Convert.ToInt32(audio.Canali);
+                        Bitrate = 96 * Convert.ToInt32(Audio.Channels);
                         Q = Double.NaN;
                         CODEC = "libmp3lame";
-                        if (audio.Canali >= 2)
-                            Canali = 2;
+                        if (Audio.Channels >= 2)
+                            Channels = 2;
                         else
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                     }
                     else
                     {
-                        if (profilo.ToLower().Contains("workraw"))
+                        if (Profile.ToLower().Contains("workraw"))
                         {
                             Bitrate = Double.NaN;
                             Q = 4;
                             CODEC = "libvorbis";
-                            if (audio.Canali >= 1)
-                                Canali = 1;
+                            if (Audio.Channels >= 1)
+                                Channels = 1;
                             else
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                         }
                         else
                         {
-                            if (profilo.ToLower().Contains("ac3"))
+                            if (Profile.ToLower().Contains("ac3"))
                             {
-                                Bitrate = 80 * Convert.ToInt32(audio.Canali);
+                                Bitrate = 80 * Convert.ToInt32(Audio.Channels);
                                 Q = Double.NaN;
                                 CODEC = "ac3";
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("streaming"))
+                                if (Profile.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali >= 2)
-                                        Canali = 2;
+                                    if (Audio.Channels >= 2)
+                                        Channels = 2;
                                     else
-                                        Canali = audio.Canali;
+                                        Channels = Audio.Channels;
                                 }
                                 else
-                                    Canali = audio.Canali;
-                                Bitrate = 128 * Convert.ToInt32(Canali) / 2;
+                                    Channels = Audio.Channels;
+                                Bitrate = 128 * Convert.ToInt32(Channels) / 2;
                                 Q = Double.NaN;
                                 CODEC = "aac";
                             }
                         }
                     }
                     break;
-                case "Medio-bassa":
-                    if (profilo.ToLower().Contains("xvid"))
+                case "Below normal":
+                    if (Profile.ToLower().Contains("xvid"))
                     {
-                        Bitrate = 80 * Convert.ToInt32(audio.Canali);
+                        Bitrate = 80 * Convert.ToInt32(Audio.Channels);
                         Q = Double.NaN;
                         CODEC = "libmp3lame";
-                        if (audio.Canali >= 2)
-                            Canali = 2;
+                        if (Audio.Channels >= 2)
+                            Channels = 2;
                         else
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                     }
                     else
                     {
-                        if (profilo.ToLower().Contains("workraw"))
+                        if (Profile.ToLower().Contains("workraw"))
                         {
                             Bitrate = Double.NaN;
                             Q = 3;
                             CODEC = "libvorbis";
-                            if (audio.Canali >= 1)
-                                Canali = 1;
+                            if (Audio.Channels >= 1)
+                                Channels = 1;
                             else
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                         }
                         else
                         {
-                            if (profilo.ToLower().Contains("ac3"))
+                            if (Profile.ToLower().Contains("ac3"))
                             {
-                                Bitrate = 80 * Convert.ToInt32(audio.Canali);
+                                Bitrate = 80 * Convert.ToInt32(Audio.Channels);
                                 Q = Double.NaN;
                                 CODEC = "ac3";
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("streaming"))
+                                if (Profile.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali >= 2)
-                                        Canali = 2;
+                                    if (Audio.Channels >= 2)
+                                        Channels = 2;
                                     else
-                                        Canali = audio.Canali;
+                                        Channels = Audio.Channels;
                                 }
                                 else
-                                    Canali = audio.Canali;
-                                Bitrate = 96 * Convert.ToInt32(Canali) / 2;
+                                    Channels = Audio.Channels;
+                                Bitrate = 96 * Convert.ToInt32(Channels) / 2;
                                 Q = Double.NaN;
                                 CODEC = "aac";
                             }
                         }
                     }
                     break;
-                case "Bassa":
-                    if (profilo.ToLower().Contains("xvid"))
+                case "Low":
+                    if (Profile.ToLower().Contains("xvid"))
                     {
-                        Bitrate = 64 * Convert.ToInt32(audio.Canali);
+                        Bitrate = 64 * Convert.ToInt32(Audio.Channels);
                         Q = Double.NaN;
                         CODEC = "libmp3lame";
-                        if (audio.Canali >= 2)
-                            Canali = 2;
+                        if (Audio.Channels >= 2)
+                            Channels = 2;
                         else
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                     }
                     else
                     {
-                        if (profilo.ToLower().Contains("workraw"))
+                        if (Profile.ToLower().Contains("workraw"))
                         {
                             Bitrate = Double.NaN;
                             Q = 2;
                             CODEC = "libvorbis";
-                            if (audio.Canali >= 1)
-                                Canali = 1;
+                            if (Audio.Channels >= 1)
+                                Channels = 1;
                             else
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                         }
                         else
                         {
-                            if (profilo.ToLower().Contains("ac3"))
+                            if (Profile.ToLower().Contains("ac3"))
                             {
-                                Bitrate = 64 * Convert.ToInt32(audio.Canali);
+                                Bitrate = 64 * Convert.ToInt32(Audio.Channels);
                                 Q = Double.NaN;
                                 CODEC = "ac3";
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("streaming"))
+                                if (Profile.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali >= 2)
-                                        Canali = 2;
+                                    if (Audio.Channels >= 2)
+                                        Channels = 2;
                                     else
-                                        Canali = audio.Canali;
+                                        Channels = Audio.Channels;
                                 }
                                 else
-                                    Canali = audio.Canali;
-                                Bitrate = 64 * Convert.ToInt32(Canali) / 2;
+                                    Channels = Audio.Channels;
+                                Bitrate = 64 * Convert.ToInt32(Channels) / 2;
                                 Q = Double.NaN;
                                 CODEC = "aac";
                             }
                         }
                     }
                     break;
-                case "Bassissima":
-                    if (profilo.ToLower().Contains("xvid"))
+                case "Very low":
+                    if (Profile.ToLower().Contains("xvid"))
                     {
-                        Bitrate = 48 * Convert.ToInt32(audio.Canali);
+                        Bitrate = 48 * Convert.ToInt32(Audio.Channels);
                         Q = Double.NaN;
                         CODEC = "libmp3lame";
-                        if (audio.Canali >= 2)
-                            Canali = 2;
+                        if (Audio.Channels >= 2)
+                            Channels = 2;
                         else
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                     }
                     else
                     {
-                        if (profilo.ToLower().Contains("workraw"))
+                        if (Profile.ToLower().Contains("workraw"))
                         {
                             Bitrate = Double.NaN;
                             Q = 1;
                             CODEC = "libvorbis";
-                            if (audio.Canali >= 1)
-                                Canali = 1;
+                            if (Audio.Channels >= 1)
+                                Channels = 1;
                             else
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                         }
                         else
                         {
-                            if (profilo.ToLower().Contains("ac3"))
+                            if (Profile.ToLower().Contains("ac3"))
                             {
-                                Bitrate = 48 * Convert.ToInt32(audio.Canali);
+                                Bitrate = 48 * Convert.ToInt32(Audio.Channels);
                                 Q = Double.NaN;
                                 CODEC = "ac3";
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             }
                             else
                             {
-                                if (profilo.ToLower().Contains("streaming"))
+                                if (Profile.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali >= 2)
-                                        Canali = 2;
+                                    if (Audio.Channels >= 2)
+                                        Channels = 2;
                                     else
-                                        Canali = audio.Canali;
+                                        Channels = Audio.Channels;
                                 }
                                 else
-                                    Canali = audio.Canali;
-                                Bitrate = 48 * Convert.ToInt32(Canali) / 2;
+                                    Channels = Audio.Channels;
+                                Bitrate = 48 * Convert.ToInt32(Channels) / 2;
                                 Q = Double.NaN;
                                 CODEC = "aac";
                             }
                         }
                     }
                     break;
-                case "Bozza":
-                    if (profilo.ToLower().Contains("xvid"))
+                case "Draft":
+                    if (Profile.ToLower().Contains("xvid"))
                     {
-                        Bitrate = 32 * Convert.ToInt32(audio.Canali);
+                        Bitrate = 32 * Convert.ToInt32(Audio.Channels);
                         Q = Double.NaN;
                         CODEC = "libmp3lame";
-                        if (audio.Canali >= 2)
-                            Canali = 2;
+                        if (Audio.Channels >= 2)
+                            Channels = 2;
                         else
-                            Canali = audio.Canali;
+                            Channels = Audio.Channels;
                     }
                     else
                     {
-                        if (profilo.ToLower().Contains("workraw"))
+                        if (Profile.ToLower().Contains("workraw"))
                         {
                             Bitrate = Double.NaN;
                             Q = 0;
                             CODEC = "libvorbis";
-                            if (audio.Canali >= 1)
-                                Canali = 1;
+                            if (Audio.Channels >= 1)
+                                Channels = 1;
                             else
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                         }
                         else
                         {
-                            if (profilo.ToLower().Contains("ac3"))
+                            if (Profile.ToLower().Contains("ac3"))
                             {
-                                Bitrate = 32 * Convert.ToInt32(audio.Canali);
+                                Bitrate = 32 * Convert.ToInt32(Audio.Channels);
                                 Q = Double.NaN;
                                 CODEC = "ac3";
-                                Canali = audio.Canali;
+                                Channels = Audio.Channels;
                             }
                             else
                             {
 
-                                if (profilo.ToLower().Contains("streaming"))
+                                if (Profile.ToLower().Contains("streaming"))
                                 {
-                                    if (audio.Canali >= 2)
-                                        Canali = 2;
+                                    if (Audio.Channels >= 2)
+                                        Channels = 2;
                                     else
-                                        Canali = audio.Canali;
+                                        Channels = Audio.Channels;
                                 }
                                 else
-                                    Canali = audio.Canali;
-                                Bitrate = 32 * Convert.ToInt32(Canali) / 2;
+                                    Channels = Audio.Channels;
+                                Bitrate = 32 * Convert.ToInt32(Channels) / 2;
                                 Q = Double.NaN;
                                 CODEC = "aac";
                             }

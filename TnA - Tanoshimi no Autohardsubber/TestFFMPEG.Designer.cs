@@ -32,7 +32,7 @@
             this.b_ok = new System.Windows.Forms.Button();
             this.DGV_test = new System.Windows.Forms.DataGridView();
             this.codec = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.presente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supported = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_test)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@
             this.DGV_test.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_test.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codec,
-            this.presente});
+            this.supported});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -79,18 +79,18 @@
             // codec
             // 
             this.codec.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.codec.HeaderText = "Codec/Filtro";
+            this.codec.HeaderText = "Codec/Filter";
             this.codec.Name = "codec";
             this.codec.ReadOnly = true;
             this.codec.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // presente
+            // supported
             // 
-            this.presente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.presente.HeaderText = "Supporto";
-            this.presente.Name = "presente";
-            this.presente.ReadOnly = true;
-            this.presente.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.supported.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.supported.HeaderText = "Supported";
+            this.supported.Name = "supported";
+            this.supported.ReadOnly = true;
+            this.supported.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // TestFFMPEG
             // 
@@ -117,6 +117,6 @@
         private System.Windows.Forms.Button b_ok;
         private System.Windows.Forms.DataGridView DGV_test;
         private System.Windows.Forms.DataGridViewTextBoxColumn codec;
-        private System.Windows.Forms.DataGridViewTextBoxColumn presente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn supported;
     }
 }

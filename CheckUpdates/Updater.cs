@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using SevenZip;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
-using SevenZip;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace CheckUpdates
 {
@@ -75,7 +70,7 @@ namespace CheckUpdates
             this.Invoke((MethodInvoker)delegate ()
             {
                 e.Cancel = false;
-                l_agg.Text = "Aggiornamento in corso di TnA - Tanoshimi no Autohardsubber: " + e.PercentDone.ToString() + "%";
+                l_agg.Text = "Updating of TnA - Tanoshimi no Autohardsubber: " + e.PercentDone.ToString() + "%";
                 pb_avanz.Value = e.PercentDone;
             });
         }

@@ -122,6 +122,9 @@
       <HintPath>..\packages\MediaInfoDotNet.0.7.79.40925\lib\net45\MediaInfoDotNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Octokit, Version=0.48.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.48.0\lib\net46\Octokit.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="SevenZipSharp, Version=0.64.3890.29348, Culture=neutral, PublicKeyToken=20de82c62b055c88, processorArchitecture=MSIL">
       <HintPath>..\packages\SevenZipSharp.0.64\lib\SevenZipSharp.dll</HintPath>
@@ -176,23 +179,23 @@
     <Compile Include="DownloadFFMPEG.Designer.cs">
       <DependentUpon>DownloadFFMPEG.cs</DependentUpon>
     </Compile>
-    <Compile Include="CronologiaVersioni.cs">
+    <Compile Include="VersionHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CronologiaVersioni.Designer.cs">
-      <DependentUpon>CronologiaVersioni.cs</DependentUpon>
+    <Compile Include="VersionHistory.Designer.cs">
+      <DependentUpon>VersionHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Seleziona formati.cs">
+    <Compile Include="FormatSelection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Seleziona formati.Designer.cs">
-      <DependentUpon>Seleziona formati.cs</DependentUpon>
+    <Compile Include="FormatSelection.Designer.cs">
+      <DependentUpon>FormatSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelezionaProcessati.cs">
+    <Compile Include="FilesToProcess.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelezionaProcessati.Designer.cs">
-      <DependentUpon>SelezionaProcessati.cs</DependentUpon>
+    <Compile Include="FilesToProcess.Designer.cs">
+      <DependentUpon>FilesToProcess.cs</DependentUpon>
     </Compile>
     <Compile Include="TestFFMPEG.cs">
       <SubType>Form</SubType>
@@ -220,14 +223,14 @@
     <EmbeddedResource Include="DownloadFFMPEG.resx">
       <DependentUpon>DownloadFFMPEG.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CronologiaVersioni.resx">
-      <DependentUpon>CronologiaVersioni.cs</DependentUpon>
+    <EmbeddedResource Include="VersionHistory.resx">
+      <DependentUpon>VersionHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Seleziona formati.resx">
-      <DependentUpon>Seleziona formati.cs</DependentUpon>
+    <EmbeddedResource Include="FormatSelection.resx">
+      <DependentUpon>FormatSelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelezionaProcessati.resx">
-      <DependentUpon>SelezionaProcessati.cs</DependentUpon>
+    <EmbeddedResource Include="FilesToProcess.resx">
+      <DependentUpon>FilesToProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestFFMPEG.resx">
       <DependentUpon>TestFFMPEG.cs</DependentUpon>

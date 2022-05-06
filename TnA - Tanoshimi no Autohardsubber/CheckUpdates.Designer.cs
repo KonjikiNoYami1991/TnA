@@ -29,43 +29,43 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TnA_Updater));
-            this.b_verifica = new System.Windows.Forms.Button();
-            this.b_agg = new System.Windows.Forms.Button();
-            this.l_vers_install = new System.Windows.Forms.Label();
+            this.b_check = new System.Windows.Forms.Button();
+            this.b_update = new System.Windows.Forms.Button();
+            this.l_installed_version = new System.Windows.Forms.Label();
             this.pb_perc_down = new System.Windows.Forms.ProgressBar();
-            this.l_vers_att = new System.Windows.Forms.Label();
+            this.l_new_version = new System.Windows.Forms.Label();
             this.l_dim_down = new System.Windows.Forms.Label();
             this.b_cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // b_verifica
+            // b_check
             // 
-            this.b_verifica.Location = new System.Drawing.Point(307, 12);
-            this.b_verifica.Name = "b_verifica";
-            this.b_verifica.Size = new System.Drawing.Size(294, 23);
-            this.b_verifica.TabIndex = 1;
-            this.b_verifica.Text = "VERIFICA DI NUOVO";
-            this.b_verifica.UseVisualStyleBackColor = true;
-            this.b_verifica.Click += new System.EventHandler(this.b_verifica_Click);
+            this.b_check.Location = new System.Drawing.Point(307, 12);
+            this.b_check.Name = "b_check";
+            this.b_check.Size = new System.Drawing.Size(294, 23);
+            this.b_check.TabIndex = 1;
+            this.b_check.Text = "CHECK AGAIN";
+            this.b_check.UseVisualStyleBackColor = true;
+            this.b_check.Click += new System.EventHandler(this.b_verifica_Click);
             // 
-            // b_agg
+            // b_update
             // 
-            this.b_agg.Location = new System.Drawing.Point(307, 52);
-            this.b_agg.Name = "b_agg";
-            this.b_agg.Size = new System.Drawing.Size(294, 23);
-            this.b_agg.TabIndex = 2;
-            this.b_agg.Text = "SCARICA AGGIORNAMENTO";
-            this.b_agg.UseVisualStyleBackColor = true;
-            this.b_agg.Click += new System.EventHandler(this.b_agg_Click);
+            this.b_update.Location = new System.Drawing.Point(307, 52);
+            this.b_update.Name = "b_update";
+            this.b_update.Size = new System.Drawing.Size(294, 23);
+            this.b_update.TabIndex = 2;
+            this.b_update.Text = "DOWNLOAD UPDATE";
+            this.b_update.UseVisualStyleBackColor = true;
+            this.b_update.Click += new System.EventHandler(this.b_agg_Click);
             // 
-            // l_vers_install
+            // l_installed_version
             // 
-            this.l_vers_install.AutoSize = true;
-            this.l_vers_install.Location = new System.Drawing.Point(12, 18);
-            this.l_vers_install.Name = "l_vers_install";
-            this.l_vers_install.Size = new System.Drawing.Size(95, 13);
-            this.l_vers_install.TabIndex = 3;
-            this.l_vers_install.Text = "Versione installata:";
+            this.l_installed_version.AutoSize = true;
+            this.l_installed_version.Location = new System.Drawing.Point(12, 18);
+            this.l_installed_version.Name = "l_installed_version";
+            this.l_installed_version.Size = new System.Drawing.Size(86, 13);
+            this.l_installed_version.TabIndex = 3;
+            this.l_installed_version.Text = "Installed version:";
             // 
             // pb_perc_down
             // 
@@ -75,14 +75,14 @@
             this.pb_perc_down.Size = new System.Drawing.Size(277, 23);
             this.pb_perc_down.TabIndex = 4;
             // 
-            // l_vers_att
+            // l_new_version
             // 
-            this.l_vers_att.AutoSize = true;
-            this.l_vers_att.Location = new System.Drawing.Point(12, 43);
-            this.l_vers_att.Name = "l_vers_att";
-            this.l_vers_att.Size = new System.Drawing.Size(84, 13);
-            this.l_vers_att.TabIndex = 5;
-            this.l_vers_att.Text = "Versione nuova:";
+            this.l_new_version.AutoSize = true;
+            this.l_new_version.Location = new System.Drawing.Point(12, 43);
+            this.l_new_version.Name = "l_new_version";
+            this.l_new_version.Size = new System.Drawing.Size(69, 13);
+            this.l_new_version.TabIndex = 5;
+            this.l_new_version.Text = "New version:";
             // 
             // l_dim_down
             // 
@@ -90,9 +90,9 @@
             this.l_dim_down.Enabled = false;
             this.l_dim_down.Location = new System.Drawing.Point(12, 76);
             this.l_dim_down.Name = "l_dim_down";
-            this.l_dim_down.Size = new System.Drawing.Size(85, 13);
+            this.l_dim_down.Size = new System.Drawing.Size(104, 13);
             this.l_dim_down.TabIndex = 8;
-            this.l_dim_down.Text = "0/0 MB scaricati";
+            this.l_dim_down.Text = "0/0 MB downloaded";
             // 
             // b_cancel
             // 
@@ -100,7 +100,7 @@
             this.b_cancel.Name = "b_cancel";
             this.b_cancel.Size = new System.Drawing.Size(294, 23);
             this.b_cancel.TabIndex = 9;
-            this.b_cancel.Text = "NON AGGIORNARE";
+            this.b_cancel.Text = "DON\'T UPDATE";
             this.b_cancel.UseVisualStyleBackColor = true;
             this.b_cancel.Click += new System.EventHandler(this.b_cancel_Click);
             // 
@@ -112,11 +112,11 @@
             this.ControlBox = false;
             this.Controls.Add(this.b_cancel);
             this.Controls.Add(this.l_dim_down);
-            this.Controls.Add(this.l_vers_att);
+            this.Controls.Add(this.l_new_version);
             this.Controls.Add(this.pb_perc_down);
-            this.Controls.Add(this.l_vers_install);
-            this.Controls.Add(this.b_agg);
-            this.Controls.Add(this.b_verifica);
+            this.Controls.Add(this.l_installed_version);
+            this.Controls.Add(this.b_update);
+            this.Controls.Add(this.b_check);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -131,11 +131,11 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button b_verifica;
-        private System.Windows.Forms.Button b_agg;
-        private System.Windows.Forms.Label l_vers_install;
+        private System.Windows.Forms.Button b_check;
+        private System.Windows.Forms.Button b_update;
+        private System.Windows.Forms.Label l_installed_version;
         private System.Windows.Forms.ProgressBar pb_perc_down;
-        private System.Windows.Forms.Label l_vers_att;
+        private System.Windows.Forms.Label l_new_version;
         private System.Windows.Forms.Label l_dim_down;
         private System.Windows.Forms.Button b_cancel;
     }

@@ -1,6 +1,6 @@
 ﻿namespace TnA___Tanoshimi_no_Autohardsubber
 {
-    partial class SelezionaProcessati
+    partial class FilesToProcess
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.b_annulla = new System.Windows.Forms.Button();
+            this.b_cancel = new System.Windows.Forms.Button();
             this.b_ok = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.b_desel_all = new System.Windows.Forms.Button();
@@ -36,20 +36,21 @@
             this.b_sel_all = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // b_annulla
+            // b_cancel
             // 
-            this.b_annulla.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.b_annulla.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.b_annulla.Location = new System.Drawing.Point(254, 142);
-            this.b_annulla.Name = "b_annulla";
-            this.b_annulla.Size = new System.Drawing.Size(75, 23);
-            this.b_annulla.TabIndex = 0;
-            this.b_annulla.Text = "Annulla";
-            this.b_annulla.UseVisualStyleBackColor = true;
+            this.b_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.b_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.b_cancel.Location = new System.Drawing.Point(254, 142);
+            this.b_cancel.Name = "b_cancel";
+            this.b_cancel.Size = new System.Drawing.Size(75, 23);
+            this.b_cancel.TabIndex = 0;
+            this.b_cancel.Text = "Cancel";
+            this.b_cancel.UseVisualStyleBackColor = true;
             // 
             // b_ok
             // 
             this.b_ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.b_ok.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.b_ok.Location = new System.Drawing.Point(335, 142);
             this.b_ok.Name = "b_ok";
             this.b_ok.Size = new System.Drawing.Size(75, 23);
@@ -75,7 +76,7 @@
             this.b_desel_all.Name = "b_desel_all";
             this.b_desel_all.Size = new System.Drawing.Size(115, 23);
             this.b_desel_all.TabIndex = 3;
-            this.b_desel_all.Text = "Deseleziona tutto";
+            this.b_desel_all.Text = "Deselect all";
             this.b_desel_all.UseVisualStyleBackColor = true;
             this.b_desel_all.Click += new System.EventHandler(this.b_desel_all_Click);
             // 
@@ -88,13 +89,13 @@
             this.clb_stati.FormattingEnabled = true;
             this.clb_stati.Items.AddRange(new object[] {
             "OK",
-            "FERMATO",
-            "ATTENZIONE",
-            "ERRORE",
-            "PRONTO"});
+            "STOPPED",
+            "WARNING",
+            "ERROR",
+            "READY"});
             this.clb_stati.Location = new System.Drawing.Point(12, 38);
             this.clb_stati.Name = "clb_stati";
-            this.clb_stati.Size = new System.Drawing.Size(277, 64);
+            this.clb_stati.Size = new System.Drawing.Size(277, 79);
             this.clb_stati.TabIndex = 4;
             // 
             // b_sel_all
@@ -104,26 +105,26 @@
             this.b_sel_all.Name = "b_sel_all";
             this.b_sel_all.Size = new System.Drawing.Size(115, 23);
             this.b_sel_all.TabIndex = 5;
-            this.b_sel_all.Text = "Seleziona tutto";
+            this.b_sel_all.Text = "Select all";
             this.b_sel_all.UseVisualStyleBackColor = true;
             this.b_sel_all.Click += new System.EventHandler(this.b_sel_all_Click);
             // 
-            // SelezionaProcessati
+            // FilesToProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 181);
+            this.ClientSize = new System.Drawing.Size(422, 177);
             this.Controls.Add(this.b_sel_all);
             this.Controls.Add(this.clb_stati);
             this.Controls.Add(this.b_desel_all);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.b_ok);
-            this.Controls.Add(this.b_annulla);
+            this.Controls.Add(this.b_cancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(442, 220);
             this.MinimumSize = new System.Drawing.Size(442, 220);
-            this.Name = "SelezionaProcessati";
+            this.Name = "FilesToProcess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TnA - Selezione file da processare";
             this.ResumeLayout(false);
@@ -133,7 +134,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button b_annulla;
+        private System.Windows.Forms.Button b_cancel;
         private System.Windows.Forms.Button b_ok;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button b_desel_all;

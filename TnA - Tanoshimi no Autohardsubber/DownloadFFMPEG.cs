@@ -24,58 +24,33 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         public DownloadFFMPEG(String temp_folder, Boolean auto)
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("it-IT", false);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("it-IT", false);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US", false);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US", false);
             InitializeComponent();
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             this.temp_folder = temp_folder;
-            //MessageBox.Show(temp_folder);
+            this.auto = auto;
+
+            GetLink();
+        }
+
+        private void GetLink()
+        {
             try
             {
                 ll_64bit.Text = htmlparser(link);
-                this.auto = auto;
-                ThreadStart ts = new ThreadStart(CheckValidUrlFFmpeg);
-                Thread t = new Thread(ts);
-                t.Start();
+                b_download.Enabled = true;
+                if (auto == true)
+                    Download();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                b_download.Enabled = false;
+                ll_64bit.BackColor = Color.DarkOrange;
                 this.DialogResult = DialogResult.Abort;
                 //this.Close();
             }
-            
-        }
 
-        private void CheckValidUrlFFmpeg()
-        {
-            this.Invoke((MethodInvoker)delegate ()
-            {
-                tssl_checkvalidlink.Text = "Controllo validità link FFmpeg...";
-            });
-
-            var code = new HttpClient().GetAsync(ll_64bit.Text).Result.StatusCode;
-
-            if (code == HttpStatusCode.OK)
-            {
-                this.Invoke((MethodInvoker)delegate ()
-                {
-                    ll_64bit.BackColor = Color.LightGreen;
-                    tssl_checkvalidlink.Text = "Link valido - Status code: " + code.ToString() + " (" + ((Int32)code).ToString() + ").";
-                    b_scarica.Enabled = true;
-                    if (auto == true)
-                        scarica();
-                });
-            }
-            else
-            {
-                this.Invoke((MethodInvoker)delegate ()
-                {
-                    b_scarica.Enabled = false;
-                    ll_64bit.BackColor = Color.DarkOrange;
-                    tssl_checkvalidlink.Text = "Errore - Status code: " + code.ToString() + " (" + ((Int32)code).ToString() + ").";
-                });
-            }
         }
 
         public String htmlparser(String url)
@@ -115,21 +90,22 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void b_scarica_Click(object sender, EventArgs e)
         {
-            scarica();
+            Download();
         }
 
-        public void scarica()
+        public void Download()
         {
             WebClient wb = new WebClient();
-            if (b_scarica.Text.StartsWith("S"))
+            if (b_download.Text.StartsWith("D"))
             {
                 try
                 {
-                    b_scarica.Text = "Annulla download";
+                    b_download.Text = "Abort download";
                     wb.BaseAddress = ll_64bit.Text;
                     ffmpeg_zip = temp_folder + "\\" + Path.GetFileName(wb.BaseAddress);
                     Uri u = new Uri(wb.BaseAddress);
                     wb.DownloadFileAsync(u, ffmpeg_zip);
+                    ll_64bit.BackColor = Color.LightGreen;
                     wb.DownloadProgressChanged += wb_DownloadProgressChanged;
                     wb.DownloadFileCompleted += wb_DownloadFileCompleted;
                 }
@@ -141,7 +117,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             else
             {
                 wb.CancelAsync();
-                b_scarica.Text = "Scarica FFmpeg";
+                b_download.Text = "Download FFmpeg";
                 this.DialogResult = DialogResult.Abort;
                 this.Close();
             }
@@ -151,13 +127,13 @@ namespace TnA___Tanoshimi_no_Autohardsubber
         {
             if (e.Cancelled == false)
             {
-                b_scarica.Text = "Scarica FFmpeg";
-                estrai_exe();
+                b_download.Text = "Download FFmpeg";
+                ExtractEXE();
             }
             else
             {
-                MessageBox.Show("Annullato", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                b_scarica.Text = "Scarica FFmpeg";
+                MessageBox.Show("Aborted", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                b_download.Text = "Download FFmpeg";
             }
         }
 
@@ -173,7 +149,7 @@ namespace TnA___Tanoshimi_no_Autohardsubber
             return string.Format(formatter, value);
         }
 
-        public void estrai_exe()
+        public void ExtractEXE()
         {
             try
             {
@@ -223,12 +199,20 @@ namespace TnA___Tanoshimi_no_Autohardsubber
 
         private void ll_64bit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(ll_64bit.Text);
+            try
+            {
+                Process.Start(ll_64bit.Text);
+            }
+            catch { }
         }
 
         private void ll_zeranoe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(link);
+            try
+            {
+                Process.Start(link);
+            }
+            catch { }
         }
     }
 }

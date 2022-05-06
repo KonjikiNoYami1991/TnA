@@ -1,12 +1,12 @@
-﻿using System;
+﻿using SevenZip;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Reflection;
-using System.Net;
-using System.Drawing;
-using SevenZip;
 
 namespace Updater
 {
@@ -19,7 +19,7 @@ namespace Updater
 
         Boolean Auto = false;
 
-        public TnA_Updater(String vers_att, Boolean Hidden, Icon Icona, String AppName, Boolean Auto, String AppFolder)
+        public TnA_Updater(String NewVersion, Boolean Hidden, Icon Icon, String AppName, Boolean Auto, String AppFolder)
         {
             InitializeComponent();
 
@@ -28,29 +28,29 @@ namespace Updater
 
             this.Auto = Auto;
 
-            this.Icon = Icona;
-            l_vers_install.Text = ("Versione installata: " + vers_att).Replace("v", String.Empty);
-            Verifica(Hidden);
+            this.Icon = Icon;
+            l_installed_version.Text = ("Installed version: " + NewVersion).Replace("v", String.Empty);
+            Check(Hidden);
         }
 
-        public void Verifica(Boolean Hidden)
+        public void Check(Boolean Hidden)
         {
             String link_ini = "https://www.dropbox.com/s/5ppwjapyd51sf1g/vers.ini?dl=1";
-            String file_ini_vers = Path.GetDirectoryName(Application.ExecutablePath) + "\\version.ini";
+            String IniVers = Path.GetDirectoryName(Application.ExecutablePath) + "\\version.ini";
             try
             {
                 WebClient update = new WebClient();
                 update.BaseAddress = link_ini;
-                update.DownloadFile(update.BaseAddress, file_ini_vers);
-                IniFile leggi_vers = new IniFile(file_ini_vers);
-                l_vers_att.Text = "Versione attuale: " + leggi_vers.Read("n", "Versioni");
-                link_tna = leggi_vers.Read("l", "Versioni");
-                File.Delete(file_ini_vers);
+                update.DownloadFile(update.BaseAddress, IniVers);
+                IniFile ReadVersion = new IniFile(IniVers);
+                l_new_version.Text = "New version: " + ReadVersion.Read("n", "Versioni");
+                link_tna = ReadVersion.Read("l", "Versioni");
+                File.Delete(IniVers);
 
-                if (l_vers_install.Text.Split(' ')[2] == l_vers_att.Text.Split(' ')[2])
+                if (l_installed_version.Text.Split(' ')[2] == l_new_version.Text.Split(' ')[2])
                 {
                     if (Hidden == false)
-                        MessageBox.Show("L'ultima verisone del programma (" + l_vers_install.Text.Split(' ')[2] + ") è già installata.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("The newest version (" + l_installed_version.Text.Split(' ')[2] + ") is already installed.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.None;
                     this.Close();
                 }
@@ -78,13 +78,13 @@ namespace Updater
 
         private void b_verifica_Click(object sender, EventArgs e)
         {
-            b_agg.Enabled = false;
+            b_update.Enabled = false;
             b_cancel.Enabled = false;
-            b_verifica.Text = "VERIFICA IN CORSO...";
-            b_verifica.Update();
-            Verifica(false);
-            b_verifica.Text = "VERIFICA DI NUOVO";
-            b_agg.Enabled = true;
+            b_check.Text = "CHECKING...";
+            b_check.Update();
+            Check(false);
+            b_check.Text = "CHECK AGAIN";
+            b_update.Enabled = true;
             b_cancel.Enabled = true;
         }
 
@@ -92,19 +92,19 @@ namespace Updater
         {
             WebClient update = new WebClient();
             update.BaseAddress = link_tna;
-            if (b_agg.Text.StartsWith("SCA"))
+            if (b_update.Text.StartsWith("DOWN"))
             {
-                b_verifica.Enabled = false;
+                b_check.Enabled = false;
                 b_cancel.Enabled = false;
-                b_agg.Text = "ANNULLA";
+                b_update.Text = "ABORT";
                 update.DownloadFileAsync(new Uri(update.BaseAddress), Path.GetDirectoryName(Application.ExecutablePath) + "\\TnA.7z");
                 update.DownloadProgressChanged += Update_DownloadProgressChanged;
                 update.DownloadFileCompleted += Update_DownloadFileCompleted;
             }
             else
             {
-                b_agg.Text = "SCARICA AGGIORNAMENTO";
-                b_verifica.Enabled = true;
+                b_update.Text = "DOWNLOAD UPDATE";
+                b_check.Enabled = true;
                 b_cancel.Enabled = true;
                 update.CancelAsync();
             }
@@ -128,7 +128,7 @@ namespace Updater
         {
             if ((Int32)e.PercentDone == 100)
             {
-                MessageBox.Show("Aggiornamento completato.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Update complete.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -138,7 +138,7 @@ namespace Updater
 
         private void Extr_ExtractionFinished(object sender, EventArgs e)
         {
-            
+
         }
 
         private void b_cancel_Click(object sender, EventArgs e)
@@ -152,7 +152,7 @@ namespace Updater
             this.Invoke((MethodInvoker)delegate ()
             {
                 pb_perc_down.Value = e.ProgressPercentage;
-                l_dim_down.Text = Math.Round(e.BytesReceived / 1024.0 / 1024.0, 2).ToString() + "/" + Math.Round(e.TotalBytesToReceive / 1024.0 / 1024.0, 2).ToString() + " MB scaricati";
+                l_dim_down.Text = Math.Round(e.BytesReceived / 1024.0 / 1024.0, 2).ToString() + "/" + Math.Round(e.TotalBytesToReceive / 1024.0 / 1024.0, 2).ToString() + " MB downloaded";
             });
         }
     }
